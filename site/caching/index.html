@@ -1,0 +1,1101 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Lehrmaterial, Übungen, Aufgaben und Hilfen für Aktuelle Trends der IKT">
+      
+      
+      
+        <meta name="author" content="Jörn Freiheit">
+      
+      
+        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/caching/">
+      
+      <link rel="shortcut icon" href="../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>Caching - Progressive Web Apps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#757575">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="grey" data-md-color-accent="indigo">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#caching-mit-service-workern" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-header-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Progressive Web Apps
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Caching
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    Progressive Web Apps
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../einfuehrung/" class="md-nav__link">
+        Einführung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grundgeruest/" class="md-nav__link">
+        Grundgerüst
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manifest/" class="md-nav__link">
+        Manifest
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serviceworker/" class="md-nav__link">
+        Service Worker
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../promises/" class="md-nav__link">
+        Promises & fetch
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Caching
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Caching
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#die-cache-api" class="md-nav__link">
+    Die Cache API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bereinigen-des-htw-insta-projektes" class="md-nav__link">
+    Bereinigen des HTW-Insta-Projektes
+  </a>
+  
+    <nav class="md-nav" aria-label="Bereinigen des HTW-Insta-Projektes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ikt-pwa-03-bei-github" class="md-nav__link">
+    IKT-PWA-03 bei GitHub
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#was-soll-in-den-cache" class="md-nav__link">
+    Was soll in den Cache?
+  </a>
+  
+    <nav class="md-nav" aria-label="Was soll in den Cache?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-cachingprecaching" class="md-nav__link">
+    Static caching/Precaching
+  </a>
+  
+    <nav class="md-nav" aria-label="Static caching/Precaching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#den-service-worker-cache-erstellen" class="md-nav__link">
+    Den Service-Worker-Cache erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eine-ressource-in-den-cache-speichern" class="md-nav__link">
+    Eine Ressource in den Cache speichern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eine-ressource-aus-dem-cache-lesen" class="md-nav__link">
+    Eine Ressource aus dem Cache lesen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schlussel-werte-paare-request-und-response" class="md-nav__link">
+    Schlüssel-Werte-Paare request und response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alle-statischen-ressourcen-in-den-cache-laden" class="md-nav__link">
+    Alle statischen Ressourcen in den Cache laden
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uebungen/" class="md-nav__link">
+        Übungen
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        Werkzeuge
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hilfen/" class="md-nav__link">
+        Hilfen
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#die-cache-api" class="md-nav__link">
+    Die Cache API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bereinigen-des-htw-insta-projektes" class="md-nav__link">
+    Bereinigen des HTW-Insta-Projektes
+  </a>
+  
+    <nav class="md-nav" aria-label="Bereinigen des HTW-Insta-Projektes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ikt-pwa-03-bei-github" class="md-nav__link">
+    IKT-PWA-03 bei GitHub
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#was-soll-in-den-cache" class="md-nav__link">
+    Was soll in den Cache?
+  </a>
+  
+    <nav class="md-nav" aria-label="Was soll in den Cache?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-cachingprecaching" class="md-nav__link">
+    Static caching/Precaching
+  </a>
+  
+    <nav class="md-nav" aria-label="Static caching/Precaching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#den-service-worker-cache-erstellen" class="md-nav__link">
+    Den Service-Worker-Cache erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eine-ressource-in-den-cache-speichern" class="md-nav__link">
+    Eine Ressource in den Cache speichern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eine-ressource-aus-dem-cache-lesen" class="md-nav__link">
+    Eine Ressource aus dem Cache lesen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schlussel-werte-paare-request-und-response" class="md-nav__link">
+    Schlüssel-Werte-Paare request und response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alle-statischen-ressourcen-in-den-cache-laden" class="md-nav__link">
+    Alle statischen Ressourcen in den Cache laden
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/caching.md" title="Seite editieren" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="caching-mit-service-workern">Caching mit Service Workern<a class="headerlink" href="#caching-mit-service-workern" title="Permanent link">&para;</a></h1>
+<p>Caching ist ein Konzept, um Ressourcen zu speichern, um sie nicht wieder vom Server laden zu müssen. Browser verfügen über eigene Caches ("Pufferspeicher") und darin können Browser Bilder, CSS-Dateien, JavaScript-Dateien und andere Mediadateien (z.B. pdf) speichern, um diese nicht erneut vom Webserver laden zu müssen. Das Caching beschleunigt das wiederholte Laden von Webseiten. </p>
+<p>Caching mit service working verfolgt das gleiche Prinzip. Auch hier werden Ressourcen in einen Cache geladen. Der Vorteil hierbei ist jedoch nicht das schnellere Laden beim Wiederholen, sondern die Möglichkeit zu eröffnen, die Webanwendung auch (teilweise) <strong>offline</strong> auszuführen. Mit dem Service-Worker-Caching bieten wir somit die Fähigkeit des <em>Offline-Modus</em> unserer Anwendung. Die Verwendung eines Caches durch einen <em>service worker</em> erfolgt mithilfe der Cache API.</p>
+<h2 id="die-cache-api">Die Cache API<a class="headerlink" href="#die-cache-api" title="Permanent link">&para;</a></h2>
+<p>Die <a href="https://developer.mozilla.org/de/docs/Web/API/Cache">Cache API</a> verfolgt ein ganz simples Konzept. Mithilfe der Cache API werden einfach (Schlüssel-/Werte-)Paare von <em>Requests</em> und <em>Responses</em>  gespeichert. Auf den <em>Cache</em> (also auf die Menge aller gespeicherten Request-/Response-Paare) können sowohl service worker als auch das JavaScript der Webanwendung zugreifen. Allerdings kann es ja sein, dass das "normale" JavaScript der Webanwendung (noch) nicht geladen werden kann, weil z.B. die Internetverbindung zu schwach ist oder nicht vorhanden, ein service worker kann aber trotzdem bereits Daten aus dem Cache liefern, ohne überhaupt einen Request über das Internet zu senden. </p>
+<p>Wichtig ist noch zu betonen, dass die Cache API (noch) nicht von besonders vielen Browsern unterstützt wird. Das sieht man <a href="https://developer.mozilla.org/de/docs/Web/API/Cache">hier</a>, wenn Sie nach ganz unten scrollen. Im Prinzip funktioniert es nur (vollständig) mit Chrome, Firefox und Opera.</p>
+<h2 id="bereinigen-des-htw-insta-projektes">Bereinigen des HTW-Insta-Projektes<a class="headerlink" href="#bereinigen-des-htw-insta-projektes" title="Permanent link">&para;</a></h2>
+<p>Bevor wir unseren Service-Worker-Cache implementieren, bereinigen wir zunächst noch unser HTW-Insta-Projekt. Aus der <code>public/src/js/app.js</code> entfernen wir den gesamten Code, der sich auf Promises und die Fetch API bezog. Die <code>app.js</code> sieht nun (wieder) so aus:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">public/src/js/app.js</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="s1">&#39;serviceWorker&#39;</span> <span class="k">in</span> <span class="nx">navigator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span>
+        <span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;/sw.js&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker registriert&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(</span>
+            <span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+        <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+<p>In der <code>public/sw.js</code> (also in unserem <em>service worker</em>), löschen wir die Ausgaben auf die Konsole für das <code>fetch</code>-Event. Stattdessen fügen wir eine <code>respondWith()</code>-Funktion ein:</p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">public/sw.js</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+<span class="p">})</span>
+
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;activate&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; activating ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">clients</span><span class="p">.</span><span class="nx">claim</span><span class="p">();</span>
+<span class="p">})</span>
+
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="hll">    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">));</span>
+</span><span class="p">})</span>
+</code></pre></div>
+</div>
+</div>
+<p>Die <a href="https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent/respondWith">respondWith()</a>-Funktion ist eine Funktion des <code>fetch</code>-Events (also <code>FetchEvent.respondWith()</code>). Sie sorgt einerseits dafür, den Browser von seiner Standardbehandlung des <code>FetchEvents</code> abzuhalten und stattdessen eine eigene <code>Promise</code> für die Behandlung des <code>FetchEvents</code> zu definieren. Die Standardsyntax ist:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">fetchEvent</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+  <span class="c1">// Promise that resolves to a Response.</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>Hier ist ein Beispiel für die <code>responseWith()</code>-Funktion <a href="https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent/respondWith">aus</a>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Prevent the default, and handle the request ourselves.</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span><span class="k">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Try to get the response from a cache.</span>
+    <span class="kd">const</span> <span class="nx">cachedResponse</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">);</span>
+    <span class="c1">// Return it if we found one.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">cachedResponse</span><span class="p">)</span> <span class="k">return</span> <span class="nx">cachedResponse</span><span class="p">;</span>
+    <span class="c1">// If we didn&#39;t find a match in the cache, use the network.</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">);</span>
+  <span class="p">}());</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+<p>Darin wird für ein <code>fetch</code>-Event zunächst geprüft, ob der <code>request</code> im Cache vorhanden ist (Zeile <code>5</code>). Wenn ja, dann bekommt die Variable <code>cachedResponse</code> den Wert der <code>response</code> aus dem Cache (<code>match</code> liefert die <code>response</code> zum zugehörigen <code>request</code>). Wenn das der Fall ist, dann liefert <code>responseWith()</code> genau diese <code>response</code> aus dem Cache zurück. Wenn der <code>request</code> nicht im Cache gespeichert ist, dann wird einfach der <code>event.request</code> weitergeleitet, also nichts aus dem Cache genommen. </p>
+<p>In unserer derzeitigen Implementierung (highlighted Zeile <code>11</code> oben), wird noch nicht auf den Cache zugegriffen, sondern der <code>request</code> direkt an den Webserver weitergeleitet. Sollten Sie dafür einen Fehler bekommen, weil das <code>Promise</code> als nicht korrekt behandelt gilt, dann können Sie diese Zeile zunächst auch einfach auskommentieren. </p>
+<hr />
+<p>Eine etwas größere Änderung führen wir in der <code>public/src/js/feed.js</code> durch. Wir fügen statisch einen Blog-Eintrag hinzu. Die Anwendung sieht dann so aus:</p>
+<p><img alt="cache" src="../files/34_cache.png" /></p>
+<p>Schauen Sie in die <code>index.html</code>. In das folgende <code>&lt;div id="shared-moments"&gt;&lt;/div&gt;</code> fügen wir eine <em>Card</em> der Form <code>&lt;div class="shared-moment-card mdl-card mdl-shadow--2dp"&gt;&lt;/div&gt;</code> hinzu, welche das Foto und den Text enthält. Das passiert in einer Funktion <code>createCard()</code>:</p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">public/src/js/feed.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">shareImageButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#share-image-button&#39;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">createPostArea</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#create-post&#39;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">closeCreatePostModalButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#close-create-post-modal-btn&#39;</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">sharedMomentsArea</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#shared-moments&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">openCreatePostModal</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">createPostArea</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">closeCreatePostModal</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">createPostArea</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">shareImageButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">openCreatePostModal</span><span class="p">);</span>
+
+<span class="nx">closeCreatePostModalButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">closeCreatePostModal</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">createCard</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">cardWrapper</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+  <span class="nx">cardWrapper</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;shared-moment-card mdl-card mdl-shadow--2dp&#39;</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">cardTitle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+  <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;mdl-card__title&#39;</span><span class="p">;</span>
+  <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundImage</span> <span class="o">=</span> <span class="s1">&#39;url(&quot;/src/images/htw-gebaeude-h.jpg&quot;)&#39;</span><span class="p">;</span>
+  <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundSize</span> <span class="o">=</span> <span class="s1">&#39;cover&#39;</span><span class="p">;</span>
+  <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="s1">&#39;180px&#39;</span><span class="p">;</span>
+  <span class="nx">cardWrapper</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">cardTitle</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">cardTitleTextElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;h2&#39;</span><span class="p">);</span>
+  <span class="nx">cardTitleTextElement</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;mdl-card__title-text&#39;</span><span class="p">;</span>
+  <span class="nx">cardTitleTextElement</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s1">&#39;Vor der HTW-Mensa&#39;</span><span class="p">;</span>
+  <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">cardTitleTextElement</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">cardSupportingText</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+  <span class="nx">cardSupportingText</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;mdl-card__supporting-text&#39;</span><span class="p">;</span>
+  <span class="nx">cardSupportingText</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s1">&#39;HTW Berlin&#39;</span><span class="p">;</span>
+  <span class="nx">cardSupportingText</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">textAlign</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">;</span>
+  <span class="nx">cardWrapper</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">cardSupportingText</span><span class="p">);</span>
+  <span class="nx">componentHandler</span><span class="p">.</span><span class="nx">upgradeElement</span><span class="p">(</span><span class="nx">cardWrapper</span><span class="p">);</span>
+  <span class="nx">sharedMomentsArea</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">cardWrapper</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/get&#39;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">createCard</span><span class="p">();</span>
+    <span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Zunächst wird in Zeile <code>4</code> auf das <code>div</code> mit der <code>id="shared-moments"</code> zugegriffen. In dieses <code>div</code> wird die <em>Card</em> eingefügt. Alles CSS-Klassen mit <code>mdl-</code> am Anfang sind Klassen von <a href="https://getmdl.io/">Material Design Ligt</a>. Für die CSS-Klasse <code>shared-moment-card</code> definieren wir in <code>public/src/css/feed.css</code> noch:</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">shared-moment-card</span><span class="p">.</span><span class="nc">mdl-card</span> <span class="p">{</span>
+  <span class="k">margin</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="kc">auto</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>so, dass die <em>Card</em> einen Abstand vom Rand bekommt. Interessant ist vielleicht noch die Zeile <code>36</code> <code>componentHandler.upgradeElement(cardWrapper);</code>. Mit dieser Funktion müssen dynamisch erzeugte DOM-Elemente <em>registriert</em> werden, damit sie von Material Design Lite automatisch verwaltet werden. Siehe dazu <a href="https://getmdl.io/started/">Uses MDL on dynamic websites</a>.</p>
+<h3 id="ikt-pwa-03-bei-github">IKT-PWA-03 bei GitHub<a class="headerlink" href="#ikt-pwa-03-bei-github" title="Permanent link">&para;</a></h3>
+<p>Das Bild <a href="../files/htw-gebaeude-h.jpg">htw-gebaeude-h.jpg</a> muss auch noch dem <code>public/src/images</code>-Ordner hinzugefügt werden. Die aktuelle Ausgangssituation unseres Projektes finden Sie <a href="https://github.com/jfreiheit/IKT-PWA-03">hier</a>.</p>
+<p>Achten Sie bitte darauf, dass Sie (zumindest so lange wir uns mit dem Service-Worker-Cache beschäftigen) das Häkchen bei <code>Disable Cache</code> in den Developer Tools unter <code>Network</code> gesetzt haben: </p>
+<p><img alt="cache" src="../files/35_cache.png" /></p>
+<h2 id="was-soll-in-den-cache">Was soll in den Cache?<a class="headerlink" href="#was-soll-in-den-cache" title="Permanent link">&para;</a></h2>
+<p>Zunächst überlegen wir uns, was überhaupt in den Cache soll und was nicht. Prinzipiell verfolgen wir mit dem Service-Worker-Cache die Idee, dass die Anwendung auch offline verwendbar bleiben soll. Wenn wir unsere aktuelle Anwendung betrachten, dann können wir unterscheiden zwischen </p>
+<ul>
+<li>"statischen" und </li>
+<li>"dynamischen" Inhalten.</li>
+</ul>
+<p>Statisch ist im Prinzip der <em>Rahmen</em> unserer Anwendung, also im prinzip alles, was wir hatten vor unserem ersten Blog-Eintrag. Dieser <em>Rahmen</em> gibt uns das Gefühl, dass die Anwendung "läuft" - es fehlen nur die <em>dynamischen</em> Inhalte, also die Blog-Einträge. Stattdessen könnte man aber eine Meldung ausgeben, dass diese Inhalte derzeit nicht verfügbar sind. Das wäre alles jedenfalls besser als eine 404-Seite oder ein unendliches Warten oder das hier:</p>
+<p><img alt="cache" src="../files/36_cache.png" /></p>
+<p>Der <em>rahmen</em> einer Webanwendung wird auch <em>App-Shell</em> genannt. Wir wollen diese <em>App-Shell</em>  zunächst in unseren Service-Worker-Cache speichern. </p>
+<h3 id="static-cachingprecaching">Static caching/Precaching<a class="headerlink" href="#static-cachingprecaching" title="Permanent link">&para;</a></h3>
+<p>Wir wollen zunächst die <em>statischen</em> Inhalte unserer Anwendung sin den Cache speichern. Dies geschieht beim Installieren (registrieren) des service workers. Das ist auch insofern praktisch, als dass der service worker ja nur dann neu registriert wird, wenn er geändert wurde. Ansonsten bleibt einfach der "alte" existent. </p>
+<p>Ziel ist es also, zunächst alles das in den Cache zu speichern, was unsere Webanwendung ausmacht:</p>
+<ul>
+<li>die <code>index.html</code>, </li>
+<li>alle <code>*.css</code>-Dateien, die mittels <code>&lt;link href="..."&gt;</code> in dieser <code>index.html</code> einegunden werden, </li>
+<li>alle <code>*.js</code>-Dateien, die mittels <code>&lt;script src="..."&gt;</code> in dieser <code>index.html</code> einegunden werden und </li>
+<li>alle <code>*.png</code>-Dateien, die mittels <code>&lt;link href="..."&gt;</code> in dieser <code>index.html</code> einegunden werden.</li>
+</ul>
+<h4 id="den-service-worker-cache-erstellen">Den Service-Worker-Cache erstellen<a class="headerlink" href="#den-service-worker-cache-erstellen" title="Permanent link">&para;</a></h4>
+<p>Wir haben bereits eingangs festgelegt, dass wir den Cache in dem Moment anlegen wollen, in dem der service worker installiert wird. Das bedeutet, wir erstellen den Cache in der Ereignisbehandlung des Lebenszyklus-Event <code>install</code> des service workers, also hier (<code>sw.js</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="c1">// hier soll der Cache &quot;entstehen&quot;</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>Den Service-Worker-Cache erstellen wir mithilfe der Anweisung <code>caches.open();</code>. Hierbei handelt es sich um eine Funktion von <a href="https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage">CacheStorage</a>. Die Funktion <code>caches.open()</code> erzeugt ein <code>Cache</code>-Objekt, wenn es noch nicht existiert. Die Rückgabe (<code>response</code> der <code>Promise</code>) ist also ein <code>Cache</code>-Objekt. </p>
+<p>Man könnte nun annehmen, man schreibt einfach das hier:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>      <span class="c1">// nicht gut!</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Diese Idee ist aber nicht so gut, da wir immer im Hinterkopf behalten müssen, dass in einem service worker alles asynchron abgearbeitet wird. Das bedeutet, dass wir in diesem Fall bei der Baehandlung des <code>install</code>-Events zwei Anweisungen eifach "antriggern": die Ausgabe auf die Konsole (Zeile <code>2</code>) und das Erzeugen eines <code>Cache</code>-Objektes (Zeile <code>3</code>). Wie lange jedes einzelne braucht und wann etwas fertig ist, wissen wir nicht. Das bedeutet z.B. dass die Ereignisbehandlung des <code>install</code>-Events fertig ist, noch bevor die Ausgabe auf die Konsole und/oder das Erzeugen des <code>Cache</code>-Objektes abgeschlossen ist/sind. Das wiederum würde bedeuten, dass wir asynchron evtl. bereits <code>fetch</code>-Anfragen auslösen, noch bevor der <code>Cache</code> bereit ist. Um dieses Problem zu verhindern, betten wir die Erzeugung des <code>Cache</code>-Objektes in eine <code>event.waitUntil()</code>-Funktion ein. Erst wenn diese Funktion abgeschlossen ist, ist auch die Ereignisbehandlung des <code>install</code>-Events abgeschlossen (siehe auch <a href="https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage#examples">hier</a>. Das richtige Vorgehen ist also dieses:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;static&#39;</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Service-Worker-Cache erzeugt und offen&#39;</span><span class="p">);</span>
+            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p><code>caches.open()</code> erzeugt also ein <code>Promise</code>, dessen <code>response</code> der erzeugte <code>Cache</code> ist. Wir konsumieren diesen <code>Cache</code> und geben zunächst nur eine Ausgabe auf der Konsole aus. </p>
+<p>Der Parameter <code>'static'</code> in <code>caches.open()</code> ist ein Name für den Cache. Die Namen sind frei wählbar und man kann verschiedene Namen vergeben. Das sind dann jeweils eine Art "Unter"-Caches oder <em>sub caches</em>) im Service-Worker-Cache. </p>
+<h4 id="eine-ressource-in-den-cache-speichern">Eine Ressource in den Cache speichern<a class="headerlink" href="#eine-ressource-in-den-cache-speichern" title="Permanent link">&para;</a></h4>
+<p>Nun kann der Cache entsprechend mit <code>request</code>-<code>response</code>-Schlüssel-Werte-Paaren befüllt werden. Die auf den Cache anwenbaren Funktionen sind <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">hier</a> dokumentiert. Es sind <code>match(request, options)</code>,  <code>matchAll(request, options)</code>, <code>add(request)</code>, , <code>addAll(request)</code>, , <code>put(request, response)</code>, <code>delete(request, options)</code> und , <code>keys(request, options)</code>. Alle liefern natürlich ein <code>Promise</code> zurück. </p>
+<p>Um die <em>statischen</em> Inhalte unserer Webanwendung in den Cache zu laden, verwenden wir die <code>add(request)</code>-Funktion. Diese Funktion macht folgendes:</p>
+<ul>
+<li>sie führt den <code>request</code> aus (<code>fetch(request)</code>) und </li>
+<li>speichert die <code>response</code> (also die angefragte Ressource) &rarr; dieses Speichern entspricht einem <code>put(request, response)</code> im Cache.</li>
+</ul>
+<p>Wenn wir also folgendes implementieren:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;static&#39;</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Service-Worker-Cache erzeugt und offen&#39;</span><span class="p">);</span>
+<span class="hll">                <span class="nx">cache</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;/src/js/app.js&#39;</span><span class="p">);</span>    <span class="c1">// relativ vom public-Ordner</span>
+</span>            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>, dann wird beim Initialisieren des service workers die Ressource <code>public/src/js/app.js</code> beim Webserver angefragt und die <code>response</code>, also die <code>app.js</code> im Cache gespeichert. Wenn wir unsere Anwednung so ausführen, dann sehen wir in den DeveloperTools im Reiter <code>Application</code> im <code>Cache Storage</code> den Cache <code>static</code> und darin die gespeicherte Ressource <code>/src/js/app.js</code>. </p>
+<p><img alt="cache" src="../files/37_cache.png" /></p>
+<h4 id="eine-ressource-aus-dem-cache-lesen">Eine Ressource aus dem Cache lesen<a class="headerlink" href="#eine-ressource-aus-dem-cache-lesen" title="Permanent link">&para;</a></h4>
+<p>Jetzt haben wir einen Ressource in den Cache geladen, aber wir verwenden sie noch nicht, da wir in der bisherigen Behandlung des <code>fetch</code>-Events den Cache noch nicht nutzen. Zur Erinnerung: bei der Behandlung des <code>fetch</code>-Events wirkt der <em>service worker</em> wie ein Proxy. Er "schaltet" sich zwischen die Webanwendung und die ANfrage dieser an den Webserver. In unserer derzeitigen Implementierung des <code>fetch</code>-Events wird der <code>request</code> einfach an den Webserver durchgeschleust, ohne irgendetwas damit zu tun. Das wollen wir nun ändern:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Wir reagieren auf das <code>fetch</code>-Ereignis zunächst mit der <code>respondWith()</code>-Funktion, die wir bereits <a href="./#bereinigen-des-htw-insta-projektes">oben</a> besprochen haben. Diese Funktion verhindert die Ausführung des Standardverhaltens beim <code>fetch</code>, nämlich die Anfrage an den Webserver. Stattdessen fragen wir mithilfe der <code>caches.match()</code>-Funktion alle <em>sub caches</em> unseres Caches nach dem als Parameter übergebenen <code>request</code> an. Im Cache sind die Einträge als Schlüssel-Werte_paare <code>request</code>-<code>response</code> abgespeichert. Findet sich der <code>request</code> im Cache, dann liefert die <code>Promise</code> ein <code>response</code>-Objekt zurück. Wenn das so ist (Zeile <code>5</code>), dann geben wir dieses <code>response</code>-Objekt an die Webanwendung zurück (Zeile <code>6</code>). Das ist dann also die aus dem Cache geladene Ressource. </p>
+<p>Wenn die <code>match()</code>-Funktion jedoch den Schlüssel <code>request</code> nicht im Cache gefunden hat (und somit auch keine <code>response</code>), gibt sie zwar trotzdem ein <code>Promise</code> zurück, aber dann ist die <code>response</code> <code>null</code>. Das bedeutet, dass die <code>if</code>-Abfrage in Zeile <code>5</code> ein <code>false</code> zurückgibt und wir somit Zeile <code>8</code> ausführen. Darin wird die Anfrage einfach an den Webserver weitergeleitet, die Ressource also vom Webserver geladen.</p>
+<p>Wir überprüfen die Funktionalität dieser <code>fetch</code>-Ereignisbehandlung:</p>
+<p><img alt="cache" src="../files/38_cache.png" /></p>
+<p>Unter dem Reiter <code>Network</code> in den DeveloperTools sehen wir, dass die <code>app.js</code> durch den Service Worker geladen wurde. Alle anderen Ressourcen wurden auch durch den Service Worker geladen, das liegt daran, dass wir im Service Worker die Anfrage an den Webserver durch den Service Worker durchschleusen. Wichtig ist aber, dass die <code>app.js</code> <strong>nicht</strong> vom Webserver geladen wurde. das erkennen war daran, dass alle anderen Ressourcen mit ihren Größenangaben in der Tabelle stehen und dass damit gesagt, wurde, wieviel Bytes vom Webserver geladen wurden. Die <code>app.js</code> taucht dabei aber nicht auf. Sie wurde durch den Service Worker aus dem Service-Worker-Cache (<code>Cache Storage</code>) geladen!</p>
+<p>Okay, das ist jetzt vielleicht noch nicht besonders eindrucksvoll, weil der Offline-Modus für unsere Webanwendung noch nicht funktioniert und wir bis jetzt nur die <code>app.js</code> in den Cache speichern und von dort bei einem <code>fetch()</code> laden. Dadurch sieht man noch nicht wirklich viel. Deshalb laden wir jetzt den <em>statischen</em> "Rest", insbesondere die <code>index.html</code> und die dazugehörigen <code>*.css</code>-Dateien. Zuvor jedoch noch eine kurze Anmerkung zu den Schlüssel-Werte-Paaren <code>request</code> und <code>response</code> im Cache:</p>
+<h3 id="schlussel-werte-paare-request-und-response">Schlüssel-Werte-Paare <code>request</code> und <code>response</code><a class="headerlink" href="#schlussel-werte-paare-request-und-response" title="Permanent link">&para;</a></h3>
+<p>Wir laden jetzt unsere <code>index.html</code>-Datei in den Cache:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;static&#39;</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Service-Worker-Cache erzeugt und offen&#39;</span><span class="p">);</span>             
+<span class="hll">                <span class="nx">cache</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;/index.html&#39;</span><span class="p">);</span>
+</span>                <span class="nx">cache</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;/src/js/app.js&#39;</span><span class="p">);</span>    <span class="c1">// relativ vom public-Ordner</span>
+            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Wenn wir unsere Anwendung neu starten und den service worker erneut registrieren, dann sollte jetzt die <code>index.html</code> im Offline-Modus angezeigt werden (wenn auch ohne die CSS-Styles). Allerdings sieht die Anwendung nach dem Reload im Offline-Modus leider so aus wie auf der linken Seite der folgenden Abbildung gezeigt:</p>
+<p><img alt="cache" src="../files/39_cache.png" /></p>
+<p>Der Grund dafür ist, dass wir die Anwendung mit <code>localhost:8080</code> (oder <code>127.0.0.1:8080</code>) aufrufen, der <code>request</code> also <code>/</code> ist. Im Cache gespeichert haben wir aber den <code>request</code> <code>/index.html</code>. Und tatsächlich, wenn wir <code>localhost:8080/index.html</code> (oder <code>127.0.0.1:8080/index.html</code>) aufrufen, dann wird der <code>request</code> <code>/index.html</code> im Cache gefunden und als <code>response</code> die <code>index.html</code> zurückgegeben (rechte Seite in der Abbildung). Wichtig ist also, dass wir bedenken, dass alle <code>requests</code>, für die wir <code>responses</code> im Cache hinterlegen wollen, auch tatsächlich in den Cache hinzugefügt werden. Unsere <code>sw.js</code> sollte also auch so aussehen:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;static&#39;</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Service-Worker-Cache erzeugt und offen&#39;</span><span class="p">);</span> 
+<span class="hll">                <span class="nx">cache</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>            
+</span>                <span class="nx">cache</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;/index.html&#39;</span><span class="p">);</span>
+                <span class="nx">cache</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;/src/js/app.js&#39;</span><span class="p">);</span>    <span class="c1">// relativ vom public-Ordner</span>
+            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Dann erhalten wir auch das rechte Bild der Abbildung beim Aufruf von <code>localhost:8080</code> (oder <code>127.0.0.1:8080</code>) im Offline-Modus. Wir sollten also beachten, dass alle <code>requests</code>, die wir cachen wollen, auch tatsächlich in den Cache gespeichert werden.</p>
+<h3 id="alle-statischen-ressourcen-in-den-cache-laden">Alle statischen Ressourcen in den Cache laden<a class="headerlink" href="#alle-statischen-ressourcen-in-den-cache-laden" title="Permanent link">&para;</a></h3>
+<p>Wir laden jetzt alle <em>statischen</em> Ressourcen in den Cache, d.h. alles, was notwendig ist, um unsere Webanwendung auch im Offline-Modus so aussehen zu lassen, als würde sie "laufen". Dazu gehört natürlich die <code>index.html</code> und dann noch alle Ressourcen, die in der <code>index.html</code> eingebunden werden, also einige <code>*.js</code>-Dateien, einige <code>*.css</code>-Dateien und das Bild, das oben in der Webanwendung erscheint. </p>
+<p>Man könnte das alles mit einzelnen <code>cache.add()</code>-Funktionen erledigen, so wie oben. Dafür gibt es aber auch die <code>cache.addAll()</code>-Funktion, der ein Array aus lauter <code>requests</code> übergeben wird. Die Implementierung der <code>install</code>-Ereignisbehandlung in unserer <code>sw.js</code> sieht dann so aus:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;static&#39;</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Service-Worker-Cache erzeugt und offen&#39;</span><span class="p">);</span> 
+<span class="hll">                <span class="nx">cache</span><span class="p">.</span><span class="nx">addAll</span><span class="p">([</span>
+</span>                    <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;/src/js/app.js&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;/src/js/feed.js&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;/src/js/material.min.js&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;/src/css/app.css&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;/src/css/feed.css&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;/src/images/htw.jpg&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;https://fonts.googleapis.com/css?family=Roboto:400,700&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;https://fonts.googleapis.com/icon?family=Material+Icons&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css&#39;</span>
+                <span class="p">]);</span>
+            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Wenn wir nun unsere Anwendung neu starten und darauf achten, dass der neue Service Worker auch wirklich registriert wird und dann in den Offline-Modus schalten, dann sieht unsere Anwendung so aus:</p>
+<p><img alt="cache" src="../files/40_cache.png" /></p>
+<p>Wie auf der rechten Seite der Abbildung zu sehen ist, funktioniert auch das JavaScript, um zum Formular zu gelangen. Einige Sachen funktionieren im Offline-Modus nicht, weil wir sie nicht in den Cache geladen haben:</p>
+<ul>
+<li>die Hilfeseite (<code>/help/index.html</code> und die dazugehörige <code>help.css</code>) sowie</li>
+<li>den Blogeintrag, den wir bereits (statisch) vorgenommen haben (den binden wir gleich noch <em>dynamisch</em> ein).</li>
+</ul>
+<p>Eine andere Sache fällt aber vielleicht auf: die Icons von Material Design Lite erscheinen nicht, d.h. das Menü links oben ist nur ein leeres Quadrat und auf dem roten runden Button fehlt das Plus, stattdessen steht dort <code>add</code>. </p>
+<p>Wenn wir diesem Problem nachgehen, dann sehen wir in den DeveloperTools unter dem Reiter <code>Network</code>, dass alle Ressourcen, die wir im Cache gespeichert haben, auch tatsächlich aus diesem Cache geladen werden:</p>
+<p><img alt="cache" src="../files/41_cache.png" /></p>
+<p>Zusätzlich schlagen aber noch "kryptische" GET-Anfragen fehl (die roten ganz unten in der Abbildung). Hier werden offensichtlich noch Anfragen an den Webserver gestellt, von denen wir gar nichts wussten und die wir nicht im Cache vorhalten. Wo kommen diese Anfragen her? Wenn wir dort in den DeveloperTools bspw. auf die Ressource <code>https://fonts.googleapis.com/icon?family=Material+Icons</code> klicken, dann erscheint daneben der Inhalt der geladenen Ressource und wir finden darin einen weiteren <code>request</code>, den wir aber nicht in unserem Cache hinterlegt haben (weil wir es gar nicht wussten):</p>
+<p><img alt="cache" src="../files/42_cache.png" /></p>
+<p>Diese Anfragen schlagen im Offline-Modus (natürlich) fehl und deshalb fehlen uns die Material Design Icons. Gut wäre es, wenn solche <em>dynamischen</em> Anfragen ebenfalls im Cache landen würden. Mit diesem <em>dynamischen</em> Caching beschäftigen wir uns deshalb jetzt:</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../promises/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Zurück
+                </span>
+                Promises & fetch
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../uebungen/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Weiter
+                </span>
+                Übungen
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Jörn Freiheit
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: ['instant', 'tabs'],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

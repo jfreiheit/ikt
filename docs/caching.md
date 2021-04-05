@@ -1,0 +1,375 @@
+# Caching mit Service Workern
+
+Caching ist ein Konzept, um Ressourcen zu speichern, um sie nicht wieder vom Server laden zu müssen. Browser verfügen über eigene Caches ("Pufferspeicher") und darin können Browser Bilder, CSS-Dateien, JavaScript-Dateien und andere Mediadateien (z.B. pdf) speichern, um diese nicht erneut vom Webserver laden zu müssen. Das Caching beschleunigt das wiederholte Laden von Webseiten. 
+
+Caching mit service working verfolgt das gleiche Prinzip. Auch hier werden Ressourcen in einen Cache geladen. Der Vorteil hierbei ist jedoch nicht das schnellere Laden beim Wiederholen, sondern die Möglichkeit zu eröffnen, die Webanwendung auch (teilweise) **offline** auszuführen. Mit dem Service-Worker-Caching bieten wir somit die Fähigkeit des *Offline-Modus* unserer Anwendung. Die Verwendung eines Caches durch einen *service worker* erfolgt mithilfe der Cache API.
+
+## Die Cache API
+
+Die [Cache API](https://developer.mozilla.org/de/docs/Web/API/Cache) verfolgt ein ganz simples Konzept. Mithilfe der Cache API werden einfach (Schlüssel-/Werte-)Paare von *Requests* und *Responses*  gespeichert. Auf den *Cache* (also auf die Menge aller gespeicherten Request-/Response-Paare) können sowohl service worker als auch das JavaScript der Webanwendung zugreifen. Allerdings kann es ja sein, dass das "normale" JavaScript der Webanwendung (noch) nicht geladen werden kann, weil z.B. die Internetverbindung zu schwach ist oder nicht vorhanden, ein service worker kann aber trotzdem bereits Daten aus dem Cache liefern, ohne überhaupt einen Request über das Internet zu senden. 
+
+Wichtig ist noch zu betonen, dass die Cache API (noch) nicht von besonders vielen Browsern unterstützt wird. Das sieht man [hier](https://developer.mozilla.org/de/docs/Web/API/Cache), wenn Sie nach ganz unten scrollen. Im Prinzip funktioniert es nur (vollständig) mit Chrome, Firefox und Opera.
+
+## Bereinigen des HTW-Insta-Projektes
+
+Bevor wir unseren Service-Worker-Cache implementieren, bereinigen wir zunächst noch unser HTW-Insta-Projekt. Aus der `public/src/js/app.js` entfernen wir den gesamten Code, der sich auf Promises und die Fetch API bezog. Die `app.js` sieht nun (wieder) so aus:
+
+=== "public/src/js/app.js"
+	```javascript
+	if ('serviceWorker' in navigator) {
+	    navigator.serviceWorker
+	        .register('/sw.js')
+	        .then(() => {
+	            console.log('service worker registriert')
+	        })
+	        .catch(
+	            err => { console.log(err); }
+	        );
+	}
+	```
+
+In der `public/sw.js` (also in unserem *service worker*), löschen wir die Ausgaben auf die Konsole für das `fetch`-Event. Stattdessen fügen wir eine `respondWith()`-Funktion ein:
+
+=== "public/sw.js"
+	```javascript hl_lines="11"
+	self.addEventListener('install', event => {
+	    console.log('service worker --> installing ...', event);
+	})
+
+	self.addEventListener('activate', event => {
+	    console.log('service worker --> activating ...', event);
+	    return self.clients.claim();
+	})
+
+	self.addEventListener('fetch', event => {
+	    event.respondWith(fetch(event.request));
+	})
+	```
+
+Die [respondWith()](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent/respondWith)-Funktion ist eine Funktion des `fetch`-Events (also `FetchEvent.respondWith()`). Sie sorgt einerseits dafür, den Browser von seiner Standardbehandlung des `FetchEvents` abzuhalten und stattdessen eine eigene `Promise` für die Behandlung des `FetchEvents` zu definieren. Die Standardsyntax ist:
+
+```javascript
+fetchEvent.respondWith(
+  // Promise that resolves to a Response.
+);
+```
+
+Hier ist ein Beispiel für die `responseWith()`-Funktion [aus](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent/respondWith):
+
+
+```javascript linenums="1"
+addEventListener('fetch', event => {
+  // Prevent the default, and handle the request ourselves.
+  event.respondWith(async function() {
+    // Try to get the response from a cache.
+    const cachedResponse = await caches.match(event.request);
+    // Return it if we found one.
+    if (cachedResponse) return cachedResponse;
+    // If we didn't find a match in the cache, use the network.
+    return fetch(event.request);
+  }());
+});
+```
+
+Darin wird für ein `fetch`-Event zunächst geprüft, ob der `request` im Cache vorhanden ist (Zeile `5`). Wenn ja, dann bekommt die Variable `cachedResponse` den Wert der `response` aus dem Cache (`match` liefert die `response` zum zugehörigen `request`). Wenn das der Fall ist, dann liefert `responseWith()` genau diese `response` aus dem Cache zurück. Wenn der `request` nicht im Cache gespeichert ist, dann wird einfach der `event.request` weitergeleitet, also nichts aus dem Cache genommen. 
+
+In unserer derzeitigen Implementierung (highlighted Zeile `11` oben), wird noch nicht auf den Cache zugegriffen, sondern der `request` direkt an den Webserver weitergeleitet. Sollten Sie dafür einen Fehler bekommen, weil das `Promise` als nicht korrekt behandelt gilt, dann können Sie diese Zeile zunächst auch einfach auskommentieren. 
+
+---
+
+Eine etwas größere Änderung führen wir in der `public/src/js/feed.js` durch. Wir fügen statisch einen Blog-Eintrag hinzu. Die Anwendung sieht dann so aus:
+
+![cache](./files/34_cache.png)
+
+Schauen Sie in die `index.html`. In das folgende `<div id="shared-moments"></div>` fügen wir eine *Card* der Form `<div class="shared-moment-card mdl-card mdl-shadow--2dp"></div>` hinzu, welche das Foto und den Text enthält. Das passiert in einer Funktion `createCard()`:
+
+=== "public/src/js/feed.js"
+	```javascript linenums="1"
+	let shareImageButton = document.querySelector('#share-image-button');
+	let createPostArea = document.querySelector('#create-post');
+	let closeCreatePostModalButton = document.querySelector('#close-create-post-modal-btn');
+	let sharedMomentsArea = document.querySelector('#shared-moments');
+
+	function openCreatePostModal() {
+	  createPostArea.style.display = 'block';
+	}
+
+	function closeCreatePostModal() {
+	  createPostArea.style.display = 'none';
+	}
+
+	shareImageButton.addEventListener('click', openCreatePostModal);
+
+	closeCreatePostModalButton.addEventListener('click', closeCreatePostModal);
+
+	function createCard() {
+	  let cardWrapper = document.createElement('div');
+	  cardWrapper.className = 'shared-moment-card mdl-card mdl-shadow--2dp';
+	  let cardTitle = document.createElement('div');
+	  cardTitle.className = 'mdl-card__title';
+	  cardTitle.style.backgroundImage = 'url("/src/images/htw-gebaeude-h.jpg")';
+	  cardTitle.style.backgroundSize = 'cover';
+	  cardTitle.style.height = '180px';
+	  cardWrapper.appendChild(cardTitle);
+	  let cardTitleTextElement = document.createElement('h2');
+	  cardTitleTextElement.className = 'mdl-card__title-text';
+	  cardTitleTextElement.textContent = 'Vor der HTW-Mensa';
+	  cardTitle.appendChild(cardTitleTextElement);
+	  let cardSupportingText = document.createElement('div');
+	  cardSupportingText.className = 'mdl-card__supporting-text';
+	  cardSupportingText.textContent = 'HTW Berlin';
+	  cardSupportingText.style.textAlign = 'center';
+	  cardWrapper.appendChild(cardSupportingText);
+	  componentHandler.upgradeElement(cardWrapper);
+	  sharedMomentsArea.appendChild(cardWrapper);
+	}
+
+	fetch('https://httpbin.org/get')
+	    .then(function(res) {
+	      return res.json();
+	    })
+	    .then(function(data) {
+	      createCard();
+	    });
+	```
+
+Zunächst wird in Zeile `4` auf das `div` mit der `id="shared-moments"` zugegriffen. In dieses `div` wird die *Card* eingefügt. Alles CSS-Klassen mit `mdl-` am Anfang sind Klassen von [Material Design Ligt](https://getmdl.io/). Für die CSS-Klasse `shared-moment-card` definieren wir in `public/src/css/feed.css` noch:
+
+```css
+.shared-moment-card.mdl-card {
+  margin: 10px auto;
+}
+```
+
+so, dass die *Card* einen Abstand vom Rand bekommt. Interessant ist vielleicht noch die Zeile `36` `componentHandler.upgradeElement(cardWrapper);`. Mit dieser Funktion müssen dynamisch erzeugte DOM-Elemente *registriert* werden, damit sie von Material Design Lite automatisch verwaltet werden. Siehe dazu [Uses MDL on dynamic websites](https://getmdl.io/started/).
+
+### IKT-PWA-03 bei GitHub
+
+Das Bild [htw-gebaeude-h.jpg](./files/htw-gebaeude-h.jpg) muss auch noch dem `public/src/images`-Ordner hinzugefügt werden. Die aktuelle Ausgangssituation unseres Projektes finden Sie [hier](https://github.com/jfreiheit/IKT-PWA-03).
+
+Achten Sie bitte darauf, dass Sie (zumindest so lange wir uns mit dem Service-Worker-Cache beschäftigen) das Häkchen bei `Disable Cache` in den Developer Tools unter `Network` gesetzt haben: 
+
+![cache](./files/35_cache.png)
+
+## Was soll in den Cache?
+
+Zunächst überlegen wir uns, was überhaupt in den Cache soll und was nicht. Prinzipiell verfolgen wir mit dem Service-Worker-Cache die Idee, dass die Anwendung auch offline verwendbar bleiben soll. Wenn wir unsere aktuelle Anwendung betrachten, dann können wir unterscheiden zwischen 
+
+- "statischen" und 
+- "dynamischen" Inhalten.
+
+Statisch ist im Prinzip der *Rahmen* unserer Anwendung, also im prinzip alles, was wir hatten vor unserem ersten Blog-Eintrag. Dieser *Rahmen* gibt uns das Gefühl, dass die Anwendung "läuft" - es fehlen nur die *dynamischen* Inhalte, also die Blog-Einträge. Stattdessen könnte man aber eine Meldung ausgeben, dass diese Inhalte derzeit nicht verfügbar sind. Das wäre alles jedenfalls besser als eine 404-Seite oder ein unendliches Warten oder das hier:
+
+![cache](./files/36_cache.png)
+
+Der *rahmen* einer Webanwendung wird auch *App-Shell* genannt. Wir wollen diese *App-Shell*  zunächst in unseren Service-Worker-Cache speichern. 
+
+### Static caching/Precaching
+
+Wir wollen zunächst die *statischen* Inhalte unserer Anwendung sin den Cache speichern. Dies geschieht beim Installieren (registrieren) des service workers. Das ist auch insofern praktisch, als dass der service worker ja nur dann neu registriert wird, wenn er geändert wurde. Ansonsten bleibt einfach der "alte" existent. 
+
+Ziel ist es also, zunächst alles das in den Cache zu speichern, was unsere Webanwendung ausmacht:
+
+- die `index.html`, 
+- alle `*.css`-Dateien, die mittels `<link href="...">` in dieser `index.html` einegunden werden, 
+- alle `*.js`-Dateien, die mittels `<script src="...">` in dieser `index.html` einegunden werden und 
+- alle `*.png`-Dateien, die mittels `<link href="...">` in dieser `index.html` einegunden werden.
+
+#### Den Service-Worker-Cache erstellen
+
+Wir haben bereits eingangs festgelegt, dass wir den Cache in dem Moment anlegen wollen, in dem der service worker installiert wird. Das bedeutet, wir erstellen den Cache in der Ereignisbehandlung des Lebenszyklus-Event `install` des service workers, also hier (`sw.js`):
+
+```javascript
+self.addEventListener('install', event => {
+    console.log('service worker --> installing ...', event);
+    // hier soll der Cache "entstehen"
+})
+```
+
+Den Service-Worker-Cache erstellen wir mithilfe der Anweisung `caches.open();`. Hierbei handelt es sich um eine Funktion von [CacheStorage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage). Die Funktion `caches.open()` erzeugt ein `Cache`-Objekt, wenn es noch nicht existiert. Die Rückgabe (`response` der `Promise`) ist also ein `Cache`-Objekt. 
+
+Man könnte nun annehmen, man schreibt einfach das hier:
+
+```javascript linenums="1"
+self.addEventListener('install', event => {
+    console.log('service worker --> installing ...', event);
+    caches.open(); 		// nicht gut!
+})
+```
+
+Diese Idee ist aber nicht so gut, da wir immer im Hinterkopf behalten müssen, dass in einem service worker alles asynchron abgearbeitet wird. Das bedeutet, dass wir in diesem Fall bei der Baehandlung des `install`-Events zwei Anweisungen eifach "antriggern": die Ausgabe auf die Konsole (Zeile `2`) und das Erzeugen eines `Cache`-Objektes (Zeile `3`). Wie lange jedes einzelne braucht und wann etwas fertig ist, wissen wir nicht. Das bedeutet z.B. dass die Ereignisbehandlung des `install`-Events fertig ist, noch bevor die Ausgabe auf die Konsole und/oder das Erzeugen des `Cache`-Objektes abgeschlossen ist/sind. Das wiederum würde bedeuten, dass wir asynchron evtl. bereits `fetch`-Anfragen auslösen, noch bevor der `Cache` bereit ist. Um dieses Problem zu verhindern, betten wir die Erzeugung des `Cache`-Objektes in eine `event.waitUntil()`-Funktion ein. Erst wenn diese Funktion abgeschlossen ist, ist auch die Ereignisbehandlung des `install`-Events abgeschlossen (siehe auch [hier](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage#examples). Das richtige Vorgehen ist also dieses:
+
+```javascript linenums="1"
+self.addEventListener('install', event => {
+    console.log('service worker --> installing ...', event);
+    event.waitUntil(
+        caches.open('static')
+            .then( cache => {
+                console.log('Service-Worker-Cache erzeugt und offen');
+            })
+    );
+})
+```
+
+`caches.open()` erzeugt also ein `Promise`, dessen `response` der erzeugte `Cache` ist. Wir konsumieren diesen `Cache` und geben zunächst nur eine Ausgabe auf der Konsole aus. 
+
+Der Parameter `'static'` in `caches.open()` ist ein Name für den Cache. Die Namen sind frei wählbar und man kann verschiedene Namen vergeben. Das sind dann jeweils eine Art "Unter"-Caches oder *sub caches*) im Service-Worker-Cache. 
+
+#### Eine Ressource in den Cache speichern
+
+Nun kann der Cache entsprechend mit `request`-`response`-Schlüssel-Werte-Paaren befüllt werden. Die auf den Cache anwenbaren Funktionen sind [hier](https://developer.mozilla.org/en-US/docs/Web/API/Cache) dokumentiert. Es sind `match(request, options)`,  `matchAll(request, options)`, `add(request)`, , `addAll(request)`, , `put(request, response)`, `delete(request, options)` und , `keys(request, options)`. Alle liefern natürlich ein `Promise` zurück. 
+
+Um die *statischen* Inhalte unserer Webanwendung in den Cache zu laden, verwenden wir die `add(request)`-Funktion. Diese Funktion macht folgendes:
+
+- sie führt den `request` aus (`fetch(request)`) und 
+- speichert die `response` (also die angefragte Ressource) --> dieses Speichern entspricht einem `put(request, response)` im Cache.
+
+Wenn wir also folgendes implementieren:
+
+```javascript linenums="1" hl_lines="7"
+self.addEventListener('install', event => {
+    console.log('service worker --> installing ...', event);
+    event.waitUntil(
+        caches.open('static')
+            .then( cache => {
+                console.log('Service-Worker-Cache erzeugt und offen');
+                cache.add('/src/js/app.js');    // relativ vom public-Ordner
+            })
+    );
+})
+```
+
+, dann wird beim Initialisieren des service workers die Ressource `public/src/js/app.js` beim Webserver angefragt und die `response`, also die `app.js` im Cache gespeichert. Wenn wir unsere Anwednung so ausführen, dann sehen wir in den DeveloperTools im Reiter `Application` im `Cache Storage` den Cache `static` und darin die gespeicherte Ressource `/src/js/app.js`. 
+
+![cache](./files/37_cache.png)
+
+#### Eine Ressource aus dem Cache lesen
+
+Jetzt haben wir einen Ressource in den Cache geladen, aber wir verwenden sie noch nicht, da wir in der bisherigen Behandlung des `fetch`-Events den Cache noch nicht nutzen. Zur Erinnerung: bei der Behandlung des `fetch`-Events wirkt der *service worker* wie ein Proxy. Er "schaltet" sich zwischen die Webanwendung und die ANfrage dieser an den Webserver. In unserer derzeitigen Implementierung des `fetch`-Events wird der `request` einfach an den Webserver durchgeschleust, ohne irgendetwas damit zu tun. Das wollen wir nun ändern:
+
+```javascript linenums="1"
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request)
+            .then( response => {
+                if(response) {
+                    return response;
+                } else {
+                    return fetch(event.request);
+                }
+            })
+    );
+})
+```
+
+Wir reagieren auf das `fetch`-Ereignis zunächst mit der `respondWith()`-Funktion, die wir bereits [oben](./#bereinigen-des-htw-insta-projektes) besprochen haben. Diese Funktion verhindert die Ausführung des Standardverhaltens beim `fetch`, nämlich die Anfrage an den Webserver. Stattdessen fragen wir mithilfe der `caches.match()`-Funktion alle *sub caches* unseres Caches nach dem als Parameter übergebenen `request` an. Im Cache sind die Einträge als Schlüssel-Werte_paare `request`-`response` abgespeichert. Findet sich der `request` im Cache, dann liefert die `Promise` ein `response`-Objekt zurück. Wenn das so ist (Zeile `5`), dann geben wir dieses `response`-Objekt an die Webanwendung zurück (Zeile `6`). Das ist dann also die aus dem Cache geladene Ressource. 
+
+Wenn die `match()`-Funktion jedoch den Schlüssel `request` nicht im Cache gefunden hat (und somit auch keine `response`), gibt sie zwar trotzdem ein `Promise` zurück, aber dann ist die `response` `null`. Das bedeutet, dass die `if`-Abfrage in Zeile `5` ein `false` zurückgibt und wir somit Zeile `8` ausführen. Darin wird die Anfrage einfach an den Webserver weitergeleitet, die Ressource also vom Webserver geladen.
+
+Wir überprüfen die Funktionalität dieser `fetch`-Ereignisbehandlung:
+
+![cache](./files/38_cache.png)
+
+Unter dem Reiter `Network` in den DeveloperTools sehen wir, dass die `app.js` durch den Service Worker geladen wurde. Alle anderen Ressourcen wurden auch durch den Service Worker geladen, das liegt daran, dass wir im Service Worker die Anfrage an den Webserver durch den Service Worker durchschleusen. Wichtig ist aber, dass die `app.js` **nicht** vom Webserver geladen wurde. das erkennen war daran, dass alle anderen Ressourcen mit ihren Größenangaben in der Tabelle stehen und dass damit gesagt, wurde, wieviel Bytes vom Webserver geladen wurden. Die `app.js` taucht dabei aber nicht auf. Sie wurde durch den Service Worker aus dem Service-Worker-Cache (`Cache Storage`) geladen!
+
+Okay, das ist jetzt vielleicht noch nicht besonders eindrucksvoll, weil der Offline-Modus für unsere Webanwendung noch nicht funktioniert und wir bis jetzt nur die `app.js` in den Cache speichern und von dort bei einem `fetch()` laden. Dadurch sieht man noch nicht wirklich viel. Deshalb laden wir jetzt den *statischen* "Rest", insbesondere die `index.html` und die dazugehörigen `*.css`-Dateien. Zuvor jedoch noch eine kurze Anmerkung zu den Schlüssel-Werte-Paaren `request` und `response` im Cache:
+
+### Schlüssel-Werte-Paare `request` und `response`
+
+Wir laden jetzt unsere `index.html`-Datei in den Cache:
+
+```javascript linenums="1" hl_lines="7"
+self.addEventListener('install', event => {
+    console.log('service worker --> installing ...', event);
+    event.waitUntil(
+        caches.open('static')
+            .then( cache => {
+                console.log('Service-Worker-Cache erzeugt und offen');             
+                cache.add('/index.html');
+                cache.add('/src/js/app.js');    // relativ vom public-Ordner
+            })
+    );
+})
+```
+
+Wenn wir unsere Anwendung neu starten und den service worker erneut registrieren, dann sollte jetzt die `index.html` im Offline-Modus angezeigt werden (wenn auch ohne die CSS-Styles). Allerdings sieht die Anwendung nach dem Reload im Offline-Modus leider so aus wie auf der linken Seite der folgenden Abbildung gezeigt:
+
+![cache](./files/39_cache.png)
+
+Der Grund dafür ist, dass wir die Anwendung mit `localhost:8080` (oder `127.0.0.1:8080`) aufrufen, der `request` also `/` ist. Im Cache gespeichert haben wir aber den `request` `/index.html`. Und tatsächlich, wenn wir `localhost:8080/index.html` (oder `127.0.0.1:8080/index.html`) aufrufen, dann wird der `request` `/index.html` im Cache gefunden und als `response` die `index.html` zurückgegeben (rechte Seite in der Abbildung). Wichtig ist also, dass wir bedenken, dass alle `requests`, für die wir `responses` im Cache hinterlegen wollen, auch tatsächlich in den Cache hinzugefügt werden. Unsere `sw.js` sollte also auch so aussehen:
+
+```javascript linenums="1" hl_lines="7"
+self.addEventListener('install', event => {
+    console.log('service worker --> installing ...', event);
+    event.waitUntil(
+        caches.open('static')
+            .then( cache => {
+                console.log('Service-Worker-Cache erzeugt und offen'); 
+                cache.add('/');            
+                cache.add('/index.html');
+                cache.add('/src/js/app.js');    // relativ vom public-Ordner
+            })
+    );
+})
+```
+
+Dann erhalten wir auch das rechte Bild der Abbildung beim Aufruf von `localhost:8080` (oder `127.0.0.1:8080`) im Offline-Modus. Wir sollten also beachten, dass alle `requests`, die wir cachen wollen, auch tatsächlich in den Cache gespeichert werden.
+
+### Alle statischen Ressourcen in den Cache laden
+
+Wir laden jetzt alle *statischen* Ressourcen in den Cache, d.h. alles, was notwendig ist, um unsere Webanwendung auch im Offline-Modus so aussehen zu lassen, als würde sie "laufen". Dazu gehört natürlich die `index.html` und dann noch alle Ressourcen, die in der `index.html` eingebunden werden, also einige `*.js`-Dateien, einige `*.css`-Dateien und das Bild, das oben in der Webanwendung erscheint. 
+
+Man könnte das alles mit einzelnen `cache.add()`-Funktionen erledigen, so wie oben. Dafür gibt es aber auch die `cache.addAll()`-Funktion, der ein Array aus lauter `requests` übergeben wird. Die Implementierung der `install`-Ereignisbehandlung in unserer `sw.js` sieht dann so aus:
+
+```javascript linenums="1" hl_lines="7"
+self.addEventListener('install', event => {
+    console.log('service worker --> installing ...', event);
+    event.waitUntil(
+        caches.open('static')
+            .then( cache => {
+                console.log('Service-Worker-Cache erzeugt und offen'); 
+                cache.addAll([
+                    '/',
+                    '/index.html',
+                    '/src/js/app.js',
+                    '/src/js/feed.js',
+                    '/src/js/material.min.js',
+                    '/src/css/app.css',
+                    '/src/css/feed.css',
+                    '/src/images/htw.jpg',
+                    'https://fonts.googleapis.com/css?family=Roboto:400,700',
+                    'https://fonts.googleapis.com/icon?family=Material+Icons',
+                    'https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css'
+                ]);
+            })
+    );
+})
+```
+
+Wenn wir nun unsere Anwendung neu starten und darauf achten, dass der neue Service Worker auch wirklich registriert wird und dann in den Offline-Modus schalten, dann sieht unsere Anwendung so aus:
+
+![cache](./files/40_cache.png)
+
+Wie auf der rechten Seite der Abbildung zu sehen ist, funktioniert auch das JavaScript, um zum Formular zu gelangen. Einige Sachen funktionieren im Offline-Modus nicht, weil wir sie nicht in den Cache geladen haben:
+
+- die Hilfeseite (`/help/index.html` und die dazugehörige `help.css`) sowie
+- den Blogeintrag, den wir bereits (statisch) vorgenommen haben (den binden wir gleich noch *dynamisch* ein).
+
+Eine andere Sache fällt aber vielleicht auf: die Icons von Material Design Lite erscheinen nicht, d.h. das Menü links oben ist nur ein leeres Quadrat und auf dem roten runden Button fehlt das Plus, stattdessen steht dort `add`. 
+
+Wenn wir diesem Problem nachgehen, dann sehen wir in den DeveloperTools unter dem Reiter `Network`, dass alle Ressourcen, die wir im Cache gespeichert haben, auch tatsächlich aus diesem Cache geladen werden:
+
+![cache](./files/41_cache.png)
+
+Zusätzlich schlagen aber noch "kryptische" GET-Anfragen fehl (die roten ganz unten in der Abbildung). Hier werden offensichtlich noch Anfragen an den Webserver gestellt, von denen wir gar nichts wussten und die wir nicht im Cache vorhalten. Wo kommen diese Anfragen her? Wenn wir dort in den DeveloperTools bspw. auf die Ressource `https://fonts.googleapis.com/icon?family=Material+Icons` klicken, dann erscheint daneben der Inhalt der geladenen Ressource und wir finden darin einen weiteren `request`, den wir aber nicht in unserem Cache hinterlegt haben (weil wir es gar nicht wussten):
+
+![cache](./files/42_cache.png)
+
+Diese Anfragen schlagen im Offline-Modus (natürlich) fehl und deshalb fehlen uns die Material Design Icons. Gut wäre es, wenn solche *dynamischen* Anfragen ebenfalls im Cache landen würden. Mit diesem *dynamischen* Caching beschäftigen wir uns deshalb jetzt:
+
+
+
+
+
+
+

@@ -1,0 +1,1041 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Lehrmaterial, Übungen, Aufgaben und Hilfen für Aktuelle Trends der IKT">
+      
+      
+      
+        <meta name="author" content="Jörn Freiheit">
+      
+      
+        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/grundgeruest/">
+      
+      <link rel="shortcut icon" href="../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>Grundgerüst - Progressive Web Apps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#757575">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="grey" data-md-color-accent="indigo">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#grundgerust-unserer-pwa" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-header-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Progressive Web Apps
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Grundgerüst
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    Progressive Web Apps
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../einfuehrung/" class="md-nav__link">
+        Einführung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Grundgerüst
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Grundgerüst
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starten" class="md-nav__link">
+    Starten
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projekt" class="md-nav__link">
+    Projekt
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manifest/" class="md-nav__link">
+        Manifest
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serviceworker/" class="md-nav__link">
+        Service Worker
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../promises/" class="md-nav__link">
+        Promises & fetch
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../caching/" class="md-nav__link">
+        Caching
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uebungen/" class="md-nav__link">
+        Übungen
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        Werkzeuge
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hilfen/" class="md-nav__link">
+        Hilfen
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starten" class="md-nav__link">
+    Starten
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projekt" class="md-nav__link">
+    Projekt
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/grundgeruest.md" title="Seite editieren" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="grundgerust-unserer-pwa">Grundgerüst unserer PWA<a class="headerlink" href="#grundgerust-unserer-pwa" title="Permanent link">&para;</a></h1>
+<p>Wir beginnen jetzt mit der Implementierung von <em>progressive</em> Funktionalitäten. Das machen wir, indem wir sukzessive eine Progressive Web app erstellen, die viele der derzeit verfügbaren Funktionalitäten enthält, die derzeit für <em>Progressive Web Apps</em> verfügbar sind. Das Grundgerüst (oder der Ausgangspunkt) unserer PWA wird deshalb zur Verfügung gestellt, weil wir uns nicht um die Implementierung von HTML, CSS und JavaScript, sondern nur um die <em>progressive</em> Funktionalitäten kümmern wollen. Auf Basis dieses Grundgerüstes werden sukzessive Funktionalitäten, wie Push-Notifikationen, Offline-Verwendung, Geolocation, Kameranutzung usw. hinzufügen. Die Idee ist, dass wir eine Art HTW-Instagram erstellen. ich habe Instagram aber noch nie genutzt, deshalb weiß ich nicht, ob wir dem "Original" nahe kommen werden. Wahrscheinlich nicht, aber dafür behalten wir unsere Daten auch bei uns. </p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>Den Quellcode für das Grundgerüst finden Sie <a href="https://github.com/jfreiheit/IKT-PWA-01">hier (GitHub)</a>. Clonen Sie sich das Projekt in einem Ordner Ihrer Wahl und folgen Sie dann der <code>README.MD</code>: </p>
+<ul>
+<li>
+<p>Zum Ausführen des Projektes wird <a href="https://nodejs.org">Node.js</a> verendet. Sie müssen es auf Ihren Rechner installieren. </p>
+</li>
+<li>
+<p>In der Wahl Ihrer IDE sind Sie völlig frei. Empfehlungen finden Sie unter <a href="https://freiheit.f4.htw-berlin.de/ikt/tools/#integrated-development-environment-ide">https://freiheit.f4.htw-berlin.de/ikt/tools/#integrated-development-environment-ide</a></p>
+</li>
+<li>
+<p>Zum Starten des Projektes wechseln Sie im Terminal (Terminal Ihres Rechners oder das Terminal in der IDE) in den Projektordner (<code>cd IKT-PWA-01</code>) und führen dort </p>
+<p><code>npm install</code> </p>
+<p>aus. Damit werden alle erforderlichen Abhängigkeiten installiert.</p>
+</li>
+<li>
+<p>Nach erfolgreicher Installation der Abhängigkeiten, geben Sie  </p>
+<p><code>npm start</code> </p>
+<p>ein, um Ihr Projekt auszuführen. Klicken Sie danach auf <a href="http://localhost:8080">localhost:8080</a> oder geben Sie die URL direkt in Ihren Browser ein.</p>
+</li>
+<li>
+<p>Sollten Sie Änderungen an der Implementierung vornehmen und diese ausprobieren wollen, müssen Sie den Server zunächst wieder stoppen:</p>
+<p><code>Ctrl-C</code></p>
+<p>und geben dann erneut </p>
+<p><code>npm start</code> </p>
+<p>ein. </p>
+</li>
+</ul>
+<h2 id="starten">Starten<a class="headerlink" href="#starten" title="Permanent link">&para;</a></h2>
+<p>Starten Sie das Projekt mit <code>npm start</code> (nachdem Sie einmalig <code>npm install</code> ausgefürht haben) und öffnen Sie dann den Browser mit der URL <code>http://localhost:8080/</code>. Es erscheint</p>
+<p><img alt="grundgeruest" src="../files/06_pwa1.png" /></p>
+<p>bzw. wenn Sie die Viewport-Breite verkleinern</p>
+<p><img alt="grundgeruest" src="../files/07_pwa2.png" />. </p>
+<p>Sie erkennen wahrscheinlich schon, dass wir <a href="https://getmdl.io/">Material Design Lite</a> verwenden. Die Navigationskomponente kennen wir auch schon aus WebTech. Wenn Sie auf den <code>+</code>-Button klicken, erscheint ein kleines Menü. Dort können Sie zwar schon etwas eintragen, aber der <code>SPEICHERN</code>-Button funktioniert noch nicht. Auch beim <code>BENACHRICHTIGUNGEN EIN</code>-Button ist noch keine Ereignisbehandlung hinterlegt. Wenn Sie im Menü <code>Hilfe</code>klicken, öffnet sich die (fast leere) Hilfe-Seite. </p>
+<p>Schalten Sie beim Betrachten der Anwendung stets die <code>DeveloperTools</code> ein. Sie können dort sehr leicht auf die mobile Ansicht wechseln. Wichtig ist, dass Sie - zum besseren Ausprobieren der Anwendung - in den DeveloperTools unter dem Reiter <code>Network</code> ein Häkchen bei <code>Disable Cache</code> setzen. Wir wollen in Zukunft das Caching unseren <em>Service workern</em> überlassen und nicht den Cache des Browsers verwenden. </p>
+<p><img alt="cache" src="../files/08_disablecache.png" /></p>
+<h2 id="projekt">Projekt<a class="headerlink" href="#projekt" title="Permanent link">&para;</a></h2>
+<p>Bevor wir loslegen, werfen wir noch einen kurzen Blick auf die bisherigen Dateien im Projekt. Wir beginnen mit der <code>index.html</code> aus dem <code>public</code>-Ordner.</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">public/index.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span>
+        <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;ie=edge&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>IKT-PWA<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://fonts.googleapis.com/css?family=Roboto:400,700&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span>
+        <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/src/css/app.css&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/src/css/feed.css&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;app&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout mdl-js-layout mdl-layout--fixed-header&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout__header&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout__header-row&quot;</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- Title --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout-title&quot;</span><span class="p">&gt;</span>IKT-PWA<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- Add spacer, to align navigation to the right --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout-spacer&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- Navigation. We hide it in small screens. --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation mdl-layout--large-screen-only&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation__link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Bilder<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation__link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/help&quot;</span><span class="p">&gt;</span>Hilfe<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;drawer-option&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;enable-notifications mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent&quot;</span><span class="p">&gt;</span>
+              Benachrichtigungen Ein
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout__drawer&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout-title&quot;</span><span class="p">&gt;</span>IKT-PWA<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation__link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Bilder<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation__link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/help&quot;</span><span class="p">&gt;</span>Hilfe<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;drawer-option&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;enable-notifications mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent&quot;</span><span class="p">&gt;</span>
+            Benachrichtigungen Ein
+          <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">main</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout__content mat-typography&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;create-post&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;input-section mdl-textfield mdl-js-textfield mdl-textfield--floating-label&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-textfield__input&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-textfield__label&quot;</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;title&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>Titel<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;input-section mdl-textfield mdl-js-textfield mdl-textfield--floating-label&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;manual-location&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-textfield__input&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;location&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-textfield__label&quot;</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;location&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;location&quot;</span><span class="p">&gt;</span>Ort<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent&quot;</span>
+                    <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;post-btn&quot;</span><span class="p">&gt;</span>Speichern
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-button mdl-js-button mdl-button--fab&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;close-create-post-modal-btn&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons&quot;</span><span class="p">&gt;</span>close<span class="p">&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/images/htw.jpg&quot;</span>
+           <span class="na">alt</span><span class="o">=</span><span class="s">&quot;HTW Wilhelminenhof&quot;</span>
+           <span class="na">class</span><span class="o">=</span><span class="s">&quot;main-image&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;page-content&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h5</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center mdl-color-text--primary&quot;</span><span class="p">&gt;</span>HTW-Insta<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;shared-moments&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;floating-button&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-button mdl-js-button mdl-button--fab mdl-button--colored&quot;</span>
+                <span class="na">id</span><span class="o">=</span><span class="s">&quot;share-image-button&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons&quot;</span><span class="p">&gt;</span>add<span class="p">&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;confirmation-toast&quot;</span> <span class="na">aria-live</span><span class="o">=</span><span class="s">&quot;assertive&quot;</span> <span class="na">aria-atomic</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">aria-relevant</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-snackbar mdl-js-snackbar&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-snackbar__text&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-snackbar__action&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">defer</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/material.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/feed.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Sie sieht recht umfangreich aus. tatsächlich ist aber das meiste darin für das Navigationstemplate. Die Zeilen <code>21-36</code> und <code>38-49</code> beschreiben das gleiche, nämlich die Navigationsleiste. Der obere Block ist für breite Viewports (Klasse <code>mdl-layout--large-screen-only</code>). Alle <code>mdl</code>-Klassen sind von Material. Einen guten Überblick über die einzelnen Material-Komponenten finden Sie <a href="https://getmdl.io/components/index.html">hier</a>. Näheres zu den Navigationen finden Sie darin z.B. <a href="https://getmdl.io/components/index.html#layout-section/layout">hier</a>. Dann kommt das Bild (Zeilen <code>75-77</code>), dann der Text <code>HTW Insta</code> (Zeilen <code>78-81</code>) und dann der <code>+</code>-Button (Zeilen <code>82-87</code>). In den Zeilen <code>88-91</code> ist bereits eine Bestätigungsnachricht hinterlegt, derzeit aber noch <code>hidden</code>. </p>
+<p>In den eingeundenen eigenen Stylesheets <code>app.css</code> und <code>feed.css</code> steht nicht viel: </p>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">public/src/css/app.css</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">text-center</span> <span class="p">{</span>
+  <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">drawer-option</span> <span class="p">{</span>
+  <span class="k">padding</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">public/src/css/feed.css</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">#</span><span class="nn">create-post</span> <span class="p">{</span>
+  <span class="k">z-index</span><span class="p">:</span> <span class="mi">1001</span><span class="p">;</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">fixed</span><span class="p">;</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">min-height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">vh</span><span class="p">;</span>
+  <span class="k">overflow-y</span><span class="p">:</span> <span class="kc">scroll</span><span class="p">;</span>
+  <span class="k">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">top</span><span class="p">:</span> <span class="mi">56</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">background</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+  <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">main-image</span> <span class="p">{</span>
+  <span class="k">max-width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">margin</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">floating-button</span> <span class="p">{</span>
+  <span class="k">z-index</span><span class="p">:</span> <span class="mi">1000</span><span class="p">;</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">fixed</span><span class="p">;</span>
+  <span class="k">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">right</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">padding</span><span class="p">:</span> <span class="mi">30</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">input-section</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+  <span class="k">margin</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="kc">auto</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Kurze Erinnerung an CSS: Punktselektoren beschreiben Klassen (z.B. <code>.input-selection</code>) und #-Selektoren beschreiben Ids (z.B. <code>#create-post</code>). Sie können die Anwendung der Klassen und der Ids ja mal in der <code>index.html</code> suchen, wenn Sie möchten. </p>
+<p>Die <code>public/help/index.html</code> enthält noch weniger als die <code>public/index.html</code>. Erwähnenswert ist hier, dass wir mit einem Framework wie z.B. Angular natürlich der Navigation eine eigenen Komponente spendiert und diese nicht in beiden Dateien wiederholt hätten.</p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">public/help/index.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span>
+        <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;ie=edge&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Help<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://fonts.googleapis.com/css?family=Roboto:400,700&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span>
+        <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/src/css/help.css&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;app&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout mdl-js-layout mdl-layout--fixed-header&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout__header&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout__header-row&quot;</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- Title --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout-title&quot;</span><span class="p">&gt;</span>IKT-PWA<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- Add spacer, to align navigation to the right --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout-spacer&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- Navigation. We hide it in small screens. --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation mdl-layout--large-screen-only&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation__link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Bilder<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation__link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/settings&quot;</span><span class="p">&gt;</span>Einstellungen<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;drawer-option&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;enable-notifications mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent&quot;</span><span class="p">&gt;</span>
+              Benachrichtigungen Ein
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout__drawer&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout-title&quot;</span><span class="p">&gt;</span>IKT-PWA<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation__link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Feed<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-navigation__link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/help&quot;</span><span class="p">&gt;</span>Help<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;drawer-option&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;enable-notifications mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent&quot;</span><span class="p">&gt;</span>
+            Benachrichtigungen Ein
+          <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">main</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-layout__content mat-typography&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-grid&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-cell mdl-cell--12-col text-center&quot;</span><span class="p">&gt;</span>
+         <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Brauchst Du Hilfe?<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Hier erfährst Du, wie Du die App benutzen und neue Bildeinträge erstellen kannst.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-grid&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-cell mdl-cell--12-col text-center&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Kontakt<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-button mdl-js-button mdl-button--fab mdl-button--colored&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons&quot;</span><span class="p">&gt;</span>call<span class="p">&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-button mdl-js-button mdl-button--fab mdl-button--colored&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons&quot;</span><span class="p">&gt;</span>email<span class="p">&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdl-button mdl-js-button mdl-button--fab mdl-button--colored&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons&quot;</span><span class="p">&gt;</span>chat_bubble<span class="p">&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">defer</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/material.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Von den beiden JavaScript-Dateien <code>public/src/js/app.js</code> und <code>public/src/js/feed.js</code> steht derzeit nur etwas in der <code>feed.js</code>. Das schauen wir uns aber erst dann an, wenn wir neue Bildeinträge speichern wollen. </p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../einfuehrung/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Zurück
+                </span>
+                Einführung
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../manifest/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Weiter
+                </span>
+                Manifest
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Jörn Freiheit
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: ['instant', 'tabs'],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
