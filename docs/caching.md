@@ -368,6 +368,141 @@ Zusätzlich schlagen aber noch "kryptische" GET-Anfragen fehl (die roten ganz un
 Diese Anfragen schlagen im Offline-Modus (natürlich) fehl und deshalb fehlen uns die Material Design Icons. Gut wäre es, wenn solche *dynamischen* Anfragen ebenfalls im Cache landen würden. Mit diesem *dynamischen* Caching beschäftigen wir uns deshalb jetzt:
 
 
+## Dynamisches Caching
+
+Bis jetzt haben wir mit `cache.add()` bzw. `cache.addAll()` vorab festgelegt, was in den Cache geladen werden soll. Das wird *statisches Caching* oder *pre-caching* genannt. Jetzt kümmern wir uns um sogenanntes *dynamisches Caching*. Manchmal möchte man gar nicht schon gleich zu Beginn alles in den Cache laden, um die "Installation", das erstmalige Aufrufen der Seite nicht zu aufwändig und somit zu langsam zu gestalten. Manchmal kennt man aber auch gar nicht die Ressourcen, die man noch zum Cache hinzufügen möchte, wie das obere Beispiel gezeigt hat, als wir die Material Icons nicht in den Cache geladen haben, weil wir diese Anfrage vorab gar nicht kannten. 
+
+### Die Behandlung des fetch-Events erweitern
+
+Wir schauen uns zunächst nochmal die aktuelle Behandlung des `fetch`-Events im *service worker* an:
+
+```js linenums="1"
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request)
+            .then( response => {
+                if(response) {
+                    return response;
+                } else {
+                    return fetch(event.request);
+                }
+            })
+    );
+})
+```
+
+Zur Erinnerung: mit dieser behandlung schalten wir uns zwischen die Abfrage der Webseite an den Webserver. Diese Behandlung wirkt wie ein Proxy. Bei jeder Anfrage der Webseite an den Webserver wird diese Implementierung des `fetch`-Events aufgerufen. Wir erwidern den `request` mit einer `response`. 
+
+Entweder kommt diese `response` aus dem Cache, nämlich dann, wenn `caches.match(event.request)` eine `response` zurückgibt. In diesem Fall wird die `response` zurück an die Webseite geschickt und der Webserver wird gar nicht mehr weiter angefragt. 
+
+Oder wir leiten die Anfrage tatsächlich an den Webserver weiter (`return fetch(event.request);`), nämlich dann, wenn der `event.request` nicht als Schlüssel im Cache verfügbar ist und dieser deshalb keine `response` zurückgibt. An dieser Stelle fügen wir nun unser dynamisches Caching ein. Der Webserver wird mit einer `response` antworten und wir werden diese `response` in unseren Cache laden. 
+
+Dazu benötigen wir zwei Dinge:
+
+1. einen neuen, weiteren Cache, in dem wir den entsprechenden `request` und die `response` des Webservers speichern und
+2. die `cache.put()`-Anweisung. `put()` unterscheidet sich von `add()` dahingehend, dass `add()` nur einen Parameter benötigt, nämlich den `request` und die `response` automatisch als ein Schlüssel-Werte-Paar (`request, response`) speichert, während `put()` beide Werte als Schlüssel-Werte-Paar speichert, d.h. zwei Parameter erwartet (`request`, `response`).
+
+Ein erster Implementierungsversuch sieht so aus: 
+
+```js linenums="7"
+} else {
+    return fetch(event.request)
+        .then( res => {     		// nicht erneut response nehmen, haben wir schon
+            caches.open('dynamic')      // neuer, weiterer Cache namens dynamic
+                .then( cache => {
+                    cache.put(event.request.url, res);		// hier die put-Anweisung
+                })
+        });
+}
+```
+
+Die Zeilen `9-14` sind hinzugekommen. Die `fetch()`-Anweisung ist ein *Promise*, deshalb fügen wir ein `.then()` an. Die `response` müssen wir jetzt anders nennen, da es die Variable `response` ja bereits gibt und es jetzt um die `response` des Webservers geht, also nennen wir sie `res` (kann natürlich auch anders heißen). Dann öffnen wir einen neuen Cache, den wir `dynamic` nennen - kann auch anders heißen. Wenn der Cache noch nicht existiert, wird er durch `open()` erstellt. `open()` ist wiederum ein Promise, so dass wir `.then()` anknüpfen können und fügen in den Cache mithilfe von `put()` das Schlüssel-Werte-Paar (`event.request.url, res`) ein. 
+
+Das wäre schon fast korrekt, aber es fehlt noch, dass wir die Response `res` natürlich an die Webseite zurückgeben wollen. Dazu fügen wir einerseits `return res;` ein, müssen aber auch dafür sorgen, dass die `res` auch an den `fetch()`-Aufruf zurückgegeben wird. Dehalb benötigen wir auch vor `caches.open()` noch ein `return`. 
+
+Außerdem müssen wir noch einen weiteren Aspekt beachten. Wenn eine Response verwendet wird, wird sie *konsumiert*, d.h. verbraucht. Das ist so für Responses, auch wenn es nicht so wirklich nachvollziehbar und verständlich ist. Wir verwenden in unserem Code zwei Mal `res`, einmal um es in den Cache zu speichern und ein anderes Mal, um es an die Webseite zurückzugeben. In einer der beiden Verwendungen würde unsere `res` verbraucht/konsumiert werden und das andere Mal wäre sie leer. Kein Ahnung, warum das so ist ;-) . Aber wir benötigen an einer der beiden Stellen ein `res.clone()`, um den Clone der Response zu verwenden und die Response nicht zu "verbrauchen". Wir speichern den Clone der Response in den Cache (wir könnten auch die `res` in den Cache speichern und `res.clone()` zurückgeben). 
+
+Die gesamte Implementierung sieht dann so aus: 
+
+```js linenums="1"
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request)
+            .then( response => {
+                if(response) {
+                    return response;
+                } else {
+                    return fetch(event.request)
+                        .then( res => {     // nicht erneut response nehmen, haben wir schon
+                            return caches.open('dynamic')      // neuer, weiterer Cache namens dynamic
+                                .then( cache => {
+                                    cache.put(event.request.url, res.clone());
+                                    return res;
+                                })
+                        });
+                }
+            })
+    );
+})
+```
+
+Wenn wir nun die Anwendung ausführen ( `npm start`), dann in den `Offline`-Modus gehen und ein `Reload` im Browser durchführen, sehen wir, dass die Material-Icons nun auch im Offline-Modus vorhanden sind:
+
+![cache](./files/43_cache.png)
+
+Wenn wir uns in den DeveloperTools unter `Application` auf der linken Seite unter `Cache` den `Cache Storage` anschauen, dann sehen wir, dass dort nun 2 Caches sind, der `static` und der `dynamic` Cache. 
+
+![cache](./files/44_cache.png)
+
+In dem `dynmic` Cache finden wir nun auch die Material Icons wieder
+
+![cache](./files/45_cache.png)
+
+und unter dem `Network`-Reiter gibt es auch keine "Fehler" mehr, sondern alle Ressourcen werden vom Service Worker aus dem Cache geladen:
+
+![cache](./files/46_cache.png)
+
+Als weiteres Zeichen, dass nun alle Inhalte dynamisch geladen werden, erkennen wir auch die "Mensa-Card" in unserer Anwendung im Offline-Modus. Diese hatten wir ja statisch nicht hinzugefügt. Probieren Sie auch einmal die "Hilfe-Seite" der Anwendung aus. Im Offline-Modus ist sie noch nicht verfügbar. Wenn wir aber wieder online gehen, die "Hilfe-Seite" aufrufen und dann wieder offline gehen, ist die Hilfe-Seite im Cache und wird angezeigt. 
+
+### chrome.webRequest-API
+
+Der Chromium-Browser hat eine eigene [API für Requests](https://developer.chrome.com/docs/extensions/reference/webRequest/) und schaltet sich bei Anfragen selbst dazwischen, um den Traffic zu analysieren und eventuelle Anfragen zu blockieren. Auch diese Anfragen lösen ein `fetch`-Event aus. Allerdings gibt es bei von Chromium ausgelösten Requests in dem `request` keine `url`-Eigenschaft. Vielleicht haben Sie einen solchen Fehler auch in Ihren DeveloperTools entdeckt. Eine Chromium-Anfrage unterscheidet sich von einer "normalen" Anfrage der Webseite an den Webserver dadurch, dass in einer "normalen" Anfrage die angefragte Ressource unter "`htttp://...`", also unter einer URL verfügbar ist. Um nun den fehlerhaften Zugriff auf die `url`-Eigenschaft von `request` bei einer Anfrage durch Chrome zu vermeiden, fügen wir ganz am Anfang der Ereignisbehandlung des `fetch`-Events noch die Abfrage ein, ob der `request` das Wort "`http`" enthält. Wenn nicht, verlassen wir die Behandlung des Events einfach:
+
+
+```js linenums="1" hl_lines="2-4"
+self.addEventListener('fetch', event => {
+    // check if request is made by chrome extensions or web page
+    // if request is made for web page url must contains http.
+    if (!(event.request.url.indexOf('http') === 0)) return; // skip the request if request is not made with http protocol
+
+    event.respondWith(
+        caches.match(event.request)
+            .then( response => {
+                if(response) {
+                    return response;
+                } else {
+                    return fetch(event.request)
+                        .then( res => {     // nicht erneut response nehmen, haben wir schon
+                            return caches.open('dynamic')      // neuer, weiterer Cache namens dynamic
+                                .then( cache => {
+                                    cache.put(event.request.url, res.clone());
+                                    return res;
+                                })
+                        });
+                }
+            })
+    );
+})
+```
+
+### Versionierung von Caches
+
+
+
+
+
+
+
 
 
 

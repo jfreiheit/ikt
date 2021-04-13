@@ -414,6 +414,40 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dynamisches-caching" class="md-nav__link">
+    Dynamisches Caching
+  </a>
+  
+    <nav class="md-nav" aria-label="Dynamisches Caching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#die-behandlung-des-fetch-events-erweitern" class="md-nav__link">
+    Die Behandlung des fetch-Events erweitern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chromewebrequest-api" class="md-nav__link">
+    chrome.webRequest-API
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versionierung-von-caches" class="md-nav__link">
+    Versionierung von Caches
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -570,6 +604,40 @@
           <li class="md-nav__item">
   <a href="#alle-statischen-ressourcen-in-den-cache-laden" class="md-nav__link">
     Alle statischen Ressourcen in den Cache laden
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamisches-caching" class="md-nav__link">
+    Dynamisches Caching
+  </a>
+  
+    <nav class="md-nav" aria-label="Dynamisches Caching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#die-behandlung-des-fetch-events-erweitern" class="md-nav__link">
+    Die Behandlung des fetch-Events erweitern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chromewebrequest-api" class="md-nav__link">
+    chrome.webRequest-API
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versionierung-von-caches" class="md-nav__link">
+    Versionierung von Caches
   </a>
   
 </li>
@@ -1013,6 +1081,165 @@
 <p>Zusätzlich schlagen aber noch "kryptische" GET-Anfragen fehl (die roten ganz unten in der Abbildung). Hier werden offensichtlich noch Anfragen an den Webserver gestellt, von denen wir gar nichts wussten und die wir nicht im Cache vorhalten. Wo kommen diese Anfragen her? Wenn wir dort in den DeveloperTools bspw. auf die Ressource <code>https://fonts.googleapis.com/icon?family=Material+Icons</code> klicken, dann erscheint daneben der Inhalt der geladenen Ressource und wir finden darin einen weiteren <code>request</code>, den wir aber nicht in unserem Cache hinterlegt haben (weil wir es gar nicht wussten):</p>
 <p><img alt="cache" src="../files/42_cache.png" /></p>
 <p>Diese Anfragen schlagen im Offline-Modus (natürlich) fehl und deshalb fehlen uns die Material Design Icons. Gut wäre es, wenn solche <em>dynamischen</em> Anfragen ebenfalls im Cache landen würden. Mit diesem <em>dynamischen</em> Caching beschäftigen wir uns deshalb jetzt:</p>
+<h2 id="dynamisches-caching">Dynamisches Caching<a class="headerlink" href="#dynamisches-caching" title="Permanent link">&para;</a></h2>
+<p>Bis jetzt haben wir mit <code>cache.add()</code> bzw. <code>cache.addAll()</code> vorab festgelegt, was in den Cache geladen werden soll. Das wird <em>statisches Caching</em> oder <em>pre-caching</em> genannt. Jetzt kümmern wir uns um sogenanntes <em>dynamisches Caching</em>. Manchmal möchte man gar nicht schon gleich zu Beginn alles in den Cache laden, um die "Installation", das erstmalige Aufrufen der Seite nicht zu aufwändig und somit zu langsam zu gestalten. Manchmal kennt man aber auch gar nicht die Ressourcen, die man noch zum Cache hinzufügen möchte, wie das obere Beispiel gezeigt hat, als wir die Material Icons nicht in den Cache geladen haben, weil wir diese Anfrage vorab gar nicht kannten. </p>
+<h3 id="die-behandlung-des-fetch-events-erweitern">Die Behandlung des fetch-Events erweitern<a class="headerlink" href="#die-behandlung-des-fetch-events-erweitern" title="Permanent link">&para;</a></h3>
+<p>Wir schauen uns zunächst nochmal die aktuelle Behandlung des <code>fetch</code>-Events im <em>service worker</em> an:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Zur Erinnerung: mit dieser behandlung schalten wir uns zwischen die Abfrage der Webseite an den Webserver. Diese Behandlung wirkt wie ein Proxy. Bei jeder Anfrage der Webseite an den Webserver wird diese Implementierung des <code>fetch</code>-Events aufgerufen. Wir erwidern den <code>request</code> mit einer <code>response</code>. </p>
+<p>Entweder kommt diese <code>response</code> aus dem Cache, nämlich dann, wenn <code>caches.match(event.request)</code> eine <code>response</code> zurückgibt. In diesem Fall wird die <code>response</code> zurück an die Webseite geschickt und der Webserver wird gar nicht mehr weiter angefragt. </p>
+<p>Oder wir leiten die Anfrage tatsächlich an den Webserver weiter (<code>return fetch(event.request);</code>), nämlich dann, wenn der <code>event.request</code> nicht als Schlüssel im Cache verfügbar ist und dieser deshalb keine <code>response</code> zurückgibt. An dieser Stelle fügen wir nun unser dynamisches Caching ein. Der Webserver wird mit einer <code>response</code> antworten und wir werden diese <code>response</code> in unseren Cache laden. </p>
+<p>Dazu benötigen wir zwei Dinge:</p>
+<ol>
+<li>einen neuen, weiteren Cache, in dem wir den entsprechenden <code>request</code> und die <code>response</code> des Webservers speichern und</li>
+<li>die <code>cache.put()</code>-Anweisung. <code>put()</code> unterscheidet sich von <code>add()</code> dahingehend, dass <code>add()</code> nur einen Parameter benötigt, nämlich den <code>request</code> und die <code>response</code> automatisch als ein Schlüssel-Werte-Paar (<code>request, response</code>) speichert, während <code>put()</code> beide Werte als Schlüssel-Werte-Paar speichert, d.h. zwei Parameter erwartet (<code>request</code>, <code>response</code>).</li>
+</ol>
+<p>Ein erster Implementierungsversuch sieht so aus: </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>             <span class="c1">// nicht erneut response nehmen, haben wir schon</span>
+            <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;dynamic&#39;</span><span class="p">)</span>      <span class="c1">// neuer, weiterer Cache namens dynamic</span>
+                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="nx">cache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>      <span class="c1">// hier die put-Anweisung</span>
+                <span class="p">})</span>
+        <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Die Zeilen <code>9-14</code> sind hinzugekommen. Die <code>fetch()</code>-Anweisung ist ein <em>Promise</em>, deshalb fügen wir ein <code>.then()</code> an. Die <code>response</code> müssen wir jetzt anders nennen, da es die Variable <code>response</code> ja bereits gibt und es jetzt um die <code>response</code> des Webservers geht, also nennen wir sie <code>res</code> (kann natürlich auch anders heißen). Dann öffnen wir einen neuen Cache, den wir <code>dynamic</code> nennen - kann auch anders heißen. Wenn der Cache noch nicht existiert, wird er durch <code>open()</code> erstellt. <code>open()</code> ist wiederum ein Promise, so dass wir <code>.then()</code> anknüpfen können und fügen in den Cache mithilfe von <code>put()</code> das Schlüssel-Werte-Paar (<code>event.request.url, res</code>) ein. </p>
+<p>Das wäre schon fast korrekt, aber es fehlt noch, dass wir die Response <code>res</code> natürlich an die Webseite zurückgeben wollen. Dazu fügen wir einerseits <code>return res;</code> ein, müssen aber auch dafür sorgen, dass die <code>res</code> auch an den <code>fetch()</code>-Aufruf zurückgegeben wird. Dehalb benötigen wir auch vor <code>caches.open()</code> noch ein <code>return</code>. </p>
+<p>Außerdem müssen wir noch einen weiteren Aspekt beachten. Wenn eine Response verwendet wird, wird sie <em>konsumiert</em>, d.h. verbraucht. Das ist so für Responses, auch wenn es nicht so wirklich nachvollziehbar und verständlich ist. Wir verwenden in unserem Code zwei Mal <code>res</code>, einmal um es in den Cache zu speichern und ein anderes Mal, um es an die Webseite zurückzugeben. In einer der beiden Verwendungen würde unsere <code>res</code> verbraucht/konsumiert werden und das andere Mal wäre sie leer. Kein Ahnung, warum das so ist ;-) . Aber wir benötigen an einer der beiden Stellen ein <code>res.clone()</code>, um den Clone der Response zu verwenden und die Response nicht zu "verbrauchen". Wir speichern den Clone der Response in den Cache (wir könnten auch die <code>res</code> in den Cache speichern und <code>res.clone()</code> zurückgeben). </p>
+<p>Die gesamte Implementierung sieht dann so aus: </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>     <span class="c1">// nicht erneut response nehmen, haben wir schon</span>
+                            <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;dynamic&#39;</span><span class="p">)</span>      <span class="c1">// neuer, weiterer Cache namens dynamic</span>
+                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                                    <span class="nx">cache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">());</span>
+                                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                                <span class="p">})</span>
+                        <span class="p">});</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Wenn wir nun die Anwendung ausführen ( <code>npm start</code>), dann in den <code>Offline</code>-Modus gehen und ein <code>Reload</code> im Browser durchführen, sehen wir, dass die Material-Icons nun auch im Offline-Modus vorhanden sind:</p>
+<p><img alt="cache" src="../files/43_cache.png" /></p>
+<p>Wenn wir uns in den DeveloperTools unter <code>Application</code> auf der linken Seite unter <code>Cache</code> den <code>Cache Storage</code> anschauen, dann sehen wir, dass dort nun 2 Caches sind, der <code>static</code> und der <code>dynamic</code> Cache. </p>
+<p><img alt="cache" src="../files/44_cache.png" /></p>
+<p>In dem <code>dynmic</code> Cache finden wir nun auch die Material Icons wieder</p>
+<p><img alt="cache" src="../files/45_cache.png" /></p>
+<p>und unter dem <code>Network</code>-Reiter gibt es auch keine "Fehler" mehr, sondern alle Ressourcen werden vom Service Worker aus dem Cache geladen:</p>
+<p><img alt="cache" src="../files/46_cache.png" /></p>
+<p>Als weiteres Zeichen, dass nun alle Inhalte dynamisch geladen werden, erkennen wir auch die "Mensa-Card" in unserer Anwendung im Offline-Modus. Diese hatten wir ja statisch nicht hinzugefügt. Probieren Sie auch einmal die "Hilfe-Seite" der Anwendung aus. Im Offline-Modus ist sie noch nicht verfügbar. Wenn wir aber wieder online gehen, die "Hilfe-Seite" aufrufen und dann wieder offline gehen, ist die Hilfe-Seite im Cache und wird angezeigt. </p>
+<h3 id="chromewebrequest-api">chrome.webRequest-API<a class="headerlink" href="#chromewebrequest-api" title="Permanent link">&para;</a></h3>
+<p>Der Chromium-Browser hat eine eigene <a href="https://developer.chrome.com/docs/extensions/reference/webRequest/">API für Requests</a> und schaltet sich bei Anfragen selbst dazwischen, um den Traffic zu analysieren und eventuelle Anfragen zu blockieren. Auch diese Anfragen lösen ein <code>fetch</code>-Event aus. Allerdings gibt es bei von Chromium ausgelösten Requests in dem <code>request</code> keine <code>url</code>-Eigenschaft. Vielleicht haben Sie einen solchen Fehler auch in Ihren DeveloperTools entdeckt. Eine Chromium-Anfrage unterscheidet sich von einer "normalen" Anfrage der Webseite an den Webserver dadurch, dass in einer "normalen" Anfrage die angefragte Ressource unter "<code>htttp://...</code>", also unter einer URL verfügbar ist. Um nun den fehlerhaften Zugriff auf die <code>url</code>-Eigenschaft von <code>request</code> bei einer Anfrage durch Chrome zu vermeiden, fügen wir ganz am Anfang der Ereignisbehandlung des <code>fetch</code>-Events noch die Abfrage ein, ob der <code>request</code> das Wort "<code>http</code>" enthält. Wenn nicht, verlassen wir die Behandlung des Events einfach:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="hll">    <span class="c1">// check if request is made by chrome extensions or web page</span>
+</span><span class="hll">    <span class="c1">// if request is made for web page url must contains http.</span>
+</span><span class="hll">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request if request is not made with http protocol</span>
+</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>     <span class="c1">// nicht erneut response nehmen, haben wir schon</span>
+                            <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;dynamic&#39;</span><span class="p">)</span>      <span class="c1">// neuer, weiterer Cache namens dynamic</span>
+                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                                    <span class="nx">cache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">());</span>
+                                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                                <span class="p">})</span>
+                        <span class="p">});</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="versionierung-von-caches">Versionierung von Caches<a class="headerlink" href="#versionierung-von-caches" title="Permanent link">&para;</a></h3>
                 
               
               
