@@ -37,5 +37,9 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 
 ### Inhalte
 
-??? question "Woche 1 - Einführung und Organisatorisches"
+??? question "Woche 1 - Grundgerüst"
+
+	- eigentlich wollten wir diese Woche auch das [Application Manifest](./manifest/#web-app-manifest) machen, aber da wir am Mittwoch an einem Antirassismus-Seminar teilnehmen und somit die Vorlesung ausfällt, fangen wir ganz langsam an und betrachten nur das [Grundgerüst](./grundgeruest/#grundgerust-unserer-pwa). Dazu auch folgendes Video: 
+	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=9acae2bf623912843d1298721c67867a&width=720&height=405&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="405" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- Bearbeiten Sie bitte außerdem [Übung 1](./uebungen/#ubung-1-grundgerust). Fragen dazu klären wir in der [Übung am Donnerstag um 12:15 Uhr](https://htw-berlin.zoom.us/j/95912146800?pwd=UklCbGNicUh6L29yaGpuNzhTaDBXZz09). Die Übung um 9:45 Uhr am Donnerstag findet nicht statt, da um diese Zeit das gemeinsame Plenum zum Thema *Design Research* in der Veranstaltung *Usability* stattfindet. 
 

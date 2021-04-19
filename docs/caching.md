@@ -162,7 +162,7 @@ Statisch ist im Prinzip der *Rahmen* unserer Anwendung, also im prinzip alles, w
 
 ![cache](./files/36_cache.png)
 
-Der *rahmen* einer Webanwendung wird auch *App-Shell* genannt. Wir wollen diese *App-Shell*  zunächst in unseren Service-Worker-Cache speichern. 
+Der *Rahmen* einer Webanwendung wird auch *App-Shell* genannt. Wir wollen diese *App-Shell*  zunächst in unseren Service-Worker-Cache speichern. 
 
 ### Static caching/Precaching
 
@@ -497,13 +497,209 @@ self.addEventListener('fetch', event => {
 
 ### Versionierung von Caches
 
+Wir haben nun sowohl statisch als auch dynamisch Ressourcen unserer Webanwendung geladen. Wenn wir eine Weile auf unserer Anwendung navigieren, laden wir nach und nach alle Ressourcen in den Cache, die unsere Anwendung ausmachen. Irgendwann können wir sie komplett offline betreiben. Alle Ressourcen sind im Cache und keine Ressourcen werden mehr vom Webserver geladen. 
 
+Was passiert aber, wenn wir etwas ändern? Wenn wir den Service worker `sw.js` ändern, dann können wir dafür sorgen, dass er neu geladen wird. Der Service worker darf auch **niemals** in den Cache geladen werden, denn dann hätten wir eine unendliche Schleife, die immer wieder Ressourcen in den Cache lädt! Wenn wir irgendeine andere Datei, eine `*.html`-, `*.css`- oder `*.js`-Datei ändern, dann wird diese nie mehr in ihrer aktuellen Version vom Webserver geladen, da sie ja bereits im Cache ist und deshalb immer (in ihrer alten Version) aus dem Cache geladen wird. Um dieses problem zu beheben, *versionieren* wir unsere Caches.
 
+#### Neue Cache-Versionen erstellen
 
+Eine neue "Version" eines Caches erstellen wir dadurch, dass wir einen neuen Cache mit anderem Namen erstellen. Unsere beiden Caches (der statische und der dynamische) werden jeweils im Service Worker (`sw.js`) benannt:
 
+=== "aktueller Stand sw.js"	
+	```js linenums="1" hl_lines="4 42"
+	self.addEventListener('install', event => {
+	    console.log('service worker --> installing ...', event);
+	    event.waitUntil(
+	        caches.open('static')
+	            .then( cache => {
+	                console.log('Service-Worker-Cache erzeugt und offen');
+	                cache.addAll([
+	                    '/',
+	                    '/index.html',
+	                    '/src/js/app.js',
+	                    '/src/js/feed.js',
+	                    '/src/js/material.min.js',
+	                    '/src/css/app.css',
+	                    '/src/css/feed.css',
+	                    '/src/images/htw.jpg',
+	                    'https://fonts.googleapis.com/css?family=Roboto:400,700',
+	                    'https://fonts.googleapis.com/icon?family=Material+Icons',
+	                    'https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css'
+	                ]);
+	            })
+	    );
+	})
 
+	self.addEventListener('activate', event => {
+	    console.log('service worker --> activating ...', event);
+	    return self.clients.claim();
+	})
 
+	self.addEventListener('fetch', event => {
+	    // check if request is made by chrome extensions or web page
+	    // if request is made for web page url must contains http.
+	    if (!(event.request.url.indexOf('http') === 0)) return; // skip the request. if request is not made with http protocol
 
+	    event.respondWith(
+	        caches.match(event.request)
+	            .then( response => {
+	                if(response) {
+	                    return response;
+	                } else {
+	                    return fetch(event.request)
+	                        .then( res => {     // nicht erneut response nehmen, haben wir schon
+	                            return caches.open('dynamic')      // neuer, weiterer Cache namens dynamic
+	                                .then( cache => {
+	                                    cache.put(event.request.url, res.clone());
+	                                    return res;
+	                                })
+	                        });
+	                }
+	            })
+	    );
+	})
+	```
+
+Mit wechselndem Namen wechseln wir auch die "Version" des Caches. Wenn wir die Implementierung des statischen Service Workers (mit dem dynamischen ist es gleich, wir zeigen es hier zunächst nur für den statischen) in der Zeile `4` bespielsweise auf 
+
+```javascript
+ caches.open('static-v1')
+```
+
+ändern, ensteht ein *neuer zusätzlicher* Caches `static-v1`. Mit solchen "Versionierungen" erreichen wir, dass der Service Worker neu ausgeführt und somit wirksam wird. Geänderte Dateien gelangen so neu in diesen neuen Caches. 
+
+![caching](./files/48_cache.png)
+
+Leider bleiben aber auch die alten Caches noch bestehen und die Funktion `caches.match()` sucht in **allen** Caches nach dem passenden Request. Die Änderungen wären dann also trotzdem noch nicht sichtbar. Wir müssen jetzt noch dafür sorgen, dass die "alten" Caches gelöscht werden. 
+
+Um uns zu überlegen, an welcher Stelle ein geeigneter Platz wäre, die alten Caches zu löschen, hier nochmal eine kurze Wiederholung des [Service-Worker-Lifecycles](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle): 
+
+- **install**: Das `install`-Ereignis ist das erste Ereignis, das ein Service Worker auslöst. Es wird genau einmal ausgelöst. Die *Promise* in `installEvent.waitUntil()` gibt Auskunft darüber, ob das Installieren des Service Workers erfolgreich war oder nicht. So lange der Service Worker installiert wird, kann er keine `fetch`-Ereignisse empfangen und behandeln. 
+- **activate**: Sobald die Installation erfolgreich abgeschlossen ist, wird das `activate`-Ereignis ausgelöst. 
+- **waiting**: Wenn ein Service Worker `activated` ist, d.h. das `activate`-Event für diesen Service Worker ausgelöst wurde, kontrolliert er die Anfragen der Webseite (insb. wenn `clients.claim()` ausgeführt wurde, was dazu führt, dass auch alle Unterseiten der Seite "kontrolliert" werden). Wird der Service Worker geändert (aktualisiert) und erneut installiert, kann der geänderte Service Worker nicht sofort in den `activated` Zustand übergehen, so lange ein anderer Service Worker `active` ist. Der aktualisierte Service Worker ist dann `waiting`.
+
+![caching](./files/47_cache.png)
+
+Das Bild zeigt einen aktualisierten Service Worker (`#877`) `waiting` solange der Service Worker `#875` noch `activated` ist. Erst, wenn `skipWaiting` geklickt wird (`self.skipWaiting()`), wird der aktualisierte Service Worker `activated`. 
+
+Ein guter Punkt, existierende Caches zu löschen, die man nicht mehr verwenden möchte, ist, wenn ein (neuer/aktualisierter) Service Worker `activated` ist. Wir erweitern also die behandlung des `activate`-Ereignisses:
+
+```javascript linenums="1"
+self.addEventListener('activate', event => {
+    console.log('service worker --> activating ...', event);
+    event.waitUntil(
+        caches.keys()
+            .then( keyList => {
+                return Promise.all(keyList.map( key => {
+                    if(key !== 'static-v1' && key !== 'dynamic') {
+                        console.log('service worker --> old cache removed :', key);
+                        return caches.delete(key);
+                    }
+                }))
+            })
+    );
+    return self.clients.claim();
+})
+```
+
+Die ersten beiden und die letzten beiden Zeilen hatten wir bereits. Zeilen `3-13` sind neu. Betrachten wir den Code genauer:
+
+- Die Funktion `waitUntil()` (Zeile `4`) gibt es sowohl für das `install`-Event als auch für das `activate`-Ereignis. Dieser Funktion wird ein Promise übergeben. Wir übergeben als Promise die Funktion `caches.keys()` (Zeile `5`).
+- `caches.keys` gibt alle Namen der Service-Worker-Caches als Schlüssel zurück. In unserem Fall also `static`, `static-v1` und `dynamic`. 
+- die Funktion `Promise.all()` wird, verwendet, wenn auf ein Array von Promises "gewartet" werden soll. Die Funktion ist also dann beendet, wenn alle Promises des Arrays beendet sind. 
+- `Promise.all()` wartet auf ein Array von Promises. Wir haben aber mit `keyList` "nur" ein Array von Strings (die Namen der Caches). Mithilfe der `map()`-Funktion wandeln wir dieses Array von Strings in ein Array von Promises um. 
+- die `map`-Funktion nimmt nun jeden einzelnen String aus dem Array `keyList` und "macht" damit etwas (Zeilen `7-10`)
+- es wird geprüft, ob der `key` entweder dem dynamischen Cache entspricht (`'dynamic'`) oder dem neuen statischen Cache (`'static-v1'`). Wenn das **nicht** der Fall ist, dann wird der Cache mit dem Namen `key` gelöscht (Zeile `9`).
+- `return caches.delete(key)` gibt somit ein Promise zurück (an die `map`-Funktion). Somit wird jeder Schlüssel aus der `keyList` in ein Promise umgewandelt (für `static-v1` und `dynamic` wird `null` zurückgegeben). 
+- wenn alle dieses Promises beendet sind, ist auch die `Promise.all()`-Funktion beendet und somit auch die `event.waitUntil()`-Funktion.
+
+Somit löschen wir alle "alten" statischen Caches und behalten nur die Caches `static-v1` und `dynamic`. 
+
+![caching](./files/49_cache.png)
+
+Wenn wir also etwas in unseren `*.html`, `*.css` und/oder `*.js`-Dateien ändern und das Geänderte wirksam werden lassen wollen, ändern wir einfach die Namen der Caches im Service Worker und sobald der Service Worker aktiviert ist, existieren nur noch die neuen Caches und die alten sind gelöscht. Damit wir das an zentraler Stelle im `sw.js` machen, lagern wir die aktuellen Namen der Caches in Konstanten aus. Die vollständige Implementierung unseres Service Workers sieht so aus:
+
+```javascript linenums="1" hl_lines="1"
+const CURRENT_STATIC_CACHE = 'static-v2';
+const CURRENT_DYNAMIC_CACHE = 'dynamic-v2';
+
+self.addEventListener('install', event => {
+    console.log('service worker --> installing ...', event);
+    event.waitUntil(
+        caches.open(CURRENT_STATIC_CACHE)
+            .then( cache => {
+                console.log('Service-Worker-Cache erzeugt und offen');
+                cache.addAll([
+                    '/',
+                    '/index.html',
+                    '/src/js/app.js',
+                    '/src/js/feed.js',
+                    '/src/js/material.min.js',
+                    '/src/css/app.css',
+                    '/src/css/feed.css',
+                    '/src/images/htw.jpg',
+                    'https://fonts.googleapis.com/css?family=Roboto:400,700',
+                    'https://fonts.googleapis.com/icon?family=Material+Icons',
+                    'https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css'
+                ]);
+            })
+    );
+})
+
+self.addEventListener('activate', event => {
+    console.log('service worker --> activating ...', event);
+    event.waitUntil(
+        caches.keys()
+            .then( keyList => {
+                return Promise.all(keyList.map( key => {
+                    if(key !== CURRENT_STATIC_CACHE && key !== CURRENT_DYNAMIC_CACHE) {
+                        console.log('service worker --> old cache removed :', key);
+                        return caches.delete(key);
+                    }
+                }))
+            })
+    );
+    return self.clients.claim();
+})
+
+self.addEventListener('fetch', event => {
+    // check if request is made by chrome extensions or web page
+    // if request is made for web page url must contains http.
+    if (!(event.request.url.indexOf('http') === 0)) return; // skip the request. if request is not made with http protocol
+
+    event.respondWith(
+        caches.match(event.request)
+            .then( response => {
+                if(response) {
+                    return response;
+                } else {
+                    return fetch(event.request)
+                        .then( res => {     // nicht erneut response nehmen, haben wir schon
+                            return caches.open(CURRENT_DYNAMIC_CACHE)      // neuer, weiterer Cache namens dynamic
+                                .then( cache => {
+                                    cache.put(event.request.url, res.clone());
+                                    return res;
+                                })
+                        });
+                }
+            })
+    );
+})
+```
+
+### Zusammenfassung
+
+Die Zusammanfassung für das Caching kann man im folgenden Bild darstellen. 
+
+![cache](./files/50_cache.png)
+
+Mithilfe des Caching haben wir es geschafft, dass unsere Anwendung im **Offline-Modus** nicht mehr so aussieht, wie links, sondern wie rechts. Toll!
+
+Noch einige nützliche Links:
+
+- [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
+- [The offline cookbook](https://jakearchibald.com/2014/offline-cookbook/#cache-persistence)
+- [Google: Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers)
 
 
 
