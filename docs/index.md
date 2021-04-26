@@ -4,7 +4,7 @@ Herzlich willkommen zur Veranstaltung **Aktuelle Trends der IKT**!
 
 ### Grober Inhalt
 
-Wir beschäftigen uns dieses Semester mit *Progressive Web Apps (PWA)*. Dieser begriff ist 2015 bei Google entstanden. Progressive Web Apps bieten installierbare nativen Apps ähnliche Nutzererfahrungen sowohl auf dem Desktop als auch auf dem Smartphone, sind aber Webanwendungen, die im Browser laufen, also zum World Wide Web gehören. Typische Eigenschaften von Progressive Web Apps sind die Einbindung von Kamera und Mikrofon, dem eigenen Standort sowie die Fähigkeit, (zumindest teilweise) offline ausführbar zu sein. 
+Wir beschäftigen uns dieses Semester mit *Progressive Web Apps (PWA)*. Dieser Begriff ist 2015 bei Google entstanden. Progressive Web Apps bieten installierbare nativen Apps ähnliche Nutzererfahrungen sowohl auf dem Desktop als auch auf dem Smartphone, sind aber Webanwendungen, die im Browser laufen, also zum World Wide Web gehören. Typische Eigenschaften von Progressive Web Apps sind die Einbindung von Kamera und Mikrofon, dem eigenen Standort sowie die Fähigkeit, (zumindest teilweise) offline ausführbar zu sein. 
 
 Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesungsvideos finden Sie darunter für die einzelnen Wochen (unter [**Inhalte**](http://freiheit.f4.htw-berlin.de/ikt/#inhalte)).
 
@@ -37,9 +37,20 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 
 ### Inhalte
 
+
+##### Woche 1 (Grundgerüst)
+
 ??? question "Woche 1 - Grundgerüst"
 
 	- eigentlich wollten wir diese Woche auch das [Application Manifest](./manifest/#web-app-manifest) machen, aber da wir am Mittwoch an einem Antirassismus-Seminar teilnehmen und somit die Vorlesung ausfällt, fangen wir ganz langsam an und betrachten nur das [Grundgerüst](./grundgeruest/#grundgerust-unserer-pwa). Dazu auch folgendes Video: 
 	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=9acae2bf623912843d1298721c67867a&width=720&height=405&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="405" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 	- Bearbeiten Sie bitte außerdem [Übung 1](./uebungen/#ubung-1-grundgerust). Fragen dazu klären wir in der [Übung am Donnerstag um 12:15 Uhr](https://htw-berlin.zoom.us/j/95912146800?pwd=UklCbGNicUh6L29yaGpuNzhTaDBXZz09). Die Übung um 9:45 Uhr am Donnerstag findet nicht statt, da um diese Zeit das gemeinsame Plenum zum Thema *Design Research* in der Veranstaltung *Usability* stattfindet. 
 
+
+##### Woche 2 (Manifest)
+
+??? question "Woche 2 - Manifest"
+
+	- Diese Woche wird unsere App mithilfe des [Application Manifest](./manifest/#web-app-manifest) **installierbar**. Arbeiten Sie bitte den [Abschnitt dazu](./manifest/#web-app-manifest) durch. Dazu gibt es folgendes Video: 
+	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=247bb388ae29a4d849a3fcff5fae95db&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- Bearbeiten Sie bitte zu diesem Thema [Übung 2](./uebungen/#ubung-2-web-app-manifest). Leider müssen diesen Donnerstag aufgrund einer großen Veranstaltung in unserem Forschungsprojekt **beide Übungen entfallen** - tut mir wirklich leid, wird aber die kommenden Wochen (hoffentlich!!) besser! Fragen müssen wir deshalb leider über Slack klären.  

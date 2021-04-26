@@ -392,6 +392,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#das-beforeinstallprompt-ereignis" class="md-nav__link">
+    Das beforeinstallprompt-Ereignis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#erstaz-fur-manifestwebmanifest-fur-safari" class="md-nav__link">
     Erstaz für manifest.webmanifest für Safari
   </a>
@@ -626,6 +633,13 @@
         <li class="md-nav__item">
   <a href="#testen-der-manifestwebmanifest" class="md-nav__link">
     Testen der manifest.webmanifest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#das-beforeinstallprompt-ereignis" class="md-nav__link">
+    Das beforeinstallprompt-Ereignis
   </a>
   
 </li>
@@ -888,7 +902,10 @@
 <p>Klicken Sie <code>Add</code> und dann <code>Add automatically</code>. Das Icon erscheint auf dem Homescreen (Startbildschirm). Eventuell müssen Sie den Browser zuvor schließen. Klicken Sie auf das Icon, um unsere Anwendung zu starten. Sie sehen kurz den <em>Splashscreen</em> mit der von uns gewählten Hintergrundfarbe HTW-Grün. </p>
 <p>Beachten Sie auch, dass um unsere Anwendung herum kein Browser-Fenster zu sehen ist. Sie läuft <em>standalone</em> (natürlich im Browser, aber der ist nicht zu sehen).  Das sieht man insbesondere, wenn man sich alle geöffneten Anwendungen anschaut:</p>
 <p><img alt="avd manager" src="../files/18_mobile5.png" /></p>
-<p>Sobald wir für unserer PWA auch noch einen <em>service worker</em>  registriert haben, kommen wir nochmal hierher zurück und werden dafür sorgen, dass der Browser uns sogar fragt, ob wir ein Icon auf dem Startbildschirm ablegen wollen.</p>
+<p>Sobald wir für unserer PWA auch noch einen <em>service worker</em> registriert haben, kommen wir nochmal hierher zurück und werden dafür sorgen, dass der Browser uns sogar fragt, ob wir ein Icon auf dem Startbildschirm ablegen wollen.</p>
+<h2 id="das-beforeinstallprompt-ereignis">Das <code>beforeinstallprompt</code>-Ereignis<a class="headerlink" href="#das-beforeinstallprompt-ereignis" title="Permanent link">&para;</a></h2>
+<p>Das <a href="https://developer.mozilla.org/en-US/docs/Web/API/BeforeInstallPromptEvent">BeforeInstallPromptEvent</a> wird ausgelöst, wenn Ihre Anwendung <strong>installierbar</strong> ist und Sie diese das erste Mal ausführen. Es wird ausgelöst, um Ihre Anwendung zu installieren. Ein typisches Vorgehen für die Behandlung des Ereignisses schlägt vor, die Anwendung nicht sofort, d.h. nicht durch die Behandlung des <code>beforeinstallprompt</code>-Ereignisses, zu installieren, sondern zunächst abzuwarten, ob die Anwendung auch tatsächlich so genutzt wird, dass sich eine Installation lohnt. </p>
+<p>Für unsere Anwendung könnte das z.B. bedeuten, dass diese nicht beim ersten Aufruf installiert wird, sondern dass gewartet wird, bis die Nutzerin zum ersten Mal den <code>+</code>-Button klickt. <img alt="addbutton" src="../files/52_uebung2.png" /> Ein solches typisches Vorgehen ist z.B. <a href="https://web.dev/customize-install/">hier</a> beschrieben oder <a href="https://developers.google.com/web/updates/2018/06/a2hs-updates">hier</a>. </p>
 <h2 id="erstaz-fur-manifestwebmanifest-fur-safari">Erstaz für <code>manifest.webmanifest</code> für Safari<a class="headerlink" href="#erstaz-fur-manifestwebmanifest-fur-safari" title="Permanent link">&para;</a></h2>
 <p>Leider unterstützt Safari (Apple) das <code>manifest.webmanifest</code> (noch) nicht, obwohl es eine Spezifikation des W3C ist. Über die Browser-Untertützung für das Web-App-Manifest können Sie sich z.B. <a href="https://developer.mozilla.org/de/docs/Web/Manifest">hier</a> informieren. Die Seite enthält auch eine gute Zusammenfassung aller Eigenschaften des Web-App-Manifestes. Es lohnt sich auch ein Blick <a href="https://developers.google.com/web/updates/2018/07/pwacompat">hierauf</a>.</p>
 <p>Um für Safari eine ähnliche Funktionalität zur Verfügung zu stellen, wie das Web-App-Manifest, müssen in den HTML-Dateien unserer Anwendung ein paar Meta-Angaben erfolgen:</p>
@@ -917,7 +934,7 @@
 <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;apple-touch-icon&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/src/images/icons/ios-fiw180x180.png&quot;</span> <span class="na">sizes</span><span class="o">=</span><span class="s">&quot;180x180&quot;</span><span class="p">&gt;</span>
 </code></pre></div>
 </td></tr></table>
-<p>So wirklich klar, ist es allerdings nicht, inwieweit Apple tatsächlich PWAs unterstützt und unterstützen möchte. Es scheint eher so, dass Apple volle Kontrolle darüber behalten möchte, welche Apps auf iPhones oder iOS-Tablets laufen dürfen, nämlich solche, die (nur) über den App-Store verfügbar sind. Siehe dazu z.B. <a href="https://publishingblog.ch/progressive-web-apps-pwas-auf-ios-14-etwas-besser-doch-fehlt-noch-viel/">hier</a> und <a href="https://firt.dev/ios-14/">hier</a>. Sollten Sie ein iPhone haben und sollte Ihre Anwendung mithilfe von <code>npm start</code> ausgeführt sein, so können Sie allerdings mal <code>http://141.45.57.28:8080</code> in Ihren Browser im Handy eingeben. Es muss nichts weiter installiert werden. Sie können aber kein Icon auf den Startbildschirm ablegen :-(.</p>
+<p>So wirklich klar ist es allerdings nicht, inwieweit Apple tatsächlich PWAs unterstützt und unterstützen möchte. Es scheint eher so, dass Apple volle Kontrolle darüber behalten möchte, welche Apps auf iPhones oder iOS-Tablets laufen dürfen, nämlich solche, die (nur) über den App-Store verfügbar sind. Siehe dazu z.B. <a href="https://publishingblog.ch/progressive-web-apps-pwas-auf-ios-14-etwas-besser-doch-fehlt-noch-viel/">hier</a> und <a href="https://firt.dev/ios-14/">hier</a>. Sollten Sie ein iPhone haben und sollte Ihre Anwendung mithilfe von <code>npm start</code> ausgeführt sein, so können Sie allerdings mal <code>http://141.45.57.28:8080</code> in Ihren Browser im Handy eingeben. Es muss nichts weiter installiert werden. Sie können aber kein Icon auf den Startbildschirm ablegen :-(.</p>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
 <p>Wir haben unsere Webanwendung <em>installierbar</em> gemacht. Zumindest auf Android-Geräten. Dies geschieht mithilfe der Datei <code>manifest.webmanifest</code>, die wir in alle <code>html</code>-Seiten unserer Anwendung einbinden. Wir haben viele Eigenschaften kennengelernt, die wir in diesem Web-App-Manifest definieren können. Mithilfe des Emulators von Android Studio können wir die Anwendung des Web-App-Manifestes auf Android-Geräten ausprobieren. Wir scheuen uns nun einen weiteren zentralen Funktionsblock an, nämlich <em>Service Worker</em>. </p>

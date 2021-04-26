@@ -45,7 +45,7 @@ Es ist ziemlich mühsam, alle benötigten Icons für die unterschiedlichen Platt
 
 ## WebApp-Manifest-Generator
 
-Bei der Erstellung Ihrer `manifest.webmanifest` können Sie sich auch unterstützen lassen, nämlich [hier](https://app-manifest.firebaseapp.com/).
+Bei der Erstellung Ihrer `manifest.webmanifest` können Sie sich auch unterstützen lassen, nämlich [hier](https://app-manifest.firebaseapp.com/) oder [hier](https://www.dunplab.it/web-app-manifest-generator).
 
 ## Workbox
 

@@ -325,7 +325,13 @@ Beachten Sie auch, dass um unsere Anwendung herum kein Browser-Fenster zu sehen 
 
 ![avd manager](./files/18_mobile5.png)
 
-Sobald wir für unserer PWA auch noch einen *service worker*  registriert haben, kommen wir nochmal hierher zurück und werden dafür sorgen, dass der Browser uns sogar fragt, ob wir ein Icon auf dem Startbildschirm ablegen wollen.
+Sobald wir für unserer PWA auch noch einen *service worker* registriert haben, kommen wir nochmal hierher zurück und werden dafür sorgen, dass der Browser uns sogar fragt, ob wir ein Icon auf dem Startbildschirm ablegen wollen.
+
+## Das `beforeinstallprompt`-Ereignis
+
+Das [BeforeInstallPromptEvent](https://developer.mozilla.org/en-US/docs/Web/API/BeforeInstallPromptEvent) wird ausgelöst, wenn Ihre Anwendung **installierbar** ist und Sie diese das erste Mal ausführen. Es wird ausgelöst, um Ihre Anwendung zu installieren. Ein typisches Vorgehen für die Behandlung des Ereignisses schlägt vor, die Anwendung nicht sofort, d.h. nicht durch die Behandlung des `beforeinstallprompt`-Ereignisses, zu installieren, sondern zunächst abzuwarten, ob die Anwendung auch tatsächlich so genutzt wird, dass sich eine Installation lohnt. 
+
+Für unsere Anwendung könnte das z.B. bedeuten, dass diese nicht beim ersten Aufruf installiert wird, sondern dass gewartet wird, bis die Nutzerin zum ersten Mal den `+`-Button klickt. ![addbutton](./files/52_uebung2.png) Ein solches typisches Vorgehen ist z.B. [hier](https://web.dev/customize-install/) beschrieben oder [hier](https://developers.google.com/web/updates/2018/06/a2hs-updates). 
 
 ## Erstaz für `manifest.webmanifest` für Safari
 
@@ -348,7 +354,7 @@ Um für Safari eine ähnliche Funktionalität zur Verfügung zu stellen, wie das
 <link rel="apple-touch-icon" href="/src/images/icons/ios-fiw180x180.png" sizes="180x180">
 ```
 
-So wirklich klar, ist es allerdings nicht, inwieweit Apple tatsächlich PWAs unterstützt und unterstützen möchte. Es scheint eher so, dass Apple volle Kontrolle darüber behalten möchte, welche Apps auf iPhones oder iOS-Tablets laufen dürfen, nämlich solche, die (nur) über den App-Store verfügbar sind. Siehe dazu z.B. [hier](https://publishingblog.ch/progressive-web-apps-pwas-auf-ios-14-etwas-besser-doch-fehlt-noch-viel/) und [hier](https://firt.dev/ios-14/). Sollten Sie ein iPhone haben und sollte Ihre Anwendung mithilfe von `npm start` ausgeführt sein, so können Sie allerdings mal `http://141.45.57.28:8080` in Ihren Browser im Handy eingeben. Es muss nichts weiter installiert werden. Sie können aber kein Icon auf den Startbildschirm ablegen :-(.
+So wirklich klar ist es allerdings nicht, inwieweit Apple tatsächlich PWAs unterstützt und unterstützen möchte. Es scheint eher so, dass Apple volle Kontrolle darüber behalten möchte, welche Apps auf iPhones oder iOS-Tablets laufen dürfen, nämlich solche, die (nur) über den App-Store verfügbar sind. Siehe dazu z.B. [hier](https://publishingblog.ch/progressive-web-apps-pwas-auf-ios-14-etwas-besser-doch-fehlt-noch-viel/) und [hier](https://firt.dev/ios-14/). Sollten Sie ein iPhone haben und sollte Ihre Anwendung mithilfe von `npm start` ausgeführt sein, so können Sie allerdings mal `http://141.45.57.28:8080` in Ihren Browser im Handy eingeben. Es muss nichts weiter installiert werden. Sie können aber kein Icon auf den Startbildschirm ablegen :-(.
 
 !!! success
     Wir haben unsere Webanwendung *installierbar* gemacht. Zumindest auf Android-Geräten. Dies geschieht mithilfe der Datei `manifest.webmanifest`, die wir in alle `html`-Seiten unserer Anwendung einbinden. Wir haben viele Eigenschaften kennengelernt, die wir in diesem Web-App-Manifest definieren können. Mithilfe des Emulators von Android Studio können wir die Anwendung des Web-App-Manifestes auf Android-Geräten ausprobieren. Wir scheuen uns nun einen weiteren zentralen Funktionsblock an, nämlich *Service Worker*. 
