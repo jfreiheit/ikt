@@ -355,6 +355,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#ubung-3-promises-und-fetch-api" class="md-nav__link">
+    Übung 3 (Promises und Fetch API)
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -431,6 +438,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#ubung-3-promises-und-fetch-api" class="md-nav__link">
+    Übung 3 (Promises und Fetch API)
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -467,8 +481,18 @@
 <details><summary>Übung 2</summary><ol>
 <li>Erweitern Sie Ihre Anwendung (oder das Grundgerüst) um ein Web App Manifest. Verwenden Sie zur Erstellung des Manifestes am besten den <a href="https://www.dunplab.it/web-app-manifest-generator">Web-App-Manifest-Generator</a>. </li>
 <li>Wählen Sie ein eigenes Icon. Beachten Sie, dass das Original-Icon die Maße 512x512 Pixel aufweisen muss. Der <a href="https://www.dunplab.it/web-app-manifest-generator">Web-App-Manifest-Generator</a> fügt das Original-Icon nicht dem Manifest hinzu. <a href="../tools/#lighthouse">Lighthouse</a> beschwert sich darüber, dass dem Manifest ein 512x512-Icon fehlt. Fügen Sie dieses am besten noch händisch hinzu. </li>
-<li>Die Anwendung soll in dem Moment installiert werden, wenn die Nutzerin das erste Mal auf den <code>+</code>-Button klickt. Das heißt, es wird das <code>beforeinstallprompt</code>-Ereignis ausgelöst und die Behandlung dieses Ereignisses sorgt dafür, dass Sie die Anwendung genau dann installieren, wenn Sie das erste Mal den <code>+</code>-Button klicken. <img alt="addbutton" src="../files/52_uebung2.png" /></li>
+<li>Die Anwendung soll in dem Moment installiert werden, wenn die Nutzerin das erste Mal auf den <code>+</code>-Button klickt. Das heißt, es wird das <code>beforeinstallprompt</code>-Ereignis ausgelöst und die Behandlung dieses Ereignisses sorgt dafür, dass Sie die Anwendung genau dann installieren, wenn Sie das erste Mal den <code>+</code>-Button klicken: <img alt="addbutton" src="../files/52_uebung2.png" /></li>
 <li>Hinweise und Hilfestellungen finden Sie z.B. <a href="https://web.dev/codelab-make-installable/">hier</a> oder im <a href="../manifest/#das-beforeinstallprompt-ereignis">Skript</a> (enthält weitere Links) oder im <a href="http://../#woche-2-manifest">Video zum Manifest</a>.</li>
+</ol>
+</details>
+<h5 id="ubung-3-promises-und-fetch-api">Übung 3 (Promises und Fetch API)<a class="headerlink" href="#ubung-3-promises-und-fetch-api" title="Permanent link">&para;</a></h5>
+<details><summary>Übung 3</summary><ol>
+<li>Laden Sie <a href="../files/uebung3.zip">hier die Anwendung für Übung 3 herunter</a>. Es handelt sich um eine zip-Datei. Entpacken Sie diese, öffnen Sie sie in Ihrer IDE und folgen Sie der README.MD. </li>
+<li>In der Übung üben wir Promises und die Fetch API. Öffnen Sie die Datei <code>public/src/js/app.js</code>. Die Übung besteht aus 3 Teilen:</li>
+<li><strong>Teil 1</strong>: führen Sie ein <code>fetch()</code> als GET nach <code>https://httpbin.org/ip</code> aus und geben Sie die zurückgegebene IP in das <code>output</code>-Element (<code>&lt;p id="output"&gt;&lt;/p&gt;</code>) in der <code>public/index.html</code> aus.</li>
+<li><strong>Teil 2</strong>: führen Sie ein <code>fetch()</code> als PUT nach <code>https://httpbin.org/put</code> aus. Das übergebene JSON wird von dort einfach zurückgespiegelt. Geben Sie einen oder mehrere Werte aus diesem JSON in das <code>output</code>-Element (<code>&lt;p id="output"&gt;&lt;/p&gt;</code>) in der <code>public/index.html</code> aus.</li>
+<li><strong>Teil 3</strong>: bauen Sie einen Fehler in die Anfrage (z.B. falsche Url) und behandeln Sie diesen Fehler mit einer Ausgabe auf die Konsole.</li>
+<li>Hinweise und Hilfestellungen finden Sie im Skript unter <a href="../promises/#promises-und-die-fetch-api">Promises und die Fetch-API</a>.</li>
 </ol>
 </details>
                 
