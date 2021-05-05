@@ -62,3 +62,6 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 
 	- Diese Woche betrachten wir den Lebenszyklus eines Service Workers, schauen uns Promises und die Fetch API an. In der Vorlesung wird ein Video erstellt, das hier hochgeladen wird. Die relevanten Abschnitte im Skript sind [Service Workers](./serviceworker/#service-workers) und [Promises und die Fetch-API](./promises/#promises-und-die-fetch-api).
 	- Bearbeiten Sie bitte zu diesem Thema [Übung 3](./uebungen/#ubung-3-promises-und-fetch-api). 
+	- Video zur Vorlesung am 05.05.2021
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=71d02c5d395a874c9b2b4821a140dc7f&width=720&height=389&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="389" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- Sourcecode zur Vorlesung am 05.05.2021 [hier zum Herunterladen](./files/03_promise.zip)
