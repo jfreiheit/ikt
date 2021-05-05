@@ -54,3 +54,11 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 	- Diese Woche wird unsere App mithilfe des [Application Manifest](./manifest/#web-app-manifest) **installierbar**. Arbeiten Sie bitte den [Abschnitt dazu](./manifest/#web-app-manifest) durch. Dazu gibt es folgendes Video: 
 	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=247bb388ae29a4d849a3fcff5fae95db&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 	- Bearbeiten Sie bitte zu diesem Thema [Übung 2](./uebungen/#ubung-2-web-app-manifest). Leider müssen diesen Donnerstag aufgrund einer großen Veranstaltung in unserem Forschungsprojekt **beide Übungen entfallen** - tut mir wirklich leid, wird aber die kommenden Wochen (hoffentlich!!) besser! Fragen müssen wir deshalb leider über Slack klären.  
+
+
+##### Woche 3 (Promises und Fetch API)
+
+??? question "Woche 3 - Promises und Fetch API"
+
+	- Diese Woche betrachten wir den Lebenszyklus eines Service Workers, schauen uns Promises und die Fetch API an. In der Vorlesung wird ein Video erstellt, das hier hochgeladen wird. Die relevanten Abschnitte im Skript sind [Service Workers](./serviceworker/#service-workers) und [Promises und die Fetch-API](./promises/#promises-und-die-fetch-api).
+	- Bearbeiten Sie bitte zu diesem Thema [Übung 3](./uebungen/#ubung-3-promises-und-fetch-api). 
