@@ -66,6 +66,7 @@ nav:
     - Service Worker: serviceworker.md
     - Promises & fetch: promises.md
     - Caching: caching.md
+    - Backend: backend.md
     - Übungen: uebungen.md
     - Werkzeuge: tools.md
     - Hilfen: hilfen.md

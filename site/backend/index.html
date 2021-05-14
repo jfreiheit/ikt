@@ -13,14 +13,14 @@
         <meta name="author" content="Jörn Freiheit">
       
       
-        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/hilfen/">
+        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/backend/">
       
       <link rel="shortcut icon" href="../img/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
     
     
       
-        <title>Hilfen - Progressive Web Apps</title>
+        <title>Backend - Progressive Web Apps</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hilfen" class="md-skip">
+        <a href="#rest-server" class="md-skip">
           Zum Inhalt
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Hilfen
+              Backend
             
           </span>
         </div>
@@ -309,11 +309,77 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../backend/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Backend
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Backend
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#express" class="md-nav__link">
+    Express
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nodemon" class="md-nav__link">
+    nodemon
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serverjs" class="md-nav__link">
+    server.js
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors" class="md-nav__link">
+    cors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    mysql
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -354,56 +420,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Hilfen
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../hilfen/" class="md-nav__link">
         Hilfen
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#arrow-funktionen" class="md-nav__link">
-    Arrow-Funktionen
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#callback-funktionen" class="md-nav__link">
-    Callback-Funktionen
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -433,15 +454,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#arrow-funktionen" class="md-nav__link">
-    Arrow-Funktionen
+  <a href="#express" class="md-nav__link">
+    Express
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#callback-funktionen" class="md-nav__link">
-    Callback-Funktionen
+  <a href="#nodemon" class="md-nav__link">
+    nodemon
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serverjs" class="md-nav__link">
+    server.js
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors" class="md-nav__link">
+    cors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    mysql
   </a>
   
 </li>
@@ -458,22 +500,85 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/hilfen.md" title="Seite editieren" class="md-content__button md-icon">
+                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/backend.md" title="Seite editieren" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="hilfen">Hilfen<a class="headerlink" href="#hilfen" title="Permanent link">&para;</a></h1>
-<p>Hier erläutern wir in losem Zusammenhang einzelne Aspekte. </p>
-<h3 id="arrow-funktionen">Arrow-Funktionen<a class="headerlink" href="#arrow-funktionen" title="Permanent link">&para;</a></h3>
-<p><em>Arrow-Funktionen</em> werden auch als <em>Lambda-Ausdrücke</em> bezeichnet. Eine Arrow-Funktion ist eine Kurzschreibweise für eine anonyme Funktion. Anstelle von <code>function()</code> schreibt man nur noch einen  Pfeil. Enthält die anonyme Funktion sogar nur ein Argument (Parameter), kann man links vom Pfeil sogar die runden Klammern weglassen. Auch die geschweiften Klammern des Funktionskörpers können entfallen. Wenn die geschweiften Klammwern weggelassen werden, dann entspricht die rechte Seite des Pfeils dem Rückgabewert der Funktion, d.h. es kann sogar <code>return</code> weggelassen werden. Folgende Funktionsdefinitionen sind äquivalent:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">foo</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="k">return</span> <span class="nx">foo</span><span class="o">+</span><span class="mf">1</span><span class="p">;}</span>
-<span class="p">(</span><span class="nx">foo</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">foo</span><span class="o">+</span><span class="mf">1</span><span class="p">;}</span>
-<span class="nx">foo</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">foo</span><span class="o">+</span><span class="mf">1</span><span class="p">;}</span>
-<span class="nx">foo</span> <span class="p">=&gt;</span> <span class="nx">foo</span><span class="o">+</span><span class="mf">1</span><span class="p">;</span>
+                <h1 id="rest-server">REST-Server<a class="headerlink" href="#rest-server" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>mkdir backend
+<span class="nb">cd</span> backend
+npm init
 </code></pre></div>
-<h3 id="callback-funktionen">Callback-Funktionen<a class="headerlink" href="#callback-funktionen" title="Permanent link">&para;</a></h3>
-<p>Eine <em>Callback</em>-Funktion ist eine Funktion, die einer anderen Funktion als Parameter übergeben wird. Callback-Funktionen sind z.B. <a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function">hier</a> erläutert. Darin finden Sie auch das folgende einfache Beispiel einer Callback-Funktion:</p>
+<p><code>package.json</code> wird erzeugt. Sie können ales mit <code>Enter</code> bestätigen oder eigene Eingaben wählen. </p>
+<h4 id="express">Express<a class="headerlink" href="#express" title="Permanent link">&para;</a></h4>
+<p>Dann noch <code>express</code> installieren:</p>
+<div class="highlight"><pre><span></span><code>npm install --save express
+</code></pre></div>
+<p><code>package.json</code> sieht dann vielleicht so ähnlich aus (eventuell müssen Sie noch <code>"type": "module",</code> händisch hinzufügen<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>):</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;backend&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Einfaches Backend für IKT-PWA&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;server.js&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;module&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;IKT&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;PWA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;REST&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;J. Freiheit&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;express&quot;</span><span class="p">:</span> <span class="s2">&quot;^4.17.1&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="nodemon">nodemon<a class="headerlink" href="#nodemon" title="Permanent link">&para;</a></h4>
+<p>Wir installieren noch <a href="https://www.npmjs.com/package/nodemon">nodemon</a>, damit wir nicht immer neu <code>node</code> aufrufen müssen. Nach Eingabe von </p>
+<div class="highlight"><pre><span></span><code>npm install nodemon --save-dev
+</code></pre></div>
+<p>wurde die <code>package.json</code> um </p>
+<div class="highlight"><pre><span></span><code><span class="p">,</span>
+<span class="nt">&quot;devDependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;nodemon&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.0.7&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>erweitert. Wir könnten nun noch in der <code>package.json</code> unter <code>"scripts"</code> z.B.</p>
+<div class="highlight"><pre><span></span><code>   <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;watch&quot;</span><span class="p">:</span> <span class="s2">&quot;nodemon ./server.js&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+    <span class="p">},</span>
+</code></pre></div>
+<p>hinzufügen und können die Anwendung dann über <code>npm run watch</code> starten. </p>
+<h4 id="serverjs">server.js<a class="headerlink" href="#serverjs" title="Permanent link">&para;</a></h4>
+<p>Im Ordner <code>backend</code> eine <code>server.js</code> erzeugen mit </p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mf">3000</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`just testing ...`</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server listening on port </span><span class="si">${</span> <span class="nx">port</span> <span class="si">}</span><span class="sb"> ...`</span><span class="p">));</span>
+</code></pre></div>
+<p><code>npm run watch</code> startet <code>nodemon</code>, welches <code>node server.js</code> startet. Auf der Konsole erscheint </p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>nodemon<span class="o">]</span> restarting due to changes...
+<span class="o">[</span>nodemon<span class="o">]</span> starting <span class="sb">`</span>node ./server.js<span class="sb">`</span>
+Server listening on port <span class="m">3000</span> ...
+</code></pre></div>
+<p>und im Browser unter <code>localhost:3000</code> erscheint <code>just testing ...</code>.</p>
+<h4 id="cors">cors<a class="headerlink" href="#cors" title="Permanent link">&para;</a></h4>
+<p>Mit <code>express</code> haben wir einen <em>HTTP Server</em> erstellt. Wir benötigen noch das <code>cors</code>-Modul, um <em>cross-origin resource sharing</em> möglich zu machen. </p>
+<div class="highlight"><pre><span></span><code>npm install --save cors
+</code></pre></div>
+<p>Dort, wo früher, der <code>body-parser</code> verwendet wurde, ist seit Express-Version 4.16 nun direkt die Verwendung von <code>express</code> möglich. <code>body-parser</code> ist wohl nun sogar <code>deprecated</code>. </p>
+<p>Wir ergänzen <code>server.js</code> um</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -483,19 +588,37 @@
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">greeting</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Hello &#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-<span class="p">}</span>
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="nx">cors</span> <span class="nx">from</span> <span class="s1">&#39;cors&#39;</span><span class="p">;</span>
+</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mf">3000</span><span class="p">;</span>
 
-<span class="kd">function</span> <span class="nx">processUserInput</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s1">&#39;Please enter your name.&#39;</span><span class="p">);</span>
-  <span class="nx">callback</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">());</span>
+</span><span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="nx">extended</span><span class="o">:</span> <span class="kc">false</span> <span class="p">}));</span>
+</span><span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`just testing ...`</span><span class="p">);</span>
+<span class="p">});</span>
 
-<span class="nx">processUserInput</span><span class="p">(</span><span class="nx">greeting</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server listening on port </span><span class="si">${</span> <span class="nx">port</span> <span class="si">}</span><span class="sb"> ...`</span><span class="p">));</span>
 </code></pre></div>
 </td></tr></table>
-<p>In den Zeilen 1-3 wird eine Funktion <code>greeting()</code> definiert, welche einen <code>name</code> erwartet. Diese Funktion gibt <code>Hello</code> zusammen mit dem Namen in einem Alarmfenster aus. Die Funktion <code>greeting()</code> wird als <em>Callback</em>-Funktion in der Funktion <code>processUserInput()</code> (Zeilen 5-8) verwendet. Das heißt, die Funktion <code>greeting()</code> wird der Funktion <code>processUserInput()</code> als Parameter übergeben. Innerhalb der Funktion <code>processUserInput()</code> heißt die Referenz auf die Funktion <code>greeting()</code> <code>callback</code>. Der Parametername kann beliebig gewählt werden. Wir die Funktion <code>processUserInput()</code> aufgerufen (Zeile 10) und die Funktion <code>greeting()</code> als Parameter übergeben, dann erscheint zunächst ein Eingabefenster, in dem der Name eingeben wird und dieser Name wird der <code>greeting()</code>-Funktion als Parameter übergeben. Es erscheint das Alarmfenster mit der Ausgabe <code>Hello</code> plus dem Namen. Der Funktion <code>processUserInput()</code> könnte auch jede andere Funktion als Callback-Funktion übergeben werden. </p>
+<h3 id="mysql">mysql<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>npm install --save mysql
+</code></pre></div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1"></li>
+</ol>
+</div>
                 
               
               
@@ -514,7 +637,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../tools/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../caching/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -523,11 +646,25 @@
                 <span class="md-footer-nav__direction">
                   Zurück
                 </span>
-                Werkzeuge
+                Caching
               </div>
             </div>
           </a>
         
+        
+          <a href="../uebungen/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Weiter
+                </span>
+                Übungen
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
         
       </nav>
     </div>

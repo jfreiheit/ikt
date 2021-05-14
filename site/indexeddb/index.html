@@ -13,19 +13,21 @@
         <meta name="author" content="Jörn Freiheit">
       
       
-      <link rel="shortcut icon" href="/ikt/img/favicon.png">
+        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/indexeddb/">
+      
+      <link rel="shortcut icon" href="../img/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
     
     
       
-        <title>Progressive Web Apps</title>
+        <title>IndexedDB - Progressive Web Apps</title>
       
     
     
-      <link rel="stylesheet" href="/ikt/assets/stylesheets/main.cb6bc1d0.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.cb6bc1d0.min.css">
       
         
-        <link rel="stylesheet" href="/ikt/assets/stylesheets/palette.39b8e14a.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
         
           
           
@@ -44,7 +46,7 @@
     
     
     
-      <link rel="stylesheet" href="/ikt/extra.css">
+      <link rel="stylesheet" href="../extra.css">
     
     
       
@@ -67,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#indexeddb" class="md-skip">
+          Zum Inhalt
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -78,7 +85,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-header-nav__button md-logo" aria-label="Progressive Web Apps">
       
-  <img src="/ikt/img/fiw.jpg" alt="logo">
+  <img src="../img/fiw.jpg" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -94,7 +101,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              
+              IndexedDB
             
           </span>
         </div>
@@ -170,7 +177,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-nav__button md-logo" aria-label="Progressive Web Apps">
       
-  <img src="/ikt/img/fiw.jpg" alt="logo">
+  <img src="../img/fiw.jpg" alt="logo">
 
     </a>
     Progressive Web Apps
@@ -199,7 +206,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         Home
       </a>
     </li>
@@ -214,7 +221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/einfuehrung/" class="md-nav__link">
+      <a href="../einfuehrung/" class="md-nav__link">
         Einführung
       </a>
     </li>
@@ -229,7 +236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/grundgeruest/" class="md-nav__link">
+      <a href="../grundgeruest/" class="md-nav__link">
         Grundgerüst
       </a>
     </li>
@@ -244,7 +251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/manifest/" class="md-nav__link">
+      <a href="../manifest/" class="md-nav__link">
         Manifest
       </a>
     </li>
@@ -259,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/serviceworker/" class="md-nav__link">
+      <a href="../serviceworker/" class="md-nav__link">
         Service Worker
       </a>
     </li>
@@ -274,7 +281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/promises/" class="md-nav__link">
+      <a href="../promises/" class="md-nav__link">
         Promises & fetch
       </a>
     </li>
@@ -289,7 +296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/caching/" class="md-nav__link">
+      <a href="../caching/" class="md-nav__link">
         Caching
       </a>
     </li>
@@ -304,7 +311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/backend/" class="md-nav__link">
+      <a href="../backend/" class="md-nav__link">
         Backend
       </a>
     </li>
@@ -319,7 +326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/uebungen/" class="md-nav__link">
+      <a href="../uebungen/" class="md-nav__link">
         Übungen
       </a>
     </li>
@@ -334,7 +341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/tools/" class="md-nav__link">
+      <a href="../tools/" class="md-nav__link">
         Werkzeuge
       </a>
     </li>
@@ -349,7 +356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/ikt/hilfen/" class="md-nav__link">
+      <a href="../hilfen/" class="md-nav__link">
         Hilfen
       </a>
     </li>
@@ -363,11 +370,82 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
-  <h1>404 - Not found</h1>
+                
+                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/indexeddb.md" title="Seite editieren" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="indexeddb">IndexedDB<a class="headerlink" href="#indexeddb" title="Permanent link">&para;</a></h1>
+<p>Wir haben jetzt verschiedene Ressourcen in statischen und dynamischen Caches gespeichert. Diese Ressourcen lagen als Dateien vor, die wir über eine URL abrufen konnten, also <code>*.html</code>-, <code>*.js</code>-, <code>*.css</code>- Dateien und Bilder. Jetzt wollen wir dynamisch <em>Daten</em> speichern, sogenannten <em>dynamischen Inhalt</em>. Diese Daten können ausgelesen und den unterschiedlichen Dateien hinzugefügt bzw. durch Dateien hinzugefügt werden. Wir können uns das wirklich wie eine Datenbank vorstellen, aus der wir diese Daten ziehen, nur dass diese Datenbank nicht extern in einem Datenbankmanagementsystem verwaltet wird, sondern durch den Browser. Wir haben unter den Developer Tools diese "Datenbank" vielleicht schon im <code>Application</code>-Reiter auf der linken Seite unter <code>Storage</code> entdeckt. Es handelt sich um die <code>IndexedDB</code>. </p>
+<p>Bevor wir <code>IndexedDB</code> verwenden, bauen wir uns noch ein kleines Backend mithilfe von <a href="https://firebase.google.com/?hl=de">Firebase</a>. Wir können auf den Sourcecode von <a href="../files/IKT-PWA-04.zip">IKT-PWA-04</a> aufbauen. Sie können aber auch Ihre eigenes Projekt verwenden. </p>
+<p>Wir benötigen dafür leider einen Google-Account, aber Sie können sich recht leicht eine fake-Email-Adresse bei <code>gmail.com</code> besorgen. Ansonsten kann man auch Einweg-E-Mail-Provider, wie z.B. <a href="https://temp-mail.org/de/">https://temp-mail.org/de/</a> verwenden. Nachdem Sie sich eingeloggt haben, können Sie ein <code>Projekt erstellen</code>. </p>
+<p><img alt="firebase" src="../files/53_firebase.png" /></p>
+<p>In Firebase wählen wir links im Menü <code>Entwicklen</code> und darin <code>Realtime Database</code>. Dann klicken wir auf <code>Datenbank erstellen</code>, wählen irgendeinen erupäischen Standort und starten unsere Datenbank zunächst im Sperrmodus - das ändern wir gleich. </p>
+<p><img alt="firebase" src="../files/54_firebase.png" /></p>
+<p>Dazu klicken wir auf <code>Regeln</code>, um diese zu bearbeiten. Das JSON sieht zunächst so aus: </p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;rules&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;.read&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;.write&quot;</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Wir wollen zunächst das Lesen grundsätzlich erlauben und ändern deshalb dafür den Eintrag auf <code>true</code>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;rules&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="hll">    <span class="nt">&quot;.read&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span>    <span class="nt">&quot;.write&quot;</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Man kann hier auch Authentifizierungsmethoden angeben, damit beschäftigen wir uns hier aber nicht. Klicken Sie nach der Änderung auf <code>Veröffentlichen</code> (<code>Publish</code>). </p>
+<p>Jetzt klicken wir im Reiter auf <code>Daten</code>, um unserer Datenbank einige Daten hinzuzufügen. Die Einträge erfolgen ebenfalls im JSON-Format. Die folgende Abbildung zeigt ein paar Bearbeitungsschritte (für neue Einträge auf das <code>+</code>  neben <code>null</code> klicken).</p>
+<p><img alt="firebase" src="../files/55_firebase.png" /></p>
+<p>Es ensteht das folgende JSON:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;posts&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;first-post&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;first-post&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy-url&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Wilhelminenhof&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Danach klicken wir links im Menü auf <code>Storage</code>, um ein Bild hochzuladen. Im <code>Storage</code> klicken wir auf <code>Jetzt starten</code> und die Einrichtung können wir einfach mit <code>Weiter</code> bestätigen. Wählen Sie irgendeinen europäischen Standort. Wir werden Google keine sensiblen Daten hochladen. Wir laden das Bild hoch, das wir auch bereits in der Anwendung als ein Blogpost verwendet hatten (<a href="../files/htw-gebaeude-h.jpg">hier nochmal zum Download</a>).</p>
+                
+              
+              
+                
+
 
               
             </article>
@@ -398,15 +476,15 @@
       
     </div>
     
-      <script src="/ikt/assets/javascripts/vendor.18f0862e.min.js"></script>
-      <script src="/ikt/assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt"}</script>
+      <script src="../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt"}</script>
       
       <script>
         app = initialize({
-          base: "/ikt",
+          base: "..",
           features: ['instant', 'tabs'],
           search: Object.assign({
-            worker: "/ikt/assets/javascripts/worker/search.9c0e82ba.min.js"
+            worker: "../assets/javascripts/worker/search.9c0e82ba.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

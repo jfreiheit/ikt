@@ -65,3 +65,14 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 	- Video zur Vorlesung am 05.05.2021
 		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=71d02c5d395a874c9b2b4821a140dc7f&width=720&height=389&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="389" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 	- Sourcecode zur Vorlesung am 05.05.2021 [hier zum Herunterladen](./files/03_promise.zip)
+
+
+##### Woche 4 (Caching)
+
+??? question "Woche 4 - Caching"
+
+	- Diese Woche wird die App mithilfe von [Caching](./caching/#caching-mit-service-workern) auch offline nutzbar.
+	- Die Übung entfällt diese Woche wegen des Feiertages. Arbeiten Sie aber das [Caching](./caching/#caching-mit-service-workern)-Kapitel durch. 
+	- Video zur Vorlesung am 12.05.2021
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=bf498f35fe78e01a22d5fa909d4c4be8&width=720&height=389&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="389" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- Sourcecode zur Vorlesung am 12.05.2021 [hier zum Herunterladen](./files/04_caching.zip)
