@@ -14,13 +14,13 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | 2. | 19.-23.04.2021 | Grundgerüst und Application Manifest | Übung 1 | - | 30.04.2021 | 
 | 3. | 26.-30.04.2021 | Service workers | Übung 2 | - | 07.05.2021 | 
 | 4. | 03.-07.05.2021 | Promises und Fetch API | Übung 3 | - | 14.05.2021 | 
-| 5. | 10.-14.05.2021 | Service workers und Caching | Übung 4 | - | 21.05.2021 | 
-| 6. | 17.-21.05.2021 | Caching II | Übung 5 | - | 28.05.2021 | 
-| 7. | 24.-28.05.2021 | Caching dynamische Daten mit IndexDB | Übung 6 | - | 04.06.2021 | 
-| 8. | 31.-04.06.2021 | Responsive Webdesign | Übung 7 | - | 11.06.2021 | 
-| 9. | 07.-11.06.2021 | Hintergrundsynchronisation  | Übung 8 | - | 18.06.2021 | 
-| 10. | 14.-18.06.2021 | Push-Notifikationen | Übung 9 | - | 25.06.2021 | 
-| 11. | 21.-25.06.2021 | Media API (Kamera) | Übung 10 | - | 02.07.2021 | 
+| 5. | 10.-14.05.2021 | Service workers und Caching | - | - | 21.05.2021 | 
+| 6. | 17.-21.05.2021 | Datenbank und Backend | Übung 4 | - | 28.05.2021 | 
+| 7. | 24.-28.05.2021 | Caching dynamische Daten mit IndexDB | Übung 5 | - | 04.06.2021 | 
+| 8. | 31.-04.06.2021 | Responsive Webdesign | Übung 6 | - | 11.06.2021 | 
+| 9. | 07.-11.06.2021 | Hintergrundsynchronisation  | Übung 7 | - | 18.06.2021 | 
+| 10. | 14.-18.06.2021 | Push-Notifikationen | Übung 8 | - | 25.06.2021 | 
+| 11. | 21.-25.06.2021 | Media API (Kamera) | Übung 9 | - | 02.07.2021 | 
 | 12. | 28.-02.07.2021 | Geolocation  | - | - | - |
 | 13. | 05.-09.07.2021 | automatisierte Service worker Verwaltung | - | - | - |
 | 14. | 12.-16.07.2021 | SPAs und PWAs mit Angular | - | - | - |
@@ -76,3 +76,15 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 	- Video zur Vorlesung am 12.05.2021
 		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=bf498f35fe78e01a22d5fa909d4c4be8&width=720&height=389&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="389" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 	- Sourcecode zur Vorlesung am 12.05.2021 [hier zum Herunterladen](./files/04_caching.zip)
+
+
+##### Woche 5 (Datenbank und Backend)
+
+??? question "Woche 5 - Datenbank und Backend"
+
+	- Diese Woche bereiten wir zunächst die nächsten Kapitel vor. Dazu benötigen wir eine [Datenbank und ein Backend](./backend/#rest-server), das an die Datenbank angebunden ist. Weil die Dateneingabe von Bildern in die Datenbank recht mühselig ist, bauen wir uns auch noch ein [Frontend](./backend/#frontend). 
+	- In der Übung sollen Sie diese Frontend dahingehend erweitern, dass die Daten aus der Datenbank ausgelesen und angezeigt werden. Arbeiten Sie dazu das [Backend](./backend/#rest-server)-Kapitel und das [Frontend](./backend/#frontend)-Kapitel durch. 
+	- Video zur Vorlesung am 19.05.2021
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=873c85b33cbb20f2cdd48d1b4f324e79&width=720&height=407&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="407" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+
