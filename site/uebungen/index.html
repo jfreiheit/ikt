@@ -378,9 +378,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ubung-4-frontend" class="md-nav__link">
-    Übung 4 (Frontend)
+  <a href="#ubung-4-entwicklungs-infrastruktur-einrichten" class="md-nav__link">
+    Übung 4 (Entwicklungs-Infrastruktur einrichten)
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spater" class="md-nav__link">
+    Später
+  </a>
+  
+    <nav class="md-nav" aria-label="Später">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubung-x-frontend" class="md-nav__link">
+    Übung x (Frontend)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -468,9 +488,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ubung-4-frontend" class="md-nav__link">
-    Übung 4 (Frontend)
+  <a href="#ubung-4-entwicklungs-infrastruktur-einrichten" class="md-nav__link">
+    Übung 4 (Entwicklungs-Infrastruktur einrichten)
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spater" class="md-nav__link">
+    Später
+  </a>
+  
+    <nav class="md-nav" aria-label="Später">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubung-x-frontend" class="md-nav__link">
+    Übung x (Frontend)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -524,8 +564,146 @@
 <li>Hinweise und Hilfestellungen finden Sie im Skript unter <a href="../promises/#promises-und-die-fetch-api">Promises und die Fetch-API</a>.</li>
 </ol>
 </details>
-<h5 id="ubung-4-frontend">Übung 4 (Frontend)<a class="headerlink" href="#ubung-4-frontend" title="Permanent link">&para;</a></h5>
-<details><summary>Übung 4</summary><ol>
+<h5 id="ubung-4-entwicklungs-infrastruktur-einrichten">Übung 4 (Entwicklungs-Infrastruktur einrichten)<a class="headerlink" href="#ubung-4-entwicklungs-infrastruktur-einrichten" title="Permanent link">&para;</a></h5>
+<details><summary>Übung 4</summary><p>Wir richten unsere Entwicklungs-Infrastruktur, die wir benötigen, um eine Frontend-Backend-Datenbank-App zu erstellen.</p>
+<ol>
+<li>
+<p>Lokalen Webserver einrichten: </p>
+<ul>
+<li>
+<p>Es sollte etwas Sinnvolles erscheinen, wenn Sie <code>http://localhost/</code> in den Browser eingeben (also entweder wird eine eigene html- oder php-Datei geöffnet, oder es steht soetwas wie <code>It works</code>). Wenn das nicht der Fall ist, dann benötigen Sie erst noch einen Webserver. Auf dem Mac und unter Linux existiert aber immer bereits einer, nur unter Windows muss dann z.B. <a href="https://www.apachefriends.org/de/index.html">XAMPP</a> installiert werden.</p>
+</li>
+<li>
+<p>Sie müssen wissen, aus welchem Ordner die Ressourcen geladen werden, wenn Sie <code>http://localhost/</code> in den Browser eingeben. Diesen Ordner nennen wir <code>DocumentRoot</code>. Der Standard-DocumentRoot-Ordner </p>
+<ul>
+<li>auf dem Mac ist <code>/Library/WebServer/Documents</code>,
+        - unter Linux <code>/www/html/</code>,
+        - unter Windows (XAMPP) <code>/xampp/htdocs</code>. </li>
+</ul>
+<p>Vor den angegebenen Pfaden kann in Linux und Windows noch etwas stehen, das hängt von der Konfiguration ab und wo Sie Ihr XAMPP unter Windows installiert haben. Wichtig ist, dass Sie genügend Schreibrechte auf den DocumentRoot-Ordner haben! Das ist typischerweise beim Mac unter <code>/Library/WebServer/Documents</code> nicht der Fall. Passen Sie auch auf, dass unter Windows Ihr <code>xampp</code>-Ordner nicht bereits zu tief in der Ordnerstruktur steckt. Gehen Sie entsprechende Anleitungen durch, um Ihr DocumentRoot zu ändern. Mein DocumentRoot ist z.B. unter <code>/Users/jornfreiheit/Sites</code>. Hier einige Anleitungen: <a href="https://www.ionos.de/digitalguide/server/tools/xampp-tutorial-so-erstellen-sie-ihren-lokalen-testserver/">Windows</a>, <a href="https://werner-zenk.de/tipps/lokale_webserver_xampp.php">Windows</a>, <a href="https://www.seo-head.de/entwicklung/xampp-htdocs-verzeichnis-aendern/">Windows</a>, <a href="https://sysadminde.com/questions/161529/how-to-change-document-root-for-apache2-in-mac-os-x">Mac</a>.</p>
+</li>
+<li>
+<p>Erstellen Sie zum Testen in Ihrem DocumentRoot-Ordner eine <code>index.html</code>-Datei mit folgendem Inhalt: <code>&lt;html&gt;&lt;body&gt;&lt;h1&gt;DocumentRoot korrekt eingerichtet!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</code> und rufen Sie dann im Browser <code>http://localhost/</code> auf. Es sollte im Browser <strong>DocumentRoot korrekt eingerichtet!</strong> erscheinen. </p>
+</li>
+<li>
+<p>Für <code>phpMyAdmin</code> benötigen Sie auch noch <code>php</code>. Erstellen Sie in Ihrem DocumentRoot-Ordner eine Datei <code>index.php</code> mit folgendem Inhalt: <code>&lt;?php phpinfo(); ?&gt;</code> und rufen Sie dann im Browser <code>http://localhost/index.php</code> auf. Es sollte etwas in dieser Art erscheinen: </p>
+<p><img alt="localhost" src="../files/41_localhost.png" /> </p>
+<p>Wenn <code>localhost</code> funktioniert, dann gibt es mit PHP eigentlich nur (neuerdings - erst seit Big Sur) unter dem Mac Probleme. Nutzen Sie dann eine der folgenden Anleitungen: <a href="https://wpbeaches.com/install-apache-mysql-php-on-macos-11-big-sur-and-earlier-macos/">1</a>, <a href="https://tobschall.de/2020/11/01/big-sur-mamp/">2</a>, <a href="https://tech-cookbook.com/2020/11/14/setting-up-your-local-web-server-on-macos-big-sur-11-0-1-2020-mamp-macos-apache-mysql-php/">3</a>. </p>
+</li>
+</ul>
+</li>
+<li>
+<p>Datenbank einrichten:</p>
+<ul>
+<li>
+<p>Sie müssen nicht unbedingt ein lokales Datenbanksystem installieren, sondern können auch den Studi-Server <code>https://studi.f4.htw-berlin.de</code> verwenden. </p>
+</li>
+<li>
+<p>Wenn Sie sich lokal ein Datenbanksystem installieren, was man ruhig einmal gemacht haben sollte, dann ist es egal, ob Sie <code>MariaDB</code> (kommt mit XAMPP) oder <code>MySQL</code> installieren. Beide Systeme sind in der Anwendung völlig gleich. Sie können auch <code>Postgres</code> verwenden, das habe ich aber nicht lokal und es kann sein, dass meine Anleitungen dann angepasst werden müssten (vielleicht aber auch nicht). <code>MariaDB</code> wird mit XAMPP ausgeliefert - betrifft also hauptsächlich die Windows-Nutzerinnen <a href="https://www.apachefriends.org/de/index.html">XAMPP</a>. </p>
+<ul>
+<li>Für Mac ist die Installation von XAMPP nicht notwendig (und auch nicht empfehlenswert, da Sie ansonsten nur mehrere Webserver haben). Für die Installation von MySQL unter Mac gibt es viele Videos, sollte aber auch so von <a href="https://dev.mysql.com/downloads/mysql/">hier aus</a> gut funktionieren (eine weitere Anleitung z.B. <a href="https://medium.com/@jainakansha/installing-and-running-mysql-on-macos-with-errors-resolved-70ef53e3b5b9">hier</a>).  </li>
+<li><a href="https://www.phpmyadmin.net/">phpmyadmin</a> ist eine Weboberfläche für die Verwaltung einer <code>MySQl</code>-Datenbank. Es ist sehr zu empfehlen, dass Sie sich phpmyadmin installieren, wenn Sie sich <code>MySQL</code> installiert haben. Installationanleitungen gibt es viele, z.B. für <a href="https://wpbeaches.com/install-apache-mysql-php-on-macos-11-big-sur-and-earlier-macos/">Mac</a>, <a href="https://phoenixnap.com/kb/how-to-install-phpmyadmin-on-debian-10">Linux</a> und <a href="https://de.wikihow.com/phpMyAdmin-auf-einem-Windows-PC-installieren">Windows</a>. Im Prinzip müssen Sie aber das <code>phpmyadmin</code>-Paket nur entpacken und in Ihren DocumentRoot-Ordner bewegen, dann können Sie <code>phpmyadmin</code> über <code>http://localhost/phpmyadmin</code> aufrufen. </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>Postman</code> installieren:</p>
+<ul>
+<li>
+<p>Postman ist eine Anwendung, um Schnittstellen (<em>Application Programming Interface - API</em>), die das Backend bereitstellt, zu entwickeln und zu testen. Sie finden Postman unter <a href="https://www.postman.com/">postman.com</a>. Wir beschränken uns auf den <a href="https://www.postman.com/product/api-client/">Postman API Client</a>.</p>
+</li>
+<li>
+<p>Laden Sie das Tool herunter und installieren es. Rufen Sie Postman auf und geben in das Eingabefeld <code>https://postman-echo.com/get</code> ein. Lassen Sie die Auswahl links daneben auf <code>GET</code> und klicken auf den <code>Send</code>-Button. Es erscheint folgendes Bild:</p>
+<p><img alt="Postman" src="../files/27_postman.png" /></p>
+</li>
+<li>
+<p>Neben der <code>GET</code>-Anfrage sind folgende weitere Anfragen HTTP-Anfragen möglich:</p>
+<ul>
+<li><code>POST</code> - sendet Daten zur Verarbeitung an den Webserver
+        - <code>PUT</code> - lädt existierende Daten (eine Datei) auf den Server
+        - <code>PATCH</code> - ändert Daten (eine Datei), ohne - wie bei <code>PUT</code> - diese vollständig zu ersetzen
+        - <code>DELETE</code> - löscht die angegebenen Daten auf dem Server</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>Node.js</code> installieren:</p>
+<ul>
+<li><a href="https://nodejs.org/en/">Node.js</a> ist eine JavaScript-Laufzeitumgebung für einen Server. Node.js reagiert auf Ereignisse und antwortet asynchron. Das bedeutet, dass die Ausführung einer Ereignisbearbeitung nicht zum Blockieren der Laufzeitumgebung führt, sondern nebenläufig weitere Ereignisse eintreffen können, die ebenfalls asynchron behandelt werden. <ul>
+<li>Laden Sie sich <a href="https://nodejs.org/en/download/">hier</a> Node.js herunter und installieren es. </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Paketmanager <code>npm</code>:</p>
+<ul>
+<li>
+<ul>
+<li>Sie können testen, ob die Installation von <code>node</code> und <code>npm</code> erfolgreich war, indem Sie im Terminal (Windows-Nutzerinnen bitte als Terminal die <a href="https://git-scm.com/downloads">GitBash</a> verwenden) eingeben:</li>
+</ul>
+<p>Mit der Installation von <code>node.js</code>, installieren Sie auch den Paketmanager <code>npm</code> (siehe <a href="https://www.npmjs.com/">npmjs</a>). </p>
+<div class="highlight"><pre><span></span><code>node --version
+</code></pre></div>
+<p>Sollte etwas, wie <code>v14.15.0</code> ausgeben und</p>
+<div class="highlight"><pre><span></span><code>npm --version
+</code></pre></div>
+<p>sollte etwas, wie <code>7.13.0</code> ausgeben. </p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>Angular-Command-Line-Interface (CLI)</code> installieren: </p>
+<ul>
+<li>
+<ul>
+<li>Um einfacher mit <code>Angular</code> zu entwickeln zu können, benötigen wir das <a href="https://angular.io/cli">Angular-Command-Line-Interface (CLI)</a>. Dieses installieren wir mithilfe des Paketmanagers <code>npm</code>. Geben Sie dazu ins Terminal </li>
+</ul>
+<p><a href="">Angular</a> ist ein modernes JavaScript-Framework zur Entwicklung moderner Weboberflächen. Es gehört neben <a href="https://reactjs.org/">React.js</a> und <a href="https://vuejs.org/">Vue.js</a> zu den meisteverwendeten Frameworks für die Entwicklung sogenannter <em>Single-Page-Applikationen</em>. </p>
+<div class="highlight"><pre><span></span><code>npm install -g @angular/cli
+</code></pre></div>
+<p>ein. Sie können prüfen, ob die Installation erfolgreich war, indem Sie in das Terminal </p>
+<div class="highlight"><pre><span></span><code>ng --version
+</code></pre></div>
+<p>eingeben. Es sollte etwas in der Art ausgeben: </p>
+<div class="highlight"><pre><span></span><code>     _                      _                 ____ _     ___
+    / <span class="se">\ </span>  _ __   __ _ _   _<span class="p">|</span> <span class="p">|</span> __ _ _ __     / ___<span class="p">|</span> <span class="p">|</span>   <span class="p">|</span>_ _<span class="p">|</span>
+   / △ <span class="se">\ </span><span class="p">|</span> <span class="s1">&#39;_ \ / _` | | | | |/ _` | &#39;</span>__<span class="p">|</span>   <span class="p">|</span> <span class="p">|</span>   <span class="p">|</span> <span class="p">|</span>    <span class="p">|</span> <span class="p">|</span>
+  / ___ <span class="se">\|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="p">|</span>_<span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="p">|</span>      <span class="p">|</span> <span class="p">|</span>___<span class="p">|</span> <span class="p">|</span>___ <span class="p">|</span> <span class="p">|</span>
+ /_/   <span class="se">\_\_</span><span class="p">|</span> <span class="p">|</span>_<span class="p">|</span><span class="se">\_</span>_, <span class="p">|</span><span class="se">\_</span>_,_<span class="p">|</span>_<span class="p">|</span><span class="se">\_</span>_,_<span class="p">|</span>_<span class="p">|</span>       <span class="se">\_</span>___<span class="p">|</span>_____<span class="p">|</span>___<span class="p">|</span>
+                <span class="p">|</span>___/
+
+
+Angular CLI: <span class="m">11</span>.0.1
+Node: <span class="m">14</span>.15.0
+OS: darwin x64
+
+Angular: 
+... 
+Ivy Workspace: 
+
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    <span class="m">0</span>.1100.1 <span class="o">(</span>cli-only<span class="o">)</span>
+@angular-devkit/core         <span class="m">11</span>.0.1 <span class="o">(</span>cli-only<span class="o">)</span>
+@angular-devkit/schematics   <span class="m">11</span>.0.1 <span class="o">(</span>cli-only<span class="o">)</span>
+@schematics/angular          <span class="m">11</span>.0.1 <span class="o">(</span>cli-only<span class="o">)</span>
+@schematics/update           <span class="m">0</span>.1100.1 <span class="o">(</span>cli-only<span class="o">)</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Ich hoffe, es klappt alles! Eventuelle Probleme können wir in der Vorlesung am 26.5. und/oder in der Übung am 27.5. besprechen.  </p>
+</li>
+</ol>
+</details>
+<hr />
+<h2 id="spater">Später<a class="headerlink" href="#spater" title="Permanent link">&para;</a></h2>
+<h5 id="ubung-x-frontend">Übung x (Frontend)<a class="headerlink" href="#ubung-x-frontend" title="Permanent link">&para;</a></h5>
+<details><summary>Übung x</summary><ol>
 <li>Im Abschnitt <a href="../backend/#frontend">Frontend</a> haben wir uns ein Frontend erstellt, um mithilfe eines Formulars Daten (insb. ein Bild) einzugeben und diese in einer Datenbank abzuspeichern. </li>
 <li>Erweiteren Sie dieses Frontend um eine Komponente, die alle in der Datenbank gespeicherten Daten visualisiert, insb. die in der Datenbank gespeicherten Bilder. Erstellen Sie sich dazu eine neue Komponente.</li>
 <li>Sie müssen dazu auch den <code>PostService</code> um die Anbindung an den Endpunkt <code>GET /posts</code> erweitern. </li>

@@ -1,5 +1,13 @@
 # REST-Server
 
+---
+
+***Wir machen das alles nochmal ganz in Ruhe von Anfang an, da wir mit unterschiedlichen Voraussetzungen gestartet sind. Das hatte ich leider nicht bedacht - tut mir leid! Wir legen ganz in Ruhe mit dem Backend in der Vorlesung am 26.5. los!***
+
+***Wichtig ist aber, dass Sie die [Übung 4](../uebungen/#ubung-4-entwicklungs-infrastruktur-einrichten)  als Vorbereitung durchführen!***
+
+--- 
+
 Ehe wir uns der [IndexedDB-API](https://developer.mozilla.org/de/docs/Web/API/IndexedDB_API) zuwenden, erstellen wir zunächst eine "richtige" Datenbank für unsere Posts. Die Datenbank ist simpel, sie besteht aus einer einzigen Tabelle `posts`, welche vier Attribute enthält: `id`, `title`, `location` und `image`. Die `id` ist der Primärschlüssel und das `image` ist vom Typ [longblob](https://tableplus.com/blog/2019/10/mysql-blob.html). Es hätte wohl auch `mediumblob` ausgereicht, denn damit können immerhin Bilder von 16 MB Größe gespeichert werden. 
 
 Das SQL-Skript zur Einrichtung der Datenbank `posts` kommt hier: 

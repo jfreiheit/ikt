@@ -600,6 +600,10 @@
                 
                 
                 <h1 id="rest-server">REST-Server<a class="headerlink" href="#rest-server" title="Permanent link">&para;</a></h1>
+<hr />
+<p><strong><em>Wir machen das alles nochmal ganz in Ruhe von Anfang an, da wir mit unterschiedlichen Voraussetzungen gestartet sind. Das hatte ich leider nicht bedacht - tut mir leid! Wir legen ganz in Ruhe mit dem Backend in der Vorlesung am 26.5. los!</em></strong></p>
+<p><strong><em>Wichtig ist aber, dass Sie die <a href="../uebungen/#ubung-4-entwicklungs-infrastruktur-einrichten">Übung 4</a>  als Vorbereitung durchführen!</em></strong></p>
+<hr />
 <p>Ehe wir uns der <a href="https://developer.mozilla.org/de/docs/Web/API/IndexedDB_API">IndexedDB-API</a> zuwenden, erstellen wir zunächst eine "richtige" Datenbank für unsere Posts. Die Datenbank ist simpel, sie besteht aus einer einzigen Tabelle <code>posts</code>, welche vier Attribute enthält: <code>id</code>, <code>title</code>, <code>location</code> und <code>image</code>. Die <code>id</code> ist der Primärschlüssel und das <code>image</code> ist vom Typ <a href="https://tableplus.com/blog/2019/10/mysql-blob.html">longblob</a>. Es hätte wohl auch <code>mediumblob</code> ausgereicht, denn damit können immerhin Bilder von 16 MB Größe gespeichert werden. </p>
 <p>Das SQL-Skript zur Einrichtung der Datenbank <code>posts</code> kommt hier: </p>
 <details><summary>posts.sql</summary><div class="highlight"><pre><span></span><code><span class="c1">-- phpMyAdmin SQL Dump</span>
