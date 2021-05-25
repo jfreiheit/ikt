@@ -67,6 +67,8 @@ nav:
     - Promises & fetch: promises.md
     - Caching: caching.md
     - Backend: backend.md
+    - Frontend: frontend.md
+    - IndexedDB: indexeddb.md
     - Übungen: uebungen.md
     - Werkzeuge: tools.md
     - Hilfen: hilfen.md

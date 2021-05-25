@@ -1,14 +1,44 @@
-# REST-Server
+# Backend - REST-Server
 
----
+Ehe wir uns der [IndexedDB-API](https://developer.mozilla.org/de/docs/Web/API/IndexedDB_API) zuwenden, erstellen wir zunächst eine "richtige" Datenbank für unsere Posts. Für diese Datenbank stellen wir die Implementierung einer Schnittstelle bereit, so dass wir die wesentlichen Datenbankanfragen darüber ausführen können. Diese wesentlichen Datenbankfragen werden mit [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) abgekürzt, für **C**reate, **R**ead, **U**pdate und **D**elete. Das bedeutet, wir implementieren Funktionalitäten, mit denen wir einen neuen `post` in die Datenbank einfügen (*create*), aus der Datenbank auslesen (*read*), in der Datenbank aktualisieren (*update*) und aus der Datenbank löschen (*delete*) können. 
 
-***Wir machen das alles nochmal ganz in Ruhe von Anfang an, da wir mit unterschiedlichen Voraussetzungen gestartet sind. Das hatte ich leider nicht bedacht - tut mir leid! Wir legen ganz in Ruhe mit dem Backend in der Vorlesung am 26.5. los!***
+Die Schnittstelle, die wir implementieren, ist eine sogenannte [REST-API](https://www.redhat.com/de/topics/api/what-is-a-rest-api). *REST* steht für [*Representational State Transfer*](https://de.wikipedia.org/wiki/Representational_State_Transfer) und basiert auf einigen wenigen Prinzipien:
 
-***Wichtig ist aber, dass Sie die [Übung 4](../uebungen/#ubung-4-entwicklungs-infrastruktur-einrichten)  als Vorbereitung durchführen!***
+1. Alles wird als eine *Ressource* betrachtet, z.B. `post`.
+2. Jede Ressource ist durch *URIs* (*Uniform Resource Identifiers*) eindeutig identifizierbar, z.B. `http://localhost/posts`.
+3. Es werden die [Standard-HTTP-Methoden](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol#HTTP-Anfragemethoden) verwendet, also `GET`, `POST`, `PUT`, `UPDATE`.  
+4. Ressourcen können in verschiedenen Formaten vorliegen, z.B. in [HTML](https://html.spec.whatwg.org/multipage/), [XML](https://www.w3.org/TR/xml/), [JSON](https://jsonapi.org/format/), ...
+5. Die Kommunikation ist *zustandslos*. Jede einzelne HTTP-Anfrage wird komplett isoliert bearbeitet. Es gibt keinerlei Anfragehistorie. 
 
---- 
+Das bedeutet, wir erstellen ein Backend (einen REST-Server), an den HTTP-Anfragen mit der eindeutig identifizierbaren Ressource gestellt werden. Das Backend erstellt daraus die entsprechende SQL-Query. Das Resultat der Datenbankanfrage wird im `JSON`- oder `HTML`- oder `XML`- oder in einem anderen Format bereitsgestellt.
 
-Ehe wir uns der [IndexedDB-API](https://developer.mozilla.org/de/docs/Web/API/IndexedDB_API) zuwenden, erstellen wir zunächst eine "richtige" Datenbank für unsere Posts. Die Datenbank ist simpel, sie besteht aus einer einzigen Tabelle `posts`, welche vier Attribute enthält: `id`, `title`, `location` und `image`. Die `id` ist der Primärschlüssel und das `image` ist vom Typ [longblob](https://tableplus.com/blog/2019/10/mysql-blob.html). Es hätte wohl auch `mediumblob` ausgereicht, denn damit können immerhin Bilder von 16 MB Größe gespeichert werden. 
+![restapi](./files/61_restapi.png)
+
+Prinzipiell gibt es also ein *Mapping*  von HTTP-Anfragen auf SQL-Anfragen:
+
+|CRUD |SQL |HTTP |
+|-----|----|-----|
+|create |INSERT |POST |
+|read |SELECT |GET |
+|update |UPDATE |PUT |
+|delete |DELETE |DELETE |
+
+Für das von uns hier zu erstellende Backend soll folgende REST-API umgesetzt werden: 
+
+
+| Methode | URL | Bedeutung |
+|---------|-----|-----------|
+| GET     | /posts | hole alle Datensätze |
+| GET     | /posts/11 | hole den Datensatz mit der id=11 |
+| POST    | /posts | füge einen neuen Datensatz hinzu |
+| PUT     | /posts/11 | ändere den Datensatz mit der id=11 |
+| DELETE  | /posts/11 | lösche den Datensatz mit der id=11 |
+
+Dazu erstellen wir uns zunächst die Datenbank.
+
+## Die `posts`-Datenbank
+
+Die Datenbank ist simpel, sie besteht aus einer einzigen Tabelle `posts`, welche vier Attribute enthält: `id`, `title`, `location` und `image`. Die `id` ist der Primärschlüssel und das `image` ist vom Typ [longblob](https://tableplus.com/blog/2019/10/mysql-blob.html). Es hätte wohl auch `mediumblob` ausgereicht, denn damit können immerhin Bilder von 16 MB Größe gespeichert werden. 
 
 Das SQL-Skript zur Einrichtung der Datenbank `posts` kommt hier: 
 
@@ -79,314 +109,835 @@ Das SQL-Skript zur Einrichtung der Datenbank `posts` kommt hier:
 
 Die Datei können Sie auch [hier herunterladen](./files/posts.sql), um sie dann unter *phpmyadmin* zu importieren. Sie ist aber sehr lang, da sie auch bereits zwei Einträge enthält und die `base64`-Kodierung der Bilder sehr groß ist.  
 
-## Backend
 
-Um mit der Datenbank zu kommunizieren, erstellen wir uns ein Backend - eine REST-API. Das kann [hier](https://github.com/jfreiheit/ikt_backend) geklont werden. Wir besprechen im Folgenden einige Implementierung-Details. Im Backend werden folgende Endpunkte festgelegt:
+### MySQL auf dem Studi-Server
 
+Falls Sie MySQL vom Studi-Server verwenden, dann müssen Sie 
 
-| Methode | URL | Bedeutung |
-|---------|-----|-----------|
-| GET     | /posts | hole alle Datensätze |
-| GET     | /posts/11 | hole den Datensatz mit der id=11 |
-| POST    | /posts | füge einen neuen Datensatz hinzu |
-| PUT     | /posts/11 | ändere den Datensatz mit der id=11 |
-| DELETE  | /posts/11 | lösche den Datensatz mit der id=11 |
-
-Die `package.json` im Backend sieht so aus:
-
-```json
-{
-    "name": "backend",
-    "version": "1.0.0",
-    "description": "Einfaches Backend für IKT-PWA",
-    "main": "server.js",
-    "type": "module",
-    "scripts": {
-        "watch": "nodemon ./server.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-        "IKT",
-        "PWA",
-        "REST"
-    ],
-    "author": "J. Freiheit",
-    "license": "ISC",
-    "dependencies": {
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "mysql": "^2.18.1"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.7"
-    }
-}
+```sql
+COLLATE=utf8mb4_0900_ai_ci
 ```
 
-Wir verwenden also [Express.js](https://expressjs.com/) um eine API zum Webserver zu haben, [CORS](https://www.npmjs.com/package/cors), um *cross-origin resource sharing*  zu ermöglichen und den [mysql](https://www.npmjs.com/package/mysql)-Treiber, um mit der MySQl-datenbank zu kommunizieren. Einige von Ihnen vermissen eventuell das [body-parser](https://www.npmjs.com/package/body-parser)-Modul. Das soll jedoch nach und nach durch die gleichen Funktionalitäten in `express.js` ersetzt werden. Deshalb setzen wir es hier auch nicht mehr ein. 
+durch 
 
-Unter `"scripts"` ist für die Eigenschaft `watch` (frei gewählt) der Wert `nodemon server.js` beschrieben, so dass sich die Anwendung mithilfe von `nodemon` per 
-
-`npm run watch` (vorher noch `npm install`, um alle Paketabhängigkeiten zu installieren)
-
-starten lässt.
-
-### `server.js` 
-
-Das "Startskript" ist `server.js` und darin definieren wir die Endpunkte:
-
-=== "server.js"
-    ```js linenums="1"
-    import express from 'express';
-    import cors from 'cors';
-    import path from 'path';
-    import { PostController as postController } from './controller/posts.controller.js';
-    import { fileURLToPath } from 'url';
-    const __filename = fileURLToPath(
-        import.meta.url);
-    const __dirname = path.dirname(__filename);
-
-    const app = express();
-    const port = 3000;
-
-    app.use(cors());
-    app.use(express.urlencoded({limit: '20mb', extended: true}));
-    app.use(express.json({limit: '20mb'}));
-
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(`${__dirname}/views/index.html`));
-    });
-
-    // Endpunkte definieren
-    app.post("/posts", postController.create); // C
-    app.get("/posts", postController.readAll); // R (all)
-    app.get("/posts/:postId", postController.readOne); // R (one)
-    app.put("/posts/:postId", postController.update); // U
-    app.delete("/posts/:postId", postController.delete); // D
-
-    app.listen(port, () => console.log(`Server listening on port ${port} ...`));
-    ```
-
-Als Portnummer wird `3000` (Zeile `11`) vereinbart. In Zeilen `22-26` werden die Endpunkte definiert. In Zeile `28` wird das Backend gestartet. Beachten Sie die Zeilen `14` und `15`: Unsere Datensätze sind aufgrund der übertragenen Bilder sehr groß. Ohne die Festlegung eines erhöhten Limits (hier auf `20MB`), würden wir Fehler des Backends (`PayloadTooLargeError`) erhalten, wenn wir unsere großen Datensätze versuchen, zu übertragen ( `request entity too large when trying to POST ...`).
-
-Die Zeilen `5-8` brauchen wir nur, weil wir in unserem Backend auch eine `View` eingebaut haben ( `views/index.html`). Diese ist nur zum Ausprobieren/Debuggen. Um darauf zugreifen zu können, benötigt man den Pfad der Anwendung ( `__dirname`). Leider gibt es seit `node.js v16.x` kein `__dirname` mehr (siehe [hier](https://nodejs.org/api/esm.html#esm_no_filename_or_dirname)), deshalb ist dieser *work around* notwendig. Ohne ein *View*  können aber die Zeilen `5-8` und `17-19` entfallen. 
-
-Beachten Sie auch, dass sich seit `ECMA script 6 (ES6)` das Modul-Konzept von TypeScript geändert hat, so dass anstelle von `const ... require()` nun `import ... from ...` verwendet werden soll (siehe [import](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/import)). In Zeile `4` wird der `PostController` importiert (wird in `server.js` als `postController` verwendet). Für jeden Endpunkt wird eine Funktion im `PostController` aufgerufen.
-
-### `controller/posts.controller.js`
-
-Der `PostController` wird hier als ein JavaScript-Objekt definiert, dessen Eigenschaften jeweils Funktionen sind. Die Funktionen rufen jeweils Funktionen aus dem `PostService` auf.
-
-=== "controller/posts.controller.js"
-    ```js linenums="1"
-    import { PostService } from '../service/posts.service.js';
-
-    export const PostController = {
-
-        readAll: (req, res) => {
-            PostService.getAll((err, result) => {
-                if (err)
-                    res.status(500).send({
-                        message: err.message || "Some error occurred while getting all posts",
-                    });
-                else res.json(result);
-            });
-        },
-
-        create: (req, res) => {
-            if (!req.body) {
-                res.status(400).send({
-                    message: "Content can not be empty!",
-                });
-            }
-            const post = {...req.body };
-            PostService.create(post, (err, result) => {
-                if (err)
-                    res.status(500).send({
-                        message: err.message || "Some error occurred while creating the post.",
-                    });
-                else res.json(result);
-            });
-        },
-
-        delete: (req, res) => {
-            PostService.remove(req.params.postId, (err, result) => {
-                if (err)
-                    res.status(500).send({
-                        message: err.message || "Some error occurred while delete the post",
-                    });
-                else res.json(result);
-            });
-        },
-
-        update: (req, res) => {
-            if (!req.body) {
-                res.status(400).send({
-                    message: "Content can not be empty!",
-                });
-            }
-            const post = {...req.body };
-            PostService.updateById(
-                req.params.postId,
-                post,
-                (err, result) => {
-                    if (err)
-                        res.status(500).send({
-                            message: err.message || "Some error occurred while update the post",
-                        });
-                    else res.json(result);
-                }
-            );
-        },
-
-        readOne: (req, res) => {
-            PostService.findById(req.params.postId, (err, result) => {
-                if (err)
-                    res.status(500).send({
-                        message: err.message || "Some error occurred while getting one post",
-                    });
-                else res.json(result);
-            });
-        },
-    };
-    ```
-
-Jede Funktion verarbeitet einen *Request* `req` und erzeugt eine *Response* `res`. Sowohl für die `create`-Funktion (Zeilen `15-29`) als auch für die `update`-Funktion (Zeilen `41-59`) werden Daten im `body` übergeben, die entweder in die Datenbank eingefügt oder in der Datenbank aktualisiert werden sollen. Deshalb wird in beiden Funktionen geprüft, ob der `body` des *Requests* nicht leer ist (wenn doch, wird `status 400` mit der Meldung `Content can not be empty!` zurückgemeldet). 
-
-Jede Funktion liefert den *Response* der jeweiligen `PostService`-Funktion (`result`) als ein JSON zurück (`res.json(result);`). Sollte die jeweilige `PostService`-Funktion einen Fehler zurückmelden (`err`), wird als `status 500` und eine entsprechende Fehlermeldung gesendet. 
-
-Noch eine Anmerkung zur `import`-Anweisung in Zeile `1`. Der `PostService` liefert keinen `default`-Export, sondern eine benannte Konstante (`export const PostService = `). Diese wird als `Typ` importiert und deshalb erfolgt der Import mithilfe von geschweiften Klammern (`{ PostService }`). Nur, wenn ein `default`-Export durchgeführt wird (also *ananoym*), kann der Import ohne die geschweiften Klammern durchgeführt werden (siehe dazu z.B. [hier](https://stackoverflow.com/a/54591244)). 
-
-### `service/posts.service.js`
-
-Im `PostService` definieren wir die konkreten Datenbankzugriffe. Wie beim `PostController`, erstellen wir auch wieder ein JavaScript-Objekt, dessen Eigenschaften die Funktionen sind, welche die Zugriffe auf dei Datenbank definieren. In jeder Funktion wird die Verbindung zur Datenbank verwendet (`sql.query()`). 
-
-=== "service/posts.service.js"
-    ```js linenums="1"
-    import { connection as sql } from '../database/db.js';
-
-    export const PostService = {
-        create: async(newPost, result) => {
-            sql.query("INSERT INTO posts SET ?", newPost, (err, res) => {
-                if (err) {
-                    result(err, null);
-                } else result(null, { id: res.postId, ...newPost });
-            });
-        },
-        findById: (postId, result) => {
-            sql.query(
-                `SELECT * FROM posts WHERE id = ?`, [postId],
-                (err, res) => {
-                    if (err) {
-                        result(err, null);
-                    } else if (res.length) {
-                        result(null, res[0]);
-                    } else result({ message: "post not found" }, null);
-                }
-            );
-        },
-        getAll: (result) => {
-            sql.query("SELECT * FROM posts", (err, res) => {
-                if (err) {
-                    result(null, err);
-                } else result(null, res);
-            });
-        },
-        updateById: (id, post, result) => {
-            sql.query(
-                "UPDATE posts SET ? where id= ?", [post, id],
-                (err, res) => {
-                    if (err) {
-                        result(null, err);
-                    } else if (res.affectedRows == 0) {
-                        result({ message: "post not found" }, null);
-                    } else result(null, { id: id, ...post });
-                }
-            );
-        },
-        remove: (id, result) => {
-            sql.query("DELETE FROM posts WHERE id = ?", id, (err, res) => {
-                if (err) {
-                    result(null, err);
-                } else if (res.affectedRows == 0) {
-                    result({ message: "post not found" }, null);
-                } else result(null, res);
-            });
-        },
-        removeAll: (result) => {
-            sql.query("DELETE FROM posts", (err, res) => {
-                if (err) {
-                    result(null, err);
-                } else result(null, res);
-            });
-        },
-    };
-    ```
-
-Wir haben uns hier für den Begriff *Service* entschieden. Häufig sieht man diese Implementierung auch als *Model*. 
-Außerdem geben wir hier auch stets ein `result` zurück, welches entweder die *Response* `res` der SQL-Anfrage (`sql.query()`)
-enthält oder den von der Anfrage zurückgegebenen Fehler `err`. 
-
-Eine andere Möglichkeit, diese Funktionen zu implementieren, wäre mithilfe von *Promises* gewesen, z.B.:
-
-```js
-    create: async(newPost) => {
-        return new Promise(function(resolve, reject){
-            sql.query("INSERT INTO posts SET ?", newPost, (err, res) => {
-                if (err) {
-                    reject(new Error("error inserting post"));
-                } else resolve(res);
-            });
-        }
-    }
+```sql
+COLLATE=utf8mb4_general_ci
 ```
 
-Dann hätten im `Controller` die Aufrufe so ausgesehen:
+ersetzen! Dafür ist aber hier auch die entsprechende Datei zum [Download](./files/posts_StudiServer.sql). 
 
-```js
-    PostService.create(post)
-    .then( result => res.json(result) )
-    .catch( err => res.status(500).send({
-                    message: err.message || "Some error occurred while creating the post.",
-                })
-    )
-```
+Wenn Sie den Studi-Server verwenden, können Sie in dieser Oberfläche eine neue Datenbank erstellen: 
 
-Ansonsten folgen die Anfragen alle dem gleichen Schema. 
+![studiserver](./files/59_studiserver.png)
 
-### `database/db.js`
+Klicken Sie auf `Neue Datenbank erstellen` und geben Sie dann `posts` ein (der Name Ihrer Datenbank). Beachten Sie, dass daraus ein neuer Name für Ihre Datenbank durch die Studi-Server-Webanwendung erzeugt wird, nämlich `_s05xxx__posts`, also `Unterstrich` + `ihreMatrikelnummer` + `2 x Unterstrich` + `posts`. 
 
-In der `db.js` wird die Verbindung zur Datenbank hergestellt. Dazu wird das `mysql`-Modul geladen (Zeile `1`):
+Gehen Sie dann auf `phpMyAdmin`, wählen links die Datenbank aus (`_s05xxx__posts`), klicken Sie dann auf den Reiter `Importieren` und laden [diese Datei](./files/posts_StudiServer.sql) hoch. Klicken Sie `Ok`. Die Datenbank sollte dann mit zwei Einträgen befüllt sein. 
 
-=== "database/db.js"
-    ```js linenums="1"
-    import mysql from 'mysql';
-    import { dbConfig } from '../config/db.config.js';
+![studiserver](./files/60_studiserver.png)
 
-    export const connection = mysql.createConnection({
-        host: dbConfig.HOST,
-        user: dbConfig.USER,
-        password: dbConfig.PASSWORD,
-        database: dbConfig.DB,
-    });
+Die spätere Konfigurationsdatei für die Datenbank im Backend sieht auch anders aus. Wir schreiben es nur hier schonmal hin, weil es das hier behandelte Thema `Studi-Server` betrifft:
 
-    connection.connect((error) => {
-        if (error) throw error;
-        console.log("Connected with database ... ");
-    });
-    ```
-
-Die Zugangsdaten und der Name der Datenbank ist in der `db.config` gespeichert:
-
-=== "config/db.config"
-    ```js linenums="1"
-    export const dbConfig = {
+=== "Konfiguration für die lokale Datenbank"
+    ```javascript
+    module.exports = {
         HOST: "localhost",
         USER: "root",
-        PASSWORD: "ihrPasswort",
+        PASSWORD: "IhrPasswort",
         DB: "posts"
     };
     ```
+
+Studi_Server:
+Konfiguration für den Studi-Server"
+    ```javascript
+    module.exports = {
+        HOST: "db.f4.htw-berlin.de",
+        USER: "s05xxx",
+        PASSWORD: "IhrPassword",
+        DB: "_s05xxx__posts"
+    };
+    ```
+
+Wir haben nun eine Datenbank `posts` mit einer Tabelle `posts`, die 4 Attribute (`id`, `title`, `location` und `image`)besitzt und 2 Einträge enthält. 
+
+## Das Backend - der REST-Server
+
+Wir erzeugen uns das Backend mithilfe von [Node.js](https://nodejs.org/en/). Insbesondere verwenden wir dabei einige Module, die uns die Arbeit mit HTTP und MySQl erleichtern. Dazu gehört zunächst das Framework [Express](https://expressjs.com/de/), welches uns einen HTTp_Server zur Verfügung stellt und darüber hinaus noch einige Funktionalitäten, wie z.B. *Routing*. 
+
+#### Node.js-Projekt erstellen und Express importieren
+
+Wir erstellen uns zunächst einen Ordner `backend` und wechseln in diesen Ordner.
+
+```bash
+mkdir backend
+cd backend
+```
+
+Wir initialisieren das `Node.js`-Projekt, um uns eine `package.json` erstellen zu lassen, in der die Paketabhängigkeiten verwaltet werden:
+
+```bash
+npm init
+```
+
+Sie können im Prinzip alle Fragen mit `Enter` beantworten. Ich habe als `entry point` hier bereits `server.js` (anstelle von `index.js`) gewählt. Das können wir aber auch gleich noch in der `package.json` ändern. Hier die Ausgabe auf der Kommandozeile:
+
+```bash
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help init` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg>` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+package name: (backend) 
+version: (1.0.0) 
+description: REST-Server für posts-Datenbank
+entry point: (index.js) server.js
+test command: 
+git repository: 
+keywords: IKT, PWA, REST-API, Backendend, posts 
+author: J. Freiheit
+license: (ISC) 
+About to write to /Users/jornfreiheit/Sites/PWA/backend/package.json:
+
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "REST-Server für posts-Datenbank",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "IKT",
+    "PWA",
+    "REST-API",
+    "Backendend",
+    "posts"
+  ],
+  "author": "J. Freiheit",
+  "license": "ISC"
+}
+
+
+Is this OK? (yes) 
+```
+
+Bstätigen Sie mit `Enter`. Nun öffnen wir das `backend`-Projekt in einer IDE. Das gesamte Projekt enthält bis jetzt nur die `package.json`-Datei. Tragen Sie dort (falls es nicht bereits so konfiguriert ist) für die Eigenschaft `"main"` den Wert `"server.js"` ein:
+
+=== "package.json"
+	```json linenums="1" hl_lines="5"
+	{
+	  "name": "backend",
+	  "version": "1.0.0",
+	  "description": "REST-Server für posts-Datenbank",
+	  "main": "server.js",
+	  "scripts": {
+	    "test": "echo \"Error: no test specified\" && exit 1"
+	  },
+	  "keywords": [
+	    "IKT",
+	    "PWA",
+	    "REST-API",
+	    "Backendend",
+	    "posts"
+	  ],
+	  "author": "J. Freiheit",
+	  "license": "ISC"
+	}
+	```
+
+
+Nun installieren wir `Express` und geben dazu im Terminal
+
+```bash
+npm install express
+```
+
+ein. Wenn Sie sich nun die `package.json` erneut anschauen, stellen Sie fest, dass darin nun eine Paketabhängigkeit zum `express`-Paket konfiguriert ist:
+
+=== "package.json"
+	```json linenums="1" hl_lines="18-20"
+	{
+	  "name": "backend",
+	  "version": "1.0.0",
+	  "description": "REST-Server für posts-Datenbank",
+	  "main": "server.js",
+	  "scripts": {
+	    "test": "echo \"Error: no test specified\" && exit 1"
+	  },
+	  "keywords": [
+	    "IKT",
+	    "PWA",
+	    "REST-API",
+	    "Backendend",
+	    "posts"
+	  ],
+	  "author": "J. Freiheit",
+	  "license": "ISC",
+	  "dependencies": {
+    	"express": "^4.17.1"
+  	  }
+	}
+	```
+
+#### server.js erstellen und implementieren
+
+Nun erzeugen wir uns im Verzeichnis `backend` eine Datei `server.js`. Diese Datei ist der Einstiegspunkt unseres Backends und wird ausgeführt, wenn wir das `backend`-Projekt ausführen. Die `server.js` implementieren wir zunächst wie folgt:
+
+=== "server.js"
+	```js linenums="1"
+	import express from 'express';
+
+	const app = express();
+	const PORT = 3000;
+
+	app.get('/', (request, response) => {
+	    response.send('HELLO FIW!');
+	});
+
+	app.listen(PORT, (error) => {
+	    if (error) {
+	        console.log(error);
+	    } else {
+	        console.log(`Server started and listening on port ${PORT} ...`);
+	    }
+	});
+	```
+
+Das bedeutet, wir importieren `express` (Zeile `1`), erzeugen uns davon eine Objekt und speichern dieses in der Variablen `app` (Zeile `3`). Wir legen in einer Konstanten `PORT` die Portnummer `3000` fest(Zeile `4` - die Portnummer können Sie wählen). Das `backend` ist somit unter `http://localhost:3000` verfügbar. Wenn wir diese URL aufrufen, dann wird ein `request` ausgelöst, den wir hier mit `Hello FIW!` als `response` beantworten (Zeilen `6-8`). Das eigentliche Starten des Webservers erfolgt in den Zeilen `10-16`.
+
+#### "type":"module" in package.json einfügen
+
+In Zeile `1` in der `server.js` haben wir das `express`-Paket mittels 
+
+```bash
+import express from 'express';
+```
+
+ importiert. Dies entspricht der "neuen" Syntax zum Importieren eines `ES6`-Modules (*ES6* - ECMAScript 6). "Früher" hat man stattdessen 
+
+ ```bash
+ const express = require('express');
+ ```
+
+ geschrieben. Allerdings erfordert diese "neue" Syntax eine Erweiterung in der `package.json`:
+
+=== "package.json"
+	```json linenums="1" hl_lines="6"
+	{
+	  "name": "backend",
+	  "version": "1.0.0",
+	  "description": "REST-Server für posts-Datenbank",
+	  "main": "server.js",
+	  "type": "module",
+	  "scripts": {
+	    "test": "echo \"Error: no test specified\" && exit 1"
+	  },
+	  "keywords": [
+	    "IKT",
+	    "PWA",
+	    "REST-API",
+	    "Backendend",
+	    "posts"
+	  ],
+	  "author": "J. Freiheit",
+	  "license": "ISC",
+	  "dependencies": {
+    	"express": "^4.17.1"
+  	  }
+	}
+	```
+
+#### Starten des Projektes und Installation von nodemon
+
+Das Projekt lässt sich nun starten. Wir geben dazu im Terminal im `backend`-Ordner
+
+```bash
+node server.js
+```
+
+ein. Im Terminal erscheint 
+
+```bash
+Server started and listening on port 3000 ...
+```
+
+und wenn Sie im Browser die URL `http://localhost:3000/` eingeben, wird dort
+
+```bash
+HELLO FIW!
+```
+
+angezeigt. 
+
+Wann immer wir jetzt jedoch etwas an der Implementierung ändern, müssen wir im Terminal zunächst den Webserver mit 
+
+```bash
+Strg-C		// bzw. Control-C
+```
+
+stoppen, um ihn dann wieder mit `node server.js` zu starten. Um das zu umgehen, gibt es das Paket [nodemon](https://www.npmjs.com/package/nodemon). Da es nur sinnvoll während der Entwicklung eingesetzt werden kann (und sollte), installieren wir es als eine *development dependency*:
+
+```bash
+npm install --save-dev nodemon
+```
+
+Die `package.json` sieht daraufhin so aus:
+
+=== "package.json"
+	```json linenums="1" hl_lines="22-24"
+	{
+	    "name": "backend",
+	    "version": "1.0.0",
+	    "description": "REST-Server für posts-Datenbank",
+	    "main": "server.js",
+	    "type": "module",
+	    "scripts": {
+	        "test": "echo \"Error: no test specified\" && exit 1"
+	    },
+	    "keywords": [
+	        "IKT",
+	        "PWA",
+	        "REST-API",
+	        "Backendend",
+	        "posts"
+	    ],
+	    "author": "J. Freiheit",
+	    "license": "ISC",
+	    "dependencies": {
+	        "express": "^4.17.1"
+	    },
+	    "devDependencies": {
+	        "nodemon": "^2.0.7"
+	    }
+	}
+	```
+
+Zur Verwendung von `nodemon` fügen wir in die `package.json` unter `"scripts"` noch die Eigenschaft `watch` (frei gewählt) und den dazugehörigen Wert `nodemon server.js` ein:
+
+=== "package.json"
+	```json linenums="1" hl_lines="8"
+	{
+	    "name": "backend",
+	    "version": "1.0.0",
+	    "description": "REST-Server für posts-Datenbank",
+	    "main": "server.js",
+	    "type": "module",
+	    "scripts": {
+	        "watch": "nodemon ./server.js",
+	        "test": "echo \"Error: no test specified\" && exit 1"
+	    },
+	    "keywords": [
+	        "IKT",
+	        "PWA",
+	        "REST-API",
+	        "Backendend",
+	        "posts"
+	    ],
+	    "author": "J. Freiheit",
+	    "license": "ISC",
+	    "dependencies": {
+	        "express": "^4.17.1"
+	    },
+	    "devDependencies": {
+	        "nodemon": "^2.0.7"
+	    }
+	}
+	```
+
+Nun lässt sich die Anwendung mithilfe von `nodemon` per 
+
+```bash
+npm run watch
+```
+
+starten und muss auch nicht mehr gestoppt und neu gestartet werden, wenn Änderungen an der Implementierungen durchgeführt wurden. Die Ausgabe im Terminal nach Eingabe von `npm run watch` ist ungefähr so:
+
+```bash
+
+> backend@1.0.0 watch
+> nodemon ./server.js
+
+[nodemon] 2.0.7
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node ./server.js`
+Server started and listening on port 3000 ...
+
+```
+
+#### Konfiguration der Datenbank
+
+In diesem Abschnitt stellen wir die Verbindung zwischen `backend` und Datenbank her. Dazu ist es erforderlich, 
+
+1. das `mysql`-Paket zu importieren (es enthält Funktionalitäten für die Verbindung mit einer MySQL-Datenbank sowie für die SQL-Anfragen),
+2. die Zugangsdaten zu konfigurieren (Nutzer, Datenbankhost, Passwaort, Name der Datenbank),
+3. die eigentliche Verbindung herzustellen.  
+
+***Wir werden diese `backend`-Implementierung bewusst flach halten und verzichten deshalb auf strukturierende Ordner. Es wäre aber sehr sinnvoll und ist auch ratsam, hier unterschiedliche Ordner einzufügen (z.B. `config`, `database`, `model` usw.).***
+
+Wir erzeugen uns im `backend`-Ordner eine `db.config.js` (da diese Datei auch Ihr Passowrt enthält, können Sie sie auch außerhalb des Projektes anlegen oder eine separate Passwortdatei außerhalb des Projektes):
+
+=== "db.config.js"
+
+		/*
+		 * eine der beiden folgenden dbConfig-Objekte muessen auskommentiert werden!
+		 */
+
+		/*
+		 * Konfigurationsdaten fuer die Verbindung mit localhost
+		 */
+		export const dbConfig = {
+		    HOST: "localhost",
+		    USER: "root",
+		    PASSWORD: "IhrPasswort",
+		    DB: "posts"
+		};
+
+		/*
+		 * Konfigurationsdaten fuer die Verbindung mit studi.f4.htw-berlin.de
+		 */
+		/*
+		exports const dbConfig = {
+		    HOST: "db.f4.htw-berlin.de",
+		    USER: "s05xxx",
+		    PASSWORD: "IhrPassword",
+		    DB: "_s05xxx__posts"
+		};
+
+		 */
+
+Nun erstellen wir noch ein Skript `db.connection.js`, mit dem wir die eigentliche Verbindung zur Datenbank herstellen. Dazu installieren wir zunächst das [mysql](https://www.npmjs.com/package/mysql)-Paket. Wir geben im `backend`-Ordner im Terminal 
+
+```bash
+npm install mysql
+```
+
+ein. Die `package.json` wird daraufhin entsprechend erweitert:
+
+=== "package.json"
+	```json linenums="1" hl_lines="22"
+	{
+	    "name": "backend",
+	    "version": "1.0.0",
+	    "description": "REST-Server für posts-Datenbank",
+	    "main": "server.js",
+	    "type": "module",
+	    "scripts": {
+	        "watch": "nodemon ./server.js",
+	        "test": "echo \"Error: no test specified\" && exit 1"
+	    },
+	    "keywords": [
+	        "IKT",
+	        "PWA",
+	        "REST-API",
+	        "Backendend",
+	        "posts"
+	    ],
+	    "author": "J. Freiheit",
+	    "license": "ISC",
+	    "dependencies": {
+	        "express": "^4.17.1",
+	        "mysql": "^2.18.1"
+	    },
+	    "devDependencies": {
+	        "nodemon": "^2.0.7"
+	    }
+	}
+	```
+
+Die `db.connection.js` sieht dann so aus:
+
+=== "db.connection.js"
+	```js linenums="1" hl_lines="22"
+	import mysql from 'mysql';
+	import { dbConfig } from './db.config.js';
+
+	export const connection = mysql.createConnection({
+	    host: dbConfig.HOST,
+	    user: dbConfig.USER,
+	    password: dbConfig.PASSWORD,
+	    database: dbConfig.DB,
+	});
+
+	connection.connect((error) => {
+	    if (error) throw error;
+	    console.log("Connected with database ... ");
+	});
+	```
+
+Wir importieren in Zeile `1` das `mysql`-Modul und wir importieren in Zeile `2` die soeben festgelegten Zugangsdaten zur Datenbank. Mithilfe der `createConnection()`-Funktion aus dem `mysql`-Paket werden diese Zugangsdaten eingelesen (Zeilen `4-9`). Die eigentliche Verbindung zur Datenbank wird dann mit `connect()`-Funktion des `mysql`-Paketes hergestellt. 
+
+Ob dieses Skript tatsächlich funktioniert, könnten wir ausprobieren, indem wir im Terminal den Befehl 
+
+```bash
+node db.connection.js
+```
+
+eingeben. Es sollte 
+
+```bash
+Connected with database ... 
+```
+
+ausgegeben werden. 
+
+#### Implementieren der Datenbankanfragen
+
+Wir haben nun eine Verbindung zur Datenbank hergestellt. Nun wollen wir auch Anfragen an die Datenbank stellen. Für Anfragen an die Datenbank stellt das `mysql`-Paket die Funktion `query()` zur Verfügung. Diese Funktion bekommt als ersten Parameter die entsprechende SQL-Anfrage übergeben. Die allgemeine Syntax der `query()`-Funktion ist wie folgt:
+
+```js
+.query(sqlString, values, callback)
+```
+
+Der erste Parameter ist also der `sqlString`, z.B. `"DELETE FROM posts"`, was alle Einträge in der `posts`-Tabelle löscht. Häufig enthalten diese SQL-Anfragen aber Platzhalter für Argumente, also z.B. `"DELETE FROM posts WHERE id = ?"`. Das `?` steht für einen konkreten Wert für eine `id`. Diese Werte werden bei `values` angegeben, wobei es sich bei `values` um ein Array handelt. Die `callback`-Funktion kann drei Parameter enthalten, typischerweise werden aber nur die ersten beiden `error` und `results` abgefragt. `error` gibt den Fehler zurück, falls er bei der Anfrage erzeugt wird. `result` gibt das Resultat der SQL-Anfrage zurück, also entweder die angefragten Datensätze oder die Anzahl der Zeilen, die von der Anfrage betroffen waren. 
+
+Wir implementieren folgende Anfragen:
+
+- `sql.query("INSERT INTO posts SET ?", newPost, (err, res) => {});` fügt `newPost` in die Tabelle `posts` ein,
+- `sql.query("SELECT * FROM posts", (err, res) => {});` fragt alle Einträge aus der Tabelle `posts` ab,
+- `sql.query("UPDATE posts SET ? where id= ?", [post, id], (err, res) => {});` aktualisiert den Eintrag mit der `id==id` und verwendet dazu die neuen Daten `post`,
+- `sql.query("DELETE FROM posts WHERE id = ?", [id], (err, res) => {});` löscht den Eintrag mit der `id==id`,
+- `sql.query("DELETE FROM posts", (err, res) => {});` fügt `newPost` in die Tabelle `posts` ein,
+
+
+Diese Anfragen implmentieren wir in einem JavaScript-Objekt, das wir `PostService` nennen und dessen Eigenschaften JavaScript-Funktionen sind. Dazu erstellen wir uns eine Datei `db.sqlqueries.js` mit folgendem Inhalt:
+
+=== "db.sqlqueries.js"
+	```js linenums="1"
+	import { connection as sql } from './db.connection.js';
+
+	export const PostService = {
+	    create: async(newPost, result) => {
+	        sql.query("INSERT INTO posts SET ?", newPost, (err, res) => {
+	            if (err) result(err, null);
+	            else result(null, { id: res.postId, ...newPost });
+	        });
+	    },
+	    findById: async(postId, result) => {
+	        sql.query(
+	            `SELECT * FROM posts WHERE id = ?`, [postId],
+	            (err, res) => {
+	                if (err) result(err, null);
+	                else if (res.length) result(null, res[0]);
+	                else result({ message: "post not found" }, null);
+	            }
+	        );
+	    },
+	    getAll: async(result) => {
+	        sql.query("SELECT * FROM posts", (err, res) => {
+	            if (err) result(null, err);
+	            else result(null, res);
+	        });
+	    },
+	    updateById: async(id, post, result) => {
+	        sql.query(
+	            "UPDATE posts SET ? where id= ?", [post, id],
+	            (err, res) => {
+	                if (err) result(null, err);
+	                else if (res.affectedRows == 0) result({ message: "post not found" }, null);
+	                else result(null, { id: id, ...post });
+	            }
+	        );
+	    },
+	    remove: async(id, result) => {
+	        sql.query("DELETE FROM posts WHERE id = ?", id, (err, res) => {
+	            if (err) result(null, err);
+	            else if (res.affectedRows == 0) result({ message: "post not found" }, null);
+	            else result(null, res);
+	        });
+	    },
+	    removeAll: async(result) => {
+	        sql.query("DELETE FROM posts", (err, res) => {
+	            if (err) result(null, err);
+	            else result(null, res);
+	        });
+	    },
+	};	
+	```
+
+
+Es werden also sechs Funktionen definiert, `create()`, `findById()`, `getAll()`, `updateById()`, `remove()` und `removeAll()`. Für die Funktionen werden die entsprechenden, oben aufgelisteten, SQL-Anfragen ausgeführt. Einige Besonderheiten bei den Resultaten sind noch erwähnenswert:
+
+- Die `INSERT INTO...`-Anfrage liefert als Resultat den gesamten eingefügten Datensatz zurück (Zeile `7`). Die `id` wird jedoch automatisch durch die Datenbank vergeben (*auto-inkrement*). Das bedeutet, `newPost` enthält die Daten für `title`, `location` und `image` und das Resultat enthält darüber hinaus die neue `id`. Die Syntax `...newPost` steht für den [spread operator](https://stackoverflow.com/questions/31048953/what-do-these-three-dots-in-react-do) und setzt dort im Prinzip das `newPost`-Objekt ein, separiert in die key-value-Paare. 
+- Die `SELECT * FROM posts WHERE id = ?`-Anfrage hat drei mögliche Antworten (Zeilen `14-16`). Entweder einen Fehler oder der Datensatz wird nicht gefunden, weil es die übergebene `id` nicht gibt, oder den gefundenen Datensatz. `SELECT * FROM `-Anfragen leifern ein Array zurück. Da die `SELECT * FROM posts WHERE id = ?` maximal genau einen Datensatz zurückgeben kann, greifen wir direkt auf `res[0]` zu (Zeile `15`). 
+- In den anderen Funktionen finden sich teilweise Kombinationen aus den beiden zuvor genannten Beispielen. 
+
+#### Implementieren des Controllers
+
+Die Datenbankanfragen erwarten unterschiedliche Werte für die jeweiligen parameter. Für manche Anfragen muss eine `id` übergeben werden, für andere ein `post`-Objekt mit Werten für `title`, `location` und `image`, die `updateById()`-Funktion benötigt beides und die `removeAll()`-Funktion nichts davon. Diese unterschiedlichen Werte müssen erst aus den Anfragen extrahiert werden. Dazu dient uns der *Controller*, den wir nun implementieren. Er stellt die Schnittstelle zwischen den REST-API-Anfragen und den Datenbankanfragen dar. 
+
+Wir erzeugen uns eine `posts.controller.js` mit folgendem Inhalt:
+
+=== "posts.controller.js"
+	```js linenums="1"
+	import { PostService } from './db.sqlqueries.js';
+
+	export const PostController = {
+
+	    readAll: (req, res) => {
+	        PostService.getAll((err, result) => {
+	            if (err)
+	                res.status(500).send({
+	                    message: err.message || "Some error occurred while getting all posts",
+	                });
+	            else res.json(result);
+	        });
+	    },
+
+	    create: (req, res) => {
+	        if (!req.body) {
+	            res.status(400).send({
+	                message: "Content can not be empty!",
+	            });
+	        }
+	        const post = {...req.body };
+	        PostService.create(post, (err, result) => {
+	            if (err)
+	                res.status(500).send({
+	                    message: err.message || "Some error occurred while creating the post.",
+	                });
+	            else res.json(result);
+	        });
+	    },
+
+	    delete: (req, res) => {
+	        PostService.remove(req.params.postId, (err, result) => {
+	            if (err)
+	                res.status(500).send({
+	                    message: err.message || "Some error occurred while delete the post",
+	                });
+	            else res.json(result);
+	        });
+	    },
+
+	    update: (req, res) => {
+	        if (!req.body) {
+	            res.status(400).send({
+	                message: "Content can not be empty!",
+	            });
+	        }
+	        const post = {...req.body };
+	        PostService.updateById(
+	            req.params.postId,
+	            post,
+	            (err, result) => {
+	                if (err)
+	                    res.status(500).send({
+	                        message: err.message || "Some error occurred while update the post",
+	                    });
+	                else res.json(result);
+	            }
+	        );
+	    },
+
+	    readOne: (req, res) => {
+	        PostService.findById(req.params.postId, (err, result) => {
+	            if (err)
+	                res.status(500).send({
+	                    message: err.message || "Some error occurred while getting one post",
+	                });
+	            else res.json(result);
+	        });
+	    },
+	};
+	```
+
+Die grundsätzliche Idee ist zunächst die gleiche, wie bei `PostService`. Wir erstellen wiederum eine JavaScript-Objekt, dessen Eigenschaften Funktionen sind. In den Funktionen werden dann die entsprechenden Funktionen aus dem `PostService` aufgerufen. Die prinzipielle Idee des `PostControllers` ist, neben dem Aufruf der jeweiligen Funktion von `PostService` den Funktionsaufruf so vorzubereiten, dass die entsprechenden Daten korrekt und vollständig übergeben werden. Außerdem werden die resultate der Datenbank jeweils als JSON zurückgesendet bzw. werden entsprechende Fehler gesendet, die durch die Auswertungen der Fehler aus dem `postService` generiert werden.
+
+Betrachten wir einige ausgewählte Funktionen aus dem `PostController`:
+
+- Die `readAll()`-Funktion ruft die `getAll()`-Funktion, d.h. es sollen alle Datensätze aus der `posts`-tabelle zurückgeliefert werden. Liefert die `getAll()`-Funktionen einen Fehler, dann schickt die `readAll()`-Funktionen eine Fehlermeldung mit Statuscode `500` (siehe auch [HTTP-Statuscode](https://de.wikipedia.org/wiki/HTTP-Statuscode))  mit entweder der Fehler-`message` oder mit der Nachricht `"Some error occurred while getting all posts"` an den Aufrufer (Zeilen `7-10`). Wenn alles korrekt läuft, d.h. die Datensätze von der `getAll()`-Funktion geliefert werden, dann erzeugt die `readAll()`-Funktion daraus ein JSON und schickt dieses an den Aufrufer zurück (Zeile `11`).
+- Die `create()`-Funktion ruft die `create()`-Funktion des `PostService` auf. Dazu muss jedoch erst der Datensatz erstellt werden, der in die Datenbank eingefügt werden soll. Dieser Datensatz wird aus dem `body` des `requests` extrahiert. Ist dieser `body` leer oder existiert gar nicht, wird eine Fehlermeldung mit Statuscode `400` als Response gesendet. Aus dem `body` des `requests` wird ansonsten ein neues `post`-Objekt erzeugt. Hier wird erneut der [spread operator](https://stackoverflow.com/questions/31048953/what-do-these-three-dots-in-react-do)  verwendet und somit alle Schlüssel-Werte-Paare aus `body` in das Objekt eingefügt (Zeile `21`). Dieses `post`-Objekt wird der Methode `create()` des `PostService` übergeben. Das `result` der `create()`-Methode des `PostService` ist der gesamte "neue" Datensatz inkl. der von der Datenbank vergebenen `id`.
+- Die `update()`-Methode ist ähnlich der `create()`-Funktion, aber hier wird zusätzlich noch die `id` übergeben, die verwendet werden soll, um den Datensatz zu identifiezieren, der aktualisiert werden soll. Diese `id` ist **nicht** Teil des `req.body`, sondern wird als Wert der URL mitgegeben, d.h. es erfolgt ein Aufruf der Form `http://localhost:3000/posts/11` und die `11` wird als `id` verwendet. Mithilfe von `params` kann die URL des `requests` ausgelesen werden. Die `postId` wird gleich in der `service.js` definiert werden.
+
+Wir haben übrigens keine Funktion im `PostController` definiert, die die Funktion `removeAll()` aus dem `PostService` aufruft, damit wir nicht ausversehen alle Datensätze aus unserer Datenbank löschen. 
+
+#### server.js um Endpunkte erweitern
+
+Uns stehen jetzt die wesentlichen Funktionen zur Verfügung, um CRUD-Anfragen durchzuführen. Uns fehlt noch der letzte Schritt, nämlich die *Endpunkte*  unserer REST-API mit den entsprechenden Funktionen des `Controllers` zu verknüpfen. Unter den *Endpunkten*  der REST-API verstehen wir die URI der Ressource, die angefragt wird zusammen mit der HTTP-Anfragemethode, mit der diese Ressource angefragt wird. Wir definieren folgende Endpunkte:
+
+- `GET http://localhost:3000/posts` - Aufruf von `readAll()` im `PostController` 
+- `GET http://localhost:3000/posts/:postId` - Aufruf von `readOne()` im `PostController`, `postId` bekommt einen konkreten Wert 
+- `POST http://localhost:3000/posts` - Aufruf von `create()` im `PostController` 
+- `PUT http://localhost:3000/posts/:postId` - Aufruf von `update()` im `PostController`, `postId` bekommt einen konkreten Wert 
+- `DELETE http://localhost:3000/posts/:postId` - Aufruf von `delete()` im `PostController`, `postId` bekommt einen konkreten Wert 
+
+Die Erweiterung von `server.js` sieht dann so aus:
+
+=== "server.js"
+	```js linenums="1" hl_lines="2 11-16"
+	import express from 'express';
+	import { PostController } from './posts.controller.js';
+
+	const app = express();
+	const PORT = 3000;
+
+	app.get('/', (request, response) => {
+	    response.send('HELLO FIW!');
+	});
+
+	// Endpunkte definieren
+	app.post("/posts", PostController.create); // C
+	app.get("/posts", PostController.readAll); // R (all)
+	app.get("/posts/:postId", PostController.readOne); // R (one)
+	app.put("/posts/:postId", PostController.update); // U
+	app.delete("/posts/:postId", PostController.delete); // D
+
+	app.listen(PORT, (error) => {
+	    if (error) {
+	        console.log(error);
+	    } else {
+	        console.log(`Server started and listening on port ${PORT} ...`);
+	    }
+	});
+	```
+
+Das `express`-Modul liefert uns also entsprechende Funktionen für die einzelnen HTTP-Anfragen, d.h. `.get()` für `GET`-Anfragen, `.post()` für `POST`-Anfragen usw. Pro Endpunkt wird die entsprechende Funktion aus dem `PostController` aufgerufen. Dieser muss dafür importiert werden (Zeile `2`). 
+
+Wenn wir nun im Browser `http://localhost:3000/posts` eingeben, dann entspricht das der Anfrage `GET http://localhost:3000/posts` und somit dem Aufruf von `PostController.readAll()`. Tatsächlich werden uns im Browser die beiden Datensätze angezeigt (schalten Sie die Darstellung auf `Raw`), allerdings sind die Werte für die Bilder leider sehr lang. 
+
+![restapi](./files/62_restapi.png)
+
+Mit dem Browser können wir auch noch den zweiten `GET`-Endpunkt testen, nämlich `GET http://localhost:3000/posts/:postId`. Für `id` sind bis jetzt in der Datenbank die Werte `1` und `2` vergeben, d.h. wir könnten `GET http://localhost:3000/posts/1` und `GET http://localhost:3000/posts/2` testen. 
+
+Wenn wir eine andere Zahl als `1` oder `2` versuchen, erhalten wir die in der `findById()`-Funktion im `PostService` definierte Fehlermeldung als JSON `{ message: "post not found" }`.
+
+#### Backend für größere Daten erweitern
+
+Wenn wir jetzt ausprobieren würden, einen neuen Datensatz in die Datenbank einzufügen (siehe Abschnitt [Testen mit Postman](./#testen-mit-postman)), erhalten wir einen Fehler, dass der Request gar nicht erst gesendet werden konnte. Der Grund dafür ist, dass der Webserver in `express` in den Standardeinstellungen nicht mit so großen Daten im Request umgehen kann. Wir benötigen deshalb noch eine kleine Erweiterung in der `server.js`:
+
+=== "server.js"
+	```js linenums="1" hl_lines="7-8"
+	import express from 'express';
+	import { PostController } from './posts.controller.js';
+
+	const app = express();
+	const PORT = 3000;
+
+	app.use(express.urlencoded({ limit: '20mb', extended: true }));
+	app.use(express.json({ limit: '20mb' }));
+
+	app.get('/', (request, response) => {
+	    response.send('HELLO FIW!');
+	});
+
+	// Endpunkte definieren
+	app.post("/posts", PostController.create); // C
+	app.get("/posts", PostController.readAll); // R (all)
+	app.get("/posts/:postId", PostController.readOne); // R (one)
+	app.put("/posts/:postId", PostController.update); // U
+	app.delete("/posts/:postId", PostController.delete); // D
+
+	app.listen(PORT, (error) => {
+	    if (error) {
+	        console.log(error);
+	    } else {
+	        console.log(`Server started and listening on port ${PORT} ...`);
+	    }
+	});
+	```
+
+Mit diesen beiden Anweisungen erhöhen wir die Größe der zu übetragenden daten in einem Request auf `20Mb`. Sie können auch einen noch größeren Wert hier wählen. Für unsere Bedürfnisse genügt sogar die Anweisung in Zeile `8`, aber für den Fall, dass wir auch große Datenmengen direkt in der URL übertragen wollen (als `GET` dann), sehen wir bereits Anweisung in Zeile `7` vor. 
+
+
+#### Cross-Origin Resource Sharing (CORS)
+
+Die *Same Origin Policy (SOP)* ist ein Sicherheitskonzept, das clientseitig Skriptsprachen (also z.B. JavaScript oder CSS) untersagt, Ressourcen aus verschiedenen Herkunften zu verwenden, also von verschiedenen Servern. Dadurch soll verhindert werden, dass fremde Skripte in die bestehende Client-Server-Kommunikation eingeschleust werden. Gleiche *Herkunft (origin)* bedeutet, dass das gleiche Protokoll (z.B. `http` oder `https`), von der gleichen Domain (z.B. `localhost` oder `htw-berlin`) sowie dem gleichen Port (z.B. `80` oder `4200`) verwendet werden. Es müssen alle drei Eigenschaften übereinstimmen. 
+
+Mit dem Aufkommen von Single Page Applications und dem darin benötigten AJAX kam jedoch der Bedarf auf, die SOP aufzuweichen. Es sollte möglich sein, dass z.B. JavaScript sowohl client-seitig das DOM ändert, als auch einen Request an den Server (das Backend) sendet. Der Kompromiss, der dafür gefunden wurde, nennt sich *Cross-Origin Resource Sharing (CORS)*. Damit ist es möglich, für einige oder alle Anfragen zu definieren, dass sie im Sinne der SOP trotzdem erlaubt sein sollen. 
+
+Um CORS für Ihr Backend zu aktivieren, wechseln Sie im Terminal in Ihren `backend`-Ordner und geben dort
+
+```bash
+npm install cors
+```
+
+ein. Die `package.json` sieht danach so aus:
+
+=== "package.json"
+	```json linenums="1" hl_lines="21"
+	{
+	    "name": "backend",
+	    "version": "1.0.0",
+	    "description": "REST-Server für posts-Datenbank",
+	    "main": "server.js",
+	    "type": "module",
+	    "scripts": {
+	        "watch": "nodemon ./server.js",
+	        "test": "echo \"Error: no test specified\" && exit 1"
+	    },
+	    "keywords": [
+	        "IKT",
+	        "PWA",
+	        "REST-API",
+	        "Backendend",
+	        "posts"
+	    ],
+	    "author": "J. Freiheit",
+	    "license": "ISC",
+	    "dependencies": {
+	        "cors": "^2.8.5",
+	        "express": "^4.17.1",
+	        "mysql": "^2.18.1"
+	    },
+	    "devDependencies": {
+	        "nodemon": "^2.0.7"
+	    }
+	}
+	```
+
+Öffnen Sie dann die `server.js` und fügen Sie die hervorgehobenen Zeilen ein:
+
+=== "server.js"
+	```javascript linenums="1" hl_lines="2 8"
+	import express from 'express';
+	import cors from 'cors';
+	import { PostController } from './posts.controller.js';
+
+	const app = express();
+	const PORT = 3000;
+
+	app.use(cors());
+	app.use(express.urlencoded({ limit: '20mb', extended: true }));
+	app.use(express.json({ limit: '20mb' }));
+
+	app.get('/', (request, response) => {
+	    response.send('HELLO FIW!');
+	});
+
+	// Endpunkte definieren
+	app.post("/posts", PostController.create); // C
+	app.get("/posts", PostController.readAll); // R (all)
+	app.get("/posts/:postId", PostController.readOne); // R (one)
+	app.put("/posts/:postId", PostController.update); // U
+	app.delete("/posts/:postId", PostController.delete); // D
+
+	app.listen(PORT, (error) => {
+	    if (error) {
+	        console.log(error);
+	    } else {
+	        console.log(`Server started and listening on port ${PORT} ...`);
+	    }
+	});
+	```
+
+Falls Sie z.B. nur die `get`-Anfrage teilen wollen, dann wählen Sie nicht `app.use(cors());`, sondern 
+
+```javascript
+app.get("/", cors(), (req, res) => {
+	    res.json({ message: "HELLO FIW!" });
+	});
+```
+
+Mehr zum CORS-Paket von node.js bzw. express finden Sie [hier](https://expressjs.com/en/resources/middleware/cors.html).
+
 
 ### Testen mit Postman
 
@@ -428,339 +979,7 @@ Probieren Sie in Postman auch ruhig mal `GET http://localhost:3000/posts/1` und/
     }
 ``` 
 
-ist.
-
-## Frontend
-
-Um die Dateneingabe zu vereinfachen, erstellen wir uns ein einfaches Frontend mithilfe von Angular. Der im Folgenden beschriebene Code ist unter [GitHub](https://github.com/jfreiheit/ikt_frontend) verfügbar. Dieses Frontend ist zunächst bewusst einfach gehalten und enthält nur eine einzige Komponente `CreateComponent` zum Erstellen eines Datensatzes. Da wir [Angular Material](https://material.angular.io/) verwenden, sieht die `app.module.ts` wie folgt aus:
-
-=== "app.module.ts"
-    ```js
-    import { BrowserModule } from '@angular/platform-browser';
-    import { NgModule } from '@angular/core';
-
-    import { AppRoutingModule } from './app-routing.module';
-    import { AppComponent } from './app.component';
-    import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-    import { LayoutModule } from '@angular/cdk/layout';
-    import { MatToolbarModule } from '@angular/material/toolbar';
-    import { MatButtonModule } from '@angular/material/button';
-    import { MatInputModule } from '@angular/material/input';
-    import { MatSidenavModule } from '@angular/material/sidenav';
-    import { MatIconModule } from '@angular/material/icon';
-    import { MatListModule } from '@angular/material/list';
-    import { MatCardModule } from '@angular/material/card';
-    import { MatFormFieldModule } from '@angular/material/form-field';
-    import { CreateComponent } from './create/create.component';
-    import { HttpClientModule } from '@angular/common/http';
-    import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-    import { ToastrModule } from 'ngx-toastr';
-
-    @NgModule({
-      declarations: [
-        AppComponent,
-        CreateComponent
-      ],
-      imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        FormsModule,
-        LayoutModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatInputModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
-        MatCardModule,
-        MatFormFieldModule,
-        ToastrModule.forRoot({
-          timeOut: 2000,
-          preventDuplicates: true,
-        }),
-      ],
-      providers: [],
-      bootstrap: [AppComponent]
-    })
-    export class AppModule { }
-    ```  
-
-Als einzige Route ist `/create` in der `app-routing.module.ts` definiert, wodurch die `CreateComponent` aufgerufen wird:
-
-=== "app-routing.module.ts"
-    ```js
-    import { NgModule } from '@angular/core';
-    import { Routes, RouterModule } from '@angular/router';
-    import { CreateComponent } from './create/create.component';
-
-    const routes: Routes = [
-      { path: 'create', component: CreateComponent },
-    ];
-
-    @NgModule({
-      imports: [RouterModule.forRoot(routes)],
-      exports: [RouterModule]
-    })
-    export class AppRoutingModule { }
-    ```  
-
-### `AppComponent`
-
-Die `AppComponent` enthält ausschließlich das mithilfe des [Navigation schematic](https://material.angular.io/guide/schematics#navigation-schematic) erstellte Navigationsgerüst. Als Inhalt in diesem Gerüst ist `<router-outlet></router-outlet>` enthalten, um die einzelnen Komponenten einzubinden:
+ist. Nachdem Sie den dritten datensatz eingefügt haben, können Sie ja auch mal versuchen, ihn wieder zu löschen. 
 
 
-=== "app.component.html"
-    ```html
-    <mat-sidenav-container class="sidenav-container">
-        <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-            <mat-toolbar>Menu</mat-toolbar>
-            <mat-nav-list>
-                <a mat-list-item routerLink="/create" routerLinkActive="active">Neuen Datensatz</a>
-            </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <mat-toolbar color="primary">
-                <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
-                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-                </button>
-                <span>Posts verwalten</span>
-            </mat-toolbar>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-    ```  
-
-=== "app.component.ts"
-    ```js
-    import { Component } from '@angular/core';
-    import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-    import { Observable } from 'rxjs';
-    import { map, shareReplay } from 'rxjs/operators';
-
-    @Component({
-      selector: 'app-root',
-      templateUrl: './app.component.html',
-      styleUrls: ['./app.component.css']
-    })
-    export class AppComponent {
-      title = 'frontend';
-
-      isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-        .pipe(
-          map(result => result.matches),
-          shareReplay()
-        );
-
-      constructor(private breakpointObserver: BreakpointObserver) {}
-    }
-    ```  
-
-Beide Dateien sind unverändert so übernommen, wie vom [Navigation schematic](https://material.angular.io/guide/schematics#navigation-schematic) erstellt. 
-
-### `CreateComponent`
-
-Selbst erstellt wurde nur die `CreateComponent`. In dieser Komponente wurde ein Formular nach [Material Design](https://material.angular.io/components/form-field/overview)-Vorgaben erstellt. Die `create.component.ts` sieht so aus:
-
-=== "create/create.component.ts"
-    ```js linenums="1"
-    import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-    import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-    import { ToastrService } from 'ngx-toastr';
-    import { PostService, Post } from '../post.service';
-
-    @Component({
-      selector: 'app-create',
-      templateUrl: './create.component.html',
-      styleUrls: ['./create.component.css']
-    })
-    export class CreateComponent implements OnInit {
-
-      @ViewChild('fileInput') fileInput: ElementRef;
-      fileAttr = 'Choose File';
-      formGroup: FormGroup;
-      titleAlert = 'This field is required';
-      imgBase64 = '';
-      post: Post;
-
-      constructor(
-        private formBuilder: FormBuilder,
-        private postService: PostService,
-        private toastr: ToastrService) { }
-
-      ngOnInit(): void {
-        this.formGroup = this.formBuilder.group({
-          inp_title: [null, Validators.required],
-          inp_location: [null, Validators.required],
-          uploadFile: [null, Validators.required]
-        });
-      }
-
-      uploadFileEvt(imgFile: any): void {
-        if (imgFile.target.files && imgFile.target.files[0]) {
-          this.fileAttr = '';
-          Array.from(imgFile.target.files).forEach((file: File) => {
-            this.fileAttr += file.name + ' - ';
-          });
-
-          // HTML5 FileReader API
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            const image = new Image();
-            image.src = e.target.result;
-            image.onload = rs => {
-              const imgBase64Path = e.target.result;
-              this.imgBase64 = imgBase64Path.substr(imgBase64Path.indexOf(',') + 1);
-              console.log('imgBase64Path', imgBase64Path);
-              console.log('imgBase64', this.imgBase64);
-            };
-            this.formGroup.patchValue({ uploadFile: reader.result });
-          };
-          reader.readAsDataURL(imgFile.target.files[0]);
-          // Reset if duplicate image uploaded again
-          this.fileInput.nativeElement.value = '';
-        } else {
-          this.fileAttr = 'Choose File';
-        }
-      }
-
-      get uploadFile(): FormControl {
-        return this.formGroup.get('uploadFile') as FormControl;
-      }
-
-      get inp_title(): FormControl {
-        return this.formGroup.get('inp_title') as FormControl;
-      }
-
-      get inp_location(): FormControl {
-        return this.formGroup.get('inp_location') as FormControl;
-      }
-
-      async onSubmit(): Promise<void> {
-        this.post = {
-          id: 0,
-          title: this.inp_title.value,
-          location: this.inp_location.value,
-          image: this.imgBase64
-        };
-        console.log('post', this.post);
-        await this.postService.addPost(JSON.stringify(this.post));
-        this.toastr.success('success');
-        this.formGroup.reset();
-      }
-    }
-    ```
-
-=== "create/create.component.html"
-    ```html linenums="1"
-    <div class="container" novalidate>
-    <mat-card class="example-card">
-        <mat-card-header>
-            <mat-card-title>Post hinzufügen</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div [formGroup]="formGroup" class="my-form">
-
-                <mat-form-field class="form-element">
-                    <mat-label>Post title</mat-label>
-                    <input matInput placeholder="Titel" formControlName="inp_title" />
-                    <mat-error *ngIf="!inp_title.valid && inp_title.touched">
-                        {{ titleAlert }}
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="form-element">
-                    <mat-label>Post location</mat-label>
-                    <input matInput placeholder="Location" formControlName="inp_location" />
-                    <mat-error *ngIf="!inp_location.valid && inp_location.touched">
-                        {{ titleAlert }}
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <div>
-                        <mat-toolbar>
-                            <!-- Display files names -->
-                            <input matInput [(ngModel)]="fileAttr" readonly name="name" />
-
-                            <!-- Browse Button -->
-                            <button mat-flat-button color="primary">
-                        Browse File
-                      </button>
-                        </mat-toolbar>
-
-                        <!-- Fetch selected filed on change -->
-                        <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile" multiple="multiple" accept="image/*" />
-                    </div>
-                </mat-form-field>
-
-            </div>
-        </mat-card-content>
-        <mat-card-actions>
-            <div class="form-element">
-                <button mat-stroked-button (click)="onSubmit()" color="default" class="button" [disabled]="!formGroup.valid">
-          Add post
-        </button>
-            </div>
-        </mat-card-actions>
-    </mat-card>
-    <div *ngIf="imgBase64">
-        {{ imgBase64 }}
-    </div>
-    </div>
-    ```
-
-In Zeile `15` wird eine Variable `formGroup` vom Typ `FormGroup` deklariert. Erzeugt wird das Formular mithilfe des `FormBuilder` (siehe Zeile `21`) in der `ngOnInit()`-Funktion (Zeilen `25-30`). Die drei `get`-Methoden (Zeilen `61-71`) dienen dem Zugriff auf die drei einzelnen Formularelemente.
-
-![frontend](./files/56_frontend.png)
-
-Am unfrangreichsten ist hier die `uploadFileEvt`-Methode. Diese wird aufgerufen, wenn eine Bilddatei zum Upload ausgewählt wurde. Prinzipiell ist sogar die Auswahl mehrerer Dateien möglich. In Zeile `46` wird der Base64-Code des Bildes übergeben, dieser enthält aber noch den String `data:image/jpeg;base64,`. Dieser wird in Zeile `47` entfernt und der verbleibende Code in `imgBase64` gespeichert. 
-
-Ist das gesamte Formular ausgefüllt, wird durch Klicken des `Add post`-Buttons (siehe `create.component.html`) die `onSubmit()`-Methode ausgelöst. In dieser Methode wird das `post`-Objekt erzeugt, welches an die `addPost`-Methode des `postService` übergeben wird.  
-
-### `post.service.ts`
-
-Der `PostService` stellt die Verbindung zum Backend dar. Dazu verwendet der `PostService` das `HttpClient`- und das `HttpHeaders`-Modul: 
-
-=== "post.service.ts"
-    ```js linenums="1"
-    import { HttpClient, HttpHeaders } from '@angular/common/http';
-    import { Injectable } from '@angular/core';
-
-
-    export interface Post {
-      id: number;
-      title: string;
-      location: string;
-      image: string;
-    }
-
-    @Injectable({
-      providedIn: 'root'
-    })
-    export class PostService {
-      apiUrl = 'http://localhost:3000/posts';
-
-      constructor(private http: HttpClient) { }
-
-
-      public async addPost(post): Promise<Post> {
-        return this.http
-          .post<Post>(`${this.apiUrl}`, post, {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-            }),
-          })
-          .toPromise();
-      }
-    }
-    ```
-
-Derzeit ist im `PostService` noch nur eine Funktion implementiert, die `addPost()`. Diese ruft im Backend den Endpunkt `POST http://localhost:3000/posts` auf und übergibt das `post`-Objekt, das im *Request-Body* versendet wird.   
-
-
-!!! success
-    Wir haben uns zwar in Sachen *Progressive Web Apps* nicht wirklich weiterentwickelt, aber wir haben nun erstmal einige nützliche Hilfsmittel geschaffen, um eine "größere" Anwendung später *progressive* zu gestalten. Es gibt nun eine Datenbank, die Bilder speichern kann und das passende Backend zur Anbindung der Datenbank. Zur Erleichterung der Dateneingabe in die Datenbank haben wir uns auch ein Frontend erstellt.   
 

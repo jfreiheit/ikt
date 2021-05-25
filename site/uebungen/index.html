@@ -324,6 +324,36 @@
 
   
   
+  
+    <li class="md-nav__item">
+      <a href="../frontend/" class="md-nav__link">
+        Frontend
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../indexeddb/" class="md-nav__link">
+        IndexedDB
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -380,6 +410,13 @@
         <li class="md-nav__item">
   <a href="#ubung-4-entwicklungs-infrastruktur-einrichten" class="md-nav__link">
     Übung 4 (Entwicklungs-Infrastruktur einrichten)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubung-5-backend" class="md-nav__link">
+    Übung 5 (Backend)
   </a>
   
 </li>
@@ -490,6 +527,13 @@
         <li class="md-nav__item">
   <a href="#ubung-4-entwicklungs-infrastruktur-einrichten" class="md-nav__link">
     Übung 4 (Entwicklungs-Infrastruktur einrichten)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubung-5-backend" class="md-nav__link">
+    Übung 5 (Backend)
   </a>
   
 </li>
@@ -700,6 +744,22 @@ Package                      Version
 </li>
 </ol>
 </details>
+<h5 id="ubung-5-backend">Übung 5 (Backend)<a class="headerlink" href="#ubung-5-backend" title="Permanent link">&para;</a></h5>
+<details><summary>Übung 5</summary><ol>
+<li>
+<p>Ergänzen Sie das in [Backend] erstellte Backend um einen REST-Endpunkt </p>
+<p><div class="highlight"><pre><span></span><code>GET http://localhost:3000/posts/title
+</code></pre></div>
+    Bei Aufruf dieses Endpunktes soll dem Request-Body ein JSON in der Form 
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;first post&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+    mitgesendet werden. Der Wert von <code>title</code> in diesem JSON wird verwendet, um den Datensatz/die Datensätze auszulesen, die den <code>title</code> haben (also hier der Datensatz mit dem <code>title</code> <code>"first post"</code>). </p>
+<p><img alt="uebung5" src="../files/63_restapi.png" /> </p>
+</li>
+</ol>
+</details>
 <hr />
 <h2 id="spater">Später<a class="headerlink" href="#spater" title="Permanent link">&para;</a></h2>
 <h5 id="ubung-x-frontend">Übung x (Frontend)<a class="headerlink" href="#ubung-x-frontend" title="Permanent link">&para;</a></h5>
@@ -729,7 +789,7 @@ Package                      Version
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../backend/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../indexeddb/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -738,7 +798,7 @@ Package                      Version
                 <span class="md-footer-nav__direction">
                   Zurück
                 </span>
-                Backend
+                IndexedDB
               </div>
             </div>
           </a>

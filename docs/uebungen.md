@@ -158,6 +158,26 @@
 
 	7. Ich hoffe, es klappt alles! Eventuelle Probleme können wir in der Vorlesung am 26.5. und/oder in der Übung am 27.5. besprechen.  
 
+
+##### Übung 5 (Backend)
+
+??? "Übung 5"
+
+	1. Ergänzen Sie das in [Backend] erstellte Backend um einen REST-Endpunkt 
+
+		```bash
+		GET http://localhost:3000/posts/title
+		```  
+		Bei Aufruf dieses Endpunktes soll dem Request-Body ein JSON in der Form 
+		```json
+		{
+		    "title": "first post"
+		}
+		```
+		mitgesendet werden. Der Wert von `title` in diesem JSON wird verwendet, um den Datensatz/die Datensätze auszulesen, die den `title` haben (also hier der Datensatz mit dem `title` `"first post"`). 
+
+		![uebung5](./files/63_restapi.png) 
+
 ---
 
 

@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rest-server" class="md-skip">
+        <a href="#backend-rest-server" class="md-skip">
           Zum Inhalt
         </a>
       
@@ -342,37 +342,99 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#backend" class="md-nav__link">
-    Backend
+  <a href="#die-posts-datenbank" class="md-nav__link">
+    Die posts-Datenbank
   </a>
   
-    <nav class="md-nav" aria-label="Backend">
+    <nav class="md-nav" aria-label="Die posts-Datenbank">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#serverjs" class="md-nav__link">
-    server.js
+  <a href="#mysql-auf-dem-studi-server" class="md-nav__link">
+    MySQL auf dem Studi-Server
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#das-backend-der-rest-server" class="md-nav__link">
+    Das Backend - der REST-Server
+  </a>
+  
+    <nav class="md-nav" aria-label="Das Backend - der REST-Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodejs-projekt-erstellen-und-express-importieren" class="md-nav__link">
+    Node.js-Projekt erstellen und Express importieren
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#controllerpostscontrollerjs" class="md-nav__link">
-    controller/posts.controller.js
+  <a href="#serverjs-erstellen-und-implementieren" class="md-nav__link">
+    server.js erstellen und implementieren
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#servicepostsservicejs" class="md-nav__link">
-    service/posts.service.js
+  <a href="#typemodule-in-packagejson-einfugen" class="md-nav__link">
+    "type":"module" in package.json einfügen
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#databasedbjs" class="md-nav__link">
-    database/db.js
+  <a href="#starten-des-projektes-und-installation-von-nodemon" class="md-nav__link">
+    Starten des Projektes und Installation von nodemon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konfiguration-der-datenbank" class="md-nav__link">
+    Konfiguration der Datenbank
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementieren-der-datenbankanfragen" class="md-nav__link">
+    Implementieren der Datenbankanfragen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementieren-des-controllers" class="md-nav__link">
+    Implementieren des Controllers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serverjs-um-endpunkte-erweitern" class="md-nav__link">
+    server.js um Endpunkte erweitern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-fur-groere-daten-erweitern" class="md-nav__link">
+    Backend für größere Daten erweitern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-origin-resource-sharing-cors" class="md-nav__link">
+    Cross-Origin Resource Sharing (CORS)
   </a>
   
 </li>
@@ -389,44 +451,40 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#frontend" class="md-nav__link">
-    Frontend
-  </a>
-  
-    <nav class="md-nav" aria-label="Frontend">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#appcomponent" class="md-nav__link">
-    AppComponent
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#createcomponent" class="md-nav__link">
-    CreateComponent
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#postservicets" class="md-nav__link">
-    post.service.ts
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend/" class="md-nav__link">
+        Frontend
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../indexeddb/" class="md-nav__link">
+        IndexedDB
+      </a>
     </li>
   
 
@@ -501,44 +559,16 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#backend" class="md-nav__link">
-    Backend
+  <a href="#die-posts-datenbank" class="md-nav__link">
+    Die posts-Datenbank
   </a>
   
-    <nav class="md-nav" aria-label="Backend">
+    <nav class="md-nav" aria-label="Die posts-Datenbank">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#serverjs" class="md-nav__link">
-    server.js
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#controllerpostscontrollerjs" class="md-nav__link">
-    controller/posts.controller.js
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#servicepostsservicejs" class="md-nav__link">
-    service/posts.service.js
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#databasedbjs" class="md-nav__link">
-    database/db.js
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#testen-mit-postman" class="md-nav__link">
-    Testen mit Postman
+  <a href="#mysql-auf-dem-studi-server" class="md-nav__link">
+    MySQL auf dem Studi-Server
   </a>
   
 </li>
@@ -549,30 +579,86 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#frontend" class="md-nav__link">
-    Frontend
+  <a href="#das-backend-der-rest-server" class="md-nav__link">
+    Das Backend - der REST-Server
   </a>
   
-    <nav class="md-nav" aria-label="Frontend">
+    <nav class="md-nav" aria-label="Das Backend - der REST-Server">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#appcomponent" class="md-nav__link">
-    AppComponent
+  <a href="#nodejs-projekt-erstellen-und-express-importieren" class="md-nav__link">
+    Node.js-Projekt erstellen und Express importieren
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#createcomponent" class="md-nav__link">
-    CreateComponent
+  <a href="#serverjs-erstellen-und-implementieren" class="md-nav__link">
+    server.js erstellen und implementieren
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#postservicets" class="md-nav__link">
-    post.service.ts
+  <a href="#typemodule-in-packagejson-einfugen" class="md-nav__link">
+    "type":"module" in package.json einfügen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starten-des-projektes-und-installation-von-nodemon" class="md-nav__link">
+    Starten des Projektes und Installation von nodemon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konfiguration-der-datenbank" class="md-nav__link">
+    Konfiguration der Datenbank
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementieren-der-datenbankanfragen" class="md-nav__link">
+    Implementieren der Datenbankanfragen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementieren-des-controllers" class="md-nav__link">
+    Implementieren des Controllers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serverjs-um-endpunkte-erweitern" class="md-nav__link">
+    server.js um Endpunkte erweitern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-fur-groere-daten-erweitern" class="md-nav__link">
+    Backend für größere Daten erweitern
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-origin-resource-sharing-cors" class="md-nav__link">
+    Cross-Origin Resource Sharing (CORS)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testen-mit-postman" class="md-nav__link">
+    Testen mit Postman
   </a>
   
 </li>
@@ -599,12 +685,90 @@
                   </a>
                 
                 
-                <h1 id="rest-server">REST-Server<a class="headerlink" href="#rest-server" title="Permanent link">&para;</a></h1>
-<hr />
-<p><strong><em>Wir machen das alles nochmal ganz in Ruhe von Anfang an, da wir mit unterschiedlichen Voraussetzungen gestartet sind. Das hatte ich leider nicht bedacht - tut mir leid! Wir legen ganz in Ruhe mit dem Backend in der Vorlesung am 26.5. los!</em></strong></p>
-<p><strong><em>Wichtig ist aber, dass Sie die <a href="../uebungen/#ubung-4-entwicklungs-infrastruktur-einrichten">Übung 4</a>  als Vorbereitung durchführen!</em></strong></p>
-<hr />
-<p>Ehe wir uns der <a href="https://developer.mozilla.org/de/docs/Web/API/IndexedDB_API">IndexedDB-API</a> zuwenden, erstellen wir zunächst eine "richtige" Datenbank für unsere Posts. Die Datenbank ist simpel, sie besteht aus einer einzigen Tabelle <code>posts</code>, welche vier Attribute enthält: <code>id</code>, <code>title</code>, <code>location</code> und <code>image</code>. Die <code>id</code> ist der Primärschlüssel und das <code>image</code> ist vom Typ <a href="https://tableplus.com/blog/2019/10/mysql-blob.html">longblob</a>. Es hätte wohl auch <code>mediumblob</code> ausgereicht, denn damit können immerhin Bilder von 16 MB Größe gespeichert werden. </p>
+                <h1 id="backend-rest-server">Backend - REST-Server<a class="headerlink" href="#backend-rest-server" title="Permanent link">&para;</a></h1>
+<p>Ehe wir uns der <a href="https://developer.mozilla.org/de/docs/Web/API/IndexedDB_API">IndexedDB-API</a> zuwenden, erstellen wir zunächst eine "richtige" Datenbank für unsere Posts. Für diese Datenbank stellen wir die Implementierung einer Schnittstelle bereit, so dass wir die wesentlichen Datenbankanfragen darüber ausführen können. Diese wesentlichen Datenbankfragen werden mit <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> abgekürzt, für **C**reate, **R**ead, **U**pdate und **D**elete. Das bedeutet, wir implementieren Funktionalitäten, mit denen wir einen neuen <code>post</code> in die Datenbank einfügen (<em>create</em>), aus der Datenbank auslesen (<em>read</em>), in der Datenbank aktualisieren (<em>update</em>) und aus der Datenbank löschen (<em>delete</em>) können. </p>
+<p>Die Schnittstelle, die wir implementieren, ist eine sogenannte <a href="https://www.redhat.com/de/topics/api/what-is-a-rest-api">REST-API</a>. <em>REST</em> steht für <a href="https://de.wikipedia.org/wiki/Representational_State_Transfer"><em>Representational State Transfer</em></a> und basiert auf einigen wenigen Prinzipien:</p>
+<ol>
+<li>Alles wird als eine <em>Ressource</em> betrachtet, z.B. <code>post</code>.</li>
+<li>Jede Ressource ist durch <em>URIs</em> (<em>Uniform Resource Identifiers</em>) eindeutig identifizierbar, z.B. <code>http://localhost/posts</code>.</li>
+<li>Es werden die <a href="https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol#HTTP-Anfragemethoden">Standard-HTTP-Methoden</a> verwendet, also <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>UPDATE</code>.  </li>
+<li>Ressourcen können in verschiedenen Formaten vorliegen, z.B. in <a href="https://html.spec.whatwg.org/multipage/">HTML</a>, <a href="https://www.w3.org/TR/xml/">XML</a>, <a href="https://jsonapi.org/format/">JSON</a>, ...</li>
+<li>Die Kommunikation ist <em>zustandslos</em>. Jede einzelne HTTP-Anfrage wird komplett isoliert bearbeitet. Es gibt keinerlei Anfragehistorie. </li>
+</ol>
+<p>Das bedeutet, wir erstellen ein Backend (einen REST-Server), an den HTTP-Anfragen mit der eindeutig identifizierbaren Ressource gestellt werden. Das Backend erstellt daraus die entsprechende SQL-Query. Das Resultat der Datenbankanfrage wird im <code>JSON</code>- oder <code>HTML</code>- oder <code>XML</code>- oder in einem anderen Format bereitsgestellt.</p>
+<p><img alt="restapi" src="../files/61_restapi.png" /></p>
+<p>Prinzipiell gibt es also ein <em>Mapping</em>  von HTTP-Anfragen auf SQL-Anfragen:</p>
+<table>
+<thead>
+<tr>
+<th>CRUD</th>
+<th>SQL</th>
+<th>HTTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>create</td>
+<td>INSERT</td>
+<td>POST</td>
+</tr>
+<tr>
+<td>read</td>
+<td>SELECT</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>update</td>
+<td>UPDATE</td>
+<td>PUT</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>DELETE</td>
+<td>DELETE</td>
+</tr>
+</tbody>
+</table>
+<p>Für das von uns hier zu erstellende Backend soll folgende REST-API umgesetzt werden: </p>
+<table>
+<thead>
+<tr>
+<th> Methode</th>
+<th> URL</th>
+<th> Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> GET</td>
+<td> /posts</td>
+<td> hole alle Datensätze</td>
+</tr>
+<tr>
+<td> GET</td>
+<td> /posts/11</td>
+<td>hole den Datensatz mit der id=11</td>
+</tr>
+<tr>
+<td> POST</td>
+<td> /posts</td>
+<td> füge einen neuen Datensatz hinzu</td>
+</tr>
+<tr>
+<td> PUT</td>
+<td> /posts/11</td>
+<td> ändere den Datensatz mit der id=11</td>
+</tr>
+<tr>
+<td> DELETE</td>
+<td> /posts/11</td>
+<td> lösche den Datensatz mit der id=11</td>
+</tr>
+</tbody>
+</table>
+<p>Dazu erstellen wir uns zunächst die Datenbank.</p>
+<h2 id="die-posts-datenbank">Die <code>posts</code>-Datenbank<a class="headerlink" href="#die-posts-datenbank" title="Permanent link">&para;</a></h2>
+<p>Die Datenbank ist simpel, sie besteht aus einer einzigen Tabelle <code>posts</code>, welche vier Attribute enthält: <code>id</code>, <code>title</code>, <code>location</code> und <code>image</code>. Die <code>id</code> ist der Primärschlüssel und das <code>image</code> ist vom Typ <a href="https://tableplus.com/blog/2019/10/mysql-blob.html">longblob</a>. Es hätte wohl auch <code>mediumblob</code> ausgereicht, denn damit können immerhin Bilder von 16 MB Größe gespeichert werden. </p>
 <p>Das SQL-Skript zur Einrichtung der Datenbank <code>posts</code> kommt hier: </p>
 <details><summary>posts.sql</summary><div class="highlight"><pre><span></span><code><span class="c1">-- phpMyAdmin SQL Dump</span>
 <span class="c1">-- version 5.0.2</span>
@@ -669,49 +833,498 @@
 </code></pre></div>
 </details>
 <p>Die Datei können Sie auch <a href="../files/posts.sql">hier herunterladen</a>, um sie dann unter <em>phpmyadmin</em> zu importieren. Sie ist aber sehr lang, da sie auch bereits zwei Einträge enthält und die <code>base64</code>-Kodierung der Bilder sehr groß ist.  </p>
-<h2 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h2>
-<p>Um mit der Datenbank zu kommunizieren, erstellen wir uns ein Backend - eine REST-API. Das kann <a href="https://github.com/jfreiheit/ikt_backend">hier</a> geklont werden. Wir besprechen im Folgenden einige Implementierung-Details. Im Backend werden folgende Endpunkte festgelegt:</p>
-<table>
-<thead>
-<tr>
-<th> Methode</th>
-<th> URL</th>
-<th> Bedeutung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> GET</td>
-<td> /posts</td>
-<td> hole alle Datensätze</td>
-</tr>
-<tr>
-<td> GET</td>
-<td> /posts/11</td>
-<td>hole den Datensatz mit der id=11</td>
-</tr>
-<tr>
-<td> POST</td>
-<td> /posts</td>
-<td> füge einen neuen Datensatz hinzu</td>
-</tr>
-<tr>
-<td> PUT</td>
-<td> /posts/11</td>
-<td> ändere den Datensatz mit der id=11</td>
-</tr>
-<tr>
-<td> DELETE</td>
-<td> /posts/11</td>
-<td> lösche den Datensatz mit der id=11</td>
-</tr>
-</tbody>
-</table>
-<p>Die <code>package.json</code> im Backend sieht so aus:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="mysql-auf-dem-studi-server">MySQL auf dem Studi-Server<a class="headerlink" href="#mysql-auf-dem-studi-server" title="Permanent link">&para;</a></h3>
+<p>Falls Sie MySQL vom Studi-Server verwenden, dann müssen Sie </p>
+<div class="highlight"><pre><span></span><code><span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_0900_ai_ci</span>
+</code></pre></div>
+<p>durch </p>
+<div class="highlight"><pre><span></span><code><span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_general_ci</span>
+</code></pre></div>
+<p>ersetzen! Dafür ist aber hier auch die entsprechende Datei zum <a href="../files/posts_StudiServer.sql">Download</a>. </p>
+<p>Wenn Sie den Studi-Server verwenden, können Sie in dieser Oberfläche eine neue Datenbank erstellen: </p>
+<p><img alt="studiserver" src="../files/59_studiserver.png" /></p>
+<p>Klicken Sie auf <code>Neue Datenbank erstellen</code> und geben Sie dann <code>posts</code> ein (der Name Ihrer Datenbank). Beachten Sie, dass daraus ein neuer Name für Ihre Datenbank durch die Studi-Server-Webanwendung erzeugt wird, nämlich <code>_s05xxx__posts</code>, also <code>Unterstrich</code> + <code>ihreMatrikelnummer</code> + <code>2 x Unterstrich</code> + <code>posts</code>. </p>
+<p>Gehen Sie dann auf <code>phpMyAdmin</code>, wählen links die Datenbank aus (<code>_s05xxx__posts</code>), klicken Sie dann auf den Reiter <code>Importieren</code> und laden <a href="../files/posts_StudiServer.sql">diese Datei</a> hoch. Klicken Sie <code>Ok</code>. Die Datenbank sollte dann mit zwei Einträgen befüllt sein. </p>
+<p><img alt="studiserver" src="../files/60_studiserver.png" /></p>
+<p>Die spätere Konfigurationsdatei für die Datenbank im Backend sieht auch anders aus. Wir schreiben es nur hier schonmal hin, weil es das hier behandelte Thema <code>Studi-Server</code> betrifft:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Konfiguration für die lokale Datenbank</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">HOST</span><span class="o">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="nx">USER</span><span class="o">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+    <span class="nx">PASSWORD</span><span class="o">:</span> <span class="s2">&quot;IhrPasswort&quot;</span><span class="p">,</span>
+    <span class="nx">DB</span><span class="o">:</span> <span class="s2">&quot;posts&quot;</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
+</div>
+<p>Studi_Server:
+Konfiguration für den Studi-Server"
+    <div class="highlight"><pre><span></span><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">HOST</span><span class="o">:</span> <span class="s2">&quot;db.f4.htw-berlin.de&quot;</span><span class="p">,</span>
+    <span class="nx">USER</span><span class="o">:</span> <span class="s2">&quot;s05xxx&quot;</span><span class="p">,</span>
+    <span class="nx">PASSWORD</span><span class="o">:</span> <span class="s2">&quot;IhrPassword&quot;</span><span class="p">,</span>
+    <span class="nx">DB</span><span class="o">:</span> <span class="s2">&quot;_s05xxx__posts&quot;</span>
+<span class="p">};</span>
+</code></pre></div></p>
+<p>Wir haben nun eine Datenbank <code>posts</code> mit einer Tabelle <code>posts</code>, die 4 Attribute (<code>id</code>, <code>title</code>, <code>location</code> und <code>image</code>)besitzt und 2 Einträge enthält. </p>
+<h2 id="das-backend-der-rest-server">Das Backend - der REST-Server<a class="headerlink" href="#das-backend-der-rest-server" title="Permanent link">&para;</a></h2>
+<p>Wir erzeugen uns das Backend mithilfe von <a href="https://nodejs.org/en/">Node.js</a>. Insbesondere verwenden wir dabei einige Module, die uns die Arbeit mit HTTP und MySQl erleichtern. Dazu gehört zunächst das Framework <a href="https://expressjs.com/de/">Express</a>, welches uns einen HTTp_Server zur Verfügung stellt und darüber hinaus noch einige Funktionalitäten, wie z.B. <em>Routing</em>. </p>
+<h4 id="nodejs-projekt-erstellen-und-express-importieren">Node.js-Projekt erstellen und Express importieren<a class="headerlink" href="#nodejs-projekt-erstellen-und-express-importieren" title="Permanent link">&para;</a></h4>
+<p>Wir erstellen uns zunächst einen Ordner <code>backend</code> und wechseln in diesen Ordner.</p>
+<div class="highlight"><pre><span></span><code>mkdir backend
+<span class="nb">cd</span> backend
+</code></pre></div>
+<p>Wir initialisieren das <code>Node.js</code>-Projekt, um uns eine <code>package.json</code> erstellen zu lassen, in der die Paketabhängigkeiten verwaltet werden:</p>
+<div class="highlight"><pre><span></span><code>npm init
+</code></pre></div>
+<p>Sie können im Prinzip alle Fragen mit <code>Enter</code> beantworten. Ich habe als <code>entry point</code> hier bereits <code>server.js</code> (anstelle von <code>index.js</code>) gewählt. Das können wir aber auch gleich noch in der <code>package.json</code> ändern. Hier die Ausgabe auf der Kommandozeile:</p>
+<div class="highlight"><pre><span></span><code>This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See <span class="sb">`</span>npm <span class="nb">help</span> init<span class="sb">`</span> <span class="k">for</span> definitive documentation on these fields
+and exactly what they <span class="k">do</span>.
+
+Use <span class="sb">`</span>npm install &lt;pkg&gt;<span class="sb">`</span> afterwards to install a package and
+save it as a dependency <span class="k">in</span> the package.json file.
+
+Press ^C at any <span class="nb">time</span> to quit.
+package name: <span class="o">(</span>backend<span class="o">)</span> 
+version: <span class="o">(</span><span class="m">1</span>.0.0<span class="o">)</span> 
+description: REST-Server für posts-Datenbank
+entry point: <span class="o">(</span>index.js<span class="o">)</span> server.js
+<span class="nb">test</span> command: 
+git repository: 
+keywords: IKT, PWA, REST-API, Backendend, posts 
+author: J. Freiheit
+license: <span class="o">(</span>ISC<span class="o">)</span> 
+About to write to /Users/jornfreiheit/Sites/PWA/backend/package.json:
+
+<span class="o">{</span>
+  <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;backend&quot;</span>,
+  <span class="s2">&quot;version&quot;</span>: <span class="s2">&quot;1.0.0&quot;</span>,
+  <span class="s2">&quot;description&quot;</span>: <span class="s2">&quot;REST-Server für posts-Datenbank&quot;</span>,
+  <span class="s2">&quot;main&quot;</span>: <span class="s2">&quot;server.js&quot;</span>,
+  <span class="s2">&quot;scripts&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;test&quot;</span>: <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="o">}</span>,
+  <span class="s2">&quot;keywords&quot;</span>: <span class="o">[</span>
+    <span class="s2">&quot;IKT&quot;</span>,
+    <span class="s2">&quot;PWA&quot;</span>,
+    <span class="s2">&quot;REST-API&quot;</span>,
+    <span class="s2">&quot;Backendend&quot;</span>,
+    <span class="s2">&quot;posts&quot;</span>
+  <span class="o">]</span>,
+  <span class="s2">&quot;author&quot;</span>: <span class="s2">&quot;J. Freiheit&quot;</span>,
+  <span class="s2">&quot;license&quot;</span>: <span class="s2">&quot;ISC&quot;</span>
+<span class="o">}</span>
+
+
+Is this OK? <span class="o">(</span>yes<span class="o">)</span> 
+</code></pre></div>
+<p>Bstätigen Sie mit <code>Enter</code>. Nun öffnen wir das <code>backend</code>-Projekt in einer IDE. Das gesamte Projekt enthält bis jetzt nur die <code>package.json</code>-Datei. Tragen Sie dort (falls es nicht bereits so konfiguriert ist) für die Eigenschaft <code>"main"</code> den Wert <code>"server.js"</code> ein:</p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">package.json</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;backend&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;REST-Server für posts-Datenbank&quot;</span><span class="p">,</span>
+<span class="hll">  <span class="nt">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;server.js&quot;</span><span class="p">,</span>
+</span>  <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;IKT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PWA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;REST-API&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Backendend&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;posts&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;J. Freiheit&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;ISC&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Nun installieren wir <code>Express</code> und geben dazu im Terminal</p>
+<div class="highlight"><pre><span></span><code>npm install express
+</code></pre></div>
+<p>ein. Wenn Sie sich nun die <code>package.json</code> erneut anschauen, stellen Sie fest, dass darin nun eine Paketabhängigkeit zum <code>express</code>-Paket konfiguriert ist:</p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">package.json</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;backend&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;REST-Server für posts-Datenbank&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;server.js&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;IKT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PWA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;REST-API&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Backendend&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;posts&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;J. Freiheit&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
+<span class="hll">  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class="hll">    <span class="nt">&quot;express&quot;</span><span class="p">:</span> <span class="s2">&quot;^4.17.1&quot;</span>
+</span><span class="hll">  <span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h4 id="serverjs-erstellen-und-implementieren">server.js erstellen und implementieren<a class="headerlink" href="#serverjs-erstellen-und-implementieren" title="Permanent link">&para;</a></h4>
+<p>Nun erzeugen wir uns im Verzeichnis <code>backend</code> eine Datei <code>server.js</code>. Diese Datei ist der Einstiegspunkt unseres Backends und wird ausgeführt, wenn wir das <code>backend</code>-Projekt ausführen. Die <code>server.js</code> implementieren wir zunächst wie folgt:</p>
+<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">server.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="mf">3000</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;HELLO FIW!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server started and listening on port </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb"> ...`</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Das bedeutet, wir importieren <code>express</code> (Zeile <code>1</code>), erzeugen uns davon eine Objekt und speichern dieses in der Variablen <code>app</code> (Zeile <code>3</code>). Wir legen in einer Konstanten <code>PORT</code> die Portnummer <code>3000</code> fest(Zeile <code>4</code> - die Portnummer können Sie wählen). Das <code>backend</code> ist somit unter <code>http://localhost:3000</code> verfügbar. Wenn wir diese URL aufrufen, dann wird ein <code>request</code> ausgelöst, den wir hier mit <code>Hello FIW!</code> als <code>response</code> beantworten (Zeilen <code>6-8</code>). Das eigentliche Starten des Webservers erfolgt in den Zeilen <code>10-16</code>.</p>
+<h4 id="typemodule-in-packagejson-einfugen">"type":"module" in package.json einfügen<a class="headerlink" href="#typemodule-in-packagejson-einfugen" title="Permanent link">&para;</a></h4>
+<p>In Zeile <code>1</code> in der <code>server.js</code> haben wir das <code>express</code>-Paket mittels </p>
+<div class="highlight"><pre><span></span><code>import express from <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+</code></pre></div>
+<p>importiert. Dies entspricht der "neuen" Syntax zum Importieren eines <code>ES6</code>-Modules (<em>ES6</em> - ECMAScript 6). "Früher" hat man stattdessen </p>
+<div class="highlight"><pre><span></span><code>const <span class="nv">express</span> <span class="o">=</span> require<span class="o">(</span><span class="s1">&#39;express&#39;</span><span class="o">)</span><span class="p">;</span>
+</code></pre></div>
+<p>geschrieben. Allerdings erfordert diese "neue" Syntax eine Erweiterung in der <code>package.json</code>:</p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">package.json</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;backend&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;REST-Server für posts-Datenbank&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;server.js&quot;</span><span class="p">,</span>
+<span class="hll">  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;module&quot;</span><span class="p">,</span>
+</span>  <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;IKT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PWA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;REST-API&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Backendend&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;posts&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;J. Freiheit&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;express&quot;</span><span class="p">:</span> <span class="s2">&quot;^4.17.1&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h4 id="starten-des-projektes-und-installation-von-nodemon">Starten des Projektes und Installation von nodemon<a class="headerlink" href="#starten-des-projektes-und-installation-von-nodemon" title="Permanent link">&para;</a></h4>
+<p>Das Projekt lässt sich nun starten. Wir geben dazu im Terminal im <code>backend</code>-Ordner</p>
+<div class="highlight"><pre><span></span><code>node server.js
+</code></pre></div>
+<p>ein. Im Terminal erscheint </p>
+<div class="highlight"><pre><span></span><code>Server started and listening on port <span class="m">3000</span> ...
+</code></pre></div>
+<p>und wenn Sie im Browser die URL <code>http://localhost:3000/</code> eingeben, wird dort</p>
+<div class="highlight"><pre><span></span><code>HELLO FIW!
+</code></pre></div>
+<p>angezeigt. </p>
+<p>Wann immer wir jetzt jedoch etwas an der Implementierung ändern, müssen wir im Terminal zunächst den Webserver mit </p>
+<div class="highlight"><pre><span></span><code>Strg-C      // bzw. Control-C
+</code></pre></div>
+<p>stoppen, um ihn dann wieder mit <code>node server.js</code> zu starten. Um das zu umgehen, gibt es das Paket <a href="https://www.npmjs.com/package/nodemon">nodemon</a>. Da es nur sinnvoll während der Entwicklung eingesetzt werden kann (und sollte), installieren wir es als eine <em>development dependency</em>:</p>
+<div class="highlight"><pre><span></span><code>npm install --save-dev nodemon
+</code></pre></div>
+<p>Die <code>package.json</code> sieht daraufhin so aus:</p>
+<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">package.json</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;backend&quot;</span><span class="p">,</span>
     <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Einfaches Backend für IKT-PWA&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;REST-Server für posts-Datenbank&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;server.js&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;module&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;IKT&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;PWA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;REST-API&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Backendend&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;posts&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;J. Freiheit&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;express&quot;</span><span class="p">:</span> <span class="s2">&quot;^4.17.1&quot;</span>
+    <span class="p">},</span>
+<span class="hll">    <span class="nt">&quot;devDependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class="hll">        <span class="nt">&quot;nodemon&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.0.7&quot;</span>
+</span><span class="hll">    <span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Zur Verwendung von <code>nodemon</code> fügen wir in die <code>package.json</code> unter <code>"scripts"</code> noch die Eigenschaft <code>watch</code> (frei gewählt) und den dazugehörigen Wert <code>nodemon server.js</code> ein:</p>
+<div class="tabbed-set" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">package.json</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;backend&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;REST-Server für posts-Datenbank&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;server.js&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;module&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="hll">        <span class="nt">&quot;watch&quot;</span><span class="p">:</span> <span class="s2">&quot;nodemon ./server.js&quot;</span><span class="p">,</span>
+</span>        <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;IKT&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;PWA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;REST-API&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Backendend&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;posts&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;J. Freiheit&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;express&quot;</span><span class="p">:</span> <span class="s2">&quot;^4.17.1&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;devDependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;nodemon&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.0.7&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Nun lässt sich die Anwendung mithilfe von <code>nodemon</code> per </p>
+<div class="highlight"><pre><span></span><code>npm run watch
+</code></pre></div>
+<p>starten und muss auch nicht mehr gestoppt und neu gestartet werden, wenn Änderungen an der Implementierungen durchgeführt wurden. Die Ausgabe im Terminal nach Eingabe von <code>npm run watch</code> ist ungefähr so:</p>
+<div class="highlight"><pre><span></span><code>&gt; backend@1.0.0 watch
+&gt; nodemon ./server.js
+
+<span class="o">[</span>nodemon<span class="o">]</span> <span class="m">2</span>.0.7
+<span class="o">[</span>nodemon<span class="o">]</span> to restart at any time, enter <span class="sb">`</span>rs<span class="sb">`</span>
+<span class="o">[</span>nodemon<span class="o">]</span> watching path<span class="o">(</span>s<span class="o">)</span>: *.*
+<span class="o">[</span>nodemon<span class="o">]</span> watching extensions: js,mjs,json
+<span class="o">[</span>nodemon<span class="o">]</span> starting <span class="sb">`</span>node ./server.js<span class="sb">`</span>
+Server started and listening on port <span class="m">3000</span> ...
+</code></pre></div>
+<h4 id="konfiguration-der-datenbank">Konfiguration der Datenbank<a class="headerlink" href="#konfiguration-der-datenbank" title="Permanent link">&para;</a></h4>
+<p>In diesem Abschnitt stellen wir die Verbindung zwischen <code>backend</code> und Datenbank her. Dazu ist es erforderlich, </p>
+<ol>
+<li>das <code>mysql</code>-Paket zu importieren (es enthält Funktionalitäten für die Verbindung mit einer MySQL-Datenbank sowie für die SQL-Anfragen),</li>
+<li>die Zugangsdaten zu konfigurieren (Nutzer, Datenbankhost, Passwaort, Name der Datenbank),</li>
+<li>die eigentliche Verbindung herzustellen.  </li>
+</ol>
+<p><strong><em>Wir werden diese <code>backend</code>-Implementierung bewusst flach halten und verzichten deshalb auf strukturierende Ordner. Es wäre aber sehr sinnvoll und ist auch ratsam, hier unterschiedliche Ordner einzufügen (z.B. <code>config</code>, <code>database</code>, <code>model</code> usw.).</em></strong></p>
+<p>Wir erzeugen uns im <code>backend</code>-Ordner eine <code>db.config.js</code> (da diese Datei auch Ihr Passowrt enthält, können Sie sie auch außerhalb des Projektes anlegen oder eine separate Passwortdatei außerhalb des Projektes):</p>
+<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">db.config.js</label><div class="tabbed-content">
+<div class="codehilite"><pre><span></span><code>/*
+ * eine der beiden folgenden dbConfig-Objekte muessen auskommentiert werden!
+ */
+
+/*
+ * Konfigurationsdaten fuer die Verbindung mit localhost
+ */
+export const dbConfig = {
+    HOST: &quot;localhost&quot;,
+    USER: &quot;root&quot;,
+    PASSWORD: &quot;IhrPasswort&quot;,
+    DB: &quot;posts&quot;
+};
+
+/*
+ * Konfigurationsdaten fuer die Verbindung mit studi.f4.htw-berlin.de
+ */
+/*
+exports const dbConfig = {
+    HOST: &quot;db.f4.htw-berlin.de&quot;,
+    USER: &quot;s05xxx&quot;,
+    PASSWORD: &quot;IhrPassword&quot;,
+    DB: &quot;_s05xxx__posts&quot;
+};
+
+ */
+</code></pre></div>
+
+</div>
+</div>
+<p>Nun erstellen wir noch ein Skript <code>db.connection.js</code>, mit dem wir die eigentliche Verbindung zur Datenbank herstellen. Dazu installieren wir zunächst das <a href="https://www.npmjs.com/package/mysql">mysql</a>-Paket. Wir geben im <code>backend</code>-Ordner im Terminal </p>
+<div class="highlight"><pre><span></span><code>npm install mysql
+</code></pre></div>
+<p>ein. Die <code>package.json</code> wird daraufhin entsprechend erweitert:</p>
+<div class="tabbed-set" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">package.json</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;backend&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;REST-Server für posts-Datenbank&quot;</span><span class="p">,</span>
     <span class="nt">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;server.js&quot;</span><span class="p">,</span>
     <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;module&quot;</span><span class="p">,</span>
     <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -721,27 +1334,80 @@
     <span class="nt">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&quot;IKT&quot;</span><span class="p">,</span>
         <span class="s2">&quot;PWA&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;REST&quot;</span>
+        <span class="s2">&quot;REST-API&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Backendend&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;posts&quot;</span>
     <span class="p">],</span>
     <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;J. Freiheit&quot;</span><span class="p">,</span>
     <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
     <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;cors&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.8.5&quot;</span><span class="p">,</span>
         <span class="nt">&quot;express&quot;</span><span class="p">:</span> <span class="s2">&quot;^4.17.1&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;mysql&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.18.1&quot;</span>
-    <span class="p">},</span>
+<span class="hll">        <span class="nt">&quot;mysql&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.18.1&quot;</span>
+</span>    <span class="p">},</span>
     <span class="nt">&quot;devDependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;nodemon&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.0.7&quot;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Wir verwenden also <a href="https://expressjs.com/">Express.js</a> um eine API zum Webserver zu haben, <a href="https://www.npmjs.com/package/cors">CORS</a>, um <em>cross-origin resource sharing</em>  zu ermöglichen und den <a href="https://www.npmjs.com/package/mysql">mysql</a>-Treiber, um mit der MySQl-datenbank zu kommunizieren. Einige von Ihnen vermissen eventuell das <a href="https://www.npmjs.com/package/body-parser">body-parser</a>-Modul. Das soll jedoch nach und nach durch die gleichen Funktionalitäten in <code>express.js</code> ersetzt werden. Deshalb setzen wir es hier auch nicht mehr ein. </p>
-<p>Unter <code>"scripts"</code> ist für die Eigenschaft <code>watch</code> (frei gewählt) der Wert <code>nodemon server.js</code> beschrieben, so dass sich die Anwendung mithilfe von <code>nodemon</code> per </p>
-<p><code>npm run watch</code> (vorher noch <code>npm install</code>, um alle Paketabhängigkeiten zu installieren)</p>
-<p>starten lässt.</p>
-<h3 id="serverjs"><code>server.js</code><a class="headerlink" href="#serverjs" title="Permanent link">&para;</a></h3>
-<p>Das "Startskript" ist <code>server.js</code> und darin definieren wir die Endpunkte:</p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">server.js</label><div class="tabbed-content">
+</td></tr></table>
+</div>
+</div>
+<p>Die <code>db.connection.js</code> sieht dann so aus:</p>
+<div class="tabbed-set" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">db.connection.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">mysql</span> <span class="nx">from</span> <span class="s1">&#39;mysql&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">dbConfig</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./db.config.js&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">connection</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">({</span>
+    <span class="nx">host</span><span class="o">:</span> <span class="nx">dbConfig</span><span class="p">.</span><span class="nx">HOST</span><span class="p">,</span>
+    <span class="nx">user</span><span class="o">:</span> <span class="nx">dbConfig</span><span class="p">.</span><span class="nx">USER</span><span class="p">,</span>
+    <span class="nx">password</span><span class="o">:</span> <span class="nx">dbConfig</span><span class="p">.</span><span class="nx">PASSWORD</span><span class="p">,</span>
+    <span class="nx">database</span><span class="o">:</span> <span class="nx">dbConfig</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="nx">connection</span><span class="p">.</span><span class="nx">connect</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Connected with database ... &quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Wir importieren in Zeile <code>1</code> das <code>mysql</code>-Modul und wir importieren in Zeile <code>2</code> die soeben festgelegten Zugangsdaten zur Datenbank. Mithilfe der <code>createConnection()</code>-Funktion aus dem <code>mysql</code>-Paket werden diese Zugangsdaten eingelesen (Zeilen <code>4-9</code>). Die eigentliche Verbindung zur Datenbank wird dann mit <code>connect()</code>-Funktion des <code>mysql</code>-Paketes hergestellt. </p>
+<p>Ob dieses Skript tatsächlich funktioniert, könnten wir ausprobieren, indem wir im Terminal den Befehl </p>
+<div class="highlight"><pre><span></span><code>node db.connection.js
+</code></pre></div>
+<p>eingeben. Es sollte </p>
+<div class="highlight"><pre><span></span><code>Connected with database ... 
+</code></pre></div>
+<p>ausgegeben werden. </p>
+<h4 id="implementieren-der-datenbankanfragen">Implementieren der Datenbankanfragen<a class="headerlink" href="#implementieren-der-datenbankanfragen" title="Permanent link">&para;</a></h4>
+<p>Wir haben nun eine Verbindung zur Datenbank hergestellt. Nun wollen wir auch Anfragen an die Datenbank stellen. Für Anfragen an die Datenbank stellt das <code>mysql</code>-Paket die Funktion <code>query()</code> zur Verfügung. Diese Funktion bekommt als ersten Parameter die entsprechende SQL-Anfrage übergeben. Die allgemeine Syntax der <code>query()</code>-Funktion ist wie folgt:</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">sqlString</span><span class="p">,</span> <span class="nx">values</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span>
+</code></pre></div>
+<p>Der erste Parameter ist also der <code>sqlString</code>, z.B. <code>"DELETE FROM posts"</code>, was alle Einträge in der <code>posts</code>-Tabelle löscht. Häufig enthalten diese SQL-Anfragen aber Platzhalter für Argumente, also z.B. <code>"DELETE FROM posts WHERE id = ?"</code>. Das <code>?</code> steht für einen konkreten Wert für eine <code>id</code>. Diese Werte werden bei <code>values</code> angegeben, wobei es sich bei <code>values</code> um ein Array handelt. Die <code>callback</code>-Funktion kann drei Parameter enthalten, typischerweise werden aber nur die ersten beiden <code>error</code> und <code>results</code> abgefragt. <code>error</code> gibt den Fehler zurück, falls er bei der Anfrage erzeugt wird. <code>result</code> gibt das Resultat der SQL-Anfrage zurück, also entweder die angefragten Datensätze oder die Anzahl der Zeilen, die von der Anfrage betroffen waren. </p>
+<p>Wir implementieren folgende Anfragen:</p>
+<ul>
+<li><code>sql.query("INSERT INTO posts SET ?", newPost, (err, res) =&gt; {});</code> fügt <code>newPost</code> in die Tabelle <code>posts</code> ein,</li>
+<li><code>sql.query("SELECT * FROM posts", (err, res) =&gt; {});</code> fragt alle Einträge aus der Tabelle <code>posts</code> ab,</li>
+<li><code>sql.query("UPDATE posts SET ? where id= ?", [post, id], (err, res) =&gt; {});</code> aktualisiert den Eintrag mit der <code>id==id</code> und verwendet dazu die neuen Daten <code>post</code>,</li>
+<li><code>sql.query("DELETE FROM posts WHERE id = ?", [id], (err, res) =&gt; {});</code> löscht den Eintrag mit der <code>id==id</code>,</li>
+<li><code>sql.query("DELETE FROM posts", (err, res) =&gt; {});</code> fügt <code>newPost</code> in die Tabelle <code>posts</code> ein,</li>
+</ul>
+<p>Diese Anfragen implmentieren wir in einem JavaScript-Objekt, das wir <code>PostService</code> nennen und dessen Eigenschaften JavaScript-Funktionen sind. Dazu erstellen wir uns eine Datei <code>db.sqlqueries.js</code> mit folgendem Inhalt:</p>
+<div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">db.sqlqueries.js</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -769,44 +1435,90 @@
 25
 26
 27
-28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">cors</span> <span class="nx">from</span> <span class="s1">&#39;cors&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">path</span> <span class="nx">from</span> <span class="s1">&#39;path&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">PostController</span> <span class="nx">as</span> <span class="nx">postController</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./controller/posts.controller.js&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">fileURLToPath</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;url&#39;</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">__filename</span> <span class="o">=</span> <span class="nx">fileURLToPath</span><span class="p">(</span>
-    <span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">__dirname</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">dirname</span><span class="p">(</span><span class="nx">__filename</span><span class="p">);</span>
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">connection</span> <span class="nx">as</span> <span class="nx">sql</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./db.connection.js&#39;</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
-<span class="kd">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mf">3000</span><span class="p">;</span>
-
-<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">());</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span><span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span><span class="p">,</span> <span class="nx">extended</span><span class="o">:</span> <span class="kc">true</span><span class="p">}));</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span><span class="p">}));</span>
-
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">__dirname</span><span class="si">}</span><span class="sb">/views/index.html`</span><span class="p">));</span>
-<span class="p">});</span>
-
-<span class="c1">// Endpunkte definieren</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">postController</span><span class="p">.</span><span class="nx">create</span><span class="p">);</span> <span class="c1">// C</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">postController</span><span class="p">.</span><span class="nx">readAll</span><span class="p">);</span> <span class="c1">// R (all)</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">postController</span><span class="p">.</span><span class="nx">readOne</span><span class="p">);</span> <span class="c1">// R (one)</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">postController</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span> <span class="c1">// U</span>
-<span class="nx">app</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">postController</span><span class="p">.</span><span class="k">delete</span><span class="p">);</span> <span class="c1">// D</span>
-
-<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server listening on port </span><span class="si">${</span><span class="nx">port</span><span class="si">}</span><span class="sb"> ...`</span><span class="p">));</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">PostService</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">create</span><span class="o">:</span> <span class="k">async</span><span class="p">(</span><span class="nx">newPost</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;INSERT INTO posts SET ?&quot;</span><span class="p">,</span> <span class="nx">newPost</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">result</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+            <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">postId</span><span class="p">,</span> <span class="p">...</span><span class="nx">newPost</span> <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="nx">findById</span><span class="o">:</span> <span class="k">async</span><span class="p">(</span><span class="nx">postId</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span>
+            <span class="sb">`SELECT * FROM posts WHERE id = ?`</span><span class="p">,</span> <span class="p">[</span><span class="nx">postId</span><span class="p">],</span>
+            <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">result</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+                <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">res</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+                <span class="k">else</span> <span class="nx">result</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;post not found&quot;</span> <span class="p">},</span> <span class="kc">null</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">getAll</span><span class="o">:</span> <span class="k">async</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM posts&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+            <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="nx">updateById</span><span class="o">:</span> <span class="k">async</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">post</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span>
+            <span class="s2">&quot;UPDATE posts SET ? where id= ?&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">post</span><span class="p">,</span> <span class="nx">id</span><span class="p">],</span>
+            <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+                <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">affectedRows</span> <span class="o">==</span> <span class="mf">0</span><span class="p">)</span> <span class="nx">result</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;post not found&quot;</span> <span class="p">},</span> <span class="kc">null</span><span class="p">);</span>
+                <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">id</span><span class="p">,</span> <span class="p">...</span><span class="nx">post</span> <span class="p">});</span>
+            <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">remove</span><span class="o">:</span> <span class="k">async</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;DELETE FROM posts WHERE id = ?&quot;</span><span class="p">,</span> <span class="nx">id</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">affectedRows</span> <span class="o">==</span> <span class="mf">0</span><span class="p">)</span> <span class="nx">result</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;post not found&quot;</span> <span class="p">},</span> <span class="kc">null</span><span class="p">);</span>
+            <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="nx">removeAll</span><span class="o">:</span> <span class="k">async</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;DELETE FROM posts&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+            <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+<span class="p">};</span>  
 </code></pre></div>
 </td></tr></table>
 </div>
 </div>
-<p>Als Portnummer wird <code>3000</code> (Zeile <code>11</code>) vereinbart. In Zeilen <code>22-26</code> werden die Endpunkte definiert. In Zeile <code>28</code> wird das Backend gestartet. Beachten Sie die Zeilen <code>14</code> und <code>15</code>: Unsere Datensätze sind aufgrund der übertragenen Bilder sehr groß. Ohne die Festlegung eines erhöhten Limits (hier auf <code>20MB</code>), würden wir Fehler des Backends (<code>PayloadTooLargeError</code>) erhalten, wenn wir unsere großen Datensätze versuchen, zu übertragen ( <code>request entity too large when trying to POST ...</code>).</p>
-<p>Die Zeilen <code>5-8</code> brauchen wir nur, weil wir in unserem Backend auch eine <code>View</code> eingebaut haben ( <code>views/index.html</code>). Diese ist nur zum Ausprobieren/Debuggen. Um darauf zugreifen zu können, benötigt man den Pfad der Anwendung ( <code>__dirname</code>). Leider gibt es seit <code>node.js v16.x</code> kein <code>__dirname</code> mehr (siehe <a href="https://nodejs.org/api/esm.html#esm_no_filename_or_dirname">hier</a>), deshalb ist dieser <em>work around</em> notwendig. Ohne ein <em>View</em>  können aber die Zeilen <code>5-8</code> und <code>17-19</code> entfallen. </p>
-<p>Beachten Sie auch, dass sich seit <code>ECMA script 6 (ES6)</code> das Modul-Konzept von TypeScript geändert hat, so dass anstelle von <code>const ... require()</code> nun <code>import ... from ...</code> verwendet werden soll (siehe <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/import">import</a>). In Zeile <code>4</code> wird der <code>PostController</code> importiert (wird in <code>server.js</code> als <code>postController</code> verwendet). Für jeden Endpunkt wird eine Funktion im <code>PostController</code> aufgerufen.</p>
-<h3 id="controllerpostscontrollerjs"><code>controller/posts.controller.js</code><a class="headerlink" href="#controllerpostscontrollerjs" title="Permanent link">&para;</a></h3>
-<p>Der <code>PostController</code> wird hier als ein JavaScript-Objekt definiert, dessen Eigenschaften jeweils Funktionen sind. Die Funktionen rufen jeweils Funktionen aus dem <code>PostService</code> auf.</p>
-<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">controller/posts.controller.js</label><div class="tabbed-content">
+<p>Es werden also sechs Funktionen definiert, <code>create()</code>, <code>findById()</code>, <code>getAll()</code>, <code>updateById()</code>, <code>remove()</code> und <code>removeAll()</code>. Für die Funktionen werden die entsprechenden, oben aufgelisteten, SQL-Anfragen ausgeführt. Einige Besonderheiten bei den Resultaten sind noch erwähnenswert:</p>
+<ul>
+<li>Die <code>INSERT INTO...</code>-Anfrage liefert als Resultat den gesamten eingefügten Datensatz zurück (Zeile <code>7</code>). Die <code>id</code> wird jedoch automatisch durch die Datenbank vergeben (<em>auto-inkrement</em>). Das bedeutet, <code>newPost</code> enthält die Daten für <code>title</code>, <code>location</code> und <code>image</code> und das Resultat enthält darüber hinaus die neue <code>id</code>. Die Syntax <code>...newPost</code> steht für den <a href="https://stackoverflow.com/questions/31048953/what-do-these-three-dots-in-react-do">spread operator</a> und setzt dort im Prinzip das <code>newPost</code>-Objekt ein, separiert in die key-value-Paare. </li>
+<li>Die <code>SELECT * FROM posts WHERE id = ?</code>-Anfrage hat drei mögliche Antworten (Zeilen <code>14-16</code>). Entweder einen Fehler oder der Datensatz wird nicht gefunden, weil es die übergebene <code>id</code> nicht gibt, oder den gefundenen Datensatz. <code>SELECT * FROM</code>-Anfragen leifern ein Array zurück. Da die <code>SELECT * FROM posts WHERE id = ?</code> maximal genau einen Datensatz zurückgeben kann, greifen wir direkt auf <code>res[0]</code> zu (Zeile <code>15</code>). </li>
+<li>In den anderen Funktionen finden sich teilweise Kombinationen aus den beiden zuvor genannten Beispielen. </li>
+</ul>
+<h4 id="implementieren-des-controllers">Implementieren des Controllers<a class="headerlink" href="#implementieren-des-controllers" title="Permanent link">&para;</a></h4>
+<p>Die Datenbankanfragen erwarten unterschiedliche Werte für die jeweiligen parameter. Für manche Anfragen muss eine <code>id</code> übergeben werden, für andere ein <code>post</code>-Objekt mit Werten für <code>title</code>, <code>location</code> und <code>image</code>, die <code>updateById()</code>-Funktion benötigt beides und die <code>removeAll()</code>-Funktion nichts davon. Diese unterschiedlichen Werte müssen erst aus den Anfragen extrahiert werden. Dazu dient uns der <em>Controller</em>, den wir nun implementieren. Er stellt die Schnittstelle zwischen den REST-API-Anfragen und den Datenbankanfragen dar. </p>
+<p>Wir erzeugen uns eine <code>posts.controller.js</code> mit folgendem Inhalt:</p>
+<div class="tabbed-set" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">posts.controller.js</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -876,7 +1588,7 @@
 67
 68
 69
-70</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">PostService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../service/posts.service.js&#39;</span><span class="p">;</span>
+70</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">PostService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./db.sqlqueries.js&#39;</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">PostController</span> <span class="o">=</span> <span class="p">{</span>
 
@@ -950,12 +1662,211 @@
 </td></tr></table>
 </div>
 </div>
-<p>Jede Funktion verarbeitet einen <em>Request</em> <code>req</code> und erzeugt eine <em>Response</em> <code>res</code>. Sowohl für die <code>create</code>-Funktion (Zeilen <code>15-29</code>) als auch für die <code>update</code>-Funktion (Zeilen <code>41-59</code>) werden Daten im <code>body</code> übergeben, die entweder in die Datenbank eingefügt oder in der Datenbank aktualisiert werden sollen. Deshalb wird in beiden Funktionen geprüft, ob der <code>body</code> des <em>Requests</em> nicht leer ist (wenn doch, wird <code>status 400</code> mit der Meldung <code>Content can not be empty!</code> zurückgemeldet). </p>
-<p>Jede Funktion liefert den <em>Response</em> der jeweiligen <code>PostService</code>-Funktion (<code>result</code>) als ein JSON zurück (<code>res.json(result);</code>). Sollte die jeweilige <code>PostService</code>-Funktion einen Fehler zurückmelden (<code>err</code>), wird als <code>status 500</code> und eine entsprechende Fehlermeldung gesendet. </p>
-<p>Noch eine Anmerkung zur <code>import</code>-Anweisung in Zeile <code>1</code>. Der <code>PostService</code> liefert keinen <code>default</code>-Export, sondern eine benannte Konstante (<code>export const PostService =</code>). Diese wird als <code>Typ</code> importiert und deshalb erfolgt der Import mithilfe von geschweiften Klammern (<code>{ PostService }</code>). Nur, wenn ein <code>default</code>-Export durchgeführt wird (also <em>ananoym</em>), kann der Import ohne die geschweiften Klammern durchgeführt werden (siehe dazu z.B. <a href="https://stackoverflow.com/a/54591244">hier</a>). </p>
-<h3 id="servicepostsservicejs"><code>service/posts.service.js</code><a class="headerlink" href="#servicepostsservicejs" title="Permanent link">&para;</a></h3>
-<p>Im <code>PostService</code> definieren wir die konkreten Datenbankzugriffe. Wie beim <code>PostController</code>, erstellen wir auch wieder ein JavaScript-Objekt, dessen Eigenschaften die Funktionen sind, welche die Zugriffe auf dei Datenbank definieren. In jeder Funktion wird die Verbindung zur Datenbank verwendet (<code>sql.query()</code>). </p>
-<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">service/posts.service.js</label><div class="tabbed-content">
+<p>Die grundsätzliche Idee ist zunächst die gleiche, wie bei <code>PostService</code>. Wir erstellen wiederum eine JavaScript-Objekt, dessen Eigenschaften Funktionen sind. In den Funktionen werden dann die entsprechenden Funktionen aus dem <code>PostService</code> aufgerufen. Die prinzipielle Idee des <code>PostControllers</code> ist, neben dem Aufruf der jeweiligen Funktion von <code>PostService</code> den Funktionsaufruf so vorzubereiten, dass die entsprechenden Daten korrekt und vollständig übergeben werden. Außerdem werden die resultate der Datenbank jeweils als JSON zurückgesendet bzw. werden entsprechende Fehler gesendet, die durch die Auswertungen der Fehler aus dem <code>postService</code> generiert werden.</p>
+<p>Betrachten wir einige ausgewählte Funktionen aus dem <code>PostController</code>:</p>
+<ul>
+<li>Die <code>readAll()</code>-Funktion ruft die <code>getAll()</code>-Funktion, d.h. es sollen alle Datensätze aus der <code>posts</code>-tabelle zurückgeliefert werden. Liefert die <code>getAll()</code>-Funktionen einen Fehler, dann schickt die <code>readAll()</code>-Funktionen eine Fehlermeldung mit Statuscode <code>500</code> (siehe auch <a href="https://de.wikipedia.org/wiki/HTTP-Statuscode">HTTP-Statuscode</a>)  mit entweder der Fehler-<code>message</code> oder mit der Nachricht <code>"Some error occurred while getting all posts"</code> an den Aufrufer (Zeilen <code>7-10</code>). Wenn alles korrekt läuft, d.h. die Datensätze von der <code>getAll()</code>-Funktion geliefert werden, dann erzeugt die <code>readAll()</code>-Funktion daraus ein JSON und schickt dieses an den Aufrufer zurück (Zeile <code>11</code>).</li>
+<li>Die <code>create()</code>-Funktion ruft die <code>create()</code>-Funktion des <code>PostService</code> auf. Dazu muss jedoch erst der Datensatz erstellt werden, der in die Datenbank eingefügt werden soll. Dieser Datensatz wird aus dem <code>body</code> des <code>requests</code> extrahiert. Ist dieser <code>body</code> leer oder existiert gar nicht, wird eine Fehlermeldung mit Statuscode <code>400</code> als Response gesendet. Aus dem <code>body</code> des <code>requests</code> wird ansonsten ein neues <code>post</code>-Objekt erzeugt. Hier wird erneut der <a href="https://stackoverflow.com/questions/31048953/what-do-these-three-dots-in-react-do">spread operator</a>  verwendet und somit alle Schlüssel-Werte-Paare aus <code>body</code> in das Objekt eingefügt (Zeile <code>21</code>). Dieses <code>post</code>-Objekt wird der Methode <code>create()</code> des <code>PostService</code> übergeben. Das <code>result</code> der <code>create()</code>-Methode des <code>PostService</code> ist der gesamte "neue" Datensatz inkl. der von der Datenbank vergebenen <code>id</code>.</li>
+<li>Die <code>update()</code>-Methode ist ähnlich der <code>create()</code>-Funktion, aber hier wird zusätzlich noch die <code>id</code> übergeben, die verwendet werden soll, um den Datensatz zu identifiezieren, der aktualisiert werden soll. Diese <code>id</code> ist <strong>nicht</strong> Teil des <code>req.body</code>, sondern wird als Wert der URL mitgegeben, d.h. es erfolgt ein Aufruf der Form <code>http://localhost:3000/posts/11</code> und die <code>11</code> wird als <code>id</code> verwendet. Mithilfe von <code>params</code> kann die URL des <code>requests</code> ausgelesen werden. Die <code>postId</code> wird gleich in der <code>service.js</code> definiert werden.</li>
+</ul>
+<p>Wir haben übrigens keine Funktion im <code>PostController</code> definiert, die die Funktion <code>removeAll()</code> aus dem <code>PostService</code> aufruft, damit wir nicht ausversehen alle Datensätze aus unserer Datenbank löschen. </p>
+<h4 id="serverjs-um-endpunkte-erweitern">server.js um Endpunkte erweitern<a class="headerlink" href="#serverjs-um-endpunkte-erweitern" title="Permanent link">&para;</a></h4>
+<p>Uns stehen jetzt die wesentlichen Funktionen zur Verfügung, um CRUD-Anfragen durchzuführen. Uns fehlt noch der letzte Schritt, nämlich die <em>Endpunkte</em>  unserer REST-API mit den entsprechenden Funktionen des <code>Controllers</code> zu verknüpfen. Unter den <em>Endpunkten</em>  der REST-API verstehen wir die URI der Ressource, die angefragt wird zusammen mit der HTTP-Anfragemethode, mit der diese Ressource angefragt wird. Wir definieren folgende Endpunkte:</p>
+<ul>
+<li><code>GET http://localhost:3000/posts</code> - Aufruf von <code>readAll()</code> im <code>PostController</code> </li>
+<li><code>GET http://localhost:3000/posts/:postId</code> - Aufruf von <code>readOne()</code> im <code>PostController</code>, <code>postId</code> bekommt einen konkreten Wert </li>
+<li><code>POST http://localhost:3000/posts</code> - Aufruf von <code>create()</code> im <code>PostController</code> </li>
+<li><code>PUT http://localhost:3000/posts/:postId</code> - Aufruf von <code>update()</code> im <code>PostController</code>, <code>postId</code> bekommt einen konkreten Wert </li>
+<li><code>DELETE http://localhost:3000/posts/:postId</code> - Aufruf von <code>delete()</code> im <code>PostController</code>, <code>postId</code> bekommt einen konkreten Wert </li>
+</ul>
+<p>Die Erweiterung von <code>server.js</code> sieht dann so aus:</p>
+<div class="tabbed-set" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">server.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">PostController</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./posts.controller.js&#39;</span><span class="p">;</span>
+</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="mf">3000</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;HELLO FIW!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="hll"><span class="c1">// Endpunkte definieren</span>
+</span><span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">create</span><span class="p">);</span> <span class="c1">// C</span>
+</span><span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readAll</span><span class="p">);</span> <span class="c1">// R (all)</span>
+</span><span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readOne</span><span class="p">);</span> <span class="c1">// R (one)</span>
+</span><span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span> <span class="c1">// U</span>
+</span><span class="hll"><span class="nx">app</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="k">delete</span><span class="p">);</span> <span class="c1">// D</span>
+</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server started and listening on port </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb"> ...`</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Das <code>express</code>-Modul liefert uns also entsprechende Funktionen für die einzelnen HTTP-Anfragen, d.h. <code>.get()</code> für <code>GET</code>-Anfragen, <code>.post()</code> für <code>POST</code>-Anfragen usw. Pro Endpunkt wird die entsprechende Funktion aus dem <code>PostController</code> aufgerufen. Dieser muss dafür importiert werden (Zeile <code>2</code>). </p>
+<p>Wenn wir nun im Browser <code>http://localhost:3000/posts</code> eingeben, dann entspricht das der Anfrage <code>GET http://localhost:3000/posts</code> und somit dem Aufruf von <code>PostController.readAll()</code>. Tatsächlich werden uns im Browser die beiden Datensätze angezeigt (schalten Sie die Darstellung auf <code>Raw</code>), allerdings sind die Werte für die Bilder leider sehr lang. </p>
+<p><img alt="restapi" src="../files/62_restapi.png" /></p>
+<p>Mit dem Browser können wir auch noch den zweiten <code>GET</code>-Endpunkt testen, nämlich <code>GET http://localhost:3000/posts/:postId</code>. Für <code>id</code> sind bis jetzt in der Datenbank die Werte <code>1</code> und <code>2</code> vergeben, d.h. wir könnten <code>GET http://localhost:3000/posts/1</code> und <code>GET http://localhost:3000/posts/2</code> testen. </p>
+<p>Wenn wir eine andere Zahl als <code>1</code> oder <code>2</code> versuchen, erhalten wir die in der <code>findById()</code>-Funktion im <code>PostService</code> definierte Fehlermeldung als JSON <code>{ message: "post not found" }</code>.</p>
+<h4 id="backend-fur-groere-daten-erweitern">Backend für größere Daten erweitern<a class="headerlink" href="#backend-fur-groere-daten-erweitern" title="Permanent link">&para;</a></h4>
+<p>Wenn wir jetzt ausprobieren würden, einen neuen Datensatz in die Datenbank einzufügen (siehe Abschnitt <a href="./#testen-mit-postman">Testen mit Postman</a>), erhalten wir einen Fehler, dass der Request gar nicht erst gesendet werden konnte. Der Grund dafür ist, dass der Webserver in <code>express</code> in den Standardeinstellungen nicht mit so großen Daten im Request umgehen kann. Wir benötigen deshalb noch eine kleine Erweiterung in der <code>server.js</code>:</p>
+<div class="tabbed-set" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">server.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">PostController</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./posts.controller.js&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="mf">3000</span><span class="p">;</span>
+
+<span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span><span class="p">,</span> <span class="nx">extended</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}));</span>
+</span><span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span> <span class="p">}));</span>
+</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;HELLO FIW!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Endpunkte definieren</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">create</span><span class="p">);</span> <span class="c1">// C</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readAll</span><span class="p">);</span> <span class="c1">// R (all)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readOne</span><span class="p">);</span> <span class="c1">// R (one)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span> <span class="c1">// U</span>
+<span class="nx">app</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="k">delete</span><span class="p">);</span> <span class="c1">// D</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server started and listening on port </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb"> ...`</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Mit diesen beiden Anweisungen erhöhen wir die Größe der zu übetragenden daten in einem Request auf <code>20Mb</code>. Sie können auch einen noch größeren Wert hier wählen. Für unsere Bedürfnisse genügt sogar die Anweisung in Zeile <code>8</code>, aber für den Fall, dass wir auch große Datenmengen direkt in der URL übertragen wollen (als <code>GET</code> dann), sehen wir bereits Anweisung in Zeile <code>7</code> vor. </p>
+<h4 id="cross-origin-resource-sharing-cors">Cross-Origin Resource Sharing (CORS)<a class="headerlink" href="#cross-origin-resource-sharing-cors" title="Permanent link">&para;</a></h4>
+<p>Die <em>Same Origin Policy (SOP)</em> ist ein Sicherheitskonzept, das clientseitig Skriptsprachen (also z.B. JavaScript oder CSS) untersagt, Ressourcen aus verschiedenen Herkunften zu verwenden, also von verschiedenen Servern. Dadurch soll verhindert werden, dass fremde Skripte in die bestehende Client-Server-Kommunikation eingeschleust werden. Gleiche <em>Herkunft (origin)</em> bedeutet, dass das gleiche Protokoll (z.B. <code>http</code> oder <code>https</code>), von der gleichen Domain (z.B. <code>localhost</code> oder <code>htw-berlin</code>) sowie dem gleichen Port (z.B. <code>80</code> oder <code>4200</code>) verwendet werden. Es müssen alle drei Eigenschaften übereinstimmen. </p>
+<p>Mit dem Aufkommen von Single Page Applications und dem darin benötigten AJAX kam jedoch der Bedarf auf, die SOP aufzuweichen. Es sollte möglich sein, dass z.B. JavaScript sowohl client-seitig das DOM ändert, als auch einen Request an den Server (das Backend) sendet. Der Kompromiss, der dafür gefunden wurde, nennt sich <em>Cross-Origin Resource Sharing (CORS)</em>. Damit ist es möglich, für einige oder alle Anfragen zu definieren, dass sie im Sinne der SOP trotzdem erlaubt sein sollen. </p>
+<p>Um CORS für Ihr Backend zu aktivieren, wechseln Sie im Terminal in Ihren <code>backend</code>-Ordner und geben dort</p>
+<div class="highlight"><pre><span></span><code>npm install cors
+</code></pre></div>
+<p>ein. Die <code>package.json</code> sieht danach so aus:</p>
+<div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">package.json</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;backend&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;REST-Server für posts-Datenbank&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;server.js&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;module&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;watch&quot;</span><span class="p">:</span> <span class="s2">&quot;nodemon ./server.js&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;IKT&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;PWA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;REST-API&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Backendend&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;posts&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;J. Freiheit&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="hll">        <span class="nt">&quot;cors&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.8.5&quot;</span><span class="p">,</span>
+</span>        <span class="nt">&quot;express&quot;</span><span class="p">:</span> <span class="s2">&quot;^4.17.1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;mysql&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.18.1&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;devDependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;nodemon&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.0.7&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Öffnen Sie dann die <code>server.js</code> und fügen Sie die hervorgehobenen Zeilen ein:</p>
+<div class="tabbed-set" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">server.js</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -984,171 +1895,45 @@
 26
 27
 28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">connection</span> <span class="nx">as</span> <span class="nx">sql</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../database/db.js&#39;</span><span class="p">;</span>
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="nx">cors</span> <span class="nx">from</span> <span class="s1">&#39;cors&#39;</span><span class="p">;</span>
+</span><span class="k">import</span> <span class="p">{</span> <span class="nx">PostController</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./posts.controller.js&#39;</span><span class="p">;</span>
 
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">PostService</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">create</span><span class="o">:</span> <span class="k">async</span><span class="p">(</span><span class="nx">newPost</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;INSERT INTO posts SET ?&quot;</span><span class="p">,</span> <span class="nx">newPost</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">result</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">postId</span><span class="p">,</span> <span class="p">...</span><span class="nx">newPost</span> <span class="p">});</span>
-        <span class="p">});</span>
-    <span class="p">},</span>
-    <span class="nx">findById</span><span class="o">:</span> <span class="p">(</span><span class="nx">postId</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span>
-            <span class="sb">`SELECT * FROM posts WHERE id = ?`</span><span class="p">,</span> <span class="p">[</span><span class="nx">postId</span><span class="p">],</span>
-            <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">result</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">res</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="nx">result</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;post not found&quot;</span> <span class="p">},</span> <span class="kc">null</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">);</span>
-    <span class="p">},</span>
-    <span class="nx">getAll</span><span class="o">:</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM posts&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
-        <span class="p">});</span>
-    <span class="p">},</span>
-    <span class="nx">updateById</span><span class="o">:</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">post</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span>
-            <span class="s2">&quot;UPDATE posts SET ? where id= ?&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">post</span><span class="p">,</span> <span class="nx">id</span><span class="p">],</span>
-            <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">affectedRows</span> <span class="o">==</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">result</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;post not found&quot;</span> <span class="p">},</span> <span class="kc">null</span><span class="p">);</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">id</span><span class="p">,</span> <span class="p">...</span><span class="nx">post</span> <span class="p">});</span>
-            <span class="p">}</span>
-        <span class="p">);</span>
-    <span class="p">},</span>
-    <span class="nx">remove</span><span class="o">:</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;DELETE FROM posts WHERE id = ?&quot;</span><span class="p">,</span> <span class="nx">id</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">affectedRows</span> <span class="o">==</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">result</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;post not found&quot;</span> <span class="p">},</span> <span class="kc">null</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
-        <span class="p">});</span>
-    <span class="p">},</span>
-    <span class="nx">removeAll</span><span class="o">:</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;DELETE FROM posts&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
-        <span class="p">});</span>
-    <span class="p">},</span>
-<span class="p">};</span>
-</code></pre></div>
-</td></tr></table>
-</div>
-</div>
-<p>Wir haben uns hier für den Begriff <em>Service</em> entschieden. Häufig sieht man diese Implementierung auch als <em>Model</em>. 
-Außerdem geben wir hier auch stets ein <code>result</code> zurück, welches entweder die <em>Response</em> <code>res</code> der SQL-Anfrage (<code>sql.query()</code>)
-enthält oder den von der Anfrage zurückgegebenen Fehler <code>err</code>. </p>
-<p>Eine andere Möglichkeit, diese Funktionen zu implementieren, wäre mithilfe von <em>Promises</em> gewesen, z.B.:</p>
-<div class="highlight"><pre><span></span><code>    <span class="nx">create</span><span class="o">:</span> <span class="k">async</span><span class="p">(</span><span class="nx">newPost</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span>
-            <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;INSERT INTO posts SET ?&quot;</span><span class="p">,</span> <span class="nx">newPost</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;error inserting post&quot;</span><span class="p">));</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-            <span class="p">});</span>
-        <span class="p">}</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="mf">3000</span><span class="p">;</span>
+
+<span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">());</span>
+</span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span><span class="p">,</span> <span class="nx">extended</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span> <span class="p">}));</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;HELLO FIW!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Endpunkte definieren</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">create</span><span class="p">);</span> <span class="c1">// C</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readAll</span><span class="p">);</span> <span class="c1">// R (all)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readOne</span><span class="p">);</span> <span class="c1">// R (one)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span> <span class="c1">// U</span>
+<span class="nx">app</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="k">delete</span><span class="p">);</span> <span class="c1">// D</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server started and listening on port </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb"> ...`</span><span class="p">);</span>
     <span class="p">}</span>
-</code></pre></div>
-<p>Dann hätten im <code>Controller</code> die Aufrufe so ausgesehen:</p>
-<div class="highlight"><pre><span></span><code>    <span class="nx">PostService</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">post</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">result</span> <span class="p">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">)</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span> <span class="nx">err</span> <span class="p">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
-                    <span class="nx">message</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="s2">&quot;Some error occurred while creating the post.&quot;</span><span class="p">,</span>
-                <span class="p">})</span>
-    <span class="p">)</span>
-</code></pre></div>
-<p>Ansonsten folgen die Anfragen alle dem gleichen Schema. </p>
-<h3 id="databasedbjs"><code>database/db.js</code><a class="headerlink" href="#databasedbjs" title="Permanent link">&para;</a></h3>
-<p>In der <code>db.js</code> wird die Verbindung zur Datenbank hergestellt. Dazu wird das <code>mysql</code>-Modul geladen (Zeile <code>1</code>):</p>
-<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">database/db.js</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">mysql</span> <span class="nx">from</span> <span class="s1">&#39;mysql&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">dbConfig</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../config/db.config.js&#39;</span><span class="p">;</span>
-
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">connection</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">({</span>
-    <span class="nx">host</span><span class="o">:</span> <span class="nx">dbConfig</span><span class="p">.</span><span class="nx">HOST</span><span class="p">,</span>
-    <span class="nx">user</span><span class="o">:</span> <span class="nx">dbConfig</span><span class="p">.</span><span class="nx">USER</span><span class="p">,</span>
-    <span class="nx">password</span><span class="o">:</span> <span class="nx">dbConfig</span><span class="p">.</span><span class="nx">PASSWORD</span><span class="p">,</span>
-    <span class="nx">database</span><span class="o">:</span> <span class="nx">dbConfig</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span>
-<span class="p">});</span>
-
-<span class="nx">connection</span><span class="p">.</span><span class="nx">connect</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Connected with database ... &quot;</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 </td></tr></table>
 </div>
 </div>
-<p>Die Zugangsdaten und der Name der Datenbank ist in der <code>db.config</code> gespeichert:</p>
-<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">config/db.config</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">dbConfig</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">HOST</span><span class="o">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
-    <span class="nx">USER</span><span class="o">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
-    <span class="nx">PASSWORD</span><span class="o">:</span> <span class="s2">&quot;ihrPasswort&quot;</span><span class="p">,</span>
-    <span class="nx">DB</span><span class="o">:</span> <span class="s2">&quot;posts&quot;</span>
-<span class="p">};</span>
+<p>Falls Sie z.B. nur die <code>get</code>-Anfrage teilen wollen, dann wählen Sie nicht <code>app.use(cors());</code>, sondern </p>
+<div class="highlight"><pre><span></span><code><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nx">cors</span><span class="p">(),</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;HELLO FIW!&quot;</span> <span class="p">});</span>
+    <span class="p">});</span>
 </code></pre></div>
-</td></tr></table>
-</div>
-</div>
+<p>Mehr zum CORS-Paket von node.js bzw. express finden Sie <a href="https://expressjs.com/en/resources/middleware/cors.html">hier</a>.</p>
 <h3 id="testen-mit-postman">Testen mit Postman<a class="headerlink" href="#testen-mit-postman" title="Permanent link">&para;</a></h3>
 <p>Wenn die Datenbank eingerichtet ist und das Backend gestartet, können wir es mit Postman ausprobieren. Wir haben das "kleine" Problem, dass die Daten für ein Bild sehr lang sind. Prinzipiell sieht ein <code>post</code> im JSON-Format so aus:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -1175,493 +1960,7 @@ enthält oder den von der Anfrage zurückgegebenen Fehler <code>err</code>. </p>
         <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
     <span class="p">}</span>
 </code></pre></div>
-<p>ist.</p>
-<h2 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h2>
-<p>Um die Dateneingabe zu vereinfachen, erstellen wir uns ein einfaches Frontend mithilfe von Angular. Der im Folgenden beschriebene Code ist unter <a href="https://github.com/jfreiheit/ikt_frontend">GitHub</a> verfügbar. Dieses Frontend ist zunächst bewusst einfach gehalten und enthält nur eine einzige Komponente <code>CreateComponent</code> zum Erstellen eines Datensatzes. Da wir <a href="https://material.angular.io/">Angular Material</a> verwenden, sieht die <code>app.module.ts</code> wie folgt aus:</p>
-<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">app.module.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-
-<span class="k">import</span> <span class="p">{</span> <span class="nx">AppRoutingModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app-routing.module&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app.component&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserAnimationsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser/animations&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">LayoutModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatToolbarModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/toolbar&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatButtonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatInputModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/input&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatSidenavModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/sidenav&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatListModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/list&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatCardModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/card&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatFormFieldModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/form-field&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClientModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">ReactiveFormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">ToastrModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;ngx-toastr&#39;</span><span class="p">;</span>
-
-<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
-  <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span>
-    <span class="nx">AppComponent</span><span class="p">,</span>
-    <span class="nx">CreateComponent</span>
-  <span class="p">],</span>
-  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
-    <span class="nx">BrowserModule</span><span class="p">,</span>
-    <span class="nx">AppRoutingModule</span><span class="p">,</span>
-    <span class="nx">BrowserAnimationsModule</span><span class="p">,</span>
-    <span class="nx">HttpClientModule</span><span class="p">,</span>
-    <span class="nx">ReactiveFormsModule</span><span class="p">,</span>
-    <span class="nx">FormsModule</span><span class="p">,</span>
-    <span class="nx">LayoutModule</span><span class="p">,</span>
-    <span class="nx">MatToolbarModule</span><span class="p">,</span>
-    <span class="nx">MatButtonModule</span><span class="p">,</span>
-    <span class="nx">MatInputModule</span><span class="p">,</span>
-    <span class="nx">MatSidenavModule</span><span class="p">,</span>
-    <span class="nx">MatIconModule</span><span class="p">,</span>
-    <span class="nx">MatListModule</span><span class="p">,</span>
-    <span class="nx">MatCardModule</span><span class="p">,</span>
-    <span class="nx">MatFormFieldModule</span><span class="p">,</span>
-    <span class="nx">ToastrModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">({</span>
-      <span class="nx">timeOut</span><span class="o">:</span> <span class="mf">2000</span><span class="p">,</span>
-      <span class="nx">preventDuplicates</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="p">}),</span>
-  <span class="p">],</span>
-  <span class="nx">providers</span><span class="o">:</span> <span class="p">[],</span>
-  <span class="nx">bootstrap</span><span class="o">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
-<span class="p">})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
-</code></pre></div>
-</div>
-</div>
-<p>Als einzige Route ist <code>/create</code> in der <code>app-routing.module.ts</code> definiert, wodurch die <code>CreateComponent</code> aufgerufen wird:</p>
-<div class="tabbed-set" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">app-routing.module.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
-
-<span class="kd">const</span> <span class="nx">routes</span><span class="o">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="nx">CreateComponent</span> <span class="p">},</span>
-<span class="p">];</span>
-
-<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
-  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">routes</span><span class="p">)],</span>
-  <span class="nx">exports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">]</span>
-<span class="p">})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppRoutingModule</span> <span class="p">{</span> <span class="p">}</span>
-</code></pre></div>
-</div>
-</div>
-<h3 id="appcomponent"><code>AppComponent</code><a class="headerlink" href="#appcomponent" title="Permanent link">&para;</a></h3>
-<p>Die <code>AppComponent</code> enthält ausschließlich das mithilfe des <a href="https://material.angular.io/guide/schematics#navigation-schematic">Navigation schematic</a> erstellte Navigationsgerüst. Als Inhalt in diesem Gerüst ist <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> enthalten, um die einzelnen Komponenten einzubinden:</p>
-<div class="tabbed-set" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">app.component.html</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">mat-sidenav-container</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav-container&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-sidenav</span> <span class="err">#</span><span class="na">drawer</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav&quot;</span> <span class="na">fixedInViewport</span> <span class="err">[</span><span class="na">attr</span><span class="err">.</span><span class="na">role</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">dialog</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">navigation</span><span class="err">&#39;&quot;</span> <span class="err">[</span><span class="na">mode</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">over</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">side</span><span class="err">&#39;&quot;</span> <span class="err">[</span><span class="na">opened</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">===</span> <span class="na">false</span><span class="err">&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>Menu<span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">routerLink</span><span class="o">=</span><span class="s">&quot;/create&quot;</span> <span class="na">routerLinkActive</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;</span>Neuen Datensatz<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-sidenav</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">mat-toolbar</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Toggle sidenav&quot;</span> <span class="na">mat-icon-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">drawer</span><span class="err">.</span><span class="na">toggle</span><span class="err">()&quot;</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;isHandset$ | async&quot;</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-icon</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Side nav toggle icon&quot;</span><span class="p">&gt;</span>menu<span class="p">&lt;/</span><span class="nt">mat-icon</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Posts verwalten<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">router-outlet</span><span class="p">&gt;&lt;/</span><span class="nt">router-outlet</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">mat-sidenav-container</span><span class="p">&gt;</span>
-</code></pre></div>
-</div>
-<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">app.component.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">BreakpointObserver</span><span class="p">,</span> <span class="nx">Breakpoints</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">shareReplay</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
-
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
-  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-root&#39;</span><span class="p">,</span>
-  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./app.component.html&#39;</span><span class="p">,</span>
-  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./app.component.css&#39;</span><span class="p">]</span>
-<span class="p">})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
-  <span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;frontend&#39;</span><span class="p">;</span>
-
-  <span class="nx">isHandset$</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kr">boolean</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">breakpointObserver</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nx">Breakpoints</span><span class="p">.</span><span class="nx">Handset</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
-      <span class="nx">map</span><span class="p">(</span><span class="nx">result</span> <span class="p">=&gt;</span> <span class="nx">result</span><span class="p">.</span><span class="nx">matches</span><span class="p">),</span>
-      <span class="nx">shareReplay</span><span class="p">()</span>
-    <span class="p">);</span>
-
-  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">breakpointObserver</span><span class="o">:</span> <span class="nx">BreakpointObserver</span><span class="p">)</span> <span class="p">{}</span>
-<span class="p">}</span>
-</code></pre></div>
-</div>
-</div>
-<p>Beide Dateien sind unverändert so übernommen, wie vom <a href="https://material.angular.io/guide/schematics#navigation-schematic">Navigation schematic</a> erstellt. </p>
-<h3 id="createcomponent"><code>CreateComponent</code><a class="headerlink" href="#createcomponent" title="Permanent link">&para;</a></h3>
-<p>Selbst erstellt wurde nur die <code>CreateComponent</code>. In dieser Komponente wurde ein Formular nach <a href="https://material.angular.io/components/form-field/overview">Material Design</a>-Vorgaben erstellt. Die <code>create.component.ts</code> sieht so aus:</p>
-<div class="tabbed-set" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">create/create.component.ts</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">ViewChild</span><span class="p">,</span> <span class="nx">ElementRef</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormControl</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">ToastrService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;ngx-toastr&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">PostService</span><span class="p">,</span> <span class="nx">Post</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../post.service&#39;</span><span class="p">;</span>
-
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
-  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-create&#39;</span><span class="p">,</span>
-  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./create.component.html&#39;</span><span class="p">,</span>
-  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./create.component.css&#39;</span><span class="p">]</span>
-<span class="p">})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">CreateComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
-
-  <span class="err">@</span><span class="nx">ViewChild</span><span class="p">(</span><span class="s1">&#39;fileInput&#39;</span><span class="p">)</span> <span class="nx">fileInput</span><span class="o">:</span> <span class="nx">ElementRef</span><span class="p">;</span>
-  <span class="nx">fileAttr</span> <span class="o">=</span> <span class="s1">&#39;Choose File&#39;</span><span class="p">;</span>
-  <span class="nx">formGroup</span><span class="o">:</span> <span class="nx">FormGroup</span><span class="p">;</span>
-  <span class="nx">titleAlert</span> <span class="o">=</span> <span class="s1">&#39;This field is required&#39;</span><span class="p">;</span>
-  <span class="nx">imgBase64</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-  <span class="nx">post</span><span class="o">:</span> <span class="nx">Post</span><span class="p">;</span>
-
-  <span class="nx">constructor</span><span class="p">(</span>
-    <span class="kr">private</span> <span class="nx">formBuilder</span><span class="o">:</span> <span class="nx">FormBuilder</span><span class="p">,</span>
-    <span class="kr">private</span> <span class="nx">postService</span><span class="o">:</span> <span class="nx">PostService</span><span class="p">,</span>
-    <span class="kr">private</span> <span class="nx">toastr</span><span class="o">:</span> <span class="nx">ToastrService</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-
-  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">formBuilder</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
-      <span class="nx">inp_title</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
-      <span class="nx">inp_location</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
-      <span class="nx">uploadFile</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]</span>
-    <span class="p">});</span>
-  <span class="p">}</span>
-
-  <span class="nx">uploadFileEvt</span><span class="p">(</span><span class="nx">imgFile</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span> <span class="o">&amp;&amp;</span> <span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">fileAttr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-      <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">file</span><span class="o">:</span> <span class="nx">File</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">fileAttr</span> <span class="o">+=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39; - &#39;</span><span class="p">;</span>
-      <span class="p">});</span>
-
-      <span class="c1">// HTML5 FileReader API</span>
-      <span class="kd">const</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
-      <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
-        <span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
-        <span class="nx">image</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">rs</span> <span class="p">=&gt;</span> <span class="p">{</span>
-          <span class="kd">const</span> <span class="nx">imgBase64Path</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
-          <span class="k">this</span><span class="p">.</span><span class="nx">imgBase64</span> <span class="o">=</span> <span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1</span><span class="p">);</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;imgBase64Path&#39;</span><span class="p">,</span> <span class="nx">imgBase64Path</span><span class="p">);</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;imgBase64&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">imgBase64</span><span class="p">);</span>
-        <span class="p">};</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">patchValue</span><span class="p">({</span> <span class="nx">uploadFile</span><span class="o">:</span> <span class="nx">reader</span><span class="p">.</span><span class="nx">result</span> <span class="p">});</span>
-      <span class="p">};</span>
-      <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
-      <span class="c1">// Reset if duplicate image uploaded again</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">fileInput</span><span class="p">.</span><span class="nx">nativeElement</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">fileAttr</span> <span class="o">=</span> <span class="s1">&#39;Choose File&#39;</span><span class="p">;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-
-  <span class="nx">get</span> <span class="nx">uploadFile</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;uploadFile&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="nx">get</span> <span class="nx">inp_title</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_title&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="nx">get</span> <span class="nx">inp_location</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_location&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="k">async</span> <span class="nx">onSubmit</span><span class="p">()</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">post</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="nx">id</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-      <span class="nx">title</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_title</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-      <span class="nx">location</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_location</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-      <span class="nx">image</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">imgBase64</span>
-    <span class="p">};</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">post</span><span class="p">);</span>
-    <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">postService</span><span class="p">.</span><span class="nx">addPost</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">post</span><span class="p">));</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">toastr</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-</td></tr></table>
-</div>
-<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">create/create.component.html</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span> <span class="na">novalidate</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">mat-card</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;example-card&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-card-header</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">mat-card-title</span><span class="p">&gt;</span>Post hinzufügen<span class="p">&lt;/</span><span class="nt">mat-card-title</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-card-header</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-card-content</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">div</span> <span class="err">[</span><span class="na">formGroup</span><span class="err">]=&quot;</span><span class="na">formGroup</span><span class="err">&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my-form&quot;</span><span class="p">&gt;</span>
-
-            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-element&quot;</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post title<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Titel&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_title&quot;</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_title.valid &amp;&amp; inp_title.touched&quot;</span><span class="p">&gt;</span>
-                    {{ titleAlert }}
-                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
-
-            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-element&quot;</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post location<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Location&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_location&quot;</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_location.valid &amp;&amp; inp_location.touched&quot;</span><span class="p">&gt;</span>
-                    {{ titleAlert }}
-                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
-
-            <span class="p">&lt;</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
-                        <span class="c">&lt;!-- Display files names --&gt;</span>
-                        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="err">[(</span><span class="na">ngModel</span><span class="err">)]=&quot;</span><span class="na">fileAttr</span><span class="err">&quot;</span> <span class="na">readonly</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="p">/&gt;</span>
-
-                        <span class="c">&lt;!-- Browse Button --&gt;</span>
-                        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-flat-button</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span><span class="p">&gt;</span>
-                    Browse File
-                  <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-                    <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
-
-                    <span class="c">&lt;!-- Fetch selected filed on change --&gt;</span>
-                    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="err">#</span><span class="na">fileInput</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;uploadFile&quot;</span> <span class="err">(</span><span class="na">change</span><span class="err">)=&quot;</span><span class="na">uploadFileEvt</span><span class="err">($</span><span class="na">event</span><span class="err">)&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;uploadFile&quot;</span> <span class="na">multiple</span><span class="o">=</span><span class="s">&quot;multiple&quot;</span> <span class="na">accept</span><span class="o">=</span><span class="s">&quot;image/*&quot;</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
-
-        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-card-content</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-card-actions</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-element&quot;</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-stroked-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">onSubmit</span><span class="err">()&quot;</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;default&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="err">[</span><span class="na">disabled</span><span class="err">]=&quot;!</span><span class="na">formGroup</span><span class="err">.</span><span class="na">valid</span><span class="err">&quot;</span><span class="p">&gt;</span>
-      Add post
-    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-card-actions</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">mat-card</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;imgBase64&quot;</span><span class="p">&gt;</span>
-    {{ imgBase64 }}
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div>
-</td></tr></table>
-</div>
-</div>
-<p>In Zeile <code>15</code> wird eine Variable <code>formGroup</code> vom Typ <code>FormGroup</code> deklariert. Erzeugt wird das Formular mithilfe des <code>FormBuilder</code> (siehe Zeile <code>21</code>) in der <code>ngOnInit()</code>-Funktion (Zeilen <code>25-30</code>). Die drei <code>get</code>-Methoden (Zeilen <code>61-71</code>) dienen dem Zugriff auf die drei einzelnen Formularelemente.</p>
-<p><img alt="frontend" src="../files/56_frontend.png" /></p>
-<p>Am unfrangreichsten ist hier die <code>uploadFileEvt</code>-Methode. Diese wird aufgerufen, wenn eine Bilddatei zum Upload ausgewählt wurde. Prinzipiell ist sogar die Auswahl mehrerer Dateien möglich. In Zeile <code>46</code> wird der Base64-Code des Bildes übergeben, dieser enthält aber noch den String <code>data:image/jpeg;base64,</code>. Dieser wird in Zeile <code>47</code> entfernt und der verbleibende Code in <code>imgBase64</code> gespeichert. </p>
-<p>Ist das gesamte Formular ausgefüllt, wird durch Klicken des <code>Add post</code>-Buttons (siehe <code>create.component.html</code>) die <code>onSubmit()</code>-Methode ausgelöst. In dieser Methode wird das <code>post</code>-Objekt erzeugt, welches an die <code>addPost</code>-Methode des <code>postService</code> übergeben wird.  </p>
-<h3 id="postservicets"><code>post.service.ts</code><a class="headerlink" href="#postservicets" title="Permanent link">&para;</a></h3>
-<p>Der <code>PostService</code> stellt die Verbindung zum Backend dar. Dazu verwendet der <code>PostService</code> das <code>HttpClient</code>- und das <code>HttpHeaders</code>-Modul: </p>
-<div class="tabbed-set" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">post.service.ts</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpHeaders</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-
-
-<span class="k">export</span> <span class="kr">interface</span> <span class="nx">Post</span> <span class="p">{</span>
-  <span class="nx">id</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
-  <span class="nx">title</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
-  <span class="nx">location</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
-  <span class="nx">image</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
-  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
-<span class="p">})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">PostService</span> <span class="p">{</span>
-  <span class="nx">apiUrl</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
-
-  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span><span class="o">:</span> <span class="nx">HttpClient</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-
-
-  <span class="nx">public</span> <span class="k">async</span> <span class="nx">addPost</span><span class="p">(</span><span class="nx">post</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
-      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">post</span><span class="p">,</span> <span class="p">{</span>
-        <span class="nx">headers</span><span class="o">:</span> <span class="k">new</span> <span class="nx">HttpHeaders</span><span class="p">({</span>
-          <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
-        <span class="p">}),</span>
-      <span class="p">})</span>
-      <span class="p">.</span><span class="nx">toPromise</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-</td></tr></table>
-</div>
-</div>
-<p>Derzeit ist im <code>PostService</code> noch nur eine Funktion implementiert, die <code>addPost()</code>. Diese ruft im Backend den Endpunkt <code>POST http://localhost:3000/posts</code> auf und übergibt das <code>post</code>-Objekt, das im <em>Request-Body</em> versendet wird.   </p>
-<div class="admonition success">
-<p class="admonition-title">Success</p>
-<p>Wir haben uns zwar in Sachen <em>Progressive Web Apps</em> nicht wirklich weiterentwickelt, aber wir haben nun erstmal einige nützliche Hilfsmittel geschaffen, um eine "größere" Anwendung später <em>progressive</em> zu gestalten. Es gibt nun eine Datenbank, die Bilder speichern kann und das passende Backend zur Anbindung der Datenbank. Zur Erleichterung der Dateneingabe in die Datenbank haben wir uns auch ein Frontend erstellt.   </p>
-</div>
+<p>ist. Nachdem Sie den dritten datensatz eingefügt haben, können Sie ja auch mal versuchen, ihn wieder zu löschen. </p>
                 
               
               
@@ -1695,13 +1994,13 @@ enthält oder den von der Anfrage zurückgegebenen Fehler <code>err</code>. </p>
           </a>
         
         
-          <a href="../uebungen/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../frontend/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Weiter
                 </span>
-                Übungen
+                Frontend
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

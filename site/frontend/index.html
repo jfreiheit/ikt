@@ -1,0 +1,1103 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Lehrmaterial, Übungen, Aufgaben und Hilfen für Aktuelle Trends der IKT">
+      
+      
+      
+        <meta name="author" content="Jörn Freiheit">
+      
+      
+        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/frontend/">
+      
+      <link rel="shortcut icon" href="../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>Frontend - Progressive Web Apps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#757575">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="grey" data-md-color-accent="indigo">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#frontend" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-header-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Progressive Web Apps
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Frontend
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    Progressive Web Apps
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../einfuehrung/" class="md-nav__link">
+        Einführung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grundgeruest/" class="md-nav__link">
+        Grundgerüst
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manifest/" class="md-nav__link">
+        Manifest
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serviceworker/" class="md-nav__link">
+        Service Worker
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../promises/" class="md-nav__link">
+        Promises & fetch
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../caching/" class="md-nav__link">
+        Caching
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend/" class="md-nav__link">
+        Backend
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Frontend
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Frontend
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    Frontend
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appcomponent" class="md-nav__link">
+    AppComponent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#createcomponent" class="md-nav__link">
+    CreateComponent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postservicets" class="md-nav__link">
+    post.service.ts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../indexeddb/" class="md-nav__link">
+        IndexedDB
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uebungen/" class="md-nav__link">
+        Übungen
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        Werkzeuge
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hilfen/" class="md-nav__link">
+        Hilfen
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    Frontend
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appcomponent" class="md-nav__link">
+    AppComponent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#createcomponent" class="md-nav__link">
+    CreateComponent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postservicets" class="md-nav__link">
+    post.service.ts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/frontend.md" title="Seite editieren" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Frontend</h1>
+                
+                <h2 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h2>
+<p>Um die Dateneingabe zu vereinfachen, erstellen wir uns ein einfaches Frontend mithilfe von Angular. Der im Folgenden beschriebene Code ist unter <a href="https://github.com/jfreiheit/ikt_frontend">GitHub</a> verfügbar. Dieses Frontend ist zunächst bewusst einfach gehalten und enthält nur eine einzige Komponente <code>CreateComponent</code> zum Erstellen eines Datensatzes. Da wir <a href="https://material.angular.io/">Angular Material</a> verwenden, sieht die <code>app.module.ts</code> wie folgt aus:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">app.module.ts</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppRoutingModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app-routing.module&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserAnimationsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser/animations&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LayoutModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatToolbarModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/toolbar&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatButtonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatInputModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/input&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatSidenavModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/sidenav&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatListModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/list&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatCardModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/card&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatFormFieldModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/form-field&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClientModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">ReactiveFormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ToastrModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;ngx-toastr&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">AppComponent</span><span class="p">,</span>
+    <span class="nx">CreateComponent</span>
+  <span class="p">],</span>
+  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">BrowserModule</span><span class="p">,</span>
+    <span class="nx">AppRoutingModule</span><span class="p">,</span>
+    <span class="nx">BrowserAnimationsModule</span><span class="p">,</span>
+    <span class="nx">HttpClientModule</span><span class="p">,</span>
+    <span class="nx">ReactiveFormsModule</span><span class="p">,</span>
+    <span class="nx">FormsModule</span><span class="p">,</span>
+    <span class="nx">LayoutModule</span><span class="p">,</span>
+    <span class="nx">MatToolbarModule</span><span class="p">,</span>
+    <span class="nx">MatButtonModule</span><span class="p">,</span>
+    <span class="nx">MatInputModule</span><span class="p">,</span>
+    <span class="nx">MatSidenavModule</span><span class="p">,</span>
+    <span class="nx">MatIconModule</span><span class="p">,</span>
+    <span class="nx">MatListModule</span><span class="p">,</span>
+    <span class="nx">MatCardModule</span><span class="p">,</span>
+    <span class="nx">MatFormFieldModule</span><span class="p">,</span>
+    <span class="nx">ToastrModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">({</span>
+      <span class="nx">timeOut</span><span class="o">:</span> <span class="mf">2000</span><span class="p">,</span>
+      <span class="nx">preventDuplicates</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">}),</span>
+  <span class="p">],</span>
+  <span class="nx">providers</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">bootstrap</span><span class="o">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+<p>Als einzige Route ist <code>/create</code> in der <code>app-routing.module.ts</code> definiert, wodurch die <code>CreateComponent</code> aufgerufen wird:</p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">app-routing.module.ts</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">routes</span><span class="o">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="nx">CreateComponent</span> <span class="p">},</span>
+<span class="p">];</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">routes</span><span class="p">)],</span>
+  <span class="nx">exports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppRoutingModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+<h3 id="appcomponent"><code>AppComponent</code><a class="headerlink" href="#appcomponent" title="Permanent link">&para;</a></h3>
+<p>Die <code>AppComponent</code> enthält ausschließlich das mithilfe des <a href="https://material.angular.io/guide/schematics#navigation-schematic">Navigation schematic</a> erstellte Navigationsgerüst. Als Inhalt in diesem Gerüst ist <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> enthalten, um die einzelnen Komponenten einzubinden:</p>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">app.component.html</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">mat-sidenav-container</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav-container&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-sidenav</span> <span class="err">#</span><span class="na">drawer</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav&quot;</span> <span class="na">fixedInViewport</span> <span class="err">[</span><span class="na">attr</span><span class="err">.</span><span class="na">role</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">dialog</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">navigation</span><span class="err">&#39;&quot;</span> <span class="err">[</span><span class="na">mode</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">over</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">side</span><span class="err">&#39;&quot;</span> <span class="err">[</span><span class="na">opened</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">===</span> <span class="na">false</span><span class="err">&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>Menu<span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">routerLink</span><span class="o">=</span><span class="s">&quot;/create&quot;</span> <span class="na">routerLinkActive</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;</span>Neuen Datensatz<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-sidenav</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-toolbar</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Toggle sidenav&quot;</span> <span class="na">mat-icon-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">drawer</span><span class="err">.</span><span class="na">toggle</span><span class="err">()&quot;</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;isHandset$ | async&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-icon</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Side nav toggle icon&quot;</span><span class="p">&gt;</span>menu<span class="p">&lt;/</span><span class="nt">mat-icon</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Posts verwalten<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">router-outlet</span><span class="p">&gt;&lt;/</span><span class="nt">router-outlet</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">mat-sidenav-container</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">app.component.ts</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BreakpointObserver</span><span class="p">,</span> <span class="nx">Breakpoints</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">shareReplay</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-root&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./app.component.html&#39;</span><span class="p">,</span>
+  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./app.component.css&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
+  <span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;frontend&#39;</span><span class="p">;</span>
+
+  <span class="nx">isHandset$</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kr">boolean</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">breakpointObserver</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nx">Breakpoints</span><span class="p">.</span><span class="nx">Handset</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+      <span class="nx">map</span><span class="p">(</span><span class="nx">result</span> <span class="p">=&gt;</span> <span class="nx">result</span><span class="p">.</span><span class="nx">matches</span><span class="p">),</span>
+      <span class="nx">shareReplay</span><span class="p">()</span>
+    <span class="p">);</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">breakpointObserver</span><span class="o">:</span> <span class="nx">BreakpointObserver</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+<p>Beide Dateien sind unverändert so übernommen, wie vom <a href="https://material.angular.io/guide/schematics#navigation-schematic">Navigation schematic</a> erstellt. </p>
+<h3 id="createcomponent"><code>CreateComponent</code><a class="headerlink" href="#createcomponent" title="Permanent link">&para;</a></h3>
+<p>Selbst erstellt wurde nur die <code>CreateComponent</code>. In dieser Komponente wurde ein Formular nach <a href="https://material.angular.io/components/form-field/overview">Material Design</a>-Vorgaben erstellt. Die <code>create.component.ts</code> sieht so aus:</p>
+<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">create/create.component.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">ViewChild</span><span class="p">,</span> <span class="nx">ElementRef</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormControl</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ToastrService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;ngx-toastr&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">PostService</span><span class="p">,</span> <span class="nx">Post</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../post.service&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-create&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./create.component.html&#39;</span><span class="p">,</span>
+  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./create.component.css&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">CreateComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+
+  <span class="err">@</span><span class="nx">ViewChild</span><span class="p">(</span><span class="s1">&#39;fileInput&#39;</span><span class="p">)</span> <span class="nx">fileInput</span><span class="o">:</span> <span class="nx">ElementRef</span><span class="p">;</span>
+  <span class="nx">fileAttr</span> <span class="o">=</span> <span class="s1">&#39;Choose File&#39;</span><span class="p">;</span>
+  <span class="nx">formGroup</span><span class="o">:</span> <span class="nx">FormGroup</span><span class="p">;</span>
+  <span class="nx">titleAlert</span> <span class="o">=</span> <span class="s1">&#39;This field is required&#39;</span><span class="p">;</span>
+  <span class="nx">imgBase64</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="nx">post</span><span class="o">:</span> <span class="nx">Post</span><span class="p">;</span>
+
+  <span class="nx">constructor</span><span class="p">(</span>
+    <span class="kr">private</span> <span class="nx">formBuilder</span><span class="o">:</span> <span class="nx">FormBuilder</span><span class="p">,</span>
+    <span class="kr">private</span> <span class="nx">postService</span><span class="o">:</span> <span class="nx">PostService</span><span class="p">,</span>
+    <span class="kr">private</span> <span class="nx">toastr</span><span class="o">:</span> <span class="nx">ToastrService</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">formBuilder</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+      <span class="nx">inp_title</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+      <span class="nx">inp_location</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+      <span class="nx">uploadFile</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">uploadFileEvt</span><span class="p">(</span><span class="nx">imgFile</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span> <span class="o">&amp;&amp;</span> <span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">fileAttr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+      <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">file</span><span class="o">:</span> <span class="nx">File</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">fileAttr</span> <span class="o">+=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39; - &#39;</span><span class="p">;</span>
+      <span class="p">});</span>
+
+      <span class="c1">// HTML5 FileReader API</span>
+      <span class="kd">const</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+        <span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+        <span class="nx">image</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">rs</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">imgBase64Path</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">imgBase64</span> <span class="o">=</span> <span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1</span><span class="p">);</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;imgBase64Path&#39;</span><span class="p">,</span> <span class="nx">imgBase64Path</span><span class="p">);</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;imgBase64&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">imgBase64</span><span class="p">);</span>
+        <span class="p">};</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">patchValue</span><span class="p">({</span> <span class="nx">uploadFile</span><span class="o">:</span> <span class="nx">reader</span><span class="p">.</span><span class="nx">result</span> <span class="p">});</span>
+      <span class="p">};</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+      <span class="c1">// Reset if duplicate image uploaded again</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">fileInput</span><span class="p">.</span><span class="nx">nativeElement</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">fileAttr</span> <span class="o">=</span> <span class="s1">&#39;Choose File&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">uploadFile</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;uploadFile&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_title</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_title&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_location</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_location&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">async</span> <span class="nx">onSubmit</span><span class="p">()</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">post</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">id</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_title</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+      <span class="nx">location</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_location</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+      <span class="nx">image</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">imgBase64</span>
+    <span class="p">};</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">post</span><span class="p">);</span>
+    <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">postService</span><span class="p">.</span><span class="nx">addPost</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">post</span><span class="p">));</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">toastr</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">create/create.component.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span> <span class="na">novalidate</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">mat-card</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;example-card&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-card-header</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-card-title</span><span class="p">&gt;</span>Post hinzufügen<span class="p">&lt;/</span><span class="nt">mat-card-title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-card-header</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-card-content</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="err">[</span><span class="na">formGroup</span><span class="err">]=&quot;</span><span class="na">formGroup</span><span class="err">&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my-form&quot;</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-element&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post title<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Titel&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_title&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_title.valid &amp;&amp; inp_title.touched&quot;</span><span class="p">&gt;</span>
+                    {{ titleAlert }}
+                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-element&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post location<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Location&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_location&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_location.valid &amp;&amp; inp_location.touched&quot;</span><span class="p">&gt;</span>
+                    {{ titleAlert }}
+                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+                        <span class="c">&lt;!-- Display files names --&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="err">[(</span><span class="na">ngModel</span><span class="err">)]=&quot;</span><span class="na">fileAttr</span><span class="err">&quot;</span> <span class="na">readonly</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="p">/&gt;</span>
+
+                        <span class="c">&lt;!-- Browse Button --&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-flat-button</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span><span class="p">&gt;</span>
+                    Browse File
+                  <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+                    <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+
+                    <span class="c">&lt;!-- Fetch selected filed on change --&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="err">#</span><span class="na">fileInput</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;uploadFile&quot;</span> <span class="err">(</span><span class="na">change</span><span class="err">)=&quot;</span><span class="na">uploadFileEvt</span><span class="err">($</span><span class="na">event</span><span class="err">)&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;uploadFile&quot;</span> <span class="na">multiple</span><span class="o">=</span><span class="s">&quot;multiple&quot;</span> <span class="na">accept</span><span class="o">=</span><span class="s">&quot;image/*&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-card-content</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-card-actions</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-element&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-stroked-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">onSubmit</span><span class="err">()&quot;</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;default&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="err">[</span><span class="na">disabled</span><span class="err">]=&quot;!</span><span class="na">formGroup</span><span class="err">.</span><span class="na">valid</span><span class="err">&quot;</span><span class="p">&gt;</span>
+      Add post
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-card-actions</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">mat-card</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;imgBase64&quot;</span><span class="p">&gt;</span>
+    {{ imgBase64 }}
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>In Zeile <code>15</code> wird eine Variable <code>formGroup</code> vom Typ <code>FormGroup</code> deklariert. Erzeugt wird das Formular mithilfe des <code>FormBuilder</code> (siehe Zeile <code>21</code>) in der <code>ngOnInit()</code>-Funktion (Zeilen <code>25-30</code>). Die drei <code>get</code>-Methoden (Zeilen <code>61-71</code>) dienen dem Zugriff auf die drei einzelnen Formularelemente.</p>
+<p><img alt="frontend" src="../files/56_frontend.png" /></p>
+<p>Am unfrangreichsten ist hier die <code>uploadFileEvt</code>-Methode. Diese wird aufgerufen, wenn eine Bilddatei zum Upload ausgewählt wurde. Prinzipiell ist sogar die Auswahl mehrerer Dateien möglich. In Zeile <code>46</code> wird der Base64-Code des Bildes übergeben, dieser enthält aber noch den String <code>data:image/jpeg;base64,</code>. Dieser wird in Zeile <code>47</code> entfernt und der verbleibende Code in <code>imgBase64</code> gespeichert. </p>
+<p>Ist das gesamte Formular ausgefüllt, wird durch Klicken des <code>Add post</code>-Buttons (siehe <code>create.component.html</code>) die <code>onSubmit()</code>-Methode ausgelöst. In dieser Methode wird das <code>post</code>-Objekt erzeugt, welches an die <code>addPost</code>-Methode des <code>postService</code> übergeben wird.  </p>
+<h3 id="postservicets"><code>post.service.ts</code><a class="headerlink" href="#postservicets" title="Permanent link">&para;</a></h3>
+<p>Der <code>PostService</code> stellt die Verbindung zum Backend dar. Dazu verwendet der <code>PostService</code> das <code>HttpClient</code>- und das <code>HttpHeaders</code>-Modul: </p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">post.service.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpHeaders</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">Post</span> <span class="p">{</span>
+  <span class="nx">id</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+  <span class="nx">title</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nx">location</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nx">image</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">PostService</span> <span class="p">{</span>
+  <span class="nx">apiUrl</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span><span class="o">:</span> <span class="nx">HttpClient</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+
+  <span class="nx">public</span> <span class="k">async</span> <span class="nx">addPost</span><span class="p">(</span><span class="nx">post</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">post</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">headers</span><span class="o">:</span> <span class="k">new</span> <span class="nx">HttpHeaders</span><span class="p">({</span>
+          <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+        <span class="p">}),</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">toPromise</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Derzeit ist im <code>PostService</code> noch nur eine Funktion implementiert, die <code>addPost()</code>. Diese ruft im Backend den Endpunkt <code>POST http://localhost:3000/posts</code> auf und übergibt das <code>post</code>-Objekt, das im <em>Request-Body</em> versendet wird.   </p>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Wir haben uns zwar in Sachen <em>Progressive Web Apps</em> nicht wirklich weiterentwickelt, aber wir haben nun erstmal einige nützliche Hilfsmittel geschaffen, um eine "größere" Anwendung später <em>progressive</em> zu gestalten. Es gibt nun eine Datenbank, die Bilder speichern kann und das passende Backend zur Anbindung der Datenbank. Zur Erleichterung der Dateneingabe in die Datenbank haben wir uns auch ein Frontend erstellt.   </p>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../backend/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Zurück
+                </span>
+                Backend
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../indexeddb/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Weiter
+                </span>
+                IndexedDB
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Jörn Freiheit
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: ['instant', 'tabs'],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
