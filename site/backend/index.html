@@ -446,6 +446,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#testen-des-backends-mit-mocha-und-chai" class="md-nav__link">
+    Testen des Backends mit Mocha und Chai
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -659,6 +666,13 @@
           <li class="md-nav__item">
   <a href="#testen-mit-postman" class="md-nav__link">
     Testen mit Postman
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testen-des-backends-mit-mocha-und-chai" class="md-nav__link">
+    Testen des Backends mit Mocha und Chai
   </a>
   
 </li>
@@ -1960,7 +1974,324 @@ exports const dbConfig = {
         <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
     <span class="p">}</span>
 </code></pre></div>
-<p>ist. Nachdem Sie den dritten datensatz eingefügt haben, können Sie ja auch mal versuchen, ihn wieder zu löschen. </p>
+<p>ist. Nachdem Sie den dritten Datensatz eingefügt haben, können Sie ja auch mal versuchen, ihn wieder zu löschen. </p>
+<h3 id="testen-des-backends-mit-mocha-und-chai">Testen des Backends mit Mocha und Chai<a class="headerlink" href="#testen-des-backends-mit-mocha-und-chai" title="Permanent link">&para;</a></h3>
+<p>Während wir mit Postman uns Ergebnisse der Anfragen nur stichprobenartig anschauen können, schreiben wir mithilfe von <a href="https://mochajs.org/">Mocha</a>  und <a href="https://www.chaijs.com/">Chai</a> "richtige" Tests.</p>
+<p>Zur Installation geben wir im Terminal im <code>backend</code>-Ordner ein:</p>
+<div class="highlight"><pre><span></span><code>npm install --save-dev mocha
+npm install --save-dev chai 
+npm install --save-dev chai-http
+</code></pre></div>
+<p>Danach sieht unsere <code>package.json</code> so aus (enthält auch schon eine weitere Änderung):</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;backend&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="o">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;main&quot;</span><span class="o">:</span> <span class="s2">&quot;server.js&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;module&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scripts&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;watch&quot;</span><span class="o">:</span> <span class="s2">&quot;nodemon ./server.js&quot;</span><span class="p">,</span>
+<span class="hll">        <span class="s2">&quot;test&quot;</span><span class="o">:</span> <span class="s2">&quot;mocha ./tests.js&quot;</span>
+</span>    <span class="p">},</span>
+    <span class="s2">&quot;author&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;license&quot;</span><span class="o">:</span> <span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;express&quot;</span><span class="o">:</span> <span class="s2">&quot;^4.17.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mysql&quot;</span><span class="o">:</span> <span class="s2">&quot;^2.18.1&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;chai&quot;</span><span class="o">:</span> <span class="s2">&quot;^4.3.4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;chai-http&quot;</span><span class="o">:</span> <span class="s2">&quot;^4.3.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mocha&quot;</span><span class="o">:</span> <span class="s2">&quot;^8.4.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nodemon&quot;</span><span class="o">:</span> <span class="s2">&quot;^2.0.7&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Unter den <code>devDependencies</code> wurden also die neu installierten Module hinzugefügt. Beachten Sie auch die Änderung in Zeile <code>9</code>. Dort rufen wir nun <code>mocha</code> unter <code>"scripts"."tests"</code> auf, zusammen mit einer Datei <code>tests.js</code>, die unsere Testfälle enthält. Diese Datei legen wir uns im Ordner <code>backend</code> an und befüllen Sie zunächst wie folgt:</p>
+<div class="tabbed-set" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><label for="__tabbed_17_1">tests.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">chai</span> <span class="nx">from</span> <span class="s1">&#39;chai&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">chaiHttp</span> <span class="nx">from</span> <span class="s1">&#39;chai-http&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">app</span> <span class="nx">as</span> <span class="nx">server</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./server.js&#39;</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">chai</span><span class="p">.</span><span class="nx">should</span><span class="p">();</span>
+
+<span class="nx">chai</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">chaiHttp</span><span class="p">);</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;Posts&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="cm">/*</span>
+<span class="cm">     * Test the /GET route</span>
+<span class="cm">     */</span>
+    <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;/GET /posts&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;it should GET all the posts&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">chai</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">end</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">);</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">(</span><span class="s1">&#39;array&#39;</span><span class="p">);</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">length</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">eql</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span>
+                    <span class="nx">done</span><span class="p">();</span>
+                <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>In den Zeilen <code>1</code>und <code>2</code> importieren wir das <code>chai</code>- und <code>chai-http</code>-Modul. Damit wir auch <code>app</code> als Modul aus der <code>server.js</code> importieren können, muss dieses exportiert werden. Wir fügen dazu in <code>server.js</code> vor <code>const app = express();</code> noch <code>export</code> ein:</p>
+<div class="tabbed-set" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><label for="__tabbed_18_1">server.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">PostController</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./posts.controller.js&#39;</span><span class="p">;</span>
+
+<span class="hll"><span class="k">export</span> <span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</span><span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="mf">3000</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span><span class="p">,</span> <span class="nx">extended</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span> <span class="p">}));</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello FiW!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Endpunkte definieren</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">create</span><span class="p">);</span> <span class="c1">// C</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readAll</span><span class="p">);</span> <span class="c1">// R (all)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readOne</span><span class="p">);</span> <span class="c1">// R (one)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span> <span class="c1">// U</span>
+<span class="nx">app</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="k">delete</span><span class="p">);</span> <span class="c1">// D</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server started and listeneing on port </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb"> ...`</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Zurück zur <code>tests.js</code>:</p>
+<ul>
+<li>Mit <code>describe()</code> in Zeile <code>9</code> beginnt das Testen. Dieser Block enthält alle Tests. Derzeit ist nur ein Test implementiert. </li>
+<li>
+<p>Dieser Test ist in den Zeilen <code>13-24</code> implementiert. Er testet die <code>GET /posts</code>-Anfrage, also das Lesen aller Datensätze. Es wird darin definiert, dass </p>
+<ul>
+<li>die Anfrage mit dem Statuscode <code>200</code> beantwortet werden muss (Zeile <code>18</code>,</li>
+<li>die Rückgabe ein Array sein muss ( Zeile <code>19</code>) und</li>
+<li>die Anzahl der Datensätze (die Länge des Arrays) <code>3</code> sein muss (Zeile <code>20</code>).</li>
+</ul>
+</li>
+</ul>
+<p>Gestartet wird der Test mit </p>
+<div class="highlight"><pre><span></span><code>npm <span class="nb">test</span>
+</code></pre></div>
+<p>im <code>backend</code>-Ordner. Die Ausgabe sieht so aus: </p>
+<div class="highlight"><pre><span></span><code>&gt; backend@1.0.0 <span class="nb">test</span>
+&gt; mocha ./tests.js
+
+Server started and listeneing on port <span class="m">3000</span> ...
+
+
+  Posts
+    /GET /posts
+Connected with database ... 
+      ✓ it should GET all the posts <span class="o">(</span>65ms<span class="o">)</span>
+
+
+  <span class="m">1</span> passing <span class="o">(</span>75ms<span class="o">)</span>
+</code></pre></div>
+<p>Das <code>Connected with database ...</code> stört dabei und sollte für das Testen wohl am besten aus der <code>db.connection.js</code> entfernt werden. </p>
+<p>Wir fügen noch einen weiteren Test für <code>POST /posts</code> ein. Weil die Daten für <code>image</code> aber so groß sind, prüfen wir stattdessen inen Fehlerfall, nämlich, wenn wir versuchen einen unvollständigen Datensatz einzufügen. Wir versuchen einen Datensatz einzufügen, bei dem die <code>image</code>-Eigenschaft fehlt. Dafür erwarten wir einen Fehler. Die weitere Testfunktion dazu ist in den Zeilen <code>27-44</code> implementiert:</p>
+<div class="tabbed-set" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><label for="__tabbed_19_1">tests.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">chai</span> <span class="nx">from</span> <span class="s1">&#39;chai&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">chaiHttp</span> <span class="nx">from</span> <span class="s1">&#39;chai-http&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">app</span> <span class="nx">as</span> <span class="nx">server</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./server.js&#39;</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">should</span> <span class="o">=</span> <span class="nx">chai</span><span class="p">.</span><span class="nx">should</span><span class="p">();</span>
+<span class="hll"><span class="kd">let</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nx">chai</span><span class="p">.</span><span class="nx">expect</span><span class="p">;</span>
+</span>
+<span class="nx">chai</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">chaiHttp</span><span class="p">);</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;Posts&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="cm">/*</span>
+<span class="cm">     * Test the /GET route</span>
+<span class="cm">     */</span>
+    <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;/GET /posts&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;it should GET all the posts&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">chai</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">end</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">);</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">(</span><span class="s1">&#39;array&#39;</span><span class="p">);</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">length</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">eql</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span>
+                    <span class="nx">done</span><span class="p">();</span>
+                <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+
+    <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;/POST /posts&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;it should not POST a post without images field&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;another test post&quot;</span><span class="p">,</span>
+                <span class="nx">location</span><span class="o">:</span> <span class="s2">&quot;Treskowallee 8&quot;</span>
+            <span class="p">}</span>
+            <span class="nx">chai</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">post</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">end</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">);</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">);</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">property</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">);</span>
+                    <span class="nx">expect</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">message</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">);</span>
+                    <span class="nx">done</span><span class="p">();</span>
+                <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Beachten Sie auch, dass wir Zeile <code>6</code> hinzugefügt haben, um einmal nicht nur <code>should</code>, sondern auch <code>expect</code> auszuprobieren. Die Ausführung der Tests erzeugt folgende Ausgabe:</p>
+<div class="highlight"><pre><span></span><code>&gt; backend@1.0.0 <span class="nb">test</span>
+&gt; mocha ./tests.js
+
+Server started and listeneing on port <span class="m">3000</span> ...
+
+
+  Posts
+    /GET /posts
+Connected with database ... 
+      ✓ it should GET all the posts <span class="o">(</span>61ms<span class="o">)</span>
+    /POST /posts
+      ✓ it should not POST a post without images field
+
+
+  <span class="m">2</span> passing <span class="o">(</span>88ms<span class="o">)</span>
+</code></pre></div>
+<p>Das sollte nur demonstrieren, dass die Implementierung von Testfällen für das Backend möglich ist. Die recht gute Dokumentationen für <a href="https://www.chaijs.com/api/">Chai</a> hilft Ihnen sicher weiter. </p>
                 
               
               

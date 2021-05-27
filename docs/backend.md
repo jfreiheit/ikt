@@ -979,7 +979,224 @@ Probieren Sie in Postman auch ruhig mal `GET http://localhost:3000/posts/1` und/
     }
 ``` 
 
-ist. Nachdem Sie den dritten datensatz eingefügt haben, können Sie ja auch mal versuchen, ihn wieder zu löschen. 
+ist. Nachdem Sie den dritten Datensatz eingefügt haben, können Sie ja auch mal versuchen, ihn wieder zu löschen. 
+
+### Testen des Backends mit Mocha und Chai
+
+Während wir mit Postman uns Ergebnisse der Anfragen nur stichprobenartig anschauen können, schreiben wir mithilfe von [Mocha](https://mochajs.org/)  und [Chai](https://www.chaijs.com/) "richtige" Tests.
+
+Zur Installation geben wir im Terminal im `backend`-Ordner ein:
+
+```bash
+npm install --save-dev mocha
+npm install --save-dev chai 
+npm install --save-dev chai-http
+```
+
+Danach sieht unsere `package.json` so aus (enthält auch schon eine weitere Änderung):
+
+```javascript linenums="1" hl_lines="9"
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "watch": "nodemon ./server.js",
+        "test": "mocha ./tests.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mysql": "^2.18.1"
+    },
+    "devDependencies": {
+        "chai": "^4.3.4",
+        "chai-http": "^4.3.0",
+        "mocha": "^8.4.0",
+        "nodemon": "^2.0.7"
+    }
+}
+```
+
+Unter den `devDependencies` wurden also die neu installierten Module hinzugefügt. Beachten Sie auch die Änderung in Zeile `9`. Dort rufen wir nun `mocha` unter `"scripts"."tests"` auf, zusammen mit einer Datei `tests.js`, die unsere Testfälle enthält. Diese Datei legen wir uns im Ordner `backend` an und befüllen Sie zunächst wie folgt:
+
+=== "tests.js"
+	```js linenums="1"
+	import chai from 'chai';
+	import chaiHttp from 'chai-http';
+	import { app as server } from './server.js';
+
+	let should = chai.should();
+
+	chai.use(chaiHttp);
+
+	describe('Posts', () => {
+	    /*
+	     * Test the /GET route
+	     */
+	    describe('/GET /posts', () => {
+	        it('it should GET all the posts', (done) => {
+	            chai.request(server)
+	                .get('/posts')
+	                .end((err, res) => {
+	                    res.should.have.status(200);
+	                    res.body.should.be.a('array');
+	                    res.body.length.should.be.eql(3);
+	                    done();
+	                });
+	        });
+	    });
+
+	});
+	``` 
+
+In den Zeilen `1`und `2` importieren wir das `chai`- und `chai-http`-Modul. Damit wir auch `app` als Modul aus der `server.js` importieren können, muss dieses exportiert werden. Wir fügen dazu in `server.js` vor `const app = express();` noch `export` ein:
+
+=== "server.js"
+	```js linenums="1" hl_lines="4"
+	import express from 'express';
+	import { PostController } from './posts.controller.js';
+
+	export const app = express();
+	const PORT = 3000;
+
+	app.use(express.urlencoded({ limit: '20mb', extended: true }));
+	app.use(express.json({ limit: '20mb' }));
+
+	app.get('/', (request, response) => {
+	    response.send('Hello FiW!');
+	});
+
+	// Endpunkte definieren
+	app.post("/posts", PostController.create); // C
+	app.get("/posts", PostController.readAll); // R (all)
+	app.get("/posts/:postId", PostController.readOne); // R (one)
+	app.put("/posts/:postId", PostController.update); // U
+	app.delete("/posts/:postId", PostController.delete); // D
+
+	app.listen(PORT, (error) => {
+	    if (error) {
+	        console.log(error);
+	    } else {
+	        console.log(`Server started and listeneing on port ${PORT} ...`);
+	    }
+	});
+	``` 
 
 
+Zurück zur `tests.js`:
 
+- Mit `describe()` in Zeile `9` beginnt das Testen. Dieser Block enthält alle Tests. Derzeit ist nur ein Test implementiert. 
+- Dieser Test ist in den Zeilen `13-24` implementiert. Er testet die `GET /posts`-Anfrage, also das Lesen aller Datensätze. Es wird darin definiert, dass 
+
+	- die Anfrage mit dem Statuscode `200` beantwortet werden muss (Zeile `18`,
+	- die Rückgabe ein Array sein muss ( Zeile `19`) und
+	- die Anzahl der Datensätze (die Länge des Arrays) `3` sein muss (Zeile `20`).
+
+Gestartet wird der Test mit 
+
+```bash
+npm test
+```
+
+im `backend`-Ordner. Die Ausgabe sieht so aus: 
+
+```bash
+
+> backend@1.0.0 test
+> mocha ./tests.js
+
+Server started and listeneing on port 3000 ...
+
+
+  Posts
+    /GET /posts
+Connected with database ... 
+      ✓ it should GET all the posts (65ms)
+
+
+  1 passing (75ms)
+
+```
+
+Das `Connected with database ...` stört dabei und sollte für das Testen wohl am besten aus der `db.connection.js` entfernt werden. 
+
+Wir fügen noch einen weiteren Test für `POST /posts` ein. Weil die Daten für `image` aber so groß sind, prüfen wir stattdessen inen Fehlerfall, nämlich, wenn wir versuchen einen unvollständigen Datensatz einzufügen. Wir versuchen einen Datensatz einzufügen, bei dem die `image`-Eigenschaft fehlt. Dafür erwarten wir einen Fehler. Die weitere Testfunktion dazu ist in den Zeilen `27-44` implementiert:
+
+=== "tests.js"
+	```js linenums="1" hl_lines="6"
+	import chai from 'chai';
+	import chaiHttp from 'chai-http';
+	import { app as server } from './server.js';
+
+	let should = chai.should();
+	let expect = chai.expect;
+
+	chai.use(chaiHttp);
+
+	describe('Posts', () => {
+	    /*
+	     * Test the /GET route
+	     */
+	    describe('/GET /posts', () => {
+	        it('it should GET all the posts', (done) => {
+	            chai.request(server)
+	                .get('/posts')
+	                .end((err, res) => {
+	                    res.should.have.status(200);
+	                    res.body.should.be.a('array');
+	                    res.body.length.should.be.eql(3);
+	                    done();
+	                });
+	        });
+	    });
+
+	    describe('/POST /posts', () => {
+	        it('it should not POST a post without images field', (done) => {
+	            let post = {
+	                title: "another test post",
+	                location: "Treskowallee 8"
+	            }
+	            chai.request(server)
+	                .post('/posts')
+	                .send(post)
+	                .end((err, res) => {
+	                    res.should.have.status(500);
+	                    res.body.should.be.a('object');
+	                    res.body.should.have.property('message');
+	                    expect(res.body.message).to.include('image');
+	                    done();
+	                });
+	        });
+	    });
+
+	});
+	``` 
+
+Beachten Sie auch, dass wir Zeile `6` hinzugefügt haben, um einmal nicht nur `should`, sondern auch `expect` auszuprobieren. Die Ausführung der Tests erzeugt folgende Ausgabe:
+
+```bash
+
+> backend@1.0.0 test
+> mocha ./tests.js
+
+Server started and listeneing on port 3000 ...
+
+
+  Posts
+    /GET /posts
+Connected with database ... 
+      ✓ it should GET all the posts (61ms)
+    /POST /posts
+      ✓ it should not POST a post without images field
+
+
+  2 passing (88ms)
+
+
+```
+
+Das sollte nur demonstrieren, dass die Implementierung von Testfällen für das Backend möglich ist. Die recht gute Dokumentationen für [Chai](https://www.chaijs.com/api/) hilft Ihnen sicher weiter. 

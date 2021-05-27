@@ -1,6 +1,8 @@
 ## Frontend
 
-Um die Dateneingabe zu vereinfachen, erstellen wir uns ein einfaches Frontend mithilfe von Angular. Der im Folgenden beschriebene Code ist unter [GitHub](https://github.com/jfreiheit/ikt_frontend) verfügbar. Dieses Frontend ist zunächst bewusst einfach gehalten und enthält nur eine einzige Komponente `CreateComponent` zum Erstellen eines Datensatzes. Da wir [Angular Material](https://material.angular.io/) verwenden, sieht die `app.module.ts` wie folgt aus:
+Um die Dateneingabe zu vereinfachen, erstellen wir uns ein einfaches Frontend mithilfe von [Angular]()https://angular.io/. Wie beim Backend auch, erstellen wir dieses Frontend Schritt für Schritt von Beginn an. 
+
+Der im Folgenden beschriebene Code ist unter [GitHub](https://github.com/jfreiheit/ikt_frontend) verfügbar. Dieses Frontend ist zunächst bewusst einfach gehalten und enthält nur eine einzige Komponente `CreateComponent` zum Erstellen eines Datensatzes. Da wir [Angular Material](https://material.angular.io/) verwenden, sieht die `app.module.ts` wie folgt aus:
 
 === "app.module.ts"
     ```js

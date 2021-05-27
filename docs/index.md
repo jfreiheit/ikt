@@ -78,13 +78,13 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 	- Sourcecode zur Vorlesung am 12.05.2021 [hier zum Herunterladen](./files/04_caching.zip)
 
 
-##### Woche 5 (Datenbank und Backend)
+##### Woche 6 (Datenbank und Backend)
 
-??? question "Woche 5 - Datenbank und Backend"
+??? question "Woche 6 - Datenbank und Backend"
 
-	- Diese Woche bereiten wir zunächst die nächsten Kapitel vor. Dazu benötigen wir eine [Datenbank und ein Backend](./backend/#rest-server), das an die Datenbank angebunden ist. Weil die Dateneingabe von Bildern in die Datenbank recht mühselig ist, bauen wir uns auch noch ein [Frontend](./backend/#frontend). 
-	- In der Übung sollen Sie diese Frontend dahingehend erweitern, dass die Daten aus der Datenbank ausgelesen und angezeigt werden. Arbeiten Sie dazu das [Backend](./backend/#rest-server)-Kapitel und das [Frontend](./backend/#frontend)-Kapitel durch. 
-	- Video zur Vorlesung am 19.05.2021
-		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=873c85b33cbb20f2cdd48d1b4f324e79&width=720&height=407&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="407" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- Diese Woche bereiten wir zunächst die nächsten Kapitel vor. Dazu benötigen wir eine [Datenbank und ein Backend](./backend/#rest-server), das an die Datenbank angebunden ist. 
+	- In der Übung soll das Backend um eine weitere Funktion erweiteret werden. 
+	- Video zur Vorlesung am 26.05.2021
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=a6e060a195129540a18a7be89a3738e7&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 
 
