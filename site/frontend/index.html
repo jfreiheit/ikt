@@ -361,22 +361,43 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#appcomponent" class="md-nav__link">
-    AppComponent
+  <a href="#projekt-erstellen-ng-new" class="md-nav__link">
+    Projekt erstellen - ng new
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#createcomponent" class="md-nav__link">
-    CreateComponent
+  <a href="#single-page-application" class="md-nav__link">
+    Single Page Application
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#postservicets" class="md-nav__link">
-    post.service.ts
+  <a href="#angular-material-und-schematics" class="md-nav__link">
+    Angular Material und Schematics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neue-komponente-und-routing" class="md-nav__link">
+    Neue Komponente und Routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ein-formular-erstellen" class="md-nav__link">
+    Ein Formular erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#das-frontend-mit-dem-backend-verbinden" class="md-nav__link">
+    Das Frontend mit dem Backend verbinden
   </a>
   
 </li>
@@ -485,22 +506,43 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#appcomponent" class="md-nav__link">
-    AppComponent
+  <a href="#projekt-erstellen-ng-new" class="md-nav__link">
+    Projekt erstellen - ng new
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#createcomponent" class="md-nav__link">
-    CreateComponent
+  <a href="#single-page-application" class="md-nav__link">
+    Single Page Application
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#postservicets" class="md-nav__link">
-    post.service.ts
+  <a href="#angular-material-und-schematics" class="md-nav__link">
+    Angular Material und Schematics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neue-komponente-und-routing" class="md-nav__link">
+    Neue Komponente und Routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ein-formular-erstellen" class="md-nav__link">
+    Ein Formular erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#das-frontend-mit-dem-backend-verbinden" class="md-nav__link">
+    Das Frontend mit dem Backend verbinden
   </a>
   
 </li>
@@ -530,115 +572,395 @@
                   <h1>Frontend</h1>
                 
                 <h2 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h2>
-<p>Um die Dateneingabe zu vereinfachen, erstellen wir uns ein einfaches Frontend mithilfe von <a href="">Angular</a><a href="https://angular.io/">https://angular.io/</a>. Wie beim Backend auch, erstellen wir dieses Frontend Schritt für Schritt von Beginn an. </p>
-<p>Der im Folgenden beschriebene Code ist unter <a href="https://github.com/jfreiheit/ikt_frontend">GitHub</a> verfügbar. Dieses Frontend ist zunächst bewusst einfach gehalten und enthält nur eine einzige Komponente <code>CreateComponent</code> zum Erstellen eines Datensatzes. Da wir <a href="https://material.angular.io/">Angular Material</a> verwenden, sieht die <code>app.module.ts</code> wie folgt aus:</p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">app.module.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-
-<span class="k">import</span> <span class="p">{</span> <span class="nx">AppRoutingModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app-routing.module&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app.component&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserAnimationsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser/animations&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">LayoutModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatToolbarModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/toolbar&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatButtonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatInputModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/input&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatSidenavModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/sidenav&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatListModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/list&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatCardModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/card&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">MatFormFieldModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/form-field&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClientModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">ReactiveFormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">ToastrModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;ngx-toastr&#39;</span><span class="p">;</span>
-
-<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
-  <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span>
-    <span class="nx">AppComponent</span><span class="p">,</span>
-    <span class="nx">CreateComponent</span>
-  <span class="p">],</span>
-  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
-    <span class="nx">BrowserModule</span><span class="p">,</span>
-    <span class="nx">AppRoutingModule</span><span class="p">,</span>
-    <span class="nx">BrowserAnimationsModule</span><span class="p">,</span>
-    <span class="nx">HttpClientModule</span><span class="p">,</span>
-    <span class="nx">ReactiveFormsModule</span><span class="p">,</span>
-    <span class="nx">FormsModule</span><span class="p">,</span>
-    <span class="nx">LayoutModule</span><span class="p">,</span>
-    <span class="nx">MatToolbarModule</span><span class="p">,</span>
-    <span class="nx">MatButtonModule</span><span class="p">,</span>
-    <span class="nx">MatInputModule</span><span class="p">,</span>
-    <span class="nx">MatSidenavModule</span><span class="p">,</span>
-    <span class="nx">MatIconModule</span><span class="p">,</span>
-    <span class="nx">MatListModule</span><span class="p">,</span>
-    <span class="nx">MatCardModule</span><span class="p">,</span>
-    <span class="nx">MatFormFieldModule</span><span class="p">,</span>
-    <span class="nx">ToastrModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">({</span>
-      <span class="nx">timeOut</span><span class="o">:</span> <span class="mf">2000</span><span class="p">,</span>
-      <span class="nx">preventDuplicates</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="p">}),</span>
-  <span class="p">],</span>
-  <span class="nx">providers</span><span class="o">:</span> <span class="p">[],</span>
-  <span class="nx">bootstrap</span><span class="o">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
-<span class="p">})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+<p>Um die Dateneingabe zu vereinfachen, erstellen wir uns ein einfaches Frontend mithilfe von <a href="https://angular.io/">Angular</a>. Wie beim Backend auch, erstellen wir dieses Frontend Schritt für Schritt von Beginn an. </p>
+<p><a href="https://angular.io/">Angular</a> ist ein modernes JavaScript-Framework zur Entwicklung moderner Weboberflächen. Es gehört neben <a href="https://reactjs.org/">React.js</a> und <a href="https://vuejs.org/">Vue.js</a> zu den meisteverwendeten Frameworks für die Entwicklung sogenannter <em>Single-Page-Applikationen</em>. Um einfacher mit <code>Angular</code> zu entwickeln zu können, benötigen wir das <a href="https://angular.io/cli">Angular-Command-Line-Interface (CLI)</a>. Dieses installieren wir mithilfe des Paketmanagers <code>npm</code>. Geben Sie dazu ins Terminal </p>
+<div class="highlight"><pre><span></span><code>npm install -g @angular/cli
 </code></pre></div>
-</div>
-</div>
-<p>Als einzige Route ist <code>/create</code> in der <code>app-routing.module.ts</code> definiert, wodurch die <code>CreateComponent</code> aufgerufen wird:</p>
-<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">app-routing.module.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
-
-<span class="kd">const</span> <span class="nx">routes</span><span class="o">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="nx">CreateComponent</span> <span class="p">},</span>
-<span class="p">];</span>
-
-<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
-  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">routes</span><span class="p">)],</span>
-  <span class="nx">exports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">]</span>
-<span class="p">})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppRoutingModule</span> <span class="p">{</span> <span class="p">}</span>
+<p>ein. Sie können prüfen, ob die Installation erfolgreich war, indem Sie in das Terminal </p>
+<div class="highlight"><pre><span></span><code>ng --version
 </code></pre></div>
-</div>
-</div>
-<h3 id="appcomponent"><code>AppComponent</code><a class="headerlink" href="#appcomponent" title="Permanent link">&para;</a></h3>
-<p>Die <code>AppComponent</code> enthält ausschließlich das mithilfe des <a href="https://material.angular.io/guide/schematics#navigation-schematic">Navigation schematic</a> erstellte Navigationsgerüst. Als Inhalt in diesem Gerüst ist <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> enthalten, um die einzelnen Komponenten einzubinden:</p>
-<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">app.component.html</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">mat-sidenav-container</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav-container&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-sidenav</span> <span class="err">#</span><span class="na">drawer</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav&quot;</span> <span class="na">fixedInViewport</span> <span class="err">[</span><span class="na">attr</span><span class="err">.</span><span class="na">role</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">dialog</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">navigation</span><span class="err">&#39;&quot;</span> <span class="err">[</span><span class="na">mode</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">over</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">side</span><span class="err">&#39;&quot;</span> <span class="err">[</span><span class="na">opened</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">===</span> <span class="na">false</span><span class="err">&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>Menu<span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">routerLink</span><span class="o">=</span><span class="s">&quot;/create&quot;</span> <span class="na">routerLinkActive</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;</span>Neuen Datensatz<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-sidenav</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">mat-toolbar</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Toggle sidenav&quot;</span> <span class="na">mat-icon-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">drawer</span><span class="err">.</span><span class="na">toggle</span><span class="err">()&quot;</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;isHandset$ | async&quot;</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-icon</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Side nav toggle icon&quot;</span><span class="p">&gt;</span>menu<span class="p">&lt;/</span><span class="nt">mat-icon</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Posts verwalten<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">router-outlet</span><span class="p">&gt;&lt;/</span><span class="nt">router-outlet</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">mat-sidenav-container</span><span class="p">&gt;</span>
-</code></pre></div>
-</div>
-<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">app.component.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">BreakpointObserver</span><span class="p">,</span> <span class="nx">Breakpoints</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">shareReplay</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+<p>eingeben. Es sollte etwas in der Art ausgeben: </p>
+<div class="highlight"><pre><span></span><code>     _                      _                 ____ _     ___
+    / <span class="se">\ </span>  _ __   __ _ _   _<span class="p">|</span> <span class="p">|</span> __ _ _ __     / ___<span class="p">|</span> <span class="p">|</span>   <span class="p">|</span>_ _<span class="p">|</span>
+   / △ <span class="se">\ </span><span class="p">|</span> <span class="s1">&#39;_ \ / _` | | | | |/ _` | &#39;</span>__<span class="p">|</span>   <span class="p">|</span> <span class="p">|</span>   <span class="p">|</span> <span class="p">|</span>    <span class="p">|</span> <span class="p">|</span>
+  / ___ <span class="se">\|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="p">|</span>_<span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="p">|</span>      <span class="p">|</span> <span class="p">|</span>___<span class="p">|</span> <span class="p">|</span>___ <span class="p">|</span> <span class="p">|</span>
+ /_/   <span class="se">\_\_</span><span class="p">|</span> <span class="p">|</span>_<span class="p">|</span><span class="se">\_</span>_, <span class="p">|</span><span class="se">\_</span>_,_<span class="p">|</span>_<span class="p">|</span><span class="se">\_</span>_,_<span class="p">|</span>_<span class="p">|</span>       <span class="se">\_</span>___<span class="p">|</span>_____<span class="p">|</span>___<span class="p">|</span>
+                <span class="p">|</span>___/
 
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+
+Angular CLI: <span class="m">11</span>.0.1
+Node: <span class="m">14</span>.15.0
+OS: darwin x64
+
+Angular: 
+... 
+Ivy Workspace: 
+
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    <span class="m">0</span>.1100.1 <span class="o">(</span>cli-only<span class="o">)</span>
+@angular-devkit/core         <span class="m">11</span>.0.1 <span class="o">(</span>cli-only<span class="o">)</span>
+@angular-devkit/schematics   <span class="m">11</span>.0.1 <span class="o">(</span>cli-only<span class="o">)</span>
+@schematics/angular          <span class="m">11</span>.0.1 <span class="o">(</span>cli-only<span class="o">)</span>
+@schematics/update           <span class="m">0</span>.1100.1 <span class="o">(</span>cli-only<span class="o">)</span>
+</code></pre></div>
+<h4 id="projekt-erstellen-ng-new">Projekt erstellen - ng new<a class="headerlink" href="#projekt-erstellen-ng-new" title="Permanent link">&para;</a></h4>
+<p>Um ein Angular-Projekt zu erstellen, wird der Befehl <code>ng new &lt;projekt&gt;</code> verwenden. Wir nennen das Projekt <code>frontend</code> und geben deshalb </p>
+<div class="highlight"><pre><span></span><code>ng new frontend
+</code></pre></div>
+<p>ins Terminal ein. </p>
+<ul>
+<li>Die Frage nach <code>stricter type checking</code> beantworten wir mit <code>N</code>, also <code>Enter</code>. Das macht unser Leben etwas leichter. Fortgeschrittene Angular-Programmiererinnen können aber auch gerne mit <code>y</code> antworten. </li>
+<li>Die Frage nach <code>routing</code> beantworten wir mit <code>y</code>, d.h. hier wählen wir nicht die Standardantwort! <code>Routing</code> erläutern wir gleich noch. </li>
+<li>Bei den Stylesheets entscheiden wir uns für <code>CSS</code>, können also einfach mit <code>Enter</code> bestätigen. </li>
+</ul>
+<p>Jetzt sollte das Projekt eigentlich fehlerfrei erstellt worden sein. Aktuell wirft die Angular CLi jedoch einen Fehler, der vielleicht bei einigen von Ihnen auch auftritt <a href="https://stackoverflow.com/questions/67433893/unable-to-resolve-dependency-tree-error-for-creating-new-angular-project">Stackoverflow</a>:</p>
+<div class="highlight"><pre><span></span><code>⠹ Installing packages <span class="o">(</span>npm<span class="o">)</span>...npm ERR! code ERESOLVE
+npm ERR! ERESOLVE unable to resolve dependency tree
+npm ERR! 
+npm ERR! While resolving: frontend@0.0.0
+npm ERR! Found: jasmine-core@3.6.0
+npm ERR! node_modules/jasmine-core
+npm ERR!   dev jasmine-core@<span class="s2">&quot;~3.6.0&quot;</span> from the root project
+npm ERR! 
+npm ERR! Could not resolve dependency:
+npm ERR! peer jasmine-core@<span class="s2">&quot;&gt;=3.7.1&quot;</span> from karma-jasmine-html-reporter@1.6.0
+npm ERR! node_modules/karma-jasmine-html-reporter
+npm ERR!   dev karma-jasmine-html-reporter@<span class="s2">&quot;^1.5.0&quot;</span> from the root project
+npm ERR! 
+npm ERR! Fix the upstream dependency conflict, or retry
+npm ERR! this <span class="nb">command</span> with --force, or --legacy-peer-deps
+npm ERR! to accept an incorrect <span class="o">(</span>and potentially broken<span class="o">)</span> dependency resolution.
+npm ERR! 
+npm ERR! See /Users/jornfreiheit/.npm/eresolve-report.txt <span class="k">for</span> a full report.
+
+npm ERR! A <span class="nb">complete</span> log of this run can be found <span class="k">in</span>:
+npm ERR!     /Users/jornfreiheit/.npm/_logs/2021-05-28T06_28_54_229Z-debug.log
+✖ Package install failed, see above.
+The Schematic workflow failed. See above.
+</code></pre></div>
+<p>In dem oben gezeigten <a href="https://stackoverflow.com/questions/67433893/unable-to-resolve-dependency-tree-error-for-creating-new-angular-project">Stackoverflow</a>-Post wird vorgeschlagen, in der <code>package.json</code> die Versionsnummern für </p>
+<ul>
+<li><code>"jasmine-core"</code> von <code>3.6.0</code> auf <code>3.7.1</code> und für </li>
+<li><code>"karma-jasmine-html-reporter"</code> von <code>1.5.0</code> auf <code>1.6.0</code> zu ändern und dann</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>npm install
+</code></pre></div>
+im Projektordner auszuführen. Das klappt auch (klappte bei mir). Die <code>package.json</code> sieht dann also so aus:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll"><span class="p">{</span>
+</span>    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;frontend&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="o">:</span> <span class="s2">&quot;0.0.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scripts&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ng&quot;</span><span class="o">:</span> <span class="s2">&quot;ng&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="o">:</span> <span class="s2">&quot;ng serve&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;build&quot;</span><span class="o">:</span> <span class="s2">&quot;ng build&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;test&quot;</span><span class="o">:</span> <span class="s2">&quot;ng test&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lint&quot;</span><span class="o">:</span> <span class="s2">&quot;ng lint&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;e2e&quot;</span><span class="o">:</span> <span class="s2">&quot;ng e2e&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;private&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">&quot;dependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;@angular/animations&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@angular/common&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@angular/compiler&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@angular/core&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@angular/forms&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@angular/platform-browser&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@angular/platform-browser-dynamic&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@angular/router&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rxjs&quot;</span><span class="o">:</span> <span class="s2">&quot;~6.6.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tslib&quot;</span><span class="o">:</span> <span class="s2">&quot;^2.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;zone.js&quot;</span><span class="o">:</span> <span class="s2">&quot;~0.10.2&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;@angular-devkit/build-angular&quot;</span><span class="o">:</span> <span class="s2">&quot;~0.1100.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@angular/cli&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@angular/compiler-cli&quot;</span><span class="o">:</span> <span class="s2">&quot;~11.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@types/jasmine&quot;</span><span class="o">:</span> <span class="s2">&quot;~3.6.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;@types/node&quot;</span><span class="o">:</span> <span class="s2">&quot;^12.11.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;codelyzer&quot;</span><span class="o">:</span> <span class="s2">&quot;^6.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;jasmine-core&quot;</span><span class="o">:</span> <span class="s2">&quot;~3.7.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;jasmine-spec-reporter&quot;</span><span class="o">:</span> <span class="s2">&quot;~5.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;karma&quot;</span><span class="o">:</span> <span class="s2">&quot;~5.1.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;karma-chrome-launcher&quot;</span><span class="o">:</span> <span class="s2">&quot;~3.1.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;karma-coverage&quot;</span><span class="o">:</span> <span class="s2">&quot;~2.0.3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;karma-jasmine&quot;</span><span class="o">:</span> <span class="s2">&quot;~4.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;karma-jasmine-html-reporter&quot;</span><span class="o">:</span> <span class="s2">&quot;^1.6.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;protractor&quot;</span><span class="o">:</span> <span class="s2">&quot;~7.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ts-node&quot;</span><span class="o">:</span> <span class="s2">&quot;~8.3.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tslint&quot;</span><span class="o">:</span> <span class="s2">&quot;~6.1.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;typescript&quot;</span><span class="o">:</span> <span class="s2">&quot;~4.0.2&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Die Anweisung <code>npm install</code> im Projekte-Ordner führt dazu, dass alle Abhängigkeiten, die in der Datei <code>package.json</code> 
+definiert sind, geladen und das <code>node_modules</code>-Verzeichnis erstellt. Siehe z.B. <a href="https://www.stackchief.com/tutorials/npm%20install%20%7C%20how%20it%20works">hier</a>. Sollten Sie aufgefordert werden, <code>npm audit fix</code> oder <code>npm audit fix --force</code> auszuführen, weil es noch <code>high vulnerabilities</code> gibt, dann führen Sie einfach </p>
+<p><div class="highlight"><pre><span></span><code>npm audit fix --force
+</code></pre></div>
+aus. Sollte auch das noch zu Fehlern führen, können Sie auch </p>
+<div class="highlight"><pre><span></span><code>npm install --legacy-peer-deps
+</code></pre></div>
+<p>versuchen. Danach geben Sie</p>
+<div class="highlight"><pre><span></span><code>ng serve
+</code></pre></div>
+<p>ein. Es werden die entsprechenden TypeScript-Dateien compiliert und es erscheint am Ende eine Ausgabe, wie z.B.</p>
+<p><div class="highlight"><pre><span></span><code>⠋ Generating browser application bundles...****************************************************************************************
+This is a simple server for use in testing or debugging Angular applications locally.
+It hasn&#39;t been reviewed for security issues.
+
+DON&#39;T USE IT FOR PRODUCTION!
+****************************************************************************************
+Compiling @angular/core : es2015 as esm2015
+Compiling @angular/common : es2015 as esm2015
+Compiling @angular/platform-browser : es2015 as esm2015
+Compiling @angular/router : es2015 as esm2015
+Compiling @angular/platform-browser-dynamic : es2015 as esm2015
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files | Names         |      Size
+main.js             | main          | 362.07 kB
+polyfills.js        | polyfills     |  44.15 kB
+runtime.js          | runtime       |   1.09 kB
+styles.css          | styles        |   0 bytes
+
+                    | Initial Total | 407.31 kB
+
+Build at: 2021-05-28T12:19:12.354Z - Hash: b1611690e9f20b1506e4 - Time: 28973ms
+
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+4 unchanged chunks
+
+Build at: 2021-05-28T12:19:13.393Z - Hash: 52a9999d2b3b3c4923f4 - Time: 643ms
+
+✔ Compiled successfully.
+</code></pre></div>
+Wenn Sie aber einmal <code>ng serve</code> ausgeführt haben, wird im Browser automatisch auf die Änderungen reagiert. Sie müssen also nicht jedes Mal neu <code>ng serve</code> eingeben, bzw. nicht jedes Mal neu auf das grüne Dreieck in Ihrer IDE klicken: <img alt="ngserve" src="../files/86_ngserve.png" /></p>
+<p>Öffnen Sie Ihren Browser und geben Sie als URL</p>
+<div class="highlight"><pre><span></span><code>http://localhost:4200
+</code></pre></div>
+<p>ein. Folgende Seite sollte erscheinen:</p>
+<p><img alt="Webseite nach Erstellung eines neuen Projektes" src="../files/01_angular.png" /></p>
+<p>Öffnen Sie das Projekt in einer IDE. Die Projektstruktur ist wie folgt: </p>
+<div class="highlight"><pre><span></span><code>README.md
+angular.json
+e2e
+karma.conf.js
+node_modules
+package-lock.json
+package.json
+src
+<span class="p">|</span>-- app
+<span class="p">|</span>   <span class="p">|</span>-- app-routing.module.ts
+<span class="p">|</span>   <span class="p">|</span>-- app.component.css
+<span class="p">|</span>   <span class="p">|</span>-- app.component.html
+<span class="p">|</span>   <span class="p">|</span>-- app.component.spec.ts
+<span class="p">|</span>   <span class="p">|</span>-- app.component.ts
+<span class="p">|</span>   <span class="p">|</span>-- app.module.ts
+<span class="p">|</span>
+<span class="p">|</span>-- assets
+<span class="p">|</span>-- environments
+<span class="p">|</span>-- favicon.ico
+<span class="p">|</span>-- index.html
+<span class="p">|</span>-- main.ts
+<span class="p">|</span>-- polyfills.ts
+<span class="p">|</span>-- styles.css
+<span class="p">|</span>-- test.ts
+
+tsconfig.app.json
+tsconfig.json
+tsconfig.spec.json
+tslint.json
+</code></pre></div>
+<ul>
+<li>Die meiste Arbeit wird im <code>src</code>-Ordner erledigt. Darin befindet sich (wird sich befinden) der Code unserer Anwendung.</li>
+<li>Darin der wichtigste Ordner ist der <code>app</code>-Ordner.
+Hier werden wir unsere Module, Komponenten und Services hinzufügen.  </li>
+<li>In dem <code>assets</code>-Ordner werden Bilder, Icons und Daten abgelegt.</li>
+<li>Der <code>node_modules</code>-Ordner enthält alle benötigten
+3<sup>rd</sup>-party-libraries. Welche das sind, wird in der Datei
+<code>package.json</code> als <em>dependencies</em> definiert.
+Mithilfe des Befehls <code>npm install</code>werden alle benötigten
+Module dem Ordner <code>node_modules</code> hinzugefügt.</li>
+<li>Der Ordner <code>environments</code> enthält die notwendigen
+Konfigurationsinformationen für den <em>development</em>- und den
+<em>production</em>-Modus. Wir entwickeln zunächst im
+<em>development</em>-Modus.</li>
+<li><code>favicon.ico</code>ist das Favicon - ein kleines Icon, das im
+Reiter erscheint. Wählen Sie am besten ein eigenes.</li>
+<li><code>index.html</code> ist die Hauptseite. Mithilfe von Angular
+entwickeln wir eine <em>Single Page Application</em>, d.h. es wird
+eine einzige HTML-Seite geladen (<code>index.html</code>) und jeder weitere Inhalt
+wird asynchron hinzugefügt.</li>
+<li><code>styles.css</code> enthält die globalen Stylesheets, d.h.
+die CSS-Eigenschaften, die für das gesamte Projekt gelten sollen.</li>
+<li>Die <code>app.component.*</code>-Dateien beschreiben die
+app-Komponente. Eine Komponente besteht aus einer <em>HTML</em>-, einer
+<em>CSS</em>- und einer <em>TypeScript</em>-Datei (auch noch
+eine <code>*.spec.ts</code>, aber die interessiert zunächst nicht).</li>
+</ul>
+<p>Öffnen Sie in Ihrer IDE die Datei <code>app.component.html</code>. Löschen
+Sie den kompletten Inhalt und lassen nur noch
+<code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>.
+Fügen Sie oberhalb von <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>
+die Zeile <code>&lt;h1&gt;This is app&lt;/h1&gt;</code> ein. Gehen Sie wieder zum
+Browser und schauen sich den geöffneten Tab mit der URL <code>localhost:4200</code> an.
+Es erscheint der folgende Inhalt:</p>
+<p><img alt="Nach den Änderungen in app.component.html" src="../files/03_seite.png" /></p>
+<h3 id="single-page-application">Single Page Application<a class="headerlink" href="#single-page-application" title="Permanent link">&para;</a></h3>
+<p>Angular ist, wie bereits erwähnt, ein Framework zur Erstellung einer <em>Single Page Application (SPA)</em>. Das bedeutet, dass die gesamte Anwendung aus einer einzigen <code>HTML</code>-Datei besteht, der <code>src/index.html</code>-Datei und dass in diese Datei <em>Inhalte</em> asynchron eingespeist werden. Dieses Einspeisen erfolgt durch JavaScript. Die hier geladene Seite ist die <code>index.html</code>, die in unserem Projekte-Ordner <code>frontend</code> liegt. Sie sieht so aus:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">index.html</label><div class="tabbed-content"></div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Frontend<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">base</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;icon&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;image/x-icon&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;favicon.ico&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">app-root</span><span class="p">&gt;&lt;/</span><span class="nt">app-root</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Das Element <code>&lt;app-root&gt;</code> ist dabei ein sogenannter <em>Tag-Selektor</em> (auch <em>Element-Selektor</em> oder <em>Komponenten-Selektor</em>). In Angular sind die einzelnen <em>Inhalte</em>, die eingespeist werden, <em>Komponenten</em>. Jede Anwendung hat eine Hauptkomponente - die sogenannte Root Component. Diese Hauptkomponente ist meistens die <code>AppComponent</code>. Eine Komponente hat eine in sich geschlossene Bedeutung, z.B. ein Formular für Dateneingabe, eine Liste aller Daten oder auch nur ein bestimmtes Element.</p>
+<p>Eine Komponente besteht aus einer <em>View</em> (<em>Template</em>) und einer TypeScript-Klasse. Die <code>AppComponent</code> besteht z.B. aus der <code>app.component.html</code> (der View) und der <code>app.component.ts</code> (der TypeScript-Klasse). Die TypeScript-Klasse kümmert sich um die Verwaltung der Daten, die in der View dargestellt und/oder durch Eingaben erzeugt werden. Die TypeScript-Klasse beschreibt die <em>Logik</em> der Komponente. Die View ist der dargestellte Bereich der Komponente, also das, was man im Browser von der Komponente sieht.</p>
+<p>Neben der <code>*.html</code>- und der <code>*.ts</code>-Datei einer Komponente gibt es auch noch die <code>*.css</code>-Datei (also z.B. <code>app.component.css</code>). Diese enthält CSS-Eigenschaften, die speziell für die Komponente gelten sollen.</p>
+<p>Um eine Komponente der gesamten Anwendung als Komponente bekannt zu machen, wird der <em>Decorator</em> <code>@Component</code>verwendet. Decoratoren erkennt man am führenden <code>@</code>-Zeichen. Sie werden verwendet, um Metadaten der Anwendung zu verwalten. Der typische Aufbau einer Komponente (hier <code>AppComponent</code> - <code>app.component.ts</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
   <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-root&#39;</span><span class="p">,</span>
   <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./app.component.html&#39;</span><span class="p">,</span>
   <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./app.component.css&#39;</span><span class="p">]</span>
 <span class="p">})</span>
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
-  <span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;frontend&#39;</span><span class="p">;</span>
+  <span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;book-app&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Der Selektor gibt an, dass überall dort, wo <code>app-root</code> als Elementselektor <code>&lt;app-root&gt; &lt;/app-root&gt;</code> verwendet wird, das in <code>app.component.html</code> definerte Template eingesetzt wird. Angenommen, in <code>app.component.html</code> ist der HTML-Code:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>This is app<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>definiert. Dann wird dieser Code als Inhalt in das HTML-Element <code>&lt;app-root&gt; &lt;/app-root&gt;</code> eingesetzt:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">app-root</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>This is app<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">app-root</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Zu dem Komponentenselektor <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> kommen wir gleich noch. Der spielt beim <code>Routing</code> eine Rolle. Wir erzeugen uns zunächst eine Navigationskomponente mithilfe von <a href="https://material.angular.io/">Angular Material</a>. </p>
+<h3 id="angular-material-und-schematics">Angular Material und Schematics<a class="headerlink" href="#angular-material-und-schematics" title="Permanent link">&para;</a></h3>
+<p><a href="https://material.angular.io/">Angular Material</a> ist ein CSS- (und JavaScript)-Framework für eine Angular-Anwendung, ähnlich wie <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">Bootstrap</a>. Wir verwenden hier Angular Material und fügen es mit dem Befehl </p>
+<div class="highlight"><pre><span></span><code>ng add @angular/material
+</code></pre></div>
+<p>unserer Anwendung hinzu. Sie werden nach unterschiedlichen Farbkombinationen gefragt, da können Sie wählen, was Ihnen beliebt. Sie können auch alle Fragen einfach mit <code>Enter</code> beantworten und somit die Standardvorgaben übernehmen. Es erfolgt eine Ausgabe in der Art</p>
+<div class="highlight"><pre><span></span><code>ℹ Using package manager: npm
+✔ Found compatible package version: @angular/material@12.0.2.
+✔ Package information loaded.
+
+The package @angular/material@12.0.2 will be installed and executed.
+Would you like to proceed? Yes
+✔ Package successfully installed.
+? Choose a prebuilt theme name, or <span class="s2">&quot;custom&quot;</span> <span class="k">for</span> a custom theme: Indigo/Pink        <span class="o">[</span> Preview: https://material.angular.io?them
+<span class="nv">e</span><span class="o">=</span>indigo-pink <span class="o">]</span>
+? Set up global Angular Material typography styles? No
+? Set up browser animations <span class="k">for</span> Angular Material? Yes
+UPDATE package.json <span class="o">(</span><span class="m">1262</span> bytes<span class="o">)</span>
+✔ Packages installed successfully.
+UPDATE src/app/app.module.ts <span class="o">(</span><span class="m">502</span> bytes<span class="o">)</span>
+UPDATE angular.json <span class="o">(</span><span class="m">3715</span> bytes<span class="o">)</span>
+UPDATE src/index.html <span class="o">(</span><span class="m">553</span> bytes<span class="o">)</span>
+UPDATE src/styles.css <span class="o">(</span><span class="m">181</span> bytes<span class="o">)</span>
+</code></pre></div>
+<p>Eine nützliche Sache bei Angular Material sind <a href="https://material.angular.io/guide/schematics">Schematics</a>. Das sind vordefinierte Komponenten, die wir verwenden können. Wir wählen zunächst die <code>Navigations</code>-Komponente, d.h. wir erstellen mithilfe des <a href="https://material.angular.io/guide/schematics#navigation-schematic">Navigations-Schmeas</a> eine neue Komponente <code>nav</code> mit dem folgenden Befehl:</p>
+<div class="highlight"><pre><span></span><code>ng generate @angular/material:navigation nav
+</code></pre></div>
+<p>in dem Projektordner erscheint im <code>/src/app</code>-Ordner eine neuer Ordner <code>nav</code>, der die Dateien</p>
+<ul>
+<li><code>nav.component.css</code>, </li>
+<li><code>nav.component.html</code>, </li>
+<li><code>nav.component.spec.ts</code>, und </li>
+<li><code>nav.component.ts</code>.</li>
+</ul>
+<p>enthält. Es wurde also eine neue Angular-Komponente erzeugt. Wenn wir die <code>nav.component.ts</code> öffnen, </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BreakpointObserver</span><span class="p">,</span> <span class="nx">Breakpoints</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">shareReplay</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-nav&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./nav.component.html&#39;</span><span class="p">,</span>
+  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./nav.component.css&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">NavComponent</span> <span class="p">{</span>
 
   <span class="nx">isHandset$</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kr">boolean</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">breakpointObserver</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nx">Breakpoints</span><span class="p">.</span><span class="nx">Handset</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
@@ -647,14 +969,1109 @@
     <span class="p">);</span>
 
   <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">breakpointObserver</span><span class="o">:</span> <span class="nx">BreakpointObserver</span><span class="p">)</span> <span class="p">{}</span>
+
 <span class="p">}</span>
 </code></pre></div>
+</td></tr></table>
+<p>dann sehen wir in Zeile <code>7</code>, dass der Komponentenselektor dieser Komponente <code>app-nav</code> ist. Das heißt, wenn wir nun in <code>app.component.html</code> diesen Komponentenselektor einfügen, dann wird an diese Stelle die neue Komponente eingefügt:</p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">app.component.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">app-nav</span><span class="p">&gt;&lt;/</span><span class="nt">app-nav</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>This is app<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">router-outlet</span><span class="p">&gt;&lt;/</span><span class="nt">router-outlet</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
 </div>
 </div>
-<p>Beide Dateien sind unverändert so übernommen, wie vom <a href="https://material.angular.io/guide/schematics#navigation-schematic">Navigation schematic</a> erstellt. </p>
-<h3 id="createcomponent"><code>CreateComponent</code><a class="headerlink" href="#createcomponent" title="Permanent link">&para;</a></h3>
-<p>Selbst erstellt wurde nur die <code>CreateComponent</code>. In dieser Komponente wurde ein Formular nach <a href="https://material.angular.io/components/form-field/overview">Material Design</a>-Vorgaben erstellt. Die <code>create.component.ts</code> sieht so aus:</p>
-<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">create/create.component.ts</label><div class="tabbed-content">
+<p>Wenn man nun im Browser (nach <code>ng server</code> - falls noch nicht geschehen) <code>http://localhost:4200/</code> eingibt, dann sieht man die Navigationskomponente, aber nicht mehr die Überschrift <code>&lt;h1&gt;This is app&lt;/h1&gt;</code> (und bei <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> ist derzeit eh noch nichts zu sehen). Wir nehmen diese beiden Zeilen aus der <code>app.component.html</code> heraus </p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">app.component.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">app-nav</span><span class="p">&gt;&lt;/</span><span class="nt">app-nav</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>und fügen Sie in die <code>nav.component.html</code> ein:</p>
+<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">nav/nav.component.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">mat-sidenav-container</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav-container&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">mat-sidenav</span> <span class="err">#</span><span class="na">drawer</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav&quot;</span> <span class="na">fixedInViewport</span>
+      <span class="err">[</span><span class="na">attr</span><span class="err">.</span><span class="na">role</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">dialog</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">navigation</span><span class="err">&#39;&quot;</span>
+      <span class="err">[</span><span class="na">mode</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">over</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">side</span><span class="err">&#39;&quot;</span>
+      <span class="err">[</span><span class="na">opened</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">===</span> <span class="na">false</span><span class="err">&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>Menu<span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Link 1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Link 2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Link 3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">mat-sidenav</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-toolbar</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span>
+        <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Toggle sidenav&quot;</span>
+        <span class="na">mat-icon-button</span>
+        <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">drawer</span><span class="err">.</span><span class="na">toggle</span><span class="err">()&quot;</span>
+        <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;isHandset$ | async&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-icon</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Side nav toggle icon&quot;</span><span class="p">&gt;</span>menu<span class="p">&lt;/</span><span class="nt">mat-icon</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>frontend<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Add Content Here --&gt;</span>
+<span class="hll">    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>This is app<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span class="hll">    <span class="p">&lt;</span><span class="nt">router-outlet</span><span class="p">&gt;&lt;/</span><span class="nt">router-outlet</span><span class="p">&gt;</span>
+</span>  <span class="p">&lt;/</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">mat-sidenav-container</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h3 id="neue-komponente-und-routing">Neue Komponente und Routing<a class="headerlink" href="#neue-komponente-und-routing" title="Permanent link">&para;</a></h3>
+<p>Wir erstellen nun eine weitere Komponente und binden diese über <em>Routing</em> ein. Die neue Komponente soll <code>create</code> heißen. Wir nutzen dazu den <code>ng generate component &lt;name-der-komponente&gt;</code>-Befehl, der auch abgekürzt <code>ng g c &lt;name-der-komponente&gt;</code> werden kann.</p>
+<div class="highlight"><pre><span></span><code>ng g c create
+</code></pre></div>
+<p>Es entsteht ein <code>/src/app/create</code>-Ordner, der die vier Dateien <code>create.component.css</code>, <code>create.component.html</code>, <code>create.component.spec.ts</code> und <code>create.component.ts</code> enthält. In diese Komponente wollen wir später ein Formular hinzufügen, mit dessen Hilfe wir neue Daten eingeben können. </p>
+<p>Zunächst binden wir diese Komponente in unsere Anwendung ein. Dieses Mal erfolgt die Einbindung jedoch nicht <em>statisch</em> über den Komponentenselektor <code>app-create</code>, sondern <em>dynamisch</em> über eine <em>Route</em>. Das bedeutet, dass wenn die <em>Route</em>  <code>http://localhost:4200/create</code> in den Browser eingegeben wird, dann soll an die Stelle des <em>dynamischen</em> Komponenetenselektors <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> die <code>CreateComponent</code> eingebunden werden. dazu müssen wir die Route in der <code>app-routing.module.ts</code> definieren:</p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">app-routing.module.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
+</span>
+<span class="kd">const</span> <span class="nx">routes</span><span class="o">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
+<span class="hll">    <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="nx">CreateComponent</span> <span class="p">},</span>
+</span><span class="p">];</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">routes</span><span class="p">)],</span>
+  <span class="nx">exports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppRoutingModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Dazu wird in dem <code>Routes</code>-Array (Zeilen <code>5-7</code>) die neue <code>Route</code> definiert, indem der <code>path</code> angegeben wird (<code>create</code>) und welche Komponente für diesen Pfad aufgerufen werden soll (<code>CreateComponent</code>). Diese Komponente wird dazu in die <code>app-routing.module.ts</code> importiert (Zeile <code>3</code>). </p>
+<p>Wenn wir nun in den Browser <code>http://localhost:4200/create</code> eingeben, dann wird diese Komponente in den <code>&lt;routing-outlet&gt;</code>-Selektor eingefügt (also unterhalb der Überschrift <code>&lt;h1&gt;This is app&lt;/h1&gt;</code>). Es erscheint</p>
+<p><img alt="frontend" src="../files/64_frontend.png" /></p>
+<p>, da die <em>View</em> der <code>CreateComponent</code> derzeit nur aus dem Absatz <code>&lt;p&gt;create works!&lt;/p&gt;</code> besteht (siehe <code>create.component.html</code>).</p>
+<p>Um diese Route auch über das Navigationsmenü aufrufen zu können, ändern wir unsere <code>nav.component.html</code>:</p>
+<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">nav/nav.component.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">mat-sidenav-container</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav-container&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">mat-sidenav</span> <span class="err">#</span><span class="na">drawer</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav&quot;</span> <span class="na">fixedInViewport</span>
+      <span class="err">[</span><span class="na">attr</span><span class="err">.</span><span class="na">role</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">dialog</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">navigation</span><span class="err">&#39;&quot;</span>
+      <span class="err">[</span><span class="na">mode</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">over</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">side</span><span class="err">&#39;&quot;</span>
+      <span class="err">[</span><span class="na">opened</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">===</span> <span class="na">false</span><span class="err">&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>Menu<span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
+<span class="hll">      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">routerLink</span><span class="o">=</span><span class="s">&quot;/create&quot;</span> <span class="na">routerLinkActive</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;</span>Create<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span>      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Link 2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Link 3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">mat-sidenav</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-toolbar</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span>
+        <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Toggle sidenav&quot;</span>
+        <span class="na">mat-icon-button</span>
+        <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">drawer</span><span class="err">.</span><span class="na">toggle</span><span class="err">()&quot;</span>
+        <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;isHandset$ | async&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-icon</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Side nav toggle icon&quot;</span><span class="p">&gt;</span>menu<span class="p">&lt;/</span><span class="nt">mat-icon</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>frontend<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Add Content Here --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>This is app<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">router-outlet</span><span class="p">&gt;&lt;/</span><span class="nt">router-outlet</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">mat-sidenav-container</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p><em>Routen</em> werden also nicht über <code>href</code>, sondern über <code>routerLink</code> aufgerufen (siehe <a href="https://angular.io/api/router/RouterLink">hier</a>). Das Attribut <code>routerLinkActive</code> erlaubt, CSS-Klassen für "aktive", also klickbare Links hinzuzufügen (siehe <a href="https://angular.io/api/router/RouterLinkActive">hier</a>). Weitere Details zum Routing in Angular finden Sie z.B. <a href="https://angular.io/guide/routing-overview">hier</a>.</p>
+<h3 id="ein-formular-erstellen">Ein Formular erstellen<a class="headerlink" href="#ein-formular-erstellen" title="Permanent link">&para;</a></h3>
+<p>Die Erstellung eines Formulars besteht in Angular aus zwei Teilschritten:</p>
+<ol>
+<li>Es wird in der <code>.ts</code>-Klasse eine <code>FormGroup</code> erstellt, die mehrere <code>FormControl</code>-Elemente enthält. <code>FromGroup</code> entspricht dem Formular und <code>FormControl</code> kann z.B. eine Eingabefeld in diesem Formular sein. Bei der Erstellung einer <code>FormGroup</code> hilft der <code>FormBuilder</code>. </li>
+<li>Es wird in der <code>.html</code>-Datei das Formular angelegt, wobei dem Formular und den einzelnen Eingabefeldern die CSS-Klassen des Frameworks zugeordnet werden, das verwendet wird (hier also <code>Material</code>). </li>
+</ol>
+<p>Bevor uns diese Schritte genauer anschauen, erledigen wir erst eine Sache, die häufig vergessen wird. Bei dem Formular, das wir erstellen, handelt es sich um eine <a href="https://angular.io/guide/forms-overview#setup-in-reactive-forms"><em>reactive form</em></a>. Wir <strong>müssen</strong> dazu das <a href="https://angular.io/api/forms/ReactiveFormsModule">RactiveFormsModule</a> in die <code>app.module.ts</code> einfügen (ob <code>FormsModule</code> auch, weiß ich immer nicht genau, aber es schadet nichts).</p>
+<div class="tabbed-set" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">app.module.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppRoutingModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app-routing.module&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserAnimationsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser/animations&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./nav/nav.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LayoutModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatToolbarModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/toolbar&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatButtonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatSidenavModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/sidenav&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatListModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/list&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">ReactiveFormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+</span>
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">AppComponent</span><span class="p">,</span>
+    <span class="nx">NavComponent</span><span class="p">,</span>
+    <span class="nx">CreateComponent</span>
+  <span class="p">],</span>
+  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">BrowserModule</span><span class="p">,</span>
+    <span class="nx">AppRoutingModule</span><span class="p">,</span>
+    <span class="nx">BrowserAnimationsModule</span><span class="p">,</span>
+    <span class="nx">LayoutModule</span><span class="p">,</span>
+    <span class="nx">MatToolbarModule</span><span class="p">,</span>
+    <span class="nx">MatButtonModule</span><span class="p">,</span>
+    <span class="nx">MatSidenavModule</span><span class="p">,</span>
+    <span class="nx">MatIconModule</span><span class="p">,</span>
+    <span class="nx">MatListModule</span><span class="p">,</span>
+<span class="hll">    <span class="nx">FormsModule</span><span class="p">,</span>
+</span><span class="hll">    <span class="nx">ReactiveFormsModule</span>
+</span>  <span class="p">],</span>
+  <span class="nx">providers</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">bootstrap</span><span class="o">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Wir schauen uns zunächst den ersten Schritt anhand der <code>create.component.ts</code> an. Diese ist nach Erstellung noch "leer":</p>
+<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">/create/create.component.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-create&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./create.component.html&#39;</span><span class="p">,</span>
+  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./create.component.css&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">CreateComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Nachdem wir das Formular hinzugefügt haben, hat die <code>create.component.ts</code> folgendes Aussehen:</p>
+<div class="tabbed-set" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">/create/create.component.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormControl</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-create&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./create.component.html&#39;</span><span class="p">,</span>
+  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./create.component.css&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">CreateComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+  <span class="nx">formGroup</span><span class="o">:</span> <span class="nx">FormGroup</span><span class="p">;</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">fb</span><span class="o">:</span> <span class="nx">FormBuilder</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// constructor function</span>
+  <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+          <span class="nx">inp_title</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+          <span class="nx">inp_location</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+          <span class="nx">inp_image</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_title</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_title&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_location</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_location&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_image</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_image&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<ul>
+<li>In zeile <code>2</code> werden die benötigten Klassen importiert. </li>
+<li>Der Klasse wird per <em>dependency injection</em> der <code>FormBuilder</code> hinzugefügt (Zeile <code>12</code>).</li>
+<li>Die eigentliche <code>FormGroup</code> (hier namens <code>formGroup</code>) wird in den Zeilen <code>17-20</code> mithilfe des <code>FormBuilder</code> und dessen <code>group()</code>-Funktion erstellt. Dabei werden jedem <code>FormControl</code>-Element zunächst kein <code>value</code> (<code>''</code>), aber ein <code>Validator</code> hinzugefügt, der dafür verantwortlich ist, zu erkennen, ob das Feld (korrekt) ausgefüllt wurde. </li>
+<li>Die <code>get()</code>-Funktionen für die einzelnen <code>FormControl</code>-Elemente ermöglichen den Zugriff auf diese.  </li>
+</ul>
+<p>Nun erstellen wir das Formular in der <code>create.component.html</code>-Datei:</p>
+<div class="tabbed-set" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">/create/create.component.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span> <span class="na">novalidate</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-container&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Post hinzufügen<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="err">[</span><span class="na">formGroup</span><span class="err">]=&quot;</span><span class="na">formGroup</span><span class="err">&quot;</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-field&quot;</span> <span class="na">appearance</span><span class="o">=</span><span class="s">&quot;standard&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post title<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Titel&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_title&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_title.valid &amp;&amp; inp_title.touched&quot;</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">span</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;inp_title.errors.required&quot;</span><span class="p">&gt;</span>This field is mandatory.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-field&quot;</span> <span class="na">appearance</span><span class="o">=</span><span class="s">&quot;standard&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post location<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Location&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_location&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_location.valid &amp;&amp; inp_location.touched&quot;</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">span</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;inp_location.errors.required&quot;</span><span class="p">&gt;</span>This field is mandatory.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-field&quot;</span> <span class="na">appearance</span><span class="o">=</span><span class="s">&quot;standard&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post image<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Image file&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_image&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_image.valid &amp;&amp; inp_image.touched&quot;</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">span</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;inp_image.errors.required&quot;</span><span class="p">&gt;</span>This field is mandatory.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-stroked-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">onSubmit</span><span class="err">()&quot;</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;default&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="err">[</span><span class="na">disabled</span><span class="err">]=&quot;!</span><span class="na">formGroup</span><span class="err">.</span><span class="na">valid</span><span class="err">&quot;</span><span class="p">&gt;</span>
+          Add post
+        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Wir haben zunächst drei Eingabefelder, alle drei jeweils auch mit einem Label. Wir erhalten jedoch noch einige Fehler, da die passenden Module noch nicht in der <code>app.module.ts</code> importiert sind, z.B. <code>MatFormField</code>. Das müssen wir zunächst nachholen:</p>
+<div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">app.module.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppRoutingModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app-routing.module&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserAnimationsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser/animations&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./nav/nav.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LayoutModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatToolbarModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/toolbar&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatButtonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatSidenavModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/sidenav&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatListModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/list&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MatFormFieldModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/form-field&#39;</span><span class="p">;</span>
+</span><span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MatInputModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/input&#39;</span><span class="p">;</span>
+</span><span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">ReactiveFormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">AppComponent</span><span class="p">,</span>
+    <span class="nx">NavComponent</span><span class="p">,</span>
+    <span class="nx">CreateComponent</span>
+  <span class="p">],</span>
+  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">BrowserModule</span><span class="p">,</span>
+    <span class="nx">AppRoutingModule</span><span class="p">,</span>
+    <span class="nx">BrowserAnimationsModule</span><span class="p">,</span>
+    <span class="nx">LayoutModule</span><span class="p">,</span>
+    <span class="nx">MatToolbarModule</span><span class="p">,</span>
+    <span class="nx">MatButtonModule</span><span class="p">,</span>
+    <span class="nx">MatSidenavModule</span><span class="p">,</span>
+    <span class="nx">MatIconModule</span><span class="p">,</span>
+    <span class="nx">MatListModule</span><span class="p">,</span>
+<span class="hll">    <span class="nx">MatFormFieldModule</span><span class="p">,</span>
+</span><span class="hll">    <span class="nx">MatInputModule</span><span class="p">,</span>
+</span>    <span class="nx">FormsModule</span><span class="p">,</span>
+    <span class="nx">ReactiveFormsModule</span>
+  <span class="p">],</span>
+  <span class="nx">providers</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">bootstrap</span><span class="o">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Jetzt sollte es in unserer <code>create.component.html</code> nur noch einen Fehler geben, nämlich die <code>onSubmit()</code>-Funktion ist noch nicht implementiert. Wir fügen eine erste simple Implementierung der <code>create.component.ts</code> hinzu:</p>
+<div class="tabbed-set" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">/create/create.component.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormControl</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-create&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./create.component.html&#39;</span><span class="p">,</span>
+  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./create.component.css&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">CreateComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+  <span class="nx">formGroup</span><span class="o">:</span> <span class="nx">FormGroup</span><span class="p">;</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">fb</span><span class="o">:</span> <span class="nx">FormBuilder</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// constructor function</span>
+  <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+          <span class="nx">inp_title</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+          <span class="nx">inp_location</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+          <span class="nx">inp_image</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_title</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_title&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_location</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_location&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_image</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_image&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="hll">  <span class="nx">onSubmit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span>
+</span><span class="hll">  <span class="p">{</span>
+</span><span class="hll">      <span class="kd">const</span> <span class="nx">post</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="hll">        <span class="nx">title</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_title</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+</span><span class="hll">        <span class="nx">location</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_location</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+</span><span class="hll">        <span class="nx">image</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_image</span><span class="p">.</span><span class="nx">value</span>
+</span><span class="hll">      <span class="p">}</span>
+</span><span class="hll">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;post : &#39;</span><span class="p">,</span> <span class="nx">post</span><span class="p">);</span>
+</span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Die drei Werte der Eingabefelder werden ausgelesen und einem JavaScript-Objekt <code>post</code> hinzugefügt. Dieses wird auf der Konsole ausgegeben. </p>
+<p>Das Formular ist für <code>title</code> und <code>location</code> bereits passend für die Eingabe eines <code>post</code>-Datensatzes. Allerdings wollen wir für das <code>image</code> ja eine Bilddatei hochladen, die dann in das <code>base64</code>-Format umgewandelt werden soll. Dazu müssen wir das <code>image</code>-Eingabefeld ändern. Leider stellt Material nicht direkt ein <em>File upload</em>-Eingabeelement zur Verfügung. Das folgende Vorgehen wurde deshalb <a href="https://www.freakyjolly.com/angular-material-109-file-upload-ui-design-in-form-for-input-with-file-type-using-material-components/">hier</a> entnommen und angepasst. </p>
+<p>Die <code>create.component.html</code> sieht nun so aus:</p>
+<div class="tabbed-set" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">/create/create.component.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span> <span class="na">novalidate</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-container&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Post hinzufügen<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="err">[</span><span class="na">formGroup</span><span class="err">]=&quot;</span><span class="na">formGroup</span><span class="err">&quot;</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-field&quot;</span> <span class="na">appearance</span><span class="o">=</span><span class="s">&quot;standard&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post title<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Titel&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_title&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_title.valid &amp;&amp; inp_title.touched&quot;</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">span</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;inp_title.errors.required&quot;</span><span class="p">&gt;</span>This field is mandatory.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-field&quot;</span> <span class="na">appearance</span><span class="o">=</span><span class="s">&quot;standard&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post location<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Location&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_location&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_location.valid &amp;&amp; inp_location.touched&quot;</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">span</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;inp_location.errors.required&quot;</span><span class="p">&gt;</span>This field is mandatory.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-field inputbreit&quot;</span> <span class="na">appearance</span><span class="o">=</span><span class="s">&quot;standard&quot;</span><span class="p">&gt;</span>
+<span class="hll">            <span class="c">&lt;!-- Readonly Input to show File names --&gt;</span>
+</span><span class="hll">            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">readonly</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;file_name&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Browse image file&quot;</span> <span class="p">/&gt;</span>
+</span><span class="hll">
+</span><span class="hll">            <span class="c">&lt;!-- Fetch selected filed on change --&gt;</span>
+</span><span class="hll">            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;fileUpload&quot;</span> <span class="err">(</span><span class="na">change</span><span class="err">)=&quot;</span><span class="na">uploadFileEvt</span><span class="err">($</span><span class="na">event</span><span class="err">)&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_image&quot;</span> <span class="na">multiple</span><span class="o">=</span><span class="s">&quot;multiple&quot;</span> <span class="na">accept</span><span class="o">=</span><span class="s">&quot;image/*&quot;</span> <span class="p">/&gt;</span>
+</span>        <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-stroked-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">onSubmit</span><span class="err">()&quot;</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;default&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="err">[</span><span class="na">disabled</span><span class="err">]=&quot;!</span><span class="na">formGroup</span><span class="err">.</span><span class="na">valid</span><span class="err">&quot;</span><span class="p">&gt;</span>
+          Add post
+        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>In der <code>create.component.ts</code> fügen wir die <code>uploadFileEvt()</code>-Funktion hinzu, der das <code>change</code>-Event übergeben wird. Dieses Objekt enthält für den <code>input type="file"</code> unter der <code>target</code>-Eigenschaft ein <code>files</code>-Array, in dem alle ausgewählten Dateien enthalten sind. Die erste Implementierung liest diesen Wert aus:</p>
+<div class="tabbed-set" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">/create/create.component.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">ViewChild</span><span class="p">,</span> <span class="nx">ElementRef</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormControl</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-create&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./create.component.html&#39;</span><span class="p">,</span>
+  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./create.component.css&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">CreateComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+
+  <span class="nx">formGroup</span><span class="o">:</span> <span class="nx">FormGroup</span><span class="p">;</span>
+  <span class="nx">imageBase64</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">fb</span><span class="o">:</span> <span class="nx">FormBuilder</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// constructor function</span>
+  <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+          <span class="nx">inp_title</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+          <span class="nx">inp_location</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+          <span class="nx">inp_image</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_title</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_title&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_location</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_location&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">inp_image</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_image&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">onSubmit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span>
+  <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">post</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_title</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="nx">location</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_location</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="nx">image</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">imageBase64</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;post : &#39;</span><span class="p">,</span> <span class="nx">post</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">uploadFileEvt</span><span class="p">(</span><span class="nx">imgFile</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+<span class="hll">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">,</span> <span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">);</span>
+</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Wir erweitern diese Funktion nun noch um das Auslesen der Datei in einen <code>FileReader</code>. Damit können in Webanwendungen Dateien eingelesen werden. Das <code>onload</code>-Ereignis wird ausgelöst, wenn die Inhalte der Dateien verfügbar sind, wenn die Datei also eingelesen wurde. Dieser Inhalt wird in ein <code>Image</code>-Objekt umgewandelt, da für ein <code>Image</code> die Quelle des Bildes das <code>base64</code>-Format ist. </p>
+<div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">/create/create.component.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="nx">uploadFileEvt</span><span class="p">(</span><span class="nx">imgFile</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">,</span> <span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span> <span class="o">&amp;&amp;</span> <span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span> <span class="p">{</span>
+
+      <span class="kd">const</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+        <span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+        <span class="nx">image</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+
+          <span class="c1">// Return Base64 Data URL</span>
+          <span class="kd">const</span> <span class="nx">imgBase64Path</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;base64&#39;</span><span class="p">,</span> <span class="nx">imgBase64Path</span><span class="p">);</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">imageBase64</span> <span class="o">=</span> <span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1</span><span class="p">);</span>
+
+        <span class="p">};</span>
+      <span class="p">};</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Dieser <code>imgBase64Path</code> beginnt jedoch stets mit <code>data:image/png;base64</code>. Diesen Substring wollen wir entfernen, da er nicht zu den eigentlichen Bilddaten gehört (die in der Datenbank gespeichert werden). Der Aufbau dieses <code>imgBase64Path</code>-Strings ist wie folgt: </p>
+<div class="highlight"><pre><span></span><code>data:image/png<span class="p">;</span>base64 , Bilddaten
+</code></pre></div>
+<p>also der genannte Teilstring, gefolgt von Komma, gefolgt von den Bilddaten. In Zeile <code>61</code> wird deshalb der Teilstring extrahiert, der hinter dem ersten Komma beginnt - somit alle Bilddaten. Diese werden gespeichert. In der <code>onSubmit()</code>-Funktion nutzen wir als Wert der Eigenschaft <code>image</code> bereits diesen verbleibenden String. Das <code>post</code>-Objekt ist somit vollständig. </p>
+<p>Das Formular in der <code>create.component.html</code>-Datei wurde noch mit einigen eigenen CSS-Klassen versehen. Die Definitionen dieser Klassen sind hier:</p>
+<div class="tabbed-set" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">/create/create.component.css</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">vertikal</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+    <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">column</span><span class="p">;</span>
+    <span class="k">align-items</span><span class="p">:</span> <span class="kc">flex-start</span><span class="p">;</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">1</span><span class="kt">%</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">formbreit</span> <span class="p">{</span>
+    <span class="k">min-width</span><span class="p">:</span> <span class="mi">150</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">max-width</span><span class="p">:</span> <span class="mi">500</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">inputbreit</span> <span class="p">{</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">#</span><span class="nn">fileUpload</span> <span class="p">{</span>
+    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+    <span class="k">z-index</span><span class="p">:</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="k">opacity</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">left</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">top</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">cursor</span><span class="p">:</span> <span class="kc">pointer</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h3 id="das-frontend-mit-dem-backend-verbinden">Das Frontend mit dem Backend verbinden<a class="headerlink" href="#das-frontend-mit-dem-backend-verbinden" title="Permanent link">&para;</a></h3>
+<p>Um das Frontend mit dem Backend zu verknüpfen, erstellen wir uns einen <em>Service</em>. Ein <em>Service</em> in Angular ist eine TypeScript-Klasse, die einen bestimmten Zweck erfüllt und typischerweise allen Komponenten zur Verfügung steht. Zu einem Service gehört also keine View. In Angular wird ein Service mittels <code>ng generate service &lt;name-des-services&gt;</code> erstellt - kurz <code>ng g s &lt;name-des-services&gt;</code>. Wir nennen unseren Service <code>backend</code>:</p>
+<div class="highlight"><pre><span></span><code>ng g s backend
+</code></pre></div>
+<p>Es entsteht eine Datei <code>backend.service.ts</code>:</p>
+<div class="tabbed-set" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><label for="__tabbed_17_1">backend.service.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">BackendService</span> <span class="p">{</span>
+
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>In diesem Service verwenden wir zwei Angular-Module, um mittels <code>HTTP</code> auf das Backend zuzugreifen: das Modul <code>HttpClient</code> für die HTTP-Anfragen und das Modul <code>HttpHeaders</code>, um die HTTP-<code>headers</code> zu konfigurieren. Wir wollen an dieser Stelle nur die Funktion implementieren, mit der wir einen neuen Datensatz an das Backend übertragen und dabei den Endpunkt <code>http://localhost:3000/posts</code> mittels einer <code>POST</code>-Anfrage ansprechen. </p>
+<p>Diese Implementierung sieht wie folgt aus:</p>
+<div class="tabbed-set" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><label for="__tabbed_18_1">backend.service.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpHeaders</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">BackendService</span> <span class="p">{</span>
+
+  <span class="nx">apiUrl</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span><span class="o">:</span> <span class="nx">HttpClient</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+
+  <span class="nx">public</span> <span class="nx">addPost</span><span class="p">(</span><span class="nx">post</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">post</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">headers</span><span class="o">:</span> <span class="k">new</span> <span class="nx">HttpHeaders</span><span class="p">({</span>
+          <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Accept-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+        <span class="p">}),</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">toPromise</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Der <a href="https://angular.io/guide/http">HttpClient</a> bietet Funktionalitäten für die Verwendung des HTTP-Protokolls in Angular. Wir verwenden hier die <code>post</code>-Funktion. Darin übergeben wir die URL des Backends udn den Datensatz <code>post</code>. In den <code>headers</code> konfigurieren wir noch, dass wir ein JSON übergeben und auch ein JSON zurückerwarten. Wir verwenden hier einen Typen <code>Post</code>, der noch nicht existiert. Wir fügen dazu ein <em>Interface</em> in unseren Service ein (könnte auch in einer extra Datei sein), in dem wir die Struktur eines <code>Post</code>-Objektes definieren (entspricht der Struktur, die wir auch in der Datenbank dafür verwendet haben). </p>
+<div class="tabbed-set" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><label for="__tabbed_19_1">backend.service.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpHeaders</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+
+<span class="hll"><span class="k">export</span> <span class="kr">interface</span> <span class="nx">Post</span> <span class="p">{</span>
+</span><span class="hll">  <span class="nx">id</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+</span><span class="hll">  <span class="nx">title</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+</span><span class="hll">  <span class="nx">location</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+</span><span class="hll">  <span class="nx">image</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+</span><span class="hll"><span class="p">}</span>
+</span>
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">BackendService</span> <span class="p">{</span>
+
+  <span class="nx">apiUrl</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span><span class="o">:</span> <span class="nx">HttpClient</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+
+  <span class="nx">public</span> <span class="nx">addPost</span><span class="p">(</span><span class="nx">post</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">post</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">headers</span><span class="o">:</span> <span class="k">new</span> <span class="nx">HttpHeaders</span><span class="p">({</span>
+          <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Accept-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+        <span class="p">}),</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">toPromise</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Nun können wir diesen Service in unseren Komponenten verwenden. Dazu binden wir ihn per <em>dependency injection</em>  in die <code>create.component.ts</code> ein und rufen dort in der <code>onSubmit()</code>-Funktion die Funktion <code>addPost()</code> auf:</p>
+<div class="tabbed-set" data-tabs="20:1"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><label for="__tabbed_20_1">/create/create.component.ts</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -727,23 +2144,10 @@
 70
 71
 72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">ViewChild</span><span class="p">,</span> <span class="nx">ElementRef</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormControl</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">ToastrService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;ngx-toastr&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">PostService</span><span class="p">,</span> <span class="nx">Post</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../post.service&#39;</span><span class="p">;</span>
-
+73</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">ViewChild</span><span class="p">,</span> <span class="nx">ElementRef</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormControl</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">BackendService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../backend.service&#39;</span><span class="p">;</span>
+</span>
 <span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
   <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-create&#39;</span><span class="p">,</span>
   <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./create.component.html&#39;</span><span class="p">,</span>
@@ -751,56 +2155,19 @@
 <span class="p">})</span>
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">CreateComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
 
-  <span class="err">@</span><span class="nx">ViewChild</span><span class="p">(</span><span class="s1">&#39;fileInput&#39;</span><span class="p">)</span> <span class="nx">fileInput</span><span class="o">:</span> <span class="nx">ElementRef</span><span class="p">;</span>
-  <span class="nx">fileAttr</span> <span class="o">=</span> <span class="s1">&#39;Choose File&#39;</span><span class="p">;</span>
   <span class="nx">formGroup</span><span class="o">:</span> <span class="nx">FormGroup</span><span class="p">;</span>
-  <span class="nx">titleAlert</span> <span class="o">=</span> <span class="s1">&#39;This field is required&#39;</span><span class="p">;</span>
-  <span class="nx">imgBase64</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-  <span class="nx">post</span><span class="o">:</span> <span class="nx">Post</span><span class="p">;</span>
+  <span class="nx">imageBase64</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
 
-  <span class="nx">constructor</span><span class="p">(</span>
-    <span class="kr">private</span> <span class="nx">formBuilder</span><span class="o">:</span> <span class="nx">FormBuilder</span><span class="p">,</span>
-    <span class="kr">private</span> <span class="nx">postService</span><span class="o">:</span> <span class="nx">PostService</span><span class="p">,</span>
-    <span class="kr">private</span> <span class="nx">toastr</span><span class="o">:</span> <span class="nx">ToastrService</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="hll">  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">fb</span><span class="o">:</span> <span class="nx">FormBuilder</span><span class="p">,</span> <span class="kr">private</span> <span class="nx">bs</span><span class="o">:</span> <span class="nx">BackendService</span><span class="p">,)</span> <span class="p">{</span>
+</span>    <span class="c1">// constructor function</span>
+  <span class="p">}</span>
 
   <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">formBuilder</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
-      <span class="nx">inp_title</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
-      <span class="nx">inp_location</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
-      <span class="nx">uploadFile</span><span class="o">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+          <span class="nx">inp_title</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+          <span class="nx">inp_location</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+          <span class="nx">inp_image</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]</span>
     <span class="p">});</span>
-  <span class="p">}</span>
-
-  <span class="nx">uploadFileEvt</span><span class="p">(</span><span class="nx">imgFile</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span> <span class="o">&amp;&amp;</span> <span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">fileAttr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-      <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">file</span><span class="o">:</span> <span class="nx">File</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">fileAttr</span> <span class="o">+=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39; - &#39;</span><span class="p">;</span>
-      <span class="p">});</span>
-
-      <span class="c1">// HTML5 FileReader API</span>
-      <span class="kd">const</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
-      <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
-        <span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
-        <span class="nx">image</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">rs</span> <span class="p">=&gt;</span> <span class="p">{</span>
-          <span class="kd">const</span> <span class="nx">imgBase64Path</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
-          <span class="k">this</span><span class="p">.</span><span class="nx">imgBase64</span> <span class="o">=</span> <span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1</span><span class="p">);</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;imgBase64Path&#39;</span><span class="p">,</span> <span class="nx">imgBase64Path</span><span class="p">);</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;imgBase64&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">imgBase64</span><span class="p">);</span>
-        <span class="p">};</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">patchValue</span><span class="p">({</span> <span class="nx">uploadFile</span><span class="o">:</span> <span class="nx">reader</span><span class="p">.</span><span class="nx">result</span> <span class="p">});</span>
-      <span class="p">};</span>
-      <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
-      <span class="c1">// Reset if duplicate image uploaded again</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">fileInput</span><span class="p">.</span><span class="nx">nativeElement</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">fileAttr</span> <span class="o">=</span> <span class="s1">&#39;Choose File&#39;</span><span class="p">;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-
-  <span class="nx">get</span> <span class="nx">uploadFile</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;uploadFile&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
   <span class="p">}</span>
 
   <span class="nx">get</span> <span class="nx">inp_title</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
@@ -811,23 +2178,51 @@
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_location&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
   <span class="p">}</span>
 
-  <span class="k">async</span> <span class="nx">onSubmit</span><span class="p">()</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">post</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="nx">id</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-      <span class="nx">title</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_title</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-      <span class="nx">location</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_location</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-      <span class="nx">image</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">imgBase64</span>
-    <span class="p">};</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">post</span><span class="p">);</span>
-    <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">postService</span><span class="p">.</span><span class="nx">addPost</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">post</span><span class="p">));</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">toastr</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+  <span class="nx">get</span> <span class="nx">inp_image</span><span class="p">()</span><span class="o">:</span> <span class="nx">FormControl</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">formGroup</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;inp_image&#39;</span><span class="p">)</span> <span class="nx">as</span> <span class="nx">FormControl</span><span class="p">;</span>
   <span class="p">}</span>
+
+  <span class="nx">onSubmit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span>
+  <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">post</span> <span class="o">=</span> <span class="p">{</span>
+<span class="hll">        <span class="nx">id</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span>        <span class="nx">title</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_title</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="nx">location</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inp_location</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="nx">image</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">imageBase64</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;post : &#39;</span><span class="p">,</span> <span class="nx">post</span><span class="p">);</span>
+<span class="hll">      <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">bs</span><span class="p">.</span><span class="nx">addPost</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span>
+</span>  <span class="p">}</span>
+
+  <span class="nx">uploadFileEvt</span><span class="p">(</span><span class="nx">imgFile</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">,</span> <span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span> <span class="o">&amp;&amp;</span> <span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span> <span class="p">{</span>
+
+      <span class="kd">const</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+        <span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+        <span class="nx">image</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+
+          <span class="c1">// Return Base64 Data URL</span>
+          <span class="kd">const</span> <span class="nx">imgBase64Path</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;base64&#39;</span><span class="p">,</span> <span class="nx">imgBase64Path</span><span class="p">);</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">imageBase64</span> <span class="o">=</span> <span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">imgBase64Path</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1</span><span class="p">);</span>
+
+        <span class="p">};</span>
+      <span class="p">};</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">imgFile</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+
+    <span class="p">}</span>
+  <span class="p">}</span>
+
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
 </div>
-<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">create/create.component.html</label><div class="tabbed-content">
+</div>
+<p>Wichtig ist, dass wir nicht vergessen dürfen, das <code>HttpClientModule</code> in der <code>app.module.ts</code> zu importieren:</p>
+<div class="tabbed-set" data-tabs="21:1"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><label for="__tabbed_21_1">app.module.ts</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -872,149 +2267,59 @@
 42
 43
 44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span> <span class="na">novalidate</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">mat-card</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;example-card&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-card-header</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">mat-card-title</span><span class="p">&gt;</span>Post hinzufügen<span class="p">&lt;/</span><span class="nt">mat-card-title</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-card-header</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-card-content</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">div</span> <span class="err">[</span><span class="na">formGroup</span><span class="err">]=&quot;</span><span class="na">formGroup</span><span class="err">&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my-form&quot;</span><span class="p">&gt;</span>
+45</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 
-            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-element&quot;</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post title<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Titel&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_title&quot;</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_title.valid &amp;&amp; inp_title.touched&quot;</span><span class="p">&gt;</span>
-                    {{ titleAlert }}
-                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
-
-            <span class="p">&lt;</span><span class="nt">mat-form-field</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-element&quot;</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Post location<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Location&quot;</span> <span class="na">formControlName</span><span class="o">=</span><span class="s">&quot;inp_location&quot;</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nt">mat-error</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;!inp_location.valid &amp;&amp; inp_location.touched&quot;</span><span class="p">&gt;</span>
-                    {{ titleAlert }}
-                <span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
-
-            <span class="p">&lt;</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
-                        <span class="c">&lt;!-- Display files names --&gt;</span>
-                        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">matInput</span> <span class="err">[(</span><span class="na">ngModel</span><span class="err">)]=&quot;</span><span class="na">fileAttr</span><span class="err">&quot;</span> <span class="na">readonly</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="p">/&gt;</span>
-
-                        <span class="c">&lt;!-- Browse Button --&gt;</span>
-                        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-flat-button</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span><span class="p">&gt;</span>
-                    Browse File
-                  <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-                    <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
-
-                    <span class="c">&lt;!-- Fetch selected filed on change --&gt;</span>
-                    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="err">#</span><span class="na">fileInput</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;uploadFile&quot;</span> <span class="err">(</span><span class="na">change</span><span class="err">)=&quot;</span><span class="na">uploadFileEvt</span><span class="err">($</span><span class="na">event</span><span class="err">)&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;uploadFile&quot;</span> <span class="na">multiple</span><span class="o">=</span><span class="s">&quot;multiple&quot;</span> <span class="na">accept</span><span class="o">=</span><span class="s">&quot;image/*&quot;</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
-
-        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-card-content</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">mat-card-actions</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-element&quot;</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-stroked-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">onSubmit</span><span class="err">()&quot;</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;default&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="err">[</span><span class="na">disabled</span><span class="err">]=&quot;!</span><span class="na">formGroup</span><span class="err">.</span><span class="na">valid</span><span class="err">&quot;</span><span class="p">&gt;</span>
-      Add post
-    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">mat-card-actions</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">mat-card</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;imgBase64&quot;</span><span class="p">&gt;</span>
-    {{ imgBase64 }}
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div>
-</td></tr></table>
-</div>
-</div>
-<p>In Zeile <code>15</code> wird eine Variable <code>formGroup</code> vom Typ <code>FormGroup</code> deklariert. Erzeugt wird das Formular mithilfe des <code>FormBuilder</code> (siehe Zeile <code>21</code>) in der <code>ngOnInit()</code>-Funktion (Zeilen <code>25-30</code>). Die drei <code>get</code>-Methoden (Zeilen <code>61-71</code>) dienen dem Zugriff auf die drei einzelnen Formularelemente.</p>
-<p><img alt="frontend" src="../files/56_frontend.png" /></p>
-<p>Am unfrangreichsten ist hier die <code>uploadFileEvt</code>-Methode. Diese wird aufgerufen, wenn eine Bilddatei zum Upload ausgewählt wurde. Prinzipiell ist sogar die Auswahl mehrerer Dateien möglich. In Zeile <code>46</code> wird der Base64-Code des Bildes übergeben, dieser enthält aber noch den String <code>data:image/jpeg;base64,</code>. Dieser wird in Zeile <code>47</code> entfernt und der verbleibende Code in <code>imgBase64</code> gespeichert. </p>
-<p>Ist das gesamte Formular ausgefüllt, wird durch Klicken des <code>Add post</code>-Buttons (siehe <code>create.component.html</code>) die <code>onSubmit()</code>-Methode ausgelöst. In dieser Methode wird das <code>post</code>-Objekt erzeugt, welches an die <code>addPost</code>-Methode des <code>postService</code> übergeben wird.  </p>
-<h3 id="postservicets"><code>post.service.ts</code><a class="headerlink" href="#postservicets" title="Permanent link">&para;</a></h3>
-<p>Der <code>PostService</code> stellt die Verbindung zum Backend dar. Dazu verwendet der <code>PostService</code> das <code>HttpClient</code>- und das <code>HttpHeaders</code>-Modul: </p>
-<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">post.service.ts</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpHeaders</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-
-
-<span class="k">export</span> <span class="kr">interface</span> <span class="nx">Post</span> <span class="p">{</span>
-  <span class="nx">id</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
-  <span class="nx">title</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
-  <span class="nx">location</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
-  <span class="nx">image</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
-  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppRoutingModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app-routing.module&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserAnimationsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser/animations&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./nav/nav.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LayoutModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatToolbarModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/toolbar&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatButtonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatSidenavModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/sidenav&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatListModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/list&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatFormFieldModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/form-field&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatInputModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/input&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">ReactiveFormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClientModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+</span>
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">AppComponent</span><span class="p">,</span>
+    <span class="nx">NavComponent</span><span class="p">,</span>
+    <span class="nx">CreateComponent</span>
+  <span class="p">],</span>
+  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">BrowserModule</span><span class="p">,</span>
+    <span class="nx">AppRoutingModule</span><span class="p">,</span>
+    <span class="nx">BrowserAnimationsModule</span><span class="p">,</span>
+<span class="hll">    <span class="nx">HttpClientModule</span><span class="p">,</span>
+</span>    <span class="nx">LayoutModule</span><span class="p">,</span>
+    <span class="nx">MatToolbarModule</span><span class="p">,</span>
+    <span class="nx">MatButtonModule</span><span class="p">,</span>
+    <span class="nx">MatSidenavModule</span><span class="p">,</span>
+    <span class="nx">MatIconModule</span><span class="p">,</span>
+    <span class="nx">MatListModule</span><span class="p">,</span>
+    <span class="nx">MatFormFieldModule</span><span class="p">,</span>
+    <span class="nx">MatInputModule</span><span class="p">,</span>
+    <span class="nx">FormsModule</span><span class="p">,</span>
+    <span class="nx">ReactiveFormsModule</span>
+  <span class="p">],</span>
+  <span class="nx">providers</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">bootstrap</span><span class="o">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
 <span class="p">})</span>
-<span class="k">export</span> <span class="kd">class</span> <span class="nx">PostService</span> <span class="p">{</span>
-  <span class="nx">apiUrl</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
-
-  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span><span class="o">:</span> <span class="nx">HttpClient</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-
-
-  <span class="nx">public</span> <span class="k">async</span> <span class="nx">addPost</span><span class="p">(</span><span class="nx">post</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
-      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">post</span><span class="p">,</span> <span class="p">{</span>
-        <span class="nx">headers</span><span class="o">:</span> <span class="k">new</span> <span class="nx">HttpHeaders</span><span class="p">({</span>
-          <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
-        <span class="p">}),</span>
-      <span class="p">})</span>
-      <span class="p">.</span><span class="nx">toPromise</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>  
 </code></pre></div>
 </td></tr></table>
 </div>
 </div>
-<p>Derzeit ist im <code>PostService</code> noch nur eine Funktion implementiert, die <code>addPost()</code>. Diese ruft im Backend den Endpunkt <code>POST http://localhost:3000/posts</code> auf und übergibt das <code>post</code>-Objekt, das im <em>Request-Body</em> versendet wird.   </p>
+<p>Somit sollte unser Frontend fertig und an das Backend angebunden sein. Um es vollständig zu testen, <strong>starten wir das Backend</strong>! Geben Sie im Frontend (<code>/create</code>) Daten ein und schicken Sie das Formular ab. Die Datenbank sollte mit den neuen Daten befüllt sein - das können Sie unter <code>phpmyadmin</code> überprüfen. </p>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
-<p>Wir haben uns zwar in Sachen <em>Progressive Web Apps</em> nicht wirklich weiterentwickelt, aber wir haben nun erstmal einige nützliche Hilfsmittel geschaffen, um eine "größere" Anwendung später <em>progressive</em> zu gestalten. Es gibt nun eine Datenbank, die Bilder speichern kann und das passende Backend zur Anbindung der Datenbank. Zur Erleichterung der Dateneingabe in die Datenbank haben wir uns auch ein Frontend erstellt.   </p>
+<p>Wir haben uns zwar in Sachen <em>Progressive Web Apps</em> nicht wirklich weiterentwickelt, aber wir haben nun erstmal einige nützliche Hilfsmittel geschaffen, um eine "größere" Anwendung später <em>progressive</em> zu gestalten. Es gibt nun eine Datenbank, die Bilder speichern kann und das passende Backend zur Anbindung der Datenbank. Zur Erleichterung der Dateneingabe in die Datenbank haben wir uns auch ein Frontend erstellt.  </p>
 </div>
                 
               
