@@ -54,7 +54,7 @@ ng new frontend
 
 ins Terminal ein. 
 
-- Die Frage nach `stricter type checking` beantworten wir mit `N`, also `Enter`. Das macht unser Leben etwas leichter. Fortgeschrittene Angular-Programmiererinnen können aber auch gerne mit `y` antworten. 
+- Die Frage nach `stricter type checking` beantworten wir mit `N`, also `Enter`. Das macht unser Leben etwas leichter. Fortgeschrittene Angular-Programmiererinnen können aber auch gerne mit `y` antworten. (Die neue Angular CLI-Version 12 fragt danach nicht mehr, sondern verwendet das strikte Typesetting einfach, das macht es an einigen Stellen etwas komplizierter). 
 - Die Frage nach `routing` beantworten wir mit `y`, d.h. hier wählen wir nicht die Standardantwort! `Routing` erläutern wir gleich noch. 
 - Bei den Stylesheets entscheiden wir uns für `CSS`, können also einfach mit `Enter` bestätigen. 
 
@@ -803,6 +803,14 @@ Jetzt sollte es in unserer `create.component.html` nur noch einen Fehler geben, 
 
 Die drei Werte der Eingabefelder werden ausgelesen und einem JavaScript-Objekt `post` hinzugefügt. Dieses wird auf der Konsole ausgegeben. 
 
+Sollte es in Ihrer `create.component.html`-Datei nun immer noch Fehler geben, dann liegt es daran, dass bei diesen Zugriffen `inp_image.errors.required` (3x für alle 3 FormControl-Elemente) das strikte Typesetting sagt, dass `inp_image.errors` eventuell `null` sein könnte und man dann gar nicht auf die Eigenschaft `required` zugreifen könnte. Dafür können Sie den `?`-Operator verwenden, das sieht dann so aus:
+
+```html
+<span *ngIf="inp_title.errors?.required">This field is mandatory.</span>
+<span *ngIf="inp_location.errors?.required">This field is mandatory.</span>
+<span *ngIf="inp_image.errors?.required">This field is mandatory.</span>
+```
+
 Das Formular ist für `title` und `location` bereits passend für die Eingabe eines `post`-Datensatzes. Allerdings wollen wir für das `image` ja eine Bilddatei hochladen, die dann in das `base64`-Format umgewandelt werden soll. Dazu müssen wir das `image`-Eingabefeld ändern. Leider stellt Material nicht direkt ein *File upload*-Eingabeelement zur Verfügung. Das folgende Vorgehen wurde deshalb [hier](https://www.freakyjolly.com/angular-material-109-file-upload-ui-design-in-form-for-input-with-file-type-using-material-components/) entnommen und angepasst. 
 
 Die `create.component.html` sieht nun so aus:
@@ -861,7 +869,7 @@ In der `create.component.ts` fügen wir die `uploadFileEvt()`-Funktion hinzu, de
     export class CreateComponent implements OnInit {
 
       formGroup: FormGroup;
-      imageBase64: '';
+      imageBase64 = '';
 
       constructor(private fb: FormBuilder) {
         // constructor function
@@ -904,6 +912,14 @@ In der `create.component.ts` fügen wir die `uploadFileEvt()`-Funktion hinzu, de
 
     }
     ```
+
+
+Sollte es in Ihrer `create.component.ts`-Datei nun immer noch Fehler geben, dann liegt es daran, dass `formGroup: FormGroup;` nur deklariert, nicht jedoch auch initialisiert wird (striktes Typesetting). Das können Sie einfach umgehen, indem Sie sagen, dass Sie sich aber ganz sicher sind, dass es beim Initialisieren der Komponente initialisiert wird. Dazu fügt man ein `!` hinter den Variablennamen ein:
+
+```js
+formGroup!: FormGroup;
+```
+
 
 Wir erweitern diese Funktion nun noch um das Auslesen der Datei in einen `FileReader`. Damit können in Webanwendungen Dateien eingelesen werden. Das `onload`-Ereignis wird ausgelöst, wenn die Inhalte der Dateien verfügbar sind, wenn die Datei also eingelesen wurde. Dieser Inhalt wird in ein `Image`-Objekt umgewandelt, da für ein `Image` die Quelle des Bildes das `base64`-Format ist. 
 

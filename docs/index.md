@@ -16,8 +16,8 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | 4. | 03.-07.05.2021 | Promises und Fetch API | Übung 3 | - | 14.05.2021 | 
 | 5. | 10.-14.05.2021 | Service workers und Caching | - | - | 21.05.2021 | 
 | 6. | 17.-21.05.2021 | Datenbank und Backend | Übung 4 | - | 28.05.2021 | 
-| 7. | 24.-28.05.2021 | Caching dynamische Daten mit IndexDB | Übung 5 | - | 04.06.2021 | 
-| 8. | 31.-04.06.2021 | Responsive Webdesign | Übung 6 | - | 11.06.2021 | 
+| 7. | 24.-28.05.2021 | Frontend mit Backend-Anbindung | Übung 5 | - | 04.06.2021 | 
+| 8. | 31.-04.06.2021 | Caching dynamische Daten mit IndexDB | Übung 6 | - | 11.06.2021 | 
 | 9. | 07.-11.06.2021 | Hintergrundsynchronisation  | Übung 7 | - | 18.06.2021 | 
 | 10. | 14.-18.06.2021 | Push-Notifikationen | Übung 8 | - | 25.06.2021 | 
 | 11. | 21.-25.06.2021 | Media API (Kamera) | Übung 9 | - | 02.07.2021 | 
@@ -86,5 +86,15 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 	- In der Übung soll das Backend um eine weitere Funktion erweiteret werden. 
 	- Video zur Vorlesung am 26.05.2021
 		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=a6e060a195129540a18a7be89a3738e7&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+
+##### Woche 7 (Frontend und Backend-Anbindung)
+
+??? question "Woche 7 - Frontend und Backend-Anbindung"
+
+	- Diese Woche erstellen wir uns mithilfe von Angular ein [Frontend](./frontend/#frontend) und binden dieses an das Backend an. Damit wird es uns möglich, Daten in ein Formular einzugeben und diese Daten werden in der Datenbank gespeichert.  
+	- In der Übung soll das Frontend um eine weitere Funktion und eine Komponente erweiteret werden. 
+	- Video zur Vorlesung am 02.06.2021
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=63500e11ed3c99c726ac2a962f710a9f&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 
 

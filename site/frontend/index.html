@@ -610,7 +610,7 @@ Package                      Version
 </code></pre></div>
 <p>ins Terminal ein. </p>
 <ul>
-<li>Die Frage nach <code>stricter type checking</code> beantworten wir mit <code>N</code>, also <code>Enter</code>. Das macht unser Leben etwas leichter. Fortgeschrittene Angular-Programmiererinnen können aber auch gerne mit <code>y</code> antworten. </li>
+<li>Die Frage nach <code>stricter type checking</code> beantworten wir mit <code>N</code>, also <code>Enter</code>. Das macht unser Leben etwas leichter. Fortgeschrittene Angular-Programmiererinnen können aber auch gerne mit <code>y</code> antworten. (Die neue Angular CLI-Version 12 fragt danach nicht mehr, sondern verwendet das strikte Typesetting einfach, das macht es an einigen Stellen etwas komplizierter). </li>
 <li>Die Frage nach <code>routing</code> beantworten wir mit <code>y</code>, d.h. hier wählen wir nicht die Standardantwort! <code>Routing</code> erläutern wir gleich noch. </li>
 <li>Bei den Stylesheets entscheiden wir uns für <code>CSS</code>, können also einfach mit <code>Enter</code> bestätigen. </li>
 </ul>
@@ -1625,6 +1625,11 @@ UPDATE src/styles.css <span class="o">(</span><span class="m">181</span> bytes<s
 </div>
 </div>
 <p>Die drei Werte der Eingabefelder werden ausgelesen und einem JavaScript-Objekt <code>post</code> hinzugefügt. Dieses wird auf der Konsole ausgegeben. </p>
+<p>Sollte es in Ihrer <code>create.component.html</code>-Datei nun immer noch Fehler geben, dann liegt es daran, dass bei diesen Zugriffen <code>inp_image.errors.required</code> (3x für alle 3 FormControl-Elemente) das strikte Typesetting sagt, dass <code>inp_image.errors</code> eventuell <code>null</code> sein könnte und man dann gar nicht auf die Eigenschaft <code>required</code> zugreifen könnte. Dafür können Sie den <code>?</code>-Operator verwenden, das sieht dann so aus:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">span</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;inp_title.errors?.required&quot;</span><span class="p">&gt;</span>This field is mandatory.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;inp_location.errors?.required&quot;</span><span class="p">&gt;</span>This field is mandatory.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;inp_image.errors?.required&quot;</span><span class="p">&gt;</span>This field is mandatory.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div>
 <p>Das Formular ist für <code>title</code> und <code>location</code> bereits passend für die Eingabe eines <code>post</code>-Datensatzes. Allerdings wollen wir für das <code>image</code> ja eine Bilddatei hochladen, die dann in das <code>base64</code>-Format umgewandelt werden soll. Dazu müssen wir das <code>image</code>-Eingabefeld ändern. Leider stellt Material nicht direkt ein <em>File upload</em>-Eingabeelement zur Verfügung. Das folgende Vorgehen wurde deshalb <a href="https://www.freakyjolly.com/angular-material-109-file-upload-ui-design-in-form-for-input-with-file-type-using-material-components/">hier</a> entnommen und angepasst. </p>
 <p>Die <code>create.component.html</code> sieht nun so aus:</p>
 <div class="tabbed-set" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">/create/create.component.html</label><div class="tabbed-content">
@@ -1766,7 +1771,7 @@ UPDATE src/styles.css <span class="o">(</span><span class="m">181</span> bytes<s
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">CreateComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
 
   <span class="nx">formGroup</span><span class="o">:</span> <span class="nx">FormGroup</span><span class="p">;</span>
-  <span class="nx">imageBase64</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="nx">imageBase64</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
 
   <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">fb</span><span class="o">:</span> <span class="nx">FormBuilder</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// constructor function</span>
@@ -1812,6 +1817,9 @@ UPDATE src/styles.css <span class="o">(</span><span class="m">181</span> bytes<s
 </td></tr></table>
 </div>
 </div>
+<p>Sollte es in Ihrer <code>create.component.ts</code>-Datei nun immer noch Fehler geben, dann liegt es daran, dass <code>formGroup: FormGroup;</code> nur deklariert, nicht jedoch auch initialisiert wird (striktes Typesetting). Das können Sie einfach umgehen, indem Sie sagen, dass Sie sich aber ganz sicher sind, dass es beim Initialisieren der Komponente initialisiert wird. Dazu fügt man ein <code>!</code> hinter den Variablennamen ein:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">formGroup</span><span class="o">!:</span> <span class="nx">FormGroup</span><span class="p">;</span>
+</code></pre></div>
 <p>Wir erweitern diese Funktion nun noch um das Auslesen der Datei in einen <code>FileReader</code>. Damit können in Webanwendungen Dateien eingelesen werden. Das <code>onload</code>-Ereignis wird ausgelöst, wenn die Inhalte der Dateien verfügbar sind, wenn die Datei also eingelesen wurde. Dieser Inhalt wird in ein <code>Image</code>-Objekt umgewandelt, da für ein <code>Image</code> die Quelle des Bildes das <code>base64</code>-Format ist. </p>
 <div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">/create/create.component.ts</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>48
