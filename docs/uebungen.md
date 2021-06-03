@@ -178,6 +178,93 @@
 
 		![uebung5](./files/63_restapi.png) 
 
+
+??? question "eine mögliche Lösung für Übung 5"
+
+	1. In der `server.js` fügen wir einen weiteren Endpunkt hinzu und rufen für diesen request eine Funktion `readOneByTitle` im `PostController` auf:
+
+		=== "server.js"
+		```js linenums="1" hl_lines="18"
+		import express from 'express';
+		import cors from 'cors';
+		import { PostController } from './posts.controller.js';
+
+		const app = express();
+		const PORT = 3000;
+
+		app.use(cors());
+		app.use(express.urlencoded({ limit: '20mb', extended: true }));
+		app.use(express.json({ limit: '20mb' }));
+
+		app.get('/', (request, response) => {
+		    response.send('HELLO FIW!');
+		});
+
+		// Endpunkte definieren
+		app.post("/posts", PostController.create); // C
+		app.get("/posts/title", PostController.readOneByTitle); // R (one)
+		app.get("/posts", PostController.readAll); // R (all)
+		app.get("/posts/:postId", PostController.readOne); // R (one)
+
+		app.put("/posts/:postId", PostController.update); // U
+		app.delete("/posts/:postId", PostController.delete); // D
+
+		app.listen(PORT, (error) => {
+		    if (error) {
+		        console.log(error);
+		    } else {
+		        console.log(`Server started and listening on port ${PORT} ...`);
+		    }
+		});
+		``` 
+
+
+		Achten Sie dabei darauf, dass Sie den neuen Endpunkt **vor** den Endpunkt `get("/posts"` positionieren. 
+
+	2. In der `posts.controller.js` definieren wir die `readOneByTitle()`-Funktion. Da wir den `title` in einem JSON im `body` des Requests übergeben, lesen wir den `body` des Requests aus und darin die Eigenschaft `title`. Wir speichern uns diesen Wert in einer Variable (`title`) und übergeben ihn dem Aufruf einer `findTitle()`-Funktion aus dem `PostService`:
+
+		=== "posts.controller.js"
+		```js linenums="1"
+
+	    readOneByTitle: (req, res) => {
+	        console.log(req.body);
+	        const title = req.body.title;
+	        console.log('title:', title);
+	        PostService.findByTitle(title, (err, result) => {
+	            if (err)
+	                res.status(500).send({
+	                    message: err.message || "Some error occurred while getting one post",
+	                });
+	            else res.json(result);
+	        });
+	    },
+
+		``` 
+
+		Die Konsolenausgaben können natürlich entfallen. 
+
+	3. In dem `PostService` (`db.sqlqueries.js`) wird die Funktion `findByTitle()` implementiert, indem die passende DB-Anfrage gestellt wird: 
+
+		=== "db.sqlqueries.js"
+		```js linenums="1" 
+
+		findByTitle: async(title, result) => {
+	        sql.query(
+	            `SELECT * FROM posts WHERE title = ?`, [title],
+	            (err, res) => {
+	                if (err) result(err, null);
+	                else if (res.length) result(null, res);
+	                else result({ message: "post not found" }, null);
+	            }
+	        );
+	    },
+
+		``` 
+
+		Das war's schon. Ich hoffe, es hat bei Ihnen geklappt!
+
+
+
 ##### Übung 6 (Frontend)
 
 ??? "Übung 6"

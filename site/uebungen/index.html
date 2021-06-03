@@ -734,6 +734,139 @@ Package                      Version
 </li>
 </ol>
 </details>
+<details class="question"><summary>eine mögliche Lösung für Übung 5</summary><ol>
+<li>
+<p>In der <code>server.js</code> fügen wir einen weiteren Endpunkt hinzu und rufen für diesen request eine Funktion <code>readOneByTitle</code> im <code>PostController</code> auf:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">server.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">cors</span> <span class="nx">from</span> <span class="s1">&#39;cors&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">PostController</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./posts.controller.js&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="mf">3000</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">());</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span><span class="p">,</span> <span class="nx">extended</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="nx">limit</span><span class="o">:</span> <span class="s1">&#39;20mb&#39;</span> <span class="p">}));</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;HELLO FIW!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Endpunkte definieren</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">create</span><span class="p">);</span> <span class="c1">// C</span>
+<span class="hll"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts/title&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readOneByTitle</span><span class="p">);</span> <span class="c1">// R (one)</span>
+</span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readAll</span><span class="p">);</span> <span class="c1">// R (all)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">readOne</span><span class="p">);</span> <span class="c1">// R (one)</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span> <span class="c1">// U</span>
+<span class="nx">app</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s2">&quot;/posts/:postId&quot;</span><span class="p">,</span> <span class="nx">PostController</span><span class="p">.</span><span class="k">delete</span><span class="p">);</span> <span class="c1">// D</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server started and listening on port </span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb"> ...`</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Achten Sie dabei darauf, dass Sie den neuen Endpunkt <strong>vor</strong> den Endpunkt <code>get("/posts"</code> positionieren. </p>
+</li>
+<li>
+<p>In der <code>posts.controller.js</code> definieren wir die <code>readOneByTitle()</code>-Funktion. Da wir den <code>title</code> in einem JSON im <code>body</code> des Requests übergeben, lesen wir den <code>body</code> des Requests aus und darin die Eigenschaft <code>title</code>. Wir speichern uns diesen Wert in einer Variable (<code>title</code>) und übergeben ihn dem Aufruf einer <code>findTitle()</code>-Funktion aus dem <code>PostService</code>:</p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">posts.controller.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">readOneByTitle</span><span class="o">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;title:&#39;</span><span class="p">,</span> <span class="nx">title</span><span class="p">);</span>
+    <span class="nx">PostService</span><span class="p">.</span><span class="nx">findByTitle</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+                <span class="nx">message</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="s2">&quot;Some error occurred while getting one post&quot;</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="k">else</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">},</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Die Konsolenausgaben können natürlich entfallen. </p>
+</li>
+<li>
+<p>In dem <code>PostService</code> (<code>db.sqlqueries.js</code>) wird die Funktion <code>findByTitle()</code> implementiert, indem die passende DB-Anfrage gestellt wird: </p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">db.sqlqueries.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">findByTitle</span><span class="o">:</span> <span class="k">async</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">sql</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span>
+        <span class="sb">`SELECT * FROM posts WHERE title = ?`</span><span class="p">,</span> <span class="p">[</span><span class="nx">title</span><span class="p">],</span>
+        <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">result</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="nx">result</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
+            <span class="k">else</span> <span class="nx">result</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;post not found&quot;</span> <span class="p">},</span> <span class="kc">null</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">);</span>
+<span class="p">},</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Das war's schon. Ich hoffe, es hat bei Ihnen geklappt!</p>
+</li>
+</ol>
+</details>
 <h5 id="ubung-6-frontend">Übung 6 (Frontend)<a class="headerlink" href="#ubung-6-frontend" title="Permanent link">&para;</a></h5>
 <details><summary>Übung 6</summary><ol>
 <li>Im Abschnitt <a href="../frontend/#frontend">Frontend</a> haben wir uns ein Frontend erstellt, um mithilfe eines Formulars Daten (insb. ein Bild) einzugeben und diese in einer Datenbank abzuspeichern. </li>
