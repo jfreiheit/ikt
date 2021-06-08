@@ -372,9 +372,64 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#das-backend-nutzen" class="md-nav__link">
+    Das Backend nutzen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#warum-dynamische-inhalte-cachen" class="md-nav__link">
+    Warum dynamische Inhalte "cachen"?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#das-idb-paket" class="md-nav__link">
     Das idb-Paket
   </a>
+  
+    <nav class="md-nav" aria-label="Das idb-Paket">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#erstellen-und-offnen-einer-indexeddb" class="md-nav__link">
+    Erstellen und Öffnen einer IndexedDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behandlung-fetch-event-anpassen" class="md-nav__link">
+    Behandlung fetch-Event anpassen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datensatze-aus-der-indexeddb-auslesen" class="md-nav__link">
+    Datensätze aus der IndexedDB auslesen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loschen-der-indexeddb" class="md-nav__link">
+    Löschen der IndexedDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loschen-einzelner-eintrage" class="md-nav__link">
+    Löschen einzelner Einträge
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -456,9 +511,64 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#das-backend-nutzen" class="md-nav__link">
+    Das Backend nutzen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#warum-dynamische-inhalte-cachen" class="md-nav__link">
+    Warum dynamische Inhalte "cachen"?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#das-idb-paket" class="md-nav__link">
     Das idb-Paket
   </a>
+  
+    <nav class="md-nav" aria-label="Das idb-Paket">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#erstellen-und-offnen-einer-indexeddb" class="md-nav__link">
+    Erstellen und Öffnen einer IndexedDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behandlung-fetch-event-anpassen" class="md-nav__link">
+    Behandlung fetch-Event anpassen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datensatze-aus-der-indexeddb-auslesen" class="md-nav__link">
+    Datensätze aus der IndexedDB auslesen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loschen-der-indexeddb" class="md-nav__link">
+    Löschen der IndexedDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loschen-einzelner-eintrage" class="md-nav__link">
+    Löschen einzelner Einträge
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -483,21 +593,147 @@
 <p>Wir haben jetzt verschiedene Ressourcen in statischen und dynamischen Caches gespeichert. Diese Ressourcen lagen als Dateien vor, die wir über eine URL abrufen konnten, also <code>*.html</code>-, <code>*.js</code>-, <code>*.css</code>- Dateien und Bilder. Jetzt wollen wir dynamisch <em>Daten</em> speichern, sogenannten <em>dynamischen Inhalt</em>. Diese Daten können ausgelesen und den unterschiedlichen Dateien hinzugefügt bzw. durch Dateien hinzugefügt werden. Wir können uns das wirklich wie eine Datenbank vorstellen, aus der wir diese Daten ziehen, nur dass diese Datenbank nicht extern in einem Datenbankmanagementsystem verwaltet wird, sondern durch den Browser. Wir haben unter den Developer Tools diese "Datenbank" vielleicht schon im <code>Application</code>-Reiter auf der linken Seite unter <code>Storage</code> entdeckt. Es handelt sich um die <code>IndexedDB</code>. </p>
 <p>Bei der <code>IndexedDB</code> handelt es sich um eine <em>transaktionsbasierte</em> Datenbank, die Schlüssel-Werte-Paare im Browser speichert. <em>Transaktionsbasiert</em> bedeutet dabei, dass ganze <em>Transaktionen</em> ausgeführt werden, die aus einzelnen Aktionen bestehen können. Wenn nur eine Aktion einer Transaktion fehlschlägt, dann wird keine der Aktionen dieser Transaktion ausgeführt. Das bedeutet, eine <em>Transaktion</em>  wird entweder ganz oder gar nicht ausgeführt. Unsere Transaktionen bestehen aber typischerweise nur aus wenigen Aktionen, das Transaktionskonzept spielt deshalb keine große Rolle. </p>
 <p>Wir können beliebige Daten in die <code>IndexedDB</code> speichern, also auch Bilder, Dateien, Arrays, Objekte, usw. Ein wichtiger Unterschied zum <code>Lokal Storage</code> ist, dass wir sowohl über den "normalen" JavaScript-Thread unserer Webanwendung als auch über den Service Worker auf die <code>IndexedDB</code> zugreifen können. </p>
-<h3 id="das-idb-paket">Das idb-Paket<a class="headerlink" href="#das-idb-paket" title="Permanent link">&para;</a></h3>
-<p>Da die API zur <code>IndexedDB</code> sehr umständlich zu handhaben ist und viele <em>Callbacks</em> erfordert, wird die Verwendung anderer Pakete empfohlen, die sich als <em>Wrapper</em> um die API legen und die Verwendung von Promises ermöglichen. Oft wird z.B. <a href="https://dexie.org/">Dexie</a> verwendet. Wir verwenden zunächst den <a href="https://github.com/jakearchibald/idb">idb-Warpper</a> von Jake Archibald. Sie können dieses Paket per</p>
-<div class="highlight"><pre><span></span><code>npm install idb
+<h3 id="das-backend-nutzen">Das Backend nutzen<a class="headerlink" href="#das-backend-nutzen" title="Permanent link">&para;</a></h3>
+<p>Ehe wir aber mit der <code>IndexedDB</code> loslegen, wollen wir zunächst einige Anpassungen in unserer <code>HTW Insta</code>-Anwendung durchführen, damit sich unsere Mühen mit dem <a href="../backend/#backend-rest-server">Backend</a> und dem <a href="../frontend/#frontend">Frontend</a> auch gelohnt haben. </p>
+<p>Wir wollen die Daten für unsere <code>Cards</code> aus der Datenbank holen. Dazu muss das <strong>Backend gestartet sein</strong>! Öffnen Sie die <code>feed.js</code>. Die <code>fetch</code>-Funktion passen wir nun so an, dass sie auf unser Backend zugreift:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">updateUI</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div>
-<p>installieren oder von der <a href="https://github.com/jakearchibald/idb">GitHub</a>-Seite downloaden. Ich habe die <code>npm install idb</code>-Variante gewählt. Nach der Installation des Paketes erstellen wir eine Datei <code>db.js</code> im <code>public/src/js</code>-Ordner und geben dort schonmal ein (aus der <code>README.md</code> von <code>idb</code>): </p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">public/src/js/db.js</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">openDB</span><span class="p">,</span> <span class="nx">deleteDB</span><span class="p">,</span> <span class="nx">wrap</span><span class="p">,</span> <span class="nx">unwrap</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;idb&#39;</span><span class="p">;</span>
-
-<span class="k">async</span> <span class="kd">function</span> <span class="nx">doDatabaseStuff</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">openDB</span><span class="p">(</span><span class="err">…</span><span class="p">);</span>
+<p>Wir nutzen also den <code>GET http://localhost:3000/posts</code>-Endpunkt, um uns <strong>alle</strong> Daten aus der Datenbank zu holen. Wir fügen einen Funktionsaufruf einer neuen Funktion <code>updateUI(data)</code> ein. Diese Funktion macht nichts weiter, als die <code>createCard()</code>-Funktion für jeden einzelnen Datensatz aufzurufen: </p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">updateUI</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="nx">createCard</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>Die <code>createCard()</code>-Funktion war allerdings bis jetzt parameterlos. Nun übergeben wir unseren Datensatz und nutzen die einzelnen Werte daraus für die Erstellung einer <code>Card</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll"><span class="kd">function</span> <span class="nx">createCard</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span>    <span class="kd">let</span> <span class="nx">cardWrapper</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+    <span class="nx">cardWrapper</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;shared-moment-card mdl-card mdl-shadow--2dp&#39;</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">cardTitle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+    <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;mdl-card__title&#39;</span><span class="p">;</span>
+<span class="hll">    <span class="kd">let</span> <span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+</span><span class="hll">    <span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&quot;data:image/png;base64,&quot;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">image</span><span class="p">;</span>
+</span><span class="hll">    <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundImage</span> <span class="o">=</span> <span class="s1">&#39;url(&#39;</span><span class="o">+</span><span class="nx">image</span><span class="p">.</span><span class="nx">src</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">;</span>
+</span>    <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundSize</span> <span class="o">=</span> <span class="s1">&#39;cover&#39;</span><span class="p">;</span>
+    <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="s1">&#39;180px&#39;</span><span class="p">;</span>
+    <span class="nx">cardWrapper</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">cardTitle</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">cardTitleTextElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;h2&#39;</span><span class="p">);</span>
+    <span class="nx">cardTitleTextElement</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;mdl-card__title-text&#39;</span><span class="p">;</span>
+<span class="hll">    <span class="nx">cardTitleTextElement</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+</span>    <span class="nx">cardTitle</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">cardTitleTextElement</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">cardSupportingText</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+    <span class="nx">cardSupportingText</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;mdl-card__supporting-text&#39;</span><span class="p">;</span>
+<span class="hll">    <span class="nx">cardSupportingText</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">location</span><span class="p">;</span>
+</span>    <span class="nx">cardSupportingText</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">textAlign</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">;</span>
+    <span class="nx">cardWrapper</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">cardSupportingText</span><span class="p">);</span>
+    <span class="nx">componentHandler</span><span class="p">.</span><span class="nx">upgradeElement</span><span class="p">(</span><span class="nx">cardWrapper</span><span class="p">);</span>
+    <span class="nx">sharedMomentsArea</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">cardWrapper</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Das "Zusammenbauen" des <code>base64</code>-Strings ist ein wenig aufwendiger. Wir benötigen ein <code>Image</code>-Objekt, dem wir als Wert des <code>src</code>-Attributes den durch die Konkatenation <code>"data:image/png;base64," + data.image</code> Strings übergeben. Dann wird der <code>src</code>-Wert des <code>Image</code>-Objektes als eine <code>URL</code> für das Hintergrundbild einer <code>Card</code> verwendet (Zeilen <code>6-8</code>).</p>
+<p>Damit die <code>image</code>-Eigenschaft unseres Datensatzes kein <code>ArrayBuffer</code> ist, sondern ein String, habe ich im Backend im <code>PostController</code> die <code>readAll</code>-Methode verändert. Mit "plain" JavaScript konnte ich nicht aus dem <code>ArrayBuffer</code> ein Bild erzeugen. Falls Ihnen das gelingt, dann würde ich mich über Information freuen!</p>
+<p>In der <code>readAll</code>-Funktion habe ich aus dem Buffer mithilfe der <code>toString()</code>-Methode einen String erzeugt und diesen anstelle des ArrayBuffers gesendet. </p>
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll">    <span class="nx">readAll</span><span class="o">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span>        <span class="nx">PostService</span><span class="p">.</span><span class="nx">getAll</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+                    <span class="nx">message</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="s2">&quot;Some error occurred while getting all posts&quot;</span><span class="p">,</span>
+                <span class="p">});</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                <span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+                <span class="nx">result</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span> <span class="nx">post</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="kd">let</span> <span class="nx">buff</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">post</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span> <span class="s1">&#39;base64&#39;</span><span class="p">);</span>
+                    <span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">buff</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">);</span>
+                    <span class="c1">//console.log(text);</span>
+                    <span class="nx">post</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="nx">text</span><span class="p">;</span>
+                    <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span>
+                <span class="p">});</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+</code></pre></div>
+</td></tr></table>
+Dadurch kommen die Daten auch bereits als Array im Frontend an. Je nachdem, welche Daten Sie alle in Ihrer Datenbank haben, sieht die Anwendung nun so aus: </p>
+<p><img alt="indexdb" src="../files/64_indexdb.png" /></p>
+<p>Beachten Sie auch, dass sowohl der statische als auch der dynamische Service-Worker-Cache funktioniert. Das heißt, wenn Sie Ihre Anwendung offline schalten, dann ist immer noch alles da. </p>
+<h3 id="warum-dynamische-inhalte-cachen">Warum dynamische Inhalte "cachen"?<a class="headerlink" href="#warum-dynamische-inhalte-cachen" title="Permanent link">&para;</a></h3>
+<p>Wenn wir nun bereits alle Ressourcen (html-Dateien, js-Dateien, css-Dateien und Bilddateien) im Service-Worker-Cache gespeichert haben (statisch und oder dynamisch), dann stellt sich natürlich die Frage, warum wir überhaupt noch eine In-Browser-Datenbank verwenden sollen und wollen. Die beiden Terme, die dabei unterschieden werden, sind <em>dynamic caching</em> und <em>caching dynamic content</em>, also dynamische Inhalte speichern. Beides hat <em>caching</em> im Namen und <em>dynamic</em>, ist auch nicht so viel anders. </p>
+<p><em>Dynamic caching</em> haben wir bis jetzt durchgeführt. Die Webanwendung stellt eine Anfrage an den Webserver, der Service Worker schaltet sich jedoch als Proxy dazwischen. Wenn der Service Worker die Anfrage selbst aus dem Cache beantworten kann, wird sie gar nicht erst an den Webserver weitergeleitet. Wenn nicht, dann geht die Anfrage zum Webserver, der schickt eine Antwort zurück, die der Service Worker aber auch in seinen dynamischen Cache ablegt, um sie beim nächsten Mal aus dem Cache beantworten zu können. Beim <em>dynamic caching</em> werden also dynamisch Ressourcen im Cache abgelegt. </p>
+<p>Beim Speichern von dynamischen Inhalten mithilfe der In-Browser-IndexedDB spielt die Fetch-API keine Rolle. es geht auch nicht darum, Ressourcen, wie html-, css, oder js-Dateien zu speichern. Vielmehr werden in der Datenbank strukturierte (aber auch unstrukturierte) Daten, wie JSON- oder XML-Daten gespeichert. Prinzipiell geht es um das Speichern von <em>Schlüssel-Werte-Paaren</em>. Primär handelt es sich bei den Daten in der IndexedDB aber um dynamische, sich häufig ändernde Daten - <em>dynamic content</em>. Während wir beim <em>dynamic caching</em> eher davon ausgehen, Ressourcen zu speichern, die sich nicht häufig ändern, ist das bei der IndexedDB anders. Dort gehen wir davon aus, dass sich diese Daten häufig ändern. Ein weiterer Unterschied liegt darin, dass wir mit <em>dynamic caching</em> stets nur vollständige <em>Responses</em> speichern, also eine Ressource gaz oder gar nicht. Das muss in der IndexedDB nicht sein. Wir könnten in der IndexedDB z.B. von einem <code>Post</code> immer nur <code>post.title</code> und <code>post.location</code> speichern, nicht aber <code>post.image</code> (oder umgekehrt). Außerdem lassen sich die Daten in der IndexedDB auch ändern oder in ein anderes Format umwandeln. Wir haben in Bezug auf die gespeicherten Ressourcen in der IndexedDB mehr Flexibilität.  </p>
+<h3 id="das-idb-paket">Das idb-Paket<a class="headerlink" href="#das-idb-paket" title="Permanent link">&para;</a></h3>
+<p>Da die API zur <code>IndexedDB</code> sehr umständlich zu handhaben ist und viele <em>Callbacks</em> erfordert, wird die Verwendung anderer Pakete empfohlen, die sich als <em>Wrapper</em> um die API legen und die Verwendung von Promises ermöglichen. Oft wird z.B. <a href="https://dexie.org/">Dexie</a> verwendet. Wir verwenden zunächst den <a href="https://github.com/jakearchibald/idb">idb-Warpper</a> von Jake Archibald. Ich verwende im Folgenden dieses <a href="../files/idb.js">idb.js</a>, das Sie sich <a href="../files/idb.js">hier</a> herunterladen und einfach in Ihren <code>/public/src/js</code>-Ordner kopieren können. </p>
+<p><img alt="indexeddb" src="../files/65_indexdb.png" /></p>
+<p>Diese Datei binden wir zunächst über die <code>index.html</code>-Datei ein:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">index.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>107
+108
+109
+110
+111
+112
+113</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">defer</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/material.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="hll"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/idb.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/feed.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
 </div>
 </div>
-<p>Im Service Worker haben wir normalerweise keinen direkten Zugriff auf die Skripte und Dateien unserer Webanwendung. Dafür gibt es jedoch die <code>importScripts()</code>-Anweisung. Wir importieren damit unsere <code>db.js</code>-Datei in den Service Worker und wir laden diese Datei auch in den Cache:</p>
+<p>Im Service Worker haben wir normalerweise keinen direkten Zugriff auf die Skripte und Dateien unserer Webanwendung. Dafür gibt es jedoch die <code>importScripts()</code>-Anweisung. Wir importieren damit unsere <code>idb.js</code>-Datei in den Service Worker und wir laden diese Datei auch in den Cache:</p>
 <div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">public/sw.js</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
@@ -583,7 +819,7 @@
                 <span class="s1">&#39;/src/js/app.js&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;/src/js/feed.js&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;/src/js/material.min.js&#39;</span><span class="p">,</span>
-<span class="hll">                <span class="s1">&#39;/src/js/db.js&#39;</span><span class="p">,</span>
+<span class="hll">                <span class="s1">&#39;/src/js/idb.js&#39;</span><span class="p">,</span>
 </span>                <span class="s1">&#39;/src/css/app.css&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;/src/css/feed.css&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;/src/images/htw.jpg&#39;</span><span class="p">,</span>
@@ -637,6 +873,1312 @@
 </code></pre></div>
 </td></tr></table>
 </div>
+</div>
+<p>Wir führen zunächst noch einige Änderungen in unserer Service Worker Datei <code>sw.js</code> durch. Zunächst lagern wir alle Dateien, die wir in dem statischen Cache speichern wollen, in ein eigenes Array <code>STATIC_FILES</code> aus:</p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">public/sw.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    <span class="nx">importScripts</span><span class="p">(</span><span class="s1">&#39;/src/js/db.js&#39;</span><span class="p">);</span>
+
+    <span class="kd">const</span> <span class="nx">CURRENT_STATIC_CACHE</span> <span class="o">=</span> <span class="s1">&#39;static-v3&#39;</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">CURRENT_DYNAMIC_CACHE</span> <span class="o">=</span> <span class="s1">&#39;dynamic-v3&#39;</span><span class="p">;</span>
+<span class="hll">    <span class="kd">const</span> <span class="nx">STATIC_FILES</span> <span class="o">=</span> <span class="p">[</span>
+</span>        <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/src/js/app.js&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/src/js/feed.js&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/src/js/material.min.js&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/src/js/idb.js&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/src/css/app.css&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/src/css/feed.css&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/src/images/htw.jpg&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;https://fonts.googleapis.com/css?family=Roboto:400,700&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;https://fonts.googleapis.com/icon?family=Material+Icons&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css&#39;</span>
+<span class="hll">    <span class="p">];</span>
+</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+            <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CURRENT_STATIC_CACHE</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Service-Worker-Cache erzeugt und offen&#39;</span><span class="p">);</span>
+<span class="hll">                <span class="nx">cache</span><span class="p">.</span><span class="nx">addAll</span><span class="p">(</span><span class="nx">STATIC_FILES</span><span class="p">);</span>
+</span>            <span class="p">})</span>
+        <span class="p">);</span>
+    <span class="p">})</span>
+
+<span class="c1">// hier der Rest</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Das hat keine weitere Bedeutung und strukturiert nur den Code besser. Wichtiger aber ist es, die Behandlung des <code>fetch</code>-Ereignisses zu überdenken. Derzeit sieht die Behandlung so aus:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>     <span class="c1">// nicht erneut response nehmen, haben wir schon</span>
+                            <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CURRENT_DYNAMIC_CACHE</span><span class="p">)</span>      <span class="c1">// neuer, weiterer Cache namens dynamic</span>
+                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                                    <span class="nx">cache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">());</span>
+                                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                                <span class="p">})</span>
+                        <span class="p">});</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Das heißt, dass jeder Request überprüft wird, ob er aus dem Cache beantwortet werden kann und wenn ja, dann wird die <code>response</code> aus dem Cache zurückgegeben (Zeile <code>10</code>). Wenn nicht, dann wird der Request an den Webserver weitergeleitet, die Antwort in den dynamischen Cache gelegt und an die Webanwendung weitergereicht (Zeilen <code>12-20</code>). Das betrifft <strong>jeden</strong> Request. Wir wollen nun aber die Anfragen, die an <code>http//localhost:3000/posts</code> gestellt werden, anders behandeln. Dazu speichern wir dieses <code>url</code> und prüfen, ob diese Anfrage an diese URL geht. Wenn ja, behandeln wir sie anders, wenn nicht, dann so, wie bisher:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+<span class="hll">    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+</span><span class="hll">    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+</span><span class="hll">            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+</span><span class="hll">                <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">                    <span class="c1">// hier Anfrage an http://localhost:3000/posts behandeln</span>
+</span><span class="hll">                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+</span><span class="hll">                <span class="p">})</span>
+</span><span class="hll">        <span class="p">)</span>
+</span><span class="hll">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span>        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>     <span class="c1">// nicht erneut response nehmen, haben wir schon</span>
+                            <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CURRENT_DYNAMIC_CACHE</span><span class="p">)</span>      <span class="c1">// neuer, weiterer Cache namens dynamic</span>
+                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                                    <span class="nx">cache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">());</span>
+                                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                                <span class="p">})</span>
+                        <span class="p">});</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+<span class="hll">    <span class="p">)}</span>
+</span><span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Wie wir diese Anfragen an <code>http://localhost:3000/posts</code> behandeln, schauen wir uns gleich an. Wir haben jetzt nur eine Unterscheidung hinzugefügt, ob die Anfrage an  <code>http://localhost:3000/posts</code> geht oder nicht. Wenn ja, leiten wir die Anfrage an den Webserver weiter (Zeile <code>9</code>) und geben die Response zurück (Zeile <code>12</code>). Wenn nicht, dann behandeln wir die Anfrage wir bisher. Zunächst erstellen wir aber die IndexedDB. </p>
+<h4 id="erstellen-und-offnen-einer-indexeddb">Erstellen und Öffnen einer IndexedDB<a class="headerlink" href="#erstellen-und-offnen-einer-indexeddb" title="Permanent link">&para;</a></h4>
+<p>Nachdem wir für den Service Worker die <code>importScripts()</code>-Anweisung kennengelernt haben, könnten wir nun verschiedene Skripts erstellen und diese in den Service Worker einbinden, also z.B. ein Skript für die Behandlung des <code>fetch</code>-Ereignisses und ein Skript für die Verwaltung der <code>IndexedDB</code>. Wir lassen aber hier alles in der <code>sw.js</code> und erstellen und öffnen zunächst eine neue IndexedDB, die wir <code>posts-store</code> nennen. Dies geht mit der <code>openDB()</code>-Funktion aus dem <code>idb</code>-Paket (siehe <a href="https://github.com/jakearchibald/idb">README.md</a>):</p>
+<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">public/sw.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">importScripts</span><span class="p">(</span><span class="s1">&#39;/src/js/db.js&#39;</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">CURRENT_STATIC_CACHE</span> <span class="o">=</span> <span class="s1">&#39;static-v3&#39;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">CURRENT_DYNAMIC_CACHE</span> <span class="o">=</span> <span class="s1">&#39;dynamic-v3&#39;</span><span class="p">;</span>
+
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CURRENT_STATIC_CACHE</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Service-Worker-Cache erzeugt und offen&#39;</span><span class="p">);</span>
+            <span class="nx">cache</span><span class="p">.</span><span class="nx">addAll</span><span class="p">([</span>
+                <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;/src/js/app.js&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;/src/js/feed.js&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;/src/js/material.min.js&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;/src/js/idb.js&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;/src/css/app.css&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;/src/css/feed.css&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;/src/images/htw.jpg&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;https://fonts.googleapis.com/css?family=Roboto:400,700&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;https://fonts.googleapis.com/icon?family=Material+Icons&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css&#39;</span>
+            <span class="p">]);</span>
+        <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">})</span>
+
+<span class="hll"><span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">idb</span><span class="p">.</span><span class="nx">openDB</span><span class="p">(</span><span class="s1">&#39;posts-store&#39;</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="p">{</span>
+</span><span class="hll">    <span class="nx">upgrade</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">        <span class="c1">// Create a store of objects</span>
+</span><span class="hll">        <span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">createObjectStore</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class="hll">            <span class="c1">// The &#39;id&#39; property of the object will be the key.</span>
+</span><span class="hll">            <span class="nx">keyPath</span><span class="o">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+</span><span class="hll">            <span class="c1">// If it isn&#39;t explicitly set, create a value by auto incrementing.</span>
+</span><span class="hll">            <span class="nx">autoIncrement</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class="hll">        <span class="p">});</span>
+</span><span class="hll">        <span class="c1">// Create an index on the &#39;id&#39; property of the objects.</span>
+</span><span class="hll">        <span class="nx">store</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">);</span>
+</span><span class="hll">    <span class="p">},</span>
+</span><span class="hll"><span class="p">});</span>
+</span>
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;activate&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; activating ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">keys</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">keyList</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">keyList</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">key</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">!==</span> <span class="nx">CURRENT_STATIC_CACHE</span> <span class="o">&amp;&amp;</span> <span class="nx">key</span> <span class="o">!==</span> <span class="nx">CURRENT_DYNAMIC_CACHE</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; old cache removed :&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+                    <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}))</span>
+        <span class="p">})</span>
+    <span class="p">);</span>
+    <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">clients</span><span class="p">.</span><span class="nx">claim</span><span class="p">();</span>
+<span class="p">})</span>
+
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="c1">// hier Anfrage an http://localhost:3000/posts behandeln</span>
+                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>     <span class="c1">// nicht erneut response nehmen, haben wir schon</span>
+                            <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CURRENT_DYNAMIC_CACHE</span><span class="p">)</span>      <span class="c1">// neuer, weiterer Cache namens dynamic</span>
+                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                                    <span class="nx">cache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">());</span>
+                                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                                <span class="p">})</span>
+                        <span class="p">});</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+    <span class="p">)}</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Wir haben nun eine "eigene" IndexDB namens <code>post-store</code> erstellt. Der <code>store</code> darin heißt <code>posts</code>. In diesem <code>store</code> speichern wir alle Daten der Posts. Mit der Eigenschaft <code>keyPath</code> definieren wir den Schlüssel für diesen <code>store</code>. Über diesen Schlüssel gelangen wir an unserer Daten. Mithilfe der Funktion <code>createIndex()</code> verbinden wir das Attribut <code>id</code> unserer Posts-Datensätze mit diesem Schlüssel. Für uns bedeutet das schlicht, dass <code>id</code> der Schlüssel sowoehl in der IndexedDB als auch in unserer MySQL-Datenbank für alle Posts ist. Wenn wir die Anwendung nun ausführen, dann sehen wir in den Developer Tools im Reiter <code>Application</code> links im Menü unter <code>Storage --&gt; IndexedDB</code> diese Datenbank.</p>
+<p><img alt="indexeddb" src="../files/66_indexdb.png" /></p>
+<p>Diese ist noch leer, wir machen ja noch nichts damit. </p>
+<h4 id="behandlung-fetch-event-anpassen">Behandlung <code>fetch</code>-Event anpassen<a class="headerlink" href="#behandlung-fetch-event-anpassen" title="Permanent link">&para;</a></h4>
+<p>Nun passen wir die Behandlung des <code>fetch</code>-Ereignisses für die Anfragen an <code>http://localhost:3000/posts</code> an. Wir haben derzeit folgende Ausgangssituation (siehe oben):</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="c1">// hier Anfrage an http://localhost:3000/posts behandeln</span>
+                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// dynamischer Cache</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<p>Wir behandeln die Anfrage an das Backend nun wie folgt:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="hll">                    <span class="kd">const</span> <span class="nx">clonedResponse</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+</span><span class="hll">                    <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+</span><span class="hll">                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">                            <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span>
+</span><span class="hll">                            <span class="p">{</span>
+</span><span class="hll">                                <span class="nx">db</span>
+</span><span class="hll">                                    <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">                                        <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;readwrite&#39;</span><span class="p">);</span>
+</span><span class="hll">                                        <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">);</span>
+</span><span class="hll">                                        <span class="nx">store</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+</span><span class="hll">                                        <span class="k">return</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">done</span><span class="p">;</span>
+</span><span class="hll">                                    <span class="p">})</span>
+</span><span class="hll">                            <span class="p">}</span>
+</span><span class="hll">                        <span class="p">})</span>
+</span>                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// dynamischer Cache</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+<ul>
+<li>Wir clonen zunächst die Response, da sie nur einmal "verbraucht" werden kann (Zeile <code>70</code>).</li>
+<li>Dann wird diese geclonte Response in ein JSON umgewandelt (Zeile <code>71</code>).</li>
+<li>Dieses JSON beschreibt ein JavaScript-Objekt mit den Schlüsseln <code>id</code>, <code>title</code>, <code>location</code> und <code>image</code> - so, wie es unser Backend zurückgibt. Wir gehen nun in einer <code>for</code>-Schleife durch alle diese Schlüssel-Werte-Paare durch (Zeile <code>73</code>). </li>
+<li>In Zeile <code>75</code> greifen wir auf das Promise-Objekt zu, das die Datenbank verwaltet, die wir zuvor mittels <code>openDB()</code> geöffnet haben. </li>
+<li>Dieser Promise verwaltet sich selbst. Das bedeutet, dass <code>dbPosts</code> genau für die von uns geöffnete IndexedDB steht. Wir können nur nicht erneut <code>db</code> benutzen, deshalb <code>dbPosts</code> (Zeile <code>76</code>). </li>
+<li>Als erstes erstellen wir eine <em>Transaktion</em>. Wie bereits gesagt, ist die IndexedDB <em>transaktionsbasiert</em>. Jede Operation ist somit eine <em>Transaktion</em>. Wir erstellen eine Transaktion <code>tx</code> (Zeile <code>77</code>). Diese Transaktion wird durch die Funktion <code>transaction()</code> erzeugt. Die Funktion erwaret zwei Parameter:<ul>
+<li>der erste Parameter beschreibt den <code>store</code>, auf den die Transaktion zugreift (bei uns <code>posts</code>).</li>
+<li>der zweite Parameter beschreibt, ob wir nur lesend auf diesen <code>store</code> zugreifen wollen (<code>'readonly'</code>) oder auch schreibend (<code>'readwrite'</code>).</li>
+</ul>
+</li>
+<li>Nach der Definition der Transaktion muss für die Transaktion nochmal die Eigenschaft <code>store</code> aufgerufen werden (siehe <a href="https://github.com/jakearchibald/idb#idbtransaction-enhancements">README.md des idb-Paketes</a>). Darin steht aber auch, dass man <code>tx.objectStore(storeName)</code> aufrufen soll, wenn die Transaktion mehrere Stores verwendet. Deshalb rufen wir einfach immer <code>tx.objectStore(storeName)</code> auf, da das auch funktioniert, wenn nur ein <code>store</code> verwendet wird (Zeile <code>78</code>). </li>
+<li>In Zeile <code>79</code> werden die einzelnen Schlüssel-Werte-Paare dann in die IndexedDB gespeichert. </li>
+</ul>
+<p>Nach Ausführen der Anwendung sieht die IndexedDB nun (je nachdem, welche Daten Sie bereits in Ihrer Datenbank gespeichert haben) so aus:</p>
+<p><img alt="indexeddb" src="../files/67_indexdb.png" /></p>
+<p>Sie können sich auch <a href="./files/inserposts.sql">hier</a> eine Datei herunterladen, die <code>INSERT INTO posts</code>-SQL-Anweisungen für die angezeigten 5 Datensätze enthält (können Sie so in <code>phpmyadmin</code> als Datei importieren). </p>
+<p>Wir haben nun die IndexedDB des Browsers mit unseren Datensätzen befüllt. Nun überlegen wir uns, wie wir diese Datensätze aus der IndexedDB auslesen können, wenn wir sie dort gespeichert haben und dann gar nicht mehr an das Backend Anfragen schicken müssen. </p>
+<h4 id="datensatze-aus-der-indexeddb-auslesen">Datensätze aus der IndexedDB auslesen<a class="headerlink" href="#datensatze-aus-der-indexeddb-auslesen" title="Permanent link">&para;</a></h4>
+<p>Zunächst einmal stellen wir fest, dass ein geeigneter Ort, die Datensätze aus der IndexedDB auszulesen, die <code>feed.js</code> ist, da dort ja die Daten zum Erstellen der <code>Cards</code> verwendet werden. </p>
+<p>Schauen wir uns deshalb dort die <code>fetch()</code>-Funktion an (siehe auch <a href="./#das-backend-nutzen">Das Backend nutzen</a>). </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">updateUI</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+<p>Wir stellen dort eine Anfrage an das Backend und verwenden die vom Backend übergebenen Daten (<code>data</code>), um die <code>Cards</code> zu erstellen (<code>updateUI(data)</code>). Das heißt, dass wir nun die IndexedDB auch in <code>feed.js</code> verwenden wollen - also in unserer "Webanwendung" (und nicht "nur" im Service Worker). Das heißt aber auch, dass wir nun auch in der Webanwendung die IndexedDB öffnen müssen usw. und wir dort ähnlichen Code hätten, wie auch bereits im Service Worker. Um doppelten Code zu vermeiden, lagern wir deshalb einigen Code in eine <code>db.js</code> aus. Wir <strong>bewegen</strong> (move) zunächst den Code zum Öffnen der IndexedDB aus der <code>sw.js</code> nach <code>db.js</code>:</p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">/public/src/js/db.js</label><div class="tabbed-content">
+<p><code>js linenums="1"
+    const db = idb.openDB('posts-store', 1, {
+        upgrade(db) {
+            // Create a store of objects
+            const store = db.createObjectStore('posts', {
+                // The 'id' property of the object will be the key.
+                keyPath: 'id',
+                // If it isn't explicitly set, create a value by auto incrementing.
+                autoIncrement: true,
+            });
+            // Create an index on the 'id' property of the objects.
+            store.createIndex('id', 'id');
+        },
+    });</code></p>
+</div>
+</div>
+<p>Dann erstellen wir uns in der <code>db.js</code> eine Funktion <code>writeData()</code>, die in die IndexedDB die Daten schreibt. Dazu bewegen wir den folgenden Block aus der <code>sw.js</code> nach <code>db.js</code>:</p>
+<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">sw.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="kd">const</span> <span class="nx">clonedResponse</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+                    <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                            <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span>
+                            <span class="p">{</span>
+<span class="hll">                                <span class="nx">db</span>
+</span><span class="hll">                                    <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">                                        <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;readwrite&#39;</span><span class="p">);</span>
+</span><span class="hll">                                        <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">);</span>
+</span><span class="hll">                                        <span class="nx">store</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+</span><span class="hll">                                        <span class="k">return</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">done</span><span class="p">;</span>
+</span><span class="hll">                                    <span class="p">})</span>
+</span>                            <span class="p">}</span>
+                        <span class="p">})</span>
+                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>     <span class="c1">// nicht erneut response nehmen, haben wir schon</span>
+                            <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CURRENT_DYNAMIC_CACHE</span><span class="p">)</span>      <span class="c1">// neuer, weiterer Cache namens dynamic</span>
+                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                                    <span class="nx">cache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">());</span>
+                                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                                <span class="p">})</span>
+                        <span class="p">});</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+    <span class="p">)}</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Die <code>db.js</code> sieht dann so aus:</p>
+<div class="tabbed-set" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">/public/src/js/db.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    <span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">idb</span><span class="p">.</span><span class="nx">openDB</span><span class="p">(</span><span class="s1">&#39;posts-store&#39;</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">upgrade</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Create a store of objects</span>
+            <span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">createObjectStore</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="c1">// The &#39;id&#39; property of the object will be the key.</span>
+                <span class="nx">keyPath</span><span class="o">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="c1">// If it isn&#39;t explicitly set, create a value by auto incrementing.</span>
+                <span class="nx">autoIncrement</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+            <span class="c1">// Create an index on the &#39;id&#39; property of the objects.</span>
+            <span class="nx">store</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">);</span>
+        <span class="p">},</span>
+    <span class="p">});</span>
+
+    <span class="kd">function</span> <span class="nx">writeData</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">db</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;readwrite&#39;</span><span class="p">);</span>
+                <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">);</span>
+                <span class="nx">store</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+                <span class="k">return</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">done</span><span class="p">;</span>
+            <span class="p">})</span>
+    <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Damit die <code>writeData()</code>-Funktion möglichst generisch ist, übergeben wir als Parameter den <code>store</code> (<code>posts</code>) und wir müssen natürlich auch <code>data</code> übergeben:</p>
+<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">/public/src/js/db.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    <span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">idb</span><span class="p">.</span><span class="nx">openDB</span><span class="p">(</span><span class="s1">&#39;posts-store&#39;</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">upgrade</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Create a store of objects</span>
+            <span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">createObjectStore</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="c1">// The &#39;id&#39; property of the object will be the key.</span>
+                <span class="nx">keyPath</span><span class="o">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="c1">// If it isn&#39;t explicitly set, create a value by auto incrementing.</span>
+                <span class="nx">autoIncrement</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+            <span class="c1">// Create an index on the &#39;id&#39; property of the objects.</span>
+            <span class="nx">store</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">);</span>
+        <span class="p">},</span>
+    <span class="p">});</span>
+
+<span class="hll">    <span class="kd">function</span> <span class="nx">writeData</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">        <span class="k">return</span> <span class="nx">db</span>
+</span>            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="hll">                <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="s1">&#39;readwrite&#39;</span><span class="p">);</span>
+</span><span class="hll">                <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="nx">st</span><span class="p">);</span>
+</span><span class="hll">                <span class="nx">store</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span>                <span class="k">return</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">done</span><span class="p">;</span>
+            <span class="p">})</span>
+    <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p><strong>Wichtig</strong> ist, dass wir das <code>db</code>-Promise-Objekt in <code>writeData()</code> nun zurückgeben müssen, d.h. wir benötigen ein <code>return</code> in Zeile <code>16</code>. Nun müssen wir diese <code>db.js</code> natürlich importieren, sowohl in den Service Worker als auch in die Webanwendung (da sie ja <code>feed.js</code> zur Verfügung stehen soll). Beide Importe müssen <strong>hinter</strong> dem Import der <code>idb.js</code> stehen, da die <code>db.js</code> Funktionen der <code>idb.js</code> verwendet.</p>
+<div class="tabbed-set" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">sw.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">importScripts</span><span class="p">(</span><span class="s1">&#39;/src/js/idb.js&#39;</span><span class="p">);</span>
+<span class="hll"><span class="nx">importScripts</span><span class="p">(</span><span class="s1">&#39;/src/js/db.js&#39;</span><span class="p">);</span>
+</span>
+<span class="kd">const</span> <span class="nx">CURRENT_STATIC_CACHE</span> <span class="o">=</span> <span class="s1">&#39;static-v4&#39;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">CURRENT_DYNAMIC_CACHE</span> <span class="o">=</span> <span class="s1">&#39;dynamic-v4&#39;</span><span class="p">;</span>
+
+<span class="c1">// ... und hier der Rest</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>sowie für die <code>/public/src/js/*.js</code>-Datein in der <code>index.html</code>:</p>
+<div class="tabbed-set" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">index.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>107
+108
+109
+110
+111
+112
+113
+114</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">defer</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/material.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/idb.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="hll"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/db.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/js/feed.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>In die <code>sw.js</code> setzen wir noch den Aufruf von <code>writeData('posts', data)</code> an der richtigen Stelle ein:</p>
+<div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">sw.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="kd">const</span> <span class="nx">clonedResponse</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+                    <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                            <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span>
+                            <span class="p">{</span>
+<span class="hll">                                <span class="nx">writeData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+</span>                            <span class="p">}</span>
+                        <span class="p">})</span>
+                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p><strong>Übrigens:</strong> Da wir für die Behandlung des <code>fetch</code>-Events nun zwischen den Aufrufen an den Webserver und an das Backend unterscheiden, werden die Requests der Backend-Aufrufe nun nicht mehr im (dynamischen) Cache gespeichert. Das bedeutet, dass unsere Anwendung in dem derzeitigen Zustand <em>offline</em> nicht funktioniert, da dann die <code>Cards</code> nicht angezeigt werden. Deshalb wollen wir ja in die <code>feed.js</code> nun die Abfrage an die IndexedDB einbauen, damit die Daten von dort geholt werden können. </p>
+<p>Dazu erweitern wir die <code>db.js</code> zunächst um eine <code>readAllData(store)</code>-Funktion, in der wir alle Daten aus der IndexedDB auslesen.</p>
+<div class="tabbed-set" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">/public/src/js/db.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    <span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">idb</span><span class="p">.</span><span class="nx">openDB</span><span class="p">(</span><span class="s1">&#39;posts-store&#39;</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">upgrade</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Create a store of objects</span>
+            <span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">createObjectStore</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="c1">// The &#39;id&#39; property of the object will be the key.</span>
+                <span class="nx">keyPath</span><span class="o">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="c1">// If it isn&#39;t explicitly set, create a value by auto incrementing.</span>
+                <span class="nx">autoIncrement</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+            <span class="c1">// Create an index on the &#39;id&#39; property of the objects.</span>
+            <span class="nx">store</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">);</span>
+        <span class="p">},</span>
+    <span class="p">});</span>
+
+<span class="hll">    <span class="kd">function</span> <span class="nx">writeData</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">        <span class="k">return</span> <span class="nx">db</span>
+</span>            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="hll">                <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="s1">&#39;readwrite&#39;</span><span class="p">);</span>
+</span><span class="hll">                <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="nx">st</span><span class="p">);</span>
+</span><span class="hll">                <span class="nx">store</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span>                <span class="k">return</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">done</span><span class="p">;</span>
+            <span class="p">})</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">function</span> <span class="nx">readAllData</span><span class="p">(</span><span class="nx">st</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">db</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="s1">&#39;readonly&#39;</span><span class="p">);</span>
+                <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="nx">st</span><span class="p">);</span>
+                <span class="k">return</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getAll</span><span class="p">();</span>
+            <span class="p">})</span>
+    <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Im Gegensatz zur <code>writeData()</code>-Funktion müssen wir beim Lesen der Daten (<code>readonly</code>) nicht darauf warten, dass die Transaktion vollständig abgearbeitet ist (<code>tx.done</code>), sondern wir können die Funktion mit dem Promise verlassen, in dem alle Daten zur Verfügung gestellt sind. Rein lesende Transaktionen können auf der Datenbank keinen "Schaden" anrichten. Deshalb können wir auf das <code>tx.done</code> verzichten. Alles andere ist im Prinzip wie bei <code>writeData()</code>, nur dass wir nun nur <code>readonly</code> Zugriff haben und die <code>getAll()</code>-Funktion aufrufen. </p>
+<p>Diese <code>readAllData()</code>-Funktion bauen wir nun in die <code>feed.js</code> ein. Dazu betrachten wir die <code>fetch</code>-Funktion darin zunächst noch einmal:</p>
+<div class="tabbed-set" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">/public/src/js/feed.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>55
+56
+57
+58
+59
+60
+61
+62</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">updateUI</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Diese Funktion führt ein <code>GET</code> auf das Backend durch und holt sich von dort alle Daten. Wir ändern diese Funktion zunächst leicht, um zu erkennen, wann die Daten tatsächlich vom Backend geholt wurden. </p>
+<div class="tabbed-set" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">/public/src/js/feed.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll"><span class="kd">let</span> <span class="nx">networkDataReceived</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="hll">        <span class="nx">networkDataReceived</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class="hll">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;From backend ...&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</span>        <span class="nx">updateUI</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Dazu erstellen wir uns eine Variable <code>networkDataReceived</code>, die auf <code>true</code> gesetzt wird, falls wir die Daten vom Backend holen. Dazu eine passende Ausgabe auf die Konsole. </p>
+<p>Nun erweiteren wir die <code>feed.js</code> um das Lesen der Daten aus der IndexedDB. Dazu fügen wir folgende Anweisung hinzu:</p>
+<div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">/public/src/js/feed.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">networkDataReceived</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">networkDataReceived</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;From backend ...&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+        <span class="nx">updateUI</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+
+<span class="hll"><span class="k">if</span><span class="p">(</span><span class="s1">&#39;indexedDB&#39;</span> <span class="k">in</span> <span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">    <span class="nx">readAllData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span>
+</span><span class="hll">        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">networkDataReceived</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;From cache ...&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</span><span class="hll">                <span class="nx">updateUI</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span><span class="hll">            <span class="p">}</span>
+</span><span class="hll">        <span class="p">})</span>
+</span><span class="hll"><span class="p">}</span>
+</span></code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>In Zeile <code>67</code> überprüfen wir zunächst, ob der Browser überhaupt die IndexedDB-API unterstützt. Wenn ja, dann lesen wir mithilfe der <code>readAllData()</code>-Funktion aus der <code>db.js</code> alle Daten aus dem <code>posts</code>-Store. Sollten die Daten <strong>nicht</strong> vom Backend geholt worden sein (sonst wäre <code>networkDataReceived === true</code>), dann werden die aus der IndexedDB geholten Daten verwendet, um die <code>Cards</code> zu erstellen (<code>updateUI(data)</code> in Zeile <code>72</code>). </p>
+<p>Das heißt, wir haben hier eine <em>network first</em>-Strategie implemntiert. Wenn der Zugriff auf das Backend möglich ist, dann werden die Daten von dort geholt und auch dazu verwendet, um die <code>Cards</code> zu erstellen. Nur für den Fall, dass das Netzwerk nicht verfügbar ist, werden die aus der IndexedDB geholten Daten verwendet, um die <code>Cards</code> zu erstellen. </p>
+<p>Wir testen diese Implementierung. <strong>Achten Sie darauf</strong>, die Versionsnummern der Caches in der <code>sw.js</code> zu ändern, denn wir haben ja die <code>index.html</code> und die <code>feed.js</code> geändert. Diese Änderungen würden nicht wirksam sein, ohne Versionsänderungen der Caches, da ansonsten die Dateien aus dem statischen Cache und nicht vom Webserver gelesen würden. </p>
+<ol>
+<li>Stellen Sie auch sicher, dass Ihr Backend gestartet ist.</li>
+<li>Reloaden Sie die Anwendung im Browser. </li>
+<li><code>skipWaiting</code> den neuen Service Worker</li>
+<li>checken, ob der neuen statische Cache unter <code>Cache --&gt; Cache-Storage</code> verwendet wird</li>
+<li>checken, ob die IndexedDB befüllt ist (sollte durch <code>writeData()</code> im Service Worker passieren)</li>
+<li>In der Console steht <code>From backend ...</code> mit dem dazugehörigen Data-Array</li>
+<li>Schalten Sie im Service Worker die Anwendung nun <strong>offline</strong> und reloaden Sie die Anwendung</li>
+<li>In der Console erscheint <code>Fetch failed loading GET http://localhost:3000/posts</code> mit dem dazugehörigen Fehler, aber es erscheint auch <code>From cache ...</code> mit dem dazugehörigen Daten-Array. Es werden alle <code>cards</code> erstellt und angezeigt.</li>
+</ol>
+<p>Die Anwendung ist nun auch insofern <em>offline</em>-fähig geworden, dass nun die dynamischen Daten in die IndexedDB geschrieben und aus der IndexedDB gelesen werden. </p>
+<h4 id="loschen-der-indexeddb">Löschen der IndexedDB<a class="headerlink" href="#loschen-der-indexeddb" title="Permanent link">&para;</a></h4>
+<p>Wir schreiben unsere Daten in die IndexedDB mithilfe der <code>put()</code>-Funktion (sie Funktion <code>writeDate()</code> in der <code>db.js</code> und darin <code>store.put(data)</code>). Diese Funktion schreibt ein Schlüssel-Werte-Paar in den entsprechenden <code>store</code>. Existiert der übergebene Schlüssel noch nicht, wird das Schlüssel-Werte-Paar der IndexedDB hinzugefügt. Existiert der Schlüssel bereits, wird der alte Wert mit dem neuen Wert überschrieben. Dadurch, dass es sich um lauter Schlüssel-Werte-Paare in der IndexedDB handelt, werden "alte" Schlüssel-Werte-Paare jedoch nicht gelöscht. Angenommen, wir rufen die <code>writeData()</code>-Funktion für alle Datensätze auf, die in unserer Datenbank gespeichert haben und angenommen, wir haben aus dieser Datenbank einen Datensatz gelöscht, der aber noch in der IndexedDB gespeichert ist. Dann würde dieser Datensatz auch in der IndexedDB verbleiben.</p>
+<p>Wir schreiben uns deshalb eine Funktion, die zunächst alle Daten in der Datenbank löscht. Diese führen wir dann immer aus, bevor wir die neuen Daten hinzufügen. In der <code>db.js</code> fügen wir dazu die Funktion <code>clearAllData()</code> hinzu:</p>
+<div class="tabbed-set" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">/public/src/js/db.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    <span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">idb</span><span class="p">.</span><span class="nx">openDB</span><span class="p">(</span><span class="s1">&#39;posts-store&#39;</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">upgrade</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Create a store of objects</span>
+            <span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">createObjectStore</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="c1">// The &#39;id&#39; property of the object will be the key.</span>
+                <span class="nx">keyPath</span><span class="o">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="c1">// If it isn&#39;t explicitly set, create a value by auto incrementing.</span>
+                <span class="nx">autoIncrement</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+            <span class="c1">// Create an index on the &#39;id&#39; property of the objects.</span>
+            <span class="nx">store</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">);</span>
+        <span class="p">},</span>
+    <span class="p">});</span>
+
+    <span class="kd">function</span> <span class="nx">writeData</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">db</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="s1">&#39;readwrite&#39;</span><span class="p">);</span>
+                <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="nx">st</span><span class="p">);</span>
+                <span class="nx">store</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+                <span class="k">return</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">done</span><span class="p">;</span>
+            <span class="p">})</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">function</span> <span class="nx">readAllData</span><span class="p">(</span><span class="nx">st</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">db</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="s1">&#39;readonly&#39;</span><span class="p">);</span>
+                <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="nx">st</span><span class="p">);</span>
+                <span class="k">return</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getAll</span><span class="p">();</span>
+            <span class="p">})</span>
+    <span class="p">}</span>
+
+<span class="hll">    <span class="kd">function</span> <span class="nx">clearAllData</span><span class="p">(</span><span class="nx">st</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">        <span class="k">return</span> <span class="nx">db</span>
+</span><span class="hll">            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">                <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="s1">&#39;readwrite&#39;</span><span class="p">);</span>
+</span><span class="hll">                <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="nx">st</span><span class="p">);</span>
+</span><span class="hll">                <span class="nx">store</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</span><span class="hll">                <span class="k">return</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">done</span><span class="p">;</span>
+</span><span class="hll">            <span class="p">})</span>
+</span><span class="hll">    <span class="p">}</span>
+</span></code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Diese rufen wir nun in der <code>sw.js</code> auf, bevor wir die neuen Daten in die IndexedDB schreiben:</p>
+<div class="tabbed-set" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><label for="__tabbed_17_1">sw.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="kd">const</span> <span class="nx">clonedResponse</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+                    <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+<span class="hll">                    <span class="nx">clearAllData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span>
+</span><span class="hll">                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span>                            <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                                    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span>
+                                    <span class="p">{</span>
+                                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;write data&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+                                        <span class="nx">writeData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+                                    <span class="p">}</span>
+                                <span class="p">})</span>
+<span class="hll">                        <span class="p">});</span>
+</span>                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Die Funktion <code>clearAllData()</code> gibt ein Promise-Objekt zurück. Nach dem erfolgreichen Löschen der Datenbank, können die neuen Daten hinzugefügt werden. Deshalb wird das komplette <code>clonedResponse</code>-Promise-Objekt in die <code>then()</code>-Funktion des <code>clearAllData()</code>-Promise-Objektes geschoben. Aus dieser Verschachtelung können wir aber auch eine <code>.then()</code>-Verkettung machen, die vielleicht besser zu lesen ist (dann aber nicht das <code>return</code> vor <code>clonedResponse.json();</code> vergessen):</p>
+<div class="tabbed-set" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><label for="__tabbed_18_1">sw.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="kd">const</span> <span class="nx">clonedResponse</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+                    <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+                    <span class="nx">clearAllData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="hll">                            <span class="k">return</span> <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+</span><span class="hll">                        <span class="p">})</span>
+</span>                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                            <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span>
+                            <span class="p">{</span>
+                                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;write data&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+                                <span class="nx">writeData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+                            <span class="p">}</span>
+                        <span class="p">});</span>
+                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h4 id="loschen-einzelner-eintrage">Löschen einzelner Einträge<a class="headerlink" href="#loschen-einzelner-eintrage" title="Permanent link">&para;</a></h4>
+<p>Es können auch einzelne Einträge aus der IndexedDb gelöscht werden. Der Zugriff auf die Datensätze erfolgt über den <code>keyPath</code> <code>id</code> (siehe <a href="./#erstellen-und-offnen-einer-indexeddb">Erstellen der Datenbank</a> und dort <code>openDB()</code>). Wir fügen der <code>db.js</code> eine weitere Funktion <code>deleteOneData()</code> hinzu. Diese Funktion benötigt als Parameter nebden dem <code>store</code> auch die <code>id</code> des Datensatzes, den wir löschen wollen. </p>
+<div class="tabbed-set" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><label for="__tabbed_19_1">/public/src/js/db.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">deleteOneData</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">db</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="s1">&#39;readwrite&#39;</span><span class="p">);</span>
+            <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="nx">st</span><span class="p">);</span>
+            <span class="nx">store</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">done</span><span class="p">;</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data deleted ...&#39;</span><span class="p">);</span>
+            <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Wir geben das promise-Objekt <code>db</code> nicht zurück, sondern "verwerten" es gleich hier, indem wir nach dem Löschen eine Ausgabe auf die Konsole erzeugen. </p>
+<p>Das Testen dieser Funktion in unserer Anwendnung ist derzeit nur "Spielerei". Später nutzen wir diese Funktion aber sinnvoll. Der Test könnte in der <code>sw.js</code> z.B. so aussehen, dass wir nach dem Schreiben eines neuen Datensatzes fragen, ob er die <code>id === 5</code> hat und wenn ja, löschen wir ihn gleich wieder:</p>
+<div class="tabbed-set" data-tabs="20:1"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><label for="__tabbed_20_1">sw.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="kd">const</span> <span class="nx">clonedResponse</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+                    <span class="nx">clearAllData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                            <span class="k">return</span> <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                            <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;write data&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+                                <span class="nx">writeData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+<span class="hll">                                <span class="k">if</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">id</span> <span class="o">===</span> <span class="mf">5</span><span class="p">)</span> <span class="nx">deleteOneData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="mf">5</span><span class="p">);</span>
+</span>                            <span class="p">}</span>
+                        <span class="p">});</span>
+                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Die Zeile <code>73</code> können wir danach gleich wieder löschen. Wir werden diese Funktion aber später noch sinnvoll einsetzen. <strong>Beachten Sie</strong>, dass Sie nach Änderungen an der IndexedDB diese zunächst "refreshen" müssen (Button <code>Refresh database</code> - siehe Abbildung).</p>
+<p><img alt="indexeddb" src="../files/68_indexdb.png" /></p>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Wir können nun die In-Browser-Datenbank IndexedDB verwenden, um dynamische Daten zu speichern, auszulesen und zu löschen. Somit bleibt unsere Anwendung auch dann noch aktiv, auch wenn das Backend (und/oder die Datenbank) nicht erreichbar ist. Die IndexedDB kann für alle Arten von Schlüssel-Werte-Paaren verwendet werden. Weitere Informationen finden Sie unter <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IndexedDB API</a>.</p>
 </div>
                 
               

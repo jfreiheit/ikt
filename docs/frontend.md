@@ -1,4 +1,4 @@
-## Frontend
+# Frontend
 
 Um die Dateneingabe zu vereinfachen, erstellen wir uns ein einfaches Frontend mithilfe von [Angular](https://angular.io/). Wie beim Backend auch, erstellen wir dieses Frontend Schritt für Schritt von Beginn an. 
 

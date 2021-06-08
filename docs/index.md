@@ -83,7 +83,7 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 ??? question "Woche 6 - Datenbank und Backend"
 
 	- Diese Woche bereiten wir zunächst die nächsten Kapitel vor. Dazu benötigen wir eine [Datenbank und ein Backend](./backend/#rest-server), das an die Datenbank angebunden ist. 
-	- In der Übung soll das Backend um eine weitere Funktion erweiteret werden. 
+	- In der [Übung](./uebungen/#ubung-5-backend) soll das Backend um eine weitere Funktion erweiteret werden. 
 	- Video zur Vorlesung am 26.05.2021
 		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=a6e060a195129540a18a7be89a3738e7&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 
@@ -93,8 +93,19 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 ??? question "Woche 7 - Frontend und Backend-Anbindung"
 
 	- Diese Woche erstellen wir uns mithilfe von Angular ein [Frontend](./frontend/#frontend) und binden dieses an das Backend an. Damit wird es uns möglich, Daten in ein Formular einzugeben und diese Daten werden in der Datenbank gespeichert.  
-	- In der Übung soll das Frontend um eine weitere Funktion und eine Komponente erweiteret werden. 
+	- In der [Übung](./uebungen/#ubung-6-frontend) soll das Frontend um eine weitere Funktion und eine Komponente erweiteret werden. 
 	- Video zur Vorlesung am 02.06.2021
 		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=63500e11ed3c99c726ac2a962f710a9f&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+
+
+
+##### Woche 8 (IndexedDB)
+
+??? question "Woche 8 - IndexedDB"
+
+	- Diese Woche machen wir uns mit der [IndexedDB](./indexeddb/#indexeddb) vertraut und speichern dynamische Daten (die `Posts`-Datensaätze) in die IndexedDB, um diese auszulesen, falls die Anwendung offline ist und somit das Backend nicht verfügbar.   
+	- In der [Übung](./uebungen/#ubung-7-indexeddb) soll die Verwaltung der IndexedDB um eine weitere Funktion erweiteret werden. 
+	- Video zur Vorlesung am 09.06.2021 - kommt noch
 
 
