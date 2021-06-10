@@ -1403,20 +1403,33 @@ Dadurch kommen die Daten auch bereits als Array im Frontend an. Je nachdem, welc
 </td></tr></table>
 <p>Wir stellen dort eine Anfrage an das Backend und verwenden die vom Backend übergebenen Daten (<code>data</code>), um die <code>Cards</code> zu erstellen (<code>updateUI(data)</code>). Das heißt, dass wir nun die IndexedDB auch in <code>feed.js</code> verwenden wollen - also in unserer "Webanwendung" (und nicht "nur" im Service Worker). Das heißt aber auch, dass wir nun auch in der Webanwendung die IndexedDB öffnen müssen usw. und wir dort ähnlichen Code hätten, wie auch bereits im Service Worker. Um doppelten Code zu vermeiden, lagern wir deshalb einigen Code in eine <code>db.js</code> aus. Wir <strong>bewegen</strong> (move) zunächst den Code zum Öffnen der IndexedDB aus der <code>sw.js</code> nach <code>db.js</code>:</p>
 <div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">/public/src/js/db.js</label><div class="tabbed-content">
-<p><code>js linenums="1"
-    const db = idb.openDB('posts-store', 1, {
-        upgrade(db) {
-            // Create a store of objects
-            const store = db.createObjectStore('posts', {
-                // The 'id' property of the object will be the key.
-                keyPath: 'id',
-                // If it isn't explicitly set, create a value by auto incrementing.
-                autoIncrement: true,
-            });
-            // Create an index on the 'id' property of the objects.
-            store.createIndex('id', 'id');
-        },
-    });</code></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    <span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">idb</span><span class="p">.</span><span class="nx">openDB</span><span class="p">(</span><span class="s1">&#39;posts-store&#39;</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">upgrade</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Create a store of objects</span>
+            <span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">createObjectStore</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="c1">// The &#39;id&#39; property of the object will be the key.</span>
+                <span class="nx">keyPath</span><span class="o">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+                <span class="c1">// If it isn&#39;t explicitly set, create a value by auto incrementing.</span>
+                <span class="nx">autoIncrement</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">});</span>
+            <span class="c1">// Create an index on the &#39;id&#39; property of the objects.</span>
+            <span class="nx">store</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">);</span>
+        <span class="p">},</span>
+    <span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
 </div>
 </div>
 <p>Dann erstellen wir uns in der <code>db.js</code> eine Funktion <code>writeData()</code>, die in die IndexedDB die Daten schreibt. Dazu bewegen wir den folgenden Block aus der <code>sw.js</code> nach <code>db.js</code>:</p>

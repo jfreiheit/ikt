@@ -522,7 +522,7 @@ Wir stellen dort eine Anfrage an das Backend und verwenden die vom Backend über
                 store.createIndex('id', 'id');
             },
         });
-        ```
+    ```
 
 Dann erstellen wir uns in der `db.js` eine Funktion `writeData()`, die in die IndexedDB die Daten schreibt. Dazu bewegen wir den folgenden Block aus der `sw.js` nach `db.js`:
 
