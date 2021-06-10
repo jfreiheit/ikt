@@ -69,6 +69,7 @@ nav:
     - Backend: backend.md
     - Frontend: frontend.md
     - IndexedDB: indexeddb.md
+    - Hintergrundsynchronisation: backgroundsync.md
     - Übungen: uebungen.md
     - Werkzeuge: tools.md
     - Hilfen: hilfen.md

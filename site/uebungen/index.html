@@ -354,6 +354,21 @@
 
   
   
+  
+    <li class="md-nav__item">
+      <a href="../backgroundsync/" class="md-nav__link">
+        Hintergrundsynchronisation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -890,6 +905,559 @@ Package                      Version
 <p><strong>Tipps</strong>: Es kann sein, dass Sie das vom Backend zurückgegebene JSON verändern müssen. Derzeit wird für <code>image</code> ein <code>ArrayBuffer</code> zurückgegeben, mit <code>"type": "Buffer"</code> und einem Array für <code>"data"</code>. Wenn Sie dieses Array Frontend-seitig verarbeiten können und als ein Bild angezeigt bekommen, dann würde mich sehr interessieren, wie Sie das gemacht haben. Ich habe das Backend angepasst und gebe den <code>Base64</code>-Code für <code>image</code> zurück. Im Frontend muss man diesen <code>base64</code>-Code dann nur noch hinter den String <code>'data:image/jpg;base64,'</code> hängen und erhält so den Wert für das <code>src</code>-Attribut eines Images. Schauen Sie sich dazu auch den Typ <code>SafeResourceUrl</code> und die Funktion <code>bypassSecurityTrustResourceUrl(src)</code> von <code>DomSanitizer</code> an. </p>
 <p><img alt="uebung4" src="../files/58_uebung4.png" /></p>
 </details>
+<details class="question"><summary>eine mögliche Lösung für Übung 6</summary><ol>
+<li>
+<p>In dem Backend führen Sie zunächst folgende Änderung durch: Im <code>post.controller.js</code> ändern wir die <code>readAll()</code>-Methode wie folgt:</p>
+<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">post.controller.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">PostService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./db.sqlqueries.js&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">PostController</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="nx">readAll</span><span class="o">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">PostService</span><span class="p">.</span><span class="nx">getAll</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+                    <span class="nx">message</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="s2">&quot;Some error occurred while getting all posts&quot;</span><span class="p">,</span>
+                <span class="p">});</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+
+<span class="hll">                <span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class="hll">                <span class="nx">result</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span> <span class="nx">post</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">                    <span class="kd">let</span> <span class="nx">buff</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">post</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span> <span class="s1">&#39;base64&#39;</span><span class="p">);</span>
+</span><span class="hll">                    <span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">buff</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">);</span>
+</span><span class="hll">                    <span class="c1">//console.log(text);</span>
+</span><span class="hll">                    <span class="nx">post</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="nx">text</span><span class="p">;</span>
+</span><span class="hll">                    <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span>
+</span><span class="hll">                <span class="p">});</span>
+</span>
+<span class="hll">                <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+</span>            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+
+    <span class="c1">// hier noch die anderen Funktionen</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Davor hatten wir <code>return res.json(result)</code>. Jetzt geben wir ebenfalls ein Array von unseren <code>Posts</code> zurück, allerdings ist <code>post.image</code> darin nicht mehr ein <code>ArrayBuffer</code>, sondern ein <code>String</code> mit dem <code>base64</code>-Code.</p>
+</li>
+<li>
+<p>Starten Sie das Backend ( <code>npm run watch</code>)!</p>
+</li>
+<li>
+<p>Wechseln Sie im Terminal in den <code>frontend</code>-Ordner (der Angular-Projekt-Ordner Ihres Frontends) und geben Sie darin</p>
+<div class="highlight"><pre><span></span><code>ng generate component <span class="nb">read</span>
+</code></pre></div>
+<p>ein. Damit wird die <code>ReadComponent</code> erzeugt. In Ihrem Projektordner wird unter <code>/src/app</code> ein ordner <code>read</code> erzeugt, der 4 Dateien <code>read.component.*</code> enthält. </p>
+</li>
+<li>
+<p>Öffnen Sie in Ihrer IDE die <code>app-routing.module.ts</code> und fügen Sie dort die neue Route <code>/read</code> hinzu, unter der die <code>ReadComponent</code> aufgerufen wird: </p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">app-routing.module.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">RouterModule</span><span class="p">,</span> <span class="nx">Routes</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">ReadComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;./read/read.component&quot;</span><span class="p">;</span>
+</span>
+<span class="kd">const</span> <span class="nx">routes</span><span class="o">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="nx">CreateComponent</span><span class="p">},</span>
+<span class="hll">  <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;read&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="nx">ReadComponent</span><span class="p">}</span>
+</span><span class="p">];</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">routes</span><span class="p">)],</span>
+  <span class="nx">exports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppRoutingModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Nun erscheint die <code>ReadComponent</code> unter der Route <code>http://localhost:4200/read</code>.</p>
+</li>
+<li>
+<p>Öffnen Sie die <code>nav.component.html</code> und fügen Sie dort den neuen Menüpunkt <code>Read</code> hinzu. Unter diesem Menüpunkt wird mithilfe von <code>routerLink</code> die Route <code>http://localhost:4200/read</code> aufgerufen.</p>
+<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">nav.component.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">mat-sidenav-container</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav-container&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-sidenav</span> <span class="err">#</span><span class="na">drawer</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidenav&quot;</span> <span class="na">fixedInViewport</span> <span class="err">[</span><span class="na">attr</span><span class="err">.</span><span class="na">role</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">dialog</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">navigation</span><span class="err">&#39;&quot;</span> <span class="err">[</span><span class="na">mode</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">?</span> <span class="err">&#39;</span><span class="na">over</span><span class="err">&#39;</span> <span class="na">:</span> <span class="err">&#39;</span><span class="na">side</span><span class="err">&#39;&quot;</span> <span class="err">[</span><span class="na">opened</span><span class="err">]=&quot;(</span><span class="na">isHandset</span><span class="err">$</span> <span class="err">|</span> <span class="na">async</span><span class="err">)</span> <span class="err">===</span> <span class="na">false</span><span class="err">&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>Menu<span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">routerLink</span><span class="o">=</span><span class="s">&quot;/create&quot;</span> <span class="na">routerLinkActivate</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;</span>Create<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="hll">            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">routerLink</span><span class="o">=</span><span class="s">&quot;/read&quot;</span> <span class="na">routerLinkActivate</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;</span>Read<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span>            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">mat-list-item</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Link 3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">mat-nav-list</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-sidenav</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-toolbar</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Toggle sidenav&quot;</span> <span class="na">mat-icon-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">drawer</span><span class="err">.</span><span class="na">toggle</span><span class="err">()&quot;</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;isHandset$ | async&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-icon</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Side nav toggle icon&quot;</span><span class="p">&gt;</span>menu<span class="p">&lt;/</span><span class="nt">mat-icon</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>PWA Frontend<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- Add Content Here --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>This is app<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">router-outlet</span><span class="p">&gt;&lt;/</span><span class="nt">router-outlet</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;/</span><span class="nt">mat-sidenav-content</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">mat-sidenav-container</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+</li>
+<li>
+<p>Öffnen Sie die Datei <code>backend.service.ts</code>. Diesem Service wird nun eine weitere Funktion hinzugefügt, nämlich <code>readAll</code>. Diese Funktion greift, wie bereits die Funktion <code>addPost()</code> auf das Backend zu, nur dass die <code>readAll()</code>-Funktion eine <code>GET</code>-Anfrage an <code>http://localhost:4200/posts</code> stellt. Die Rückgabe ist ebenfalls ein <code>Promise</code>, dieses Mal aber typisiert mit <code>Post[]</code>, da das Backend alle <code>Posts</code> in einem (JSON-)Array zurücksendet.</p>
+<div class="tabbed-set" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">backend.service.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpHeaders</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">Post</span> <span class="p">{</span>
+  <span class="nx">id</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+  <span class="nx">title</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nx">location</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nx">image</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">BackendService</span> <span class="p">{</span>
+
+  <span class="nx">apiURL</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span><span class="o">:</span> <span class="nx">HttpClient</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="c1">// POST http://localhost:4200/posts</span>
+  <span class="nx">public</span> <span class="nx">addPost</span><span class="p">(</span><span class="nx">post</span><span class="o">:</span> <span class="nx">Post</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+    <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiURL</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">post</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">headers</span><span class="o">:</span> <span class="k">new</span> <span class="nx">HttpHeaders</span><span class="p">({</span>
+        <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Accept-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
+      <span class="p">}),</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">toPromise</span><span class="p">();</span>
+  <span class="p">}</span>
+
+<span class="hll">  <span class="c1">// GET http://localhost:4200/posts</span>
+</span><span class="hll">  <span class="nx">public</span> <span class="nx">readAll</span><span class="p">()</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Post</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class="hll">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+</span><span class="hll">      <span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">Post</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiURL</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="p">{</span>
+</span><span class="hll">          <span class="nx">headers</span><span class="o">:</span> <span class="k">new</span> <span class="nx">HttpHeaders</span><span class="p">({</span>
+</span><span class="hll">            <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+</span><span class="hll">            <span class="s1">&#39;Accept-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
+</span><span class="hll">          <span class="p">}),</span>
+</span><span class="hll">        <span class="p">})</span>
+</span><span class="hll">      <span class="p">.</span><span class="nx">toPromise</span><span class="p">();</span>
+</span><span class="hll">  <span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+</li>
+<li>
+<p>In der <code>read.component.ts</code> können wir nun diese Funktion des <code>BackendService</code> einmal ausprobieren. Wir binden dazu (wie bereits bei der <code>CreateComponent</code>) den <code>BackendService</code> mittels <em>dependency injection</em> im Konstruktor ein, rufen die <code>readAll</code>-Funktion auf und geben das Ergebnis auf die Konsole aus.</p>
+<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">read.component.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BackendService</span><span class="p">,</span> <span class="nx">Post</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;../backend.service&quot;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-read&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./read.component.html&#39;</span><span class="p">,</span>
+  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./read.component.css&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">ReadComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+<span class="hll">  <span class="nx">allPosts</span><span class="o">!:</span> <span class="nx">Post</span><span class="p">[];</span>
+</span>
+<span class="hll">  <span class="nx">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">bs</span><span class="o">:</span> <span class="nx">BackendService</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</span>
+  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+<span class="hll">    <span class="k">this</span><span class="p">.</span><span class="nx">bs</span><span class="p">.</span><span class="nx">readAll</span><span class="p">()</span>
+</span><span class="hll">      <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">posts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">        <span class="k">this</span><span class="p">.</span><span class="nx">allPosts</span> <span class="o">=</span> <span class="nx">posts</span><span class="p">;</span>
+</span><span class="hll">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">posts</span><span class="p">);</span>
+</span><span class="hll">      <span class="p">})</span>
+</span><span class="hll">      <span class="p">.</span><span class="k">catch</span><span class="p">(</span> <span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span class="hll">      <span class="p">})</span>
+</span>  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Außerdem speichern wir alle <code>posts</code> in einer Objektvariablen <code>allPosts</code>, die vom Typ <code>Post[]</code> ist. Wenn wir nun im Menüpunkt <code>Read</code> auswählen, erscheint in den DeveloperTools in der Konsole die Ausgabe des Arrays aller Posts aus der Datenbank. </p>
+</li>
+<li>
+<p>In der <code>read.component.html</code> können wir uns nun überlegen, wie wir die einzelnen <code>posts</code> darstellen wollen. Hier ist ein Beispiel für die Verwendung einer <code>Card</code> aus <a href="https://material.angular.io/components/card/overview">Angular Material Design</a>:</p>
+<div class="tabbed-set" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">read.component.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span> <span class="na">novalidate</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="err">*</span><span class="na">ngFor</span><span class="o">=</span><span class="s">&quot;let post of allPosts&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">mat-card</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;polaroid&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">mat-card-header</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">mat-card-title</span><span class="p">&gt;</span>{{post.title}}<span class="p">&lt;/</span><span class="nt">mat-card-title</span><span class="p">&gt;</span>
+<span class="hll">      <span class="p">&lt;/</span><span class="nt">mat-card-header</span><span class="p">&gt;</span>
+</span>      <span class="p">&lt;</span><span class="nt">img</span> <span class="na">mat-card-image</span> <span class="err">[</span><span class="na">src</span><span class="err">]=</span><span class="na">imageSrc</span><span class="err">(</span><span class="na">post</span><span class="err">.</span><span class="na">image</span><span class="err">)</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;Foto&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">mat-card-content</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          {{post.location}}
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">mat-card-content</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">mat-card</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Für jeden Eintrag <code>post</code> aus dem <code>allPosts</code>-Array wird eine <code>Card</code> erstellt. Die wird mithilfe der Strukturdirektive <code>*ngFor</code> erzeugt (siehe z.B. <a href="https://angular.io/api/common/NgForOf">hier</a>). Es erscheinen jetzt noch zwei Fehler: <br/>
+        1. die Funktion <code>imageSrc()</code> ist noch nicht bekannt und <br/>
+        2. das <code>MatCardModule</code> wurde noch nicht in unser Projekt importiert. <br/>
+    Letzteres machen wir zuerst:</p>
+</li>
+<li>
+<p>Öffnen Sie <code>app.module.ts</code> und importieren Sie das <code>MatCardModule</code>:</p>
+<div class="tabbed-set" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">app.module.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppRoutingModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app-routing.module&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserAnimationsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser/animations&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./nav/nav.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LayoutModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatToolbarModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/toolbar&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatButtonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatSidenavModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/sidenav&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatListModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/list&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./create/create.component&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">ReactiveFormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatFormFieldModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/form-field&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MatInputModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/input&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClientModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ReadComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./read/read.component&#39;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MatCardModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@angular/material/card&quot;</span><span class="p">;</span>
+</span>
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">AppComponent</span><span class="p">,</span>
+    <span class="nx">NavComponent</span><span class="p">,</span>
+    <span class="nx">CreateComponent</span><span class="p">,</span>
+    <span class="nx">ReadComponent</span>
+  <span class="p">],</span>
+  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">BrowserModule</span><span class="p">,</span>
+    <span class="nx">AppRoutingModule</span><span class="p">,</span>
+    <span class="nx">BrowserAnimationsModule</span><span class="p">,</span>
+    <span class="nx">LayoutModule</span><span class="p">,</span>
+    <span class="nx">MatToolbarModule</span><span class="p">,</span>
+    <span class="nx">MatButtonModule</span><span class="p">,</span>
+    <span class="nx">MatSidenavModule</span><span class="p">,</span>
+    <span class="nx">MatIconModule</span><span class="p">,</span>
+    <span class="nx">MatListModule</span><span class="p">,</span>
+    <span class="nx">MatFormFieldModule</span><span class="p">,</span>
+    <span class="nx">MatInputModule</span><span class="p">,</span>
+<span class="hll">    <span class="nx">MatCardModule</span><span class="p">,</span>
+</span>    <span class="nx">FormsModule</span><span class="p">,</span>
+    <span class="nx">ReactiveFormsModule</span><span class="p">,</span>
+    <span class="nx">HttpClientModule</span>
+  <span class="p">],</span>
+  <span class="nx">providers</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">bootstrap</span><span class="o">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+</li>
+<li>
+<p>In der <code>read.component.ts</code> fügen wir nun die <code>imageSource()</code>-Funktion hinzu. Diese ist im Prinzip von <a href="https://stackoverflow.com/questions/62252634/how-to-display-an-image-via-an-async-base64-string-in-angular">hier</a> und <a href="https://stackoverflow.com/questions/38812993/base64-to-image-angular-2/43661231">hier</a>.</p>
+<div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">read.component.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BackendService</span><span class="p">,</span> <span class="nx">Post</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;../backend.service&quot;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">DomSanitizer</span><span class="p">,</span> <span class="nx">SafeResourceUrl</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@angular/platform-browser&quot;</span><span class="p">;</span>
+</span>
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-read&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./read.component.html&#39;</span><span class="p">,</span>
+  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./read.component.css&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">ReadComponent</span> <span class="nx">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+  <span class="nx">allPosts</span><span class="o">!:</span> <span class="nx">Post</span><span class="p">[];</span>
+
+  <span class="nx">constructor</span><span class="p">(</span>
+    <span class="kr">private</span> <span class="nx">bs</span><span class="o">:</span> <span class="nx">BackendService</span><span class="p">,</span>
+<span class="hll">    <span class="kr">private</span> <span class="nx">sanitizer</span><span class="o">:</span> <span class="nx">DomSanitizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</span>
+  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bs</span><span class="p">.</span><span class="nx">readAll</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">posts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">allPosts</span> <span class="o">=</span> <span class="nx">posts</span><span class="p">;</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">(</span> <span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="p">})</span>
+  <span class="p">}</span>
+
+<span class="hll">  <span class="nx">imageSrc</span><span class="p">(</span><span class="nx">base64code</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">SafeResourceUrl</span> <span class="p">{</span>
+</span><span class="hll">      <span class="kd">const</span> <span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;data:image/png;base64,&#39;</span><span class="o">+</span><span class="nx">base64code</span><span class="p">;</span>
+</span><span class="hll">      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">sanitizer</span><span class="p">.</span><span class="nx">bypassSecurityTrustResourceUrl</span><span class="p">(</span><span class="nx">src</span><span class="p">);</span>
+</span><span class="hll">  <span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+</li>
+<li>
+<p>Jetzt werden die <code>Card</code> vollständig angezeigt. Wenn Sie möchten, können Sie ja das Layout noch etwas in der <code>read.component.css</code> anpassen:</p>
+<div class="tabbed-set" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">read.component.css</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">polaroid</span> <span class="p">{</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">250</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">box-shadow</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">4</span><span class="kt">px</span> <span class="mi">8</span><span class="kt">px</span> <span class="mi">0</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="mi">0</span> <span class="mi">6</span><span class="kt">px</span> <span class="mi">20</span><span class="kt">px</span> <span class="mi">0</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.19</span><span class="p">);</span>
+    <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Ich hoffe, es klappt alles. Viel Spaß!</p>
+</li>
+</ol>
+</details>
 <h5 id="ubung-7-indexeddb">Übung 7 (IndexedDB)<a class="headerlink" href="#ubung-7-indexeddb" title="Permanent link">&para;</a></h5>
 <details><summary>Übung 7</summary><ol>
 <li>Im Abschnitt <a href="../indexeddb/#indexeddb">IndexedDB</a> haben wir uns mit der Verwendung der In-Browser-datenbank IndexedDB vertraut gemacht. </li>
@@ -926,7 +1494,7 @@ Package                      Version
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../indexeddb/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../backgroundsync/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -935,7 +1503,7 @@ Package                      Version
                 <span class="md-footer-nav__direction">
                   Zurück
                 </span>
-                IndexedDB
+                Hintergrundsynchronisation
               </div>
             </div>
           </a>

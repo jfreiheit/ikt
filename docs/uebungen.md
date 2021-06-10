@@ -277,6 +277,320 @@
 	![uebung4](./files/58_uebung4.png)
 
 
+??? question "eine mögliche Lösung für Übung 6"
+
+	1. In dem Backend führen Sie zunächst folgende Änderung durch: Im `post.controller.js` ändern wir die `readAll()`-Methode wie folgt:
+
+		=== "post.controller.js" 
+		```js linenums="1" hl_lines="14-21 23"
+		import { PostService } from './db.sqlqueries.js';
+
+		export const PostController = {
+
+		    readAll: (req, res) => {
+		        PostService.getAll((err, result) => {
+		            if (err)
+		                res.status(500).send({
+		                    message: err.message || "Some error occurred while getting all posts",
+		                });
+		            else {
+		                console.log(result);
+
+		                let arr = [];
+		                result.forEach( post => {
+		                    let buff = new Buffer(post.image, 'base64');
+		                    let text = buff.toString('ascii');
+		                    //console.log(text);
+		                    post.image = text;
+		                    arr.push(post);
+		                });
+
+		                res.json(arr);
+		            }
+		        });
+		    },
+
+		    // hier noch die anderen Funktionen
+		}
+		``` 
+
+		Davor hatten wir `return res.json(result)`. Jetzt geben wir ebenfalls ein Array von unseren `Posts` zurück, allerdings ist `post.image` darin nicht mehr ein `ArrayBuffer`, sondern ein `String` mit dem `base64`-Code.
+
+	2. Starten Sie das Backend ( `npm run watch`)!
+
+	3. Wechseln Sie im Terminal in den `frontend`-Ordner (der Angular-Projekt-Ordner Ihres Frontends) und geben Sie darin
+
+		```bash
+		ng generate component read
+		```
+
+		ein. Damit wird die `ReadComponent` erzeugt. In Ihrem Projektordner wird unter `/src/app` ein ordner `read` erzeugt, der 4 Dateien `read.component.*` enthält. 
+
+	4. Öffnen Sie in Ihrer IDE die `app-routing.module.ts` und fügen Sie dort die neue Route `/read` hinzu, unter der die `ReadComponent` aufgerufen wird: 
+
+		=== "app-routing.module.ts" 
+		```js linenums="1" hl_lines="4 8"
+		import { NgModule } from '@angular/core';
+		import { RouterModule, Routes } from '@angular/router';
+		import { CreateComponent } from './create/create.component';
+		import { ReadComponent } from "./read/read.component";
+
+		const routes: Routes = [
+		  { path: 'create', component: CreateComponent},
+		  { path: 'read', component: ReadComponent}
+		];
+
+		@NgModule({
+		  imports: [RouterModule.forRoot(routes)],
+		  exports: [RouterModule]
+		})
+		export class AppRoutingModule { }
+		``` 
+
+		Nun erscheint die `ReadComponent` unter der Route `http://localhost:4200/read`.
+
+	5. Öffnen Sie die `nav.component.html` und fügen Sie dort den neuen Menüpunkt `Read` hinzu. Unter diesem Menüpunkt wird mithilfe von `routerLink` die Route `http://localhost:4200/read` aufgerufen.
+
+		=== "nav.component.html" 
+		```html linenums="1" hl_lines="6"
+		<mat-sidenav-container class="sidenav-container">
+		    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+		        <mat-toolbar>Menu</mat-toolbar>
+		        <mat-nav-list>
+		            <a mat-list-item routerLink="/create" routerLinkActivate="active">Create</a>
+		            <a mat-list-item routerLink="/read" routerLinkActivate="active">Read</a>
+		            <a mat-list-item href="#">Link 3</a>
+		        </mat-nav-list>
+		    </mat-sidenav>
+		    <mat-sidenav-content>
+		        <mat-toolbar color="primary">
+		            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+		        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+		      </button>
+		            <span>PWA Frontend</span>
+		        </mat-toolbar>
+		        <!-- Add Content Here -->
+		        <h1>This is app</h1>
+		        <router-outlet></router-outlet>
+
+		    </mat-sidenav-content>
+		</mat-sidenav-container>
+		``` 
+
+	6. Öffnen Sie die Datei `backend.service.ts`. Diesem Service wird nun eine weitere Funktion hinzugefügt, nämlich `readAll`. Diese Funktion greift, wie bereits die Funktion `addPost()` auf das Backend zu, nur dass die `readAll()`-Funktion eine `GET`-Anfrage an `http://localhost:4200/posts` stellt. Die Rückgabe ist ebenfalls ein `Promise`, dieses Mal aber typisiert mit `Post[]`, da das Backend alle `Posts` in einem (JSON-)Array zurücksendet.
+
+		=== "backend.service.ts" 
+		```js linenums="1" hl_lines="32-42"
+		import { HttpClient, HttpHeaders } from '@angular/common/http';
+		import { Injectable } from '@angular/core';
+
+		export interface Post {
+		  id: number;
+		  title: string;
+		  location: string;
+		  image: string;
+		}
+
+		@Injectable({
+		  providedIn: 'root'
+		})
+		export class BackendService {
+
+		  apiURL = 'http://localhost:3000/posts';
+
+		  constructor(private http: HttpClient) { }
+
+		  // POST http://localhost:4200/posts
+		  public addPost(post: Post): Promise<Post> {
+		    return this.http
+		    .post<Post>(`${this.apiURL}`, post, {
+		      headers: new HttpHeaders({
+		        'Content-Type': 'application/json',
+		        'Accept-Type': 'application/json'
+		      }),
+		    })
+		    .toPromise();
+		  }
+
+		  // GET http://localhost:4200/posts
+		  public readAll(): Promise<Post[]> {
+		    return this.http
+		      .get<Post[]>(`${this.apiURL}`, {
+		          headers: new HttpHeaders({
+		            'Content-Type': 'application/json',
+		            'Accept-Type': 'application/json'
+		          }),
+		        })
+		      .toPromise();
+		  }
+		}
+		``` 
+
+	7. In der `read.component.ts` können wir nun diese Funktion des `BackendService` einmal ausprobieren. Wir binden dazu (wie bereits bei der `CreateComponent`) den `BackendService` mittels *dependency injection* im Konstruktor ein, rufen die `readAll`-Funktion auf und geben das Ergebnis auf die Konsole aus.
+
+		=== "read.component.ts" 
+		```js linenums="1" hl_lines="10 12 15-22"
+		import { Component, OnInit } from '@angular/core';
+		import { BackendService, Post } from "../backend.service";
+
+		@Component({
+		  selector: 'app-read',
+		  templateUrl: './read.component.html',
+		  styleUrls: ['./read.component.css']
+		})
+		export class ReadComponent implements OnInit {
+		  allPosts!: Post[];
+
+		  constructor(private bs: BackendService) { }
+
+		  ngOnInit(): void {
+		    this.bs.readAll()
+		      .then( posts => {
+		      	this.allPosts = posts;
+		        console.log(posts);
+		      })
+		      .catch( err => {
+		        console.log(err);
+		      })
+		  }
+
+		}
+		``` 
+
+		Außerdem speichern wir alle `posts` in einer Objektvariablen `allPosts`, die vom Typ `Post[]` ist. Wenn wir nun im Menüpunkt `Read` auswählen, erscheint in den DeveloperTools in der Konsole die Ausgabe des Arrays aller Posts aus der Datenbank. 
+
+	8. In der `read.component.html` können wir uns nun überlegen, wie wir die einzelnen `posts` darstellen wollen. Hier ist ein Beispiel für die Verwendung einer `Card` aus [Angular Material Design](https://material.angular.io/components/card/overview):
+
+		=== "read.component.html" 
+		```html linenums="1" hl_lines="6"
+		<div class="container" novalidate>
+		  <div *ngFor="let post of allPosts">
+		    <mat-card class="polaroid">
+		      <mat-card-header>
+		        <mat-card-title>{{post.title}}</mat-card-title>
+		      </mat-card-header>
+		      <img mat-card-image [src]=imageSrc(post.image) alt="Foto">
+		      <mat-card-content>
+		        <p>
+		          {{post.location}}
+		        </p>
+		      </mat-card-content>
+		    </mat-card>
+		  </div>
+		</div>
+		``` 
+
+		Für jeden Eintrag `post` aus dem `allPosts`-Array wird eine `Card` erstellt. Die wird mithilfe der Strukturdirektive `*ngFor` erzeugt (siehe z.B. [hier](https://angular.io/api/common/NgForOf)). Es erscheinen jetzt noch zwei Fehler: <br/>
+			1. die Funktion `imageSrc()` ist noch nicht bekannt und <br/>
+			2. das `MatCardModule` wurde noch nicht in unser Projekt importiert. <br/>
+		Letzteres machen wir zuerst:
+
+	9. Öffnen Sie `app.module.ts` und importieren Sie das `MatCardModule`:
+
+		=== "app.module.ts" 
+		```js linenums="1" hl_lines="20 41"
+		import { NgModule } from '@angular/core';
+		import { BrowserModule } from '@angular/platform-browser';
+
+		import { AppRoutingModule } from './app-routing.module';
+		import { AppComponent } from './app.component';
+		import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+		import { NavComponent } from './nav/nav.component';
+		import { LayoutModule } from '@angular/cdk/layout';
+		import { MatToolbarModule } from '@angular/material/toolbar';
+		import { MatButtonModule } from '@angular/material/button';
+		import { MatSidenavModule } from '@angular/material/sidenav';
+		import { MatIconModule } from '@angular/material/icon';
+		import { MatListModule } from '@angular/material/list';
+		import { CreateComponent } from './create/create.component';
+		import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+		import { MatFormFieldModule } from '@angular/material/form-field';
+		import { MatInputModule } from '@angular/material/input';
+		import { HttpClientModule } from '@angular/common/http';
+		import { ReadComponent } from './read/read.component';
+		import { MatCardModule } from "@angular/material/card";
+
+		@NgModule({
+		  declarations: [
+		    AppComponent,
+		    NavComponent,
+		    CreateComponent,
+		    ReadComponent
+		  ],
+		  imports: [
+		    BrowserModule,
+		    AppRoutingModule,
+		    BrowserAnimationsModule,
+		    LayoutModule,
+		    MatToolbarModule,
+		    MatButtonModule,
+		    MatSidenavModule,
+		    MatIconModule,
+		    MatListModule,
+		    MatFormFieldModule,
+		    MatInputModule,
+		    MatCardModule,
+		    FormsModule,
+		    ReactiveFormsModule,
+		    HttpClientModule
+		  ],
+		  providers: [],
+		  bootstrap: [AppComponent]
+		})
+		export class AppModule { }
+
+		``` 
+
+	10. In der `read.component.ts` fügen wir nun die `imageSource()`-Funktion hinzu. Diese ist im Prinzip von [hier](https://stackoverflow.com/questions/62252634/how-to-display-an-image-via-an-async-base64-string-in-angular) und [hier](https://stackoverflow.com/questions/38812993/base64-to-image-angular-2/43661231).
+
+		=== "read.component.ts" 
+		```js linenums="1" hl_lines="3 15 27-30"
+		import { Component, OnInit } from '@angular/core';
+		import { BackendService, Post } from "../backend.service";
+		import { DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+
+		@Component({
+		  selector: 'app-read',
+		  templateUrl: './read.component.html',
+		  styleUrls: ['./read.component.css']
+		})
+		export class ReadComponent implements OnInit {
+		  allPosts!: Post[];
+
+		  constructor(
+		    private bs: BackendService,
+		    private sanitizer: DomSanitizer) { }
+
+		  ngOnInit(): void {
+		    this.bs.readAll()
+		      .then( posts => {
+		        this.allPosts = posts;
+		      })
+		      .catch( err => {
+		        console.log(err);
+		      })
+		  }
+
+		  imageSrc(base64code: string): SafeResourceUrl {
+		      const src = 'data:image/png;base64,'+base64code;
+		      return this.sanitizer.bypassSecurityTrustResourceUrl(src);
+		  }
+		}
+		``` 
+
+	11. Jetzt werden die `Card` vollständig angezeigt. Wenn Sie möchten, können Sie ja das Layout noch etwas in der `read.component.css` anpassen:
+
+		=== "read.component.css" 
+		```css linenums="1"
+		.polaroid {
+		    width: 250px;
+		    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		    text-align: center;
+		    margin: 20px;
+		}
+		``` 
+
+		Ich hoffe, es klappt alles. Viel Spaß!
 
 
 ##### Übung 7 (IndexedDB)

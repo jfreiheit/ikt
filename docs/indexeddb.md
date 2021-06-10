@@ -1,6 +1,6 @@
 # IndexedDB 
 
-Wir haben jetzt verschiedene Ressourcen in statischen und dynamischen Caches gespeichert. Diese Ressourcen lagen als Dateien vor, die wir über eine URL abrufen konnten, also `*.html`-, `*.js`-, `*.css`- Dateien und Bilder. Jetzt wollen wir dynamisch *Daten* speichern, sogenannten *dynamischen Inhalt*. Diese Daten können ausgelesen und den unterschiedlichen Dateien hinzugefügt bzw. durch Dateien hinzugefügt werden. Wir können uns das wirklich wie eine Datenbank vorstellen, aus der wir diese Daten ziehen, nur dass diese Datenbank nicht extern in einem Datenbankmanagementsystem verwaltet wird, sondern durch den Browser. Wir haben unter den Developer Tools diese "Datenbank" vielleicht schon im `Application`-Reiter auf der linken Seite unter `Storage` entdeckt. Es handelt sich um die `IndexedDB`. 
+Wir haben jetzt verschiedene Ressourcen in statischen und dynamischen Caches gespeichert. Unsere *HTW-Insta*-Anwendung sieht nun [so aus](./files/IKT-PWA-04.zip). Diese Ressourcen lagen als Dateien vor, die wir über eine URL abrufen konnten, also `*.html`-, `*.js`-, `*.css`- Dateien und Bilder. Jetzt wollen wir dynamisch *Daten* speichern, sogenannten *dynamischen Inhalt*. Diese Daten können ausgelesen und den unterschiedlichen Dateien hinzugefügt bzw. durch Dateien hinzugefügt werden. Wir können uns das wirklich wie eine Datenbank vorstellen, aus der wir diese Daten ziehen, nur dass diese Datenbank nicht extern in einem Datenbankmanagementsystem verwaltet wird, sondern durch den Browser. Wir haben unter den Developer Tools diese "Datenbank" vielleicht schon im `Application`-Reiter auf der linken Seite unter `Storage` entdeckt. Es handelt sich um die `IndexedDB`. 
 
 Bei der `IndexedDB` handelt es sich um eine *transaktionsbasierte* Datenbank, die Schlüssel-Werte-Paare im Browser speichert. *Transaktionsbasiert* bedeutet dabei, dass ganze *Transaktionen* ausgeführt werden, die aus einzelnen Aktionen bestehen können. Wenn nur eine Aktion einer Transaktion fehlschlägt, dann wird keine der Aktionen dieser Transaktion ausgeführt. Das bedeutet, eine *Transaktion*  wird entweder ganz oder gar nicht ausgeführt. Unsere Transaktionen bestehen aber typischerweise nur aus wenigen Aktionen, das Transaktionskonzept spielt deshalb keine große Rolle. 
 
@@ -67,7 +67,7 @@ Damit die `image`-Eigenschaft unseres Datensatzes kein `ArrayBuffer` ist, sonder
 
 In der `readAll`-Funktion habe ich aus dem Buffer mithilfe der `toString()`-Methode einen String erzeugt und diesen anstelle des ArrayBuffers gesendet. 
 
-```js linenums="1" hl_lines="1"
+```js linenums="1" hl_lines="9-16"
     readAll: (req, res) => {
         PostService.getAll((err, result) => {
             if (err)
@@ -485,7 +485,7 @@ Nach Ausführen der Anwendung sieht die IndexedDB nun (je nachdem, welche Daten 
 
 ![indexeddb](./files/67_indexdb.png)
 
-Sie können sich auch [hier](./files/inserposts.sql) eine Datei herunterladen, die `INSERT INTO posts`-SQL-Anweisungen für die angezeigten 5 Datensätze enthält (können Sie so in `phpmyadmin` als Datei importieren). 
+Sie können sich auch [hier](./files/insertposts.sql) eine Datei herunterladen, die `INSERT INTO posts`-SQL-Anweisungen für die angezeigten 5 Datensätze enthält (können Sie so in `phpmyadmin` als Datei importieren). 
 
 Wir haben nun die IndexedDB des Browsers mit unseren Datensätzen befüllt. Nun überlegen wir uns, wie wir diese Datensätze aus der IndexedDB auslesen können, wenn wir sie dort gespeichert haben und dann gar nicht mehr an das Backend Anfragen schicken müssen. 
 
@@ -885,7 +885,6 @@ Diese rufen wir nun in der `sw.js` auf, bevor wir die neuen Daten in die Indexed
                 fetch(event.request)
                     .then ( res => {
                         const clonedResponse = res.clone();
-                        clonedResponse.json()
                         clearAllData('posts')
                             .then( () => {
                                 clonedResponse.json()
@@ -920,7 +919,6 @@ Die Funktion `clearAllData()` gibt ein Promise-Objekt zurück. Nach dem erfolgre
                 fetch(event.request)
                     .then ( res => {
                         const clonedResponse = res.clone();
-                        clonedResponse.json()
                         clearAllData('posts')
                             .then( () => {
                                 return clonedResponse.json();

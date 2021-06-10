@@ -106,6 +106,5 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 
 	- Diese Woche machen wir uns mit der [IndexedDB](./indexeddb/#indexeddb) vertraut und speichern dynamische Daten (die `Posts`-Datensaätze) in die IndexedDB, um diese auszulesen, falls die Anwendung offline ist und somit das Backend nicht verfügbar.   
 	- In der [Übung](./uebungen/#ubung-7-indexeddb) soll die Verwaltung der IndexedDB um eine weitere Funktion erweiteret werden. 
-	- Video zur Vorlesung am 09.06.2021 - kommt noch
-
-
+	- Video zur Vorlesung am 09.06.2021
+		<iframe src="./files/08_indexeddb.mp4" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>

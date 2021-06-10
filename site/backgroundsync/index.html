@@ -1,0 +1,717 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Lehrmaterial, Übungen, Aufgaben und Hilfen für Aktuelle Trends der IKT">
+      
+      
+      
+        <meta name="author" content="Jörn Freiheit">
+      
+      
+        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/backgroundsync/">
+      
+      <link rel="shortcut icon" href="../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>Hintergrundsynchronisation - Progressive Web Apps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#757575">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="grey" data-md-color-accent="indigo">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hintergrundsynchronisation" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-header-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Progressive Web Apps
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Hintergrundsynchronisation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    Progressive Web Apps
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../einfuehrung/" class="md-nav__link">
+        Einführung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grundgeruest/" class="md-nav__link">
+        Grundgerüst
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manifest/" class="md-nav__link">
+        Manifest
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serviceworker/" class="md-nav__link">
+        Service Worker
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../promises/" class="md-nav__link">
+        Promises & fetch
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../caching/" class="md-nav__link">
+        Caching
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend/" class="md-nav__link">
+        Backend
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend/" class="md-nav__link">
+        Frontend
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../indexeddb/" class="md-nav__link">
+        IndexedDB
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Hintergrundsynchronisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Hintergrundsynchronisation
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#zunachst-ein-bisschen-mehr-responsive" class="md-nav__link">
+    Zunächst ein bisschen mehr responsive
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#daten-senden" class="md-nav__link">
+    Daten senden
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uebungen/" class="md-nav__link">
+        Übungen
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        Werkzeuge
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hilfen/" class="md-nav__link">
+        Hilfen
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#zunachst-ein-bisschen-mehr-responsive" class="md-nav__link">
+    Zunächst ein bisschen mehr responsive
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#daten-senden" class="md-nav__link">
+    Daten senden
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/backgroundsync.md" title="Seite editieren" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="hintergrundsynchronisation">Hintergrundsynchronisation<a class="headerlink" href="#hintergrundsynchronisation" title="Permanent link">&para;</a></h1>
+<p>Hintergrundsynchronisation erlaubt die Synchronisation von daten, selbst dann, wenn die Anwendung offline ist. Diese "Synchronisation" erfolgt natürlich "asynchron". Angenommen, Sie geben offline Daten in die Anwendung ein und wollen diese versenden, z.B. an das Backend, dann wird dieser Request so lange in Ihrer Anwendung gespeichert, bis Sie wieder online sind und erst dann ausgeführt. </p>
+<p>Das Situation ist die Folgende:</p>
+<p><img alt="backgroundsync" src="../files/69_background.png" /></p>
+<p>Es sollen Daten an das Backend gesendet werden, aber die Internetverbindung ist unterbrochen. Deshalb werden die Daten in die IndexedDB gespeichert und im Service Worker wird eine <em>Sync Task</em> registriert. </p>
+<p><img alt="backgroundsync" src="../files/70_background.png" /></p>
+<p>Sobald die Verbindung wieder steht, wird ein <em>Sync</em>-Event im Service Worker ausgelöst und dieser sendet die Daten an das Backend (<code>POST-Request</code>).</p>
+<p>Dadurch, dass der Service Worker diesen <code>POST-Request</code> ausführt (und die Daten dabei mitsendet), kann die Hintergrundsynchronisation sogar dann stattfinden, wenn die Webanwendung bereits geschlossen ist! Deshalb sollten wir einfach immer beim Senden von Daten eine <em>Sync Task</em> registrieren, weil es sein kann, dass die Daten noch gar nicht vollständig gesendet wurden, bevor wir den Browsertab schließen. </p>
+<h3 id="zunachst-ein-bisschen-mehr-responsive">Zunächst ein bisschen mehr responsive<a class="headerlink" href="#zunachst-ein-bisschen-mehr-responsive" title="Permanent link">&para;</a></h3>
+<p>Unser <em>HTW Insta</em> entwickelt sich langsam. Deshalb ist hier vielleicht ein guter Zeitpunkt, um die Anwendung noch etwas mehr <em>responsive</em> zu gestalten. Zum Beispiel sind die <code>Cards</code> stets in fester Größe, unabhängig davon, ob wir die Anwendung am Desktop betrachten oder am Mobilgerät. </p>
+<p>Dazu können wir in unsere <code>feed.css</code> ein paar <em>Media queries</em> einfügen:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">/src/css/feed.css</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="p">#</span><span class="nn">create-post</span> <span class="p">{</span>
+    <span class="k">z-index</span><span class="p">:</span> <span class="mi">1001</span><span class="p">;</span>
+    <span class="k">position</span><span class="p">:</span> <span class="kc">fixed</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">min-height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">vh</span><span class="p">;</span>
+    <span class="k">overflow-y</span><span class="p">:</span> <span class="kc">scroll</span><span class="p">;</span>
+    <span class="k">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">top</span><span class="p">:</span> <span class="mi">56</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">background</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+    <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+    <span class="k">visibility</span><span class="p">:</span> <span class="kc">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">main-image</span> <span class="p">{</span>
+    <span class="k">max-width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">whiteText</span> <span class="p">{</span>
+    <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">floating-button</span> <span class="p">{</span>
+    <span class="k">z-index</span><span class="p">:</span> <span class="mi">1000</span><span class="p">;</span>
+    <span class="k">position</span><span class="p">:</span> <span class="kc">fixed</span><span class="p">;</span>
+    <span class="k">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">right</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">30</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">input-section</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="kc">auto</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">shared-moment-card</span><span class="p">.</span><span class="nc">mdl-card</span> <span class="p">{</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="kc">auto</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">80</span><span class="kt">%</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">600px</span><span class="o">)</span> <span class="p">{</span>
+    <span class="p">.</span><span class="nc">shared-moment-card</span><span class="p">.</span><span class="nc">mdl-card</span> <span class="p">{</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">60</span><span class="kt">%</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">1200px</span><span class="o">)</span> <span class="p">{</span>
+    <span class="p">.</span><span class="nc">shared-moment-card</span><span class="p">.</span><span class="nc">mdl-card</span> <span class="p">{</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">45</span><span class="kt">%</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">shared-moment-card</span> <span class="p">.</span><span class="nc">mdl-card__title</span> <span class="p">{</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">250</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-height</span><span class="o">:</span> <span class="nt">600px</span><span class="o">)</span> <span class="p">{</span>
+    <span class="p">.</span><span class="nc">shared-moment-card</span> <span class="p">.</span><span class="nc">mdl-card__title</span> <span class="p">{</span>
+        <span class="k">height</span><span class="p">:</span> <span class="mi">300</span><span class="kt">px</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-height</span><span class="o">:</span> <span class="nt">1200px</span><span class="o">)</span> <span class="p">{</span>
+    <span class="p">.</span><span class="nc">shared-moment-card</span> <span class="p">.</span><span class="nc">mdl-card__title</span> <span class="p">{</span>
+        <span class="k">height</span><span class="p">:</span> <span class="mi">380</span><span class="kt">px</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>       
+</code></pre></div>
+</div>
+</div>
+<p>Wir haben sowohl für die Viewport-Höhe als auch für die Viewport-Breite zwei <em>Breakpoints</em> eingebaut. Bei jeweils <code>600px</code> bzw. <code>1200px</code> ändern sich die Angaben zur Höhe bzw. Breite der Bilder in den <code>Cards</code>. <strong>Achtung:</strong> In <code>feed.js</code> muss dazu die Zeile </p>
+<div class="highlight"><pre><span></span><code>cardTitle.style.height = &#39;180px&#39;;
+</code></pre></div>
+<p>gelöscht werden! Die Höhe und Breite der Bilder in den <code>Cards</code> passt sich jetzt (besser)  der Viewport-Breite und -Höhe an. Bei den Breiten haben wir sogar %-Angaben verwendet (gut), bei den Höhen nur feste Pixel-Werte (nicht so gut). Sie können gerne damit herumspielen und es an Ihre Bedürfnisse anpassen. </p>
+<p>Die Verwendung der Bilder können wir noch auf eine andere Art <em>responsive</em> gestalten. Je nach Viewport-Größe können die Bilder eingebunden werden, deren Auflösung "ausreicht". In dem <code>/public/src/images/</code>-Ordner haben wir für unser Hauptbild oben drei verschiedene Versionen:</p>
+<ul>
+<li><code>htw.jpg</code>, mit der Auflösung <code>898 x 343</code> Pixel,</li>
+<li><code>htw-lg.jpg</code>, mit der Auflösung <code>1199 x 457</code> Pixel und</li>
+<li><code>htw-sm.jpg</code>, mit der Auflösung <code>480 x 183</code> Pixel.</li>
+</ul>
+<p>Es wäre unsinnig, beisielsweise das <code>htw-lg.jp</code> auf einem schmalen Viewport anzuzeigen, da dafür die Auflösung des <code>htw-sm.lpg</code> völlig genügt. Da Letzteres auch noch deutlich kleiner ist (<code>43 KB</code>), als das <code>htw-lg.jpg</code>-Bild (<code>170 KB</code>), ließe sich auch die Ladezeit verringern, wenn für mobile Geräte das kleiner Bild verwendet würde. Auf der anderen Seite sieht dieses Bild aufgrund seiner niedrigen Auflösung in großen Viewports (also am Desktop-Monitor) nicht gut aus. Dort benötigen wir das <code>htw-lg.jpg</code>. Um diesen Wechsel der Bilder je nach Viewport-Größe zu vereinfachen, wurde in HTML5 für das <code>img</code>-Element das Attribut <code>srcset</code> hinzugefügt (siehe z.B. <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images">hier</a>  oder <a href="https://html.com/attributes/img-srcset/">hier</a>). In unserer <code>index.html</code> können wir also das Einbinden des <code>img</code>-Elementes wie folgt erweitern:</p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">/index.html</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">img</span> <span class="na">srcset</span><span class="o">=</span><span class="s">&quot;/src/images/htw-lg.jpg 1200w, </span>
+<span class="s">             /src/images/htw.jpg 900w,</span>
+<span class="s">             /src/images/htw-sm.jpg 480w&quot;</span> 
+     <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/images/htw.jpg&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;HTW Wilhelminenhof&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;main-image&quot;</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Zuvor stand dort einfach nur: <code>&lt;img src="/src/images/htw.jpg" alt="HTW Wilhelminenhof" class="main-image"&gt;</code>. Wir haben also das <code>srcset</code>-Attribut hinzugefügt. Das generelle Template dafür sieht so aus:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">img</span> <span class="na">srcset</span><span class="o">=</span><span class="s">&quot;url size, </span>
+<span class="s">             url size,</span>
+<span class="s">             url size&quot;</span> 
+     <span class="na">src</span><span class="o">=</span><span class="s">&quot;default url&quot;</span> <span class="p">&gt;</span>
+</code></pre></div>
+<p>Das heißt, nach den URLs auf die jeweiligen Bilder schreiben wir noch die Größe des Viewports, ab denen die Bilder verwendet werden sollen, also <code>1200w, 900w, 480w</code>. Dabei steht <code>w</code> für <code>width</code>. Möglich wäre </p>
+<h3 id="daten-senden">Daten senden<a class="headerlink" href="#daten-senden" title="Permanent link">&para;</a></h3>
+<p>In unserer <em>HTW Insta</em>-Anwendung sorgen wir nun zunächst dafür, dass wir auch Daten eingeben und diese versenden können. Ausgangspunkt ist dieser <a href="../files/IKT-PWA-05.zip">Stand des Projektes</a>.</p>
+<p>Wir wollen dazu den <code>Speichern</code>-Button aus der <code>index.html</code> </p>
+<p><code>html linenums=76
+&lt;button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent"
+        type="submit" id="post-btn"&gt;Speichern
+&lt;/button&gt;</code></p>
+<p>mit der <code>feed.js</code> verbinden. </p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../indexeddb/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Zurück
+                </span>
+                IndexedDB
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../uebungen/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Weiter
+                </span>
+                Übungen
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Jörn Freiheit
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: ['instant', 'tabs'],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

@@ -449,6 +449,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../backgroundsync/" class="md-nav__link">
+        Hintergrundsynchronisation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../uebungen/" class="md-nav__link">
         Übungen
       </a>
@@ -590,7 +605,7 @@
                 
                 
                 <h1 id="indexeddb">IndexedDB<a class="headerlink" href="#indexeddb" title="Permanent link">&para;</a></h1>
-<p>Wir haben jetzt verschiedene Ressourcen in statischen und dynamischen Caches gespeichert. Diese Ressourcen lagen als Dateien vor, die wir über eine URL abrufen konnten, also <code>*.html</code>-, <code>*.js</code>-, <code>*.css</code>- Dateien und Bilder. Jetzt wollen wir dynamisch <em>Daten</em> speichern, sogenannten <em>dynamischen Inhalt</em>. Diese Daten können ausgelesen und den unterschiedlichen Dateien hinzugefügt bzw. durch Dateien hinzugefügt werden. Wir können uns das wirklich wie eine Datenbank vorstellen, aus der wir diese Daten ziehen, nur dass diese Datenbank nicht extern in einem Datenbankmanagementsystem verwaltet wird, sondern durch den Browser. Wir haben unter den Developer Tools diese "Datenbank" vielleicht schon im <code>Application</code>-Reiter auf der linken Seite unter <code>Storage</code> entdeckt. Es handelt sich um die <code>IndexedDB</code>. </p>
+<p>Wir haben jetzt verschiedene Ressourcen in statischen und dynamischen Caches gespeichert. Unsere <em>HTW-Insta</em>-Anwendung sieht nun <a href="../files/IKT-PWA-04.zip">so aus</a>. Diese Ressourcen lagen als Dateien vor, die wir über eine URL abrufen konnten, also <code>*.html</code>-, <code>*.js</code>-, <code>*.css</code>- Dateien und Bilder. Jetzt wollen wir dynamisch <em>Daten</em> speichern, sogenannten <em>dynamischen Inhalt</em>. Diese Daten können ausgelesen und den unterschiedlichen Dateien hinzugefügt bzw. durch Dateien hinzugefügt werden. Wir können uns das wirklich wie eine Datenbank vorstellen, aus der wir diese Daten ziehen, nur dass diese Datenbank nicht extern in einem Datenbankmanagementsystem verwaltet wird, sondern durch den Browser. Wir haben unter den Developer Tools diese "Datenbank" vielleicht schon im <code>Application</code>-Reiter auf der linken Seite unter <code>Storage</code> entdeckt. Es handelt sich um die <code>IndexedDB</code>. </p>
 <p>Bei der <code>IndexedDB</code> handelt es sich um eine <em>transaktionsbasierte</em> Datenbank, die Schlüssel-Werte-Paare im Browser speichert. <em>Transaktionsbasiert</em> bedeutet dabei, dass ganze <em>Transaktionen</em> ausgeführt werden, die aus einzelnen Aktionen bestehen können. Wenn nur eine Aktion einer Transaktion fehlschlägt, dann wird keine der Aktionen dieser Transaktion ausgeführt. Das bedeutet, eine <em>Transaktion</em>  wird entweder ganz oder gar nicht ausgeführt. Unsere Transaktionen bestehen aber typischerweise nur aus wenigen Aktionen, das Transaktionskonzept spielt deshalb keine große Rolle. </p>
 <p>Wir können beliebige Daten in die <code>IndexedDB</code> speichern, also auch Bilder, Dateien, Arrays, Objekte, usw. Ein wichtiger Unterschied zum <code>Lokal Storage</code> ist, dass wir sowohl über den "normalen" JavaScript-Thread unserer Webanwendung als auch über den Service Worker auf die <code>IndexedDB</code> zugreifen können. </p>
 <h3 id="das-backend-nutzen">Das Backend nutzen<a class="headerlink" href="#das-backend-nutzen" title="Permanent link">&para;</a></h3>
@@ -682,23 +697,23 @@
 17
 18
 19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll">    <span class="nx">readAll</span><span class="o">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span>        <span class="nx">PostService</span><span class="p">.</span><span class="nx">getAll</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    <span class="nx">readAll</span><span class="o">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">PostService</span><span class="p">.</span><span class="nx">getAll</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span>
                 <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
                     <span class="nx">message</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="s2">&quot;Some error occurred while getting all posts&quot;</span><span class="p">,</span>
                 <span class="p">});</span>
             <span class="k">else</span> <span class="p">{</span>
                 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-                <span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
-                <span class="nx">result</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span> <span class="nx">post</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                    <span class="kd">let</span> <span class="nx">buff</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">post</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span> <span class="s1">&#39;base64&#39;</span><span class="p">);</span>
-                    <span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">buff</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">);</span>
-                    <span class="c1">//console.log(text);</span>
-                    <span class="nx">post</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="nx">text</span><span class="p">;</span>
-                    <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span>
-                <span class="p">});</span>
-                <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+<span class="hll">                <span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class="hll">                <span class="nx">result</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span> <span class="nx">post</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">                    <span class="kd">let</span> <span class="nx">buff</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">post</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span> <span class="s1">&#39;base64&#39;</span><span class="p">);</span>
+</span><span class="hll">                    <span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">buff</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">);</span>
+</span><span class="hll">                    <span class="c1">//console.log(text);</span>
+</span><span class="hll">                    <span class="nx">post</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="nx">text</span><span class="p">;</span>
+</span><span class="hll">                    <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span>
+</span><span class="hll">                <span class="p">});</span>
+</span>                <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">});</span>
     <span class="p">},</span>
@@ -1366,7 +1381,7 @@ Dadurch kommen die Daten auch bereits als Array im Frontend an. Je nachdem, welc
 </ul>
 <p>Nach Ausführen der Anwendung sieht die IndexedDB nun (je nachdem, welche Daten Sie bereits in Ihrer Datenbank gespeichert haben) so aus:</p>
 <p><img alt="indexeddb" src="../files/67_indexdb.png" /></p>
-<p>Sie können sich auch <a href="./files/inserposts.sql">hier</a> eine Datei herunterladen, die <code>INSERT INTO posts</code>-SQL-Anweisungen für die angezeigten 5 Datensätze enthält (können Sie so in <code>phpmyadmin</code> als Datei importieren). </p>
+<p>Sie können sich auch <a href="../files/insertposts.sql">hier</a> eine Datei herunterladen, die <code>INSERT INTO posts</code>-SQL-Anweisungen für die angezeigten 5 Datensätze enthält (können Sie so in <code>phpmyadmin</code> als Datei importieren). </p>
 <p>Wir haben nun die IndexedDB des Browsers mit unseren Datensätzen befüllt. Nun überlegen wir uns, wie wir diese Datensätze aus der IndexedDB auslesen können, wenn wir sie dort gespeichert haben und dann gar nicht mehr an das Backend Anfragen schicken müssen. </p>
 <h4 id="datensatze-aus-der-indexeddb-auslesen">Datensätze aus der IndexedDB auslesen<a class="headerlink" href="#datensatze-aus-der-indexeddb-auslesen" title="Permanent link">&para;</a></h4>
 <p>Zunächst einmal stellen wir fest, dass ein geeigneter Ort, die Datensätze aus der IndexedDB auszulesen, die <code>feed.js</code> ist, da dort ja die Daten zum Erstellen der <code>Cards</code> verwendet werden. </p>
@@ -1995,8 +2010,7 @@ Dadurch kommen die Daten auch bereits als Array im Frontend an. Je nachdem, welc
 76
 77
 78
-79
-80</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+79</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="c1">// check if request is made by chrome extensions or web page</span>
     <span class="c1">// if request is made for web page url must contains http.</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
@@ -2007,20 +2021,19 @@ Dadurch kommen die Daten auch bereits als Array im Frontend an. Je nachdem, welc
             <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
                 <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
                     <span class="kd">const</span> <span class="nx">clonedResponse</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
-                    <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
-<span class="hll">                    <span class="nx">clearAllData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span>
-</span><span class="hll">                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span>                            <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
-                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="nx">clearAllData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span>
+<span class="hll">                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">                            <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+</span>                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
                                     <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span>
                                     <span class="p">{</span>
                                         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;write data&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
                                         <span class="nx">writeData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
                                     <span class="p">}</span>
                                 <span class="p">})</span>
-<span class="hll">                        <span class="p">});</span>
-</span>                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
-                <span class="p">})</span>
+                        <span class="p">});</span>
+<span class="hll">                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+</span>                <span class="p">})</span>
         <span class="p">)</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </code></pre></div>
@@ -2054,8 +2067,7 @@ Dadurch kommen die Daten auch bereits als Array im Frontend an. Je nachdem, welc
 76
 77
 78
-79
-80</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+79</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="c1">// check if request is made by chrome extensions or web page</span>
     <span class="c1">// if request is made for web page url must contains http.</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
@@ -2066,13 +2078,12 @@ Dadurch kommen die Daten auch bereits als Array im Frontend an. Je nachdem, welc
             <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
                 <span class="p">.</span><span class="nx">then</span> <span class="p">(</span> <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
                     <span class="kd">const</span> <span class="nx">clonedResponse</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
-                    <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
                     <span class="nx">clearAllData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span>
                         <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-<span class="hll">                            <span class="k">return</span> <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-</span><span class="hll">                        <span class="p">})</span>
-</span>                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                            <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span>
+                            <span class="k">return</span> <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="hll">                        <span class="p">})</span>
+</span><span class="hll">                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span>                            <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span>
                             <span class="p">{</span>
                                 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;write data&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
                                 <span class="nx">writeData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
@@ -2213,13 +2224,13 @@ Dadurch kommen die Daten auch bereits als Array im Frontend an. Je nachdem, welc
           </a>
         
         
-          <a href="../uebungen/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../backgroundsync/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Weiter
                 </span>
-                Übungen
+                Hintergrundsynchronisation
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
