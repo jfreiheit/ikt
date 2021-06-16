@@ -13,14 +13,14 @@
         <meta name="author" content="Jörn Freiheit">
       
       
-        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/einfuehrung/">
+        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/pushnotes/">
       
       <link rel="shortcut icon" href="../img/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
     
     
       
-        <title>Einführung - Progressive Web Apps</title>
+        <title>Push Notifications - Progressive Web Apps</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#einfuhrung" class="md-skip">
+        <a href="#push-notifications" class="md-skip">
           Zum Inhalt
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Einführung
+              Push Notifications
             
           </span>
         </div>
@@ -219,70 +219,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Einführung
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../einfuehrung/" class="md-nav__link">
         Einführung
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#webanwendungen-vs-native-apps" class="md-nav__link">
-    Webanwendungen vs. native Apps
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pwas-vs-spas" class="md-nav__link">
-    PWAs vs. SPAs
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lighthouse" class="md-nav__link">
-    Lighthouse
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pwa-checklist" class="md-nav__link">
-    PWA Checklist
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -428,11 +369,20 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../pushnotes/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Push Notifications
       </a>
+      
     </li>
   
 
@@ -500,42 +450,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#webanwendungen-vs-native-apps" class="md-nav__link">
-    Webanwendungen vs. native Apps
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pwas-vs-spas" class="md-nav__link">
-    PWAs vs. SPAs
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lighthouse" class="md-nav__link">
-    Lighthouse
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pwa-checklist" class="md-nav__link">
-    PWA Checklist
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -546,84 +460,17 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/einfuehrung.md" title="Seite editieren" class="md-content__button md-icon">
+                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/pushnotes.md" title="Seite editieren" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="einfuhrung">Einführung<a class="headerlink" href="#einfuhrung" title="Permanent link">&para;</a></h1>
-<p>In diesem Semester geht es um <strong>Progressive Web Apps (PWA)</strong>. PWA sind Funktionen, die wir Webanwendungen hinzufügen können, um sie in ihrer Funktionalität zu erweitern. Die so werweiterten Webanwendungen kommen mit solchen Funktionen nativen Apps immer näher, d.h. das <em>Look and Feel</em> gleicht sich mit PWAs nativen Apps an. Dazu gehören Funktionalitäten, wie z.B. </p>
-<ul>
-<li>die Möglichkeit, die Webanwendung auch offline zu verwenden,</li>
-<li>die Kamera zu nutzen, </li>
-<li>den eigenen Standort zu verwenden, </li>
-<li>Daten im Hintergrund zu synchronisieren. </li>
-</ul>
-<p>Das bedeutet aber nicht automatisch, dass wir ausschließlich auf moderne Browser angewiesen sind, die diese Funktionalitäten von PWAs unterstützen. Die Webanwendungen sollen auch weiterhin auf alten Webbrowsern laufen, dann jedoch eventuell ohne einige oder alle PWA-Funktionalitäten. </p>
-<p>Progressive Web Apps müssen </p>
-<ul>
-<li><strong>zuverlässig</strong> (<em>reliable</em>) sein, d.h. sie müssen schnelle Ladezeiten aufweisen und sogar (teilweise) offline funktionieren, </li>
-<li><strong>schnell</strong> sein, d.h. schnell auf Nutzerinteraktionen reagieren, </li>
-<li><strong>motivierend</strong> sein, die Webanwendung zu verwenden, d.h. einerseits intuitiv bedienbar und anderseits, z.B. über Push-Notifikationen, die Nutzerinnen animieren, die App zu nutzen.</li>
-</ul>
-<p>Die prinzipielle Idee einer Progressive Web App lässt sich vereinfacht durch die folgenden Abbildung veranschaulichen:</p>
-<p><img alt="pwa" src="../files/01_pwa.png" /></p>
-<p>Eine Progressive Web App ist eine Webanwendung, die sich wie eine native mobile App verhält. </p>
-<h2 id="webanwendungen-vs-native-apps">Webanwendungen vs. native Apps<a class="headerlink" href="#webanwendungen-vs-native-apps" title="Permanent link">&para;</a></h2>
-<p>Die meisten Nutzerinnen verwenden die meiste Zeit native Apps auf ihrem Smartphone. Nur zu einem geringen Prozentsatz werden Web-Anwendungen (also der Browser) auf dem Smartphone verwendet. Das spricht eigentlich eher dafür, dass wir uns mit der Entwicklung nativer Apps beschäftigen sollten, als mit der Entwicklung von (mobilen) Webanwendungen. Die vorrangige Verwendung nativer Apps hat mehrere Gründe:</p>
-<ul>
-<li><strong>Push-Notifikationen</strong>: Native Apps laufen im Hintergrund und die Nutzerinnen werden über Push-Notifikationen informiert, wenn etwas Neues passiert ist, z.B. neue Nachrichten , E-Mails, etc. Man muss also gar nicht aktiv die native App bedienen, um über Aktuelles informiert zu werden. </li>
-<li><strong>App-Icons auf dem Home-Bildschirm</strong>: ermöglichen einen schnellen, direkten Zugang zu den Apps. </li>
-<li><strong>Gerätefunktionen</strong>: wie z.B. Standortermittlung, Kameras und Mikrofine können leicht in native Apps eingebaut werden. Für Webanwendungen ist dies nur aufwändig möglich. </li>
-<li><strong>Offline-Funktionalitäten</strong>: viele native Apps können auch offline ganz oder teilweise verwendet werden, z.B. Spiele oder Musikapps, die heruntergeladene Musik abspielen. </li>
-</ul>
-<p>App-Icons auf dem Home-Bildschirm können wir auch für Links auf unsere Webanwendung erstellen und die anderen drei Argumente wollen wir ja genau mit Progressive Web Apps zunichte machen. Das heißt, mit Progressive Web Apps kommen die Vorteile nativer Apps im Vergleich zu Webanwendungen nicht mehr zum Tragen. </p>
-<p>Demgegenüber stahen zwei Gründe, warum Webanwendungen besser sind als native Apps:</p>
-<ul>
-<li>Native Apps müssen sowohl für iOS als auch für Android erstellt werden, um eine möglichst große Nutzerinnenzahl anzusprechen. Dazu müssen auch unterschiedliche programmiersprachen verwendet werden (Swift für iOS und Java/Kotlin für Android). Zwar versuchen Hybride Tools diesen Nachteil zu umgehen, aber es gelingt nicht wirklich. </li>
-<li>Es werden so gut wie nie neue native Apps auf Smartphones geladen. Umfragen ergeben, dass Nutzerinnen die allermeiste Zeit am Smartphone mit höchstens drei Apps verbringen. Alle weiteren Apps werden am Anfang der Nutzung installiert. Es kommen im Laufe eines "Smartphone-Lebens" kaum welche hinzu. Die durchschnittliche Anzahl neuhinzugefügter Apps im Monat liegt bei nahe 0. </li>
-</ul>
-<p>Die Verwendung von Webanwendungen ist deutlich einfacher. Man muss nichts installieren. Man googlet einfach und öffnet dann die Seite. Die Bandbreite aller Webanwendungen ist deutlich schneller erreichbar als eine große Anzahl an nativen Apps. Die Reichweite einer Webanwendung ist deutlich größer als die Reichweite einer nativen App. </p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th> Funktionalitäten</th>
-<th> Nutzerinnen-Reichweite</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>native App</td>
-<td>Zugriff auf Gerätefunktionalitäten</td>
-<td>nur sehr wenige Apps werden von sehr vielen Nutzerinnen die meiste Zeit verwendet</td>
-</tr>
-<tr>
-<td>herkömmliche Webanwendungen</td>
-<td>sehr eingeschränkter (gar kein) Zugriff auf Gerätefunktionalitäten</td>
-<td>hohe Reichweite, sehr einfacher Zugang</td>
-</tr>
-<tr>
-<td>progressive Webanwendungen</td>
-<td>Zugriff auf Gerätefunktionalitäten</td>
-<td>hohe Reichweite, sehr einfacher Zugang</td>
-</tr>
-</tbody>
-</table>
-<h2 id="pwas-vs-spas">PWAs vs. SPAs<a class="headerlink" href="#pwas-vs-spas" title="Permanent link">&para;</a></h2>
-<p>Wir haben noch immer nicht unsere erste Progressive Web App erstellt ;-(. Bevor wir das tun, diskutieren wie zunächst noch die Unterschiede zwischen einer <em>Progressive Web App</em> und einer <em>Single Page Application</em>, wie wir sie im WebTech-Kurs erstellt haben. </p>
-<p><em>Single Page Applications (SPAs)</em> sind Webanwendungen, die mit JavaScript erstellt werden, typischerweise mit einem JavaScript-Framewaork, wie <a href="https://angular.io/">Angular</a>, <a href="https://reactjs.org/">React</a> oder <a href="https://vuejs.org/">Vue.js</a>. In SPAs wird das DOM ständig neu gerendert, welches sich durch Nutzereingaben oder Lifecycle-Events ändert. Das Grundgerüst einer SPA besteht aus genau einer <code>HTML</code>-Seite (typischerweise <code>index.html</code>), in die verschiedene Komponenten eingebunden wird. Eine Single Page Application ist vornehmlich hoch <em>reaktiv</em> auf Nutzereingaben, im Sinne von schneller Reaktion. </p>
-<p><em>Progressive Web Applications (PWAs)</em> sind eine Sammlung verschiedener Technologien. Es ist völlig egal, ob diese Technologien in eine Single Page Application eingebunden werden oder in eine "herkömmliche" (Multi-Page-) Webanwendung. Die Idee einer PWA ist, dass sie hoch <em>reaktiv</em> im Sinne ständiger Verfügbarkeit ist. JavaScript spielt bei PWAs nicht die dominate Rolle, wie bei SPAs. Sie können eine oder mehrere <em>progressive</em> Funktionalitäten existierender Webanwendungen hinzufügen (service worker, caching, push notifivcations, ...) oder eine PWA von Grund auf neu implementieren. </p>
-<h2 id="lighthouse">Lighthouse<a class="headerlink" href="#lighthouse" title="Permanent link">&para;</a></h2>
-<p><a href="../tools/#lighthouse">Lighthouse</a> ist ein Plugin für die Developertools von Chrome, mit dessen Hilfe gemessen werden kann, wie <em>progressive</em> eine Webanwendung ist. Die folgende Abbildung zeigt den Einsatz von Lighthouse für die PWA <a href="https://2048game.com/">https://2048game.com/</a> - ein Spiel, das Sie wahrscheinlich kennen. </p>
-<p><img alt="lighthouse" src="../files/02_pwaexample.png" /></p>
-<p>Wechseln Sie in den Developertools auf die mobile Ansicht. Wählen Sie dann im Reiter <code>Lighthouse</code> die Analyse. Probieren Sie auch mal aus, die Anwendung im Offline-Modus zu verwenden. Wechseln Sie dazu in den Developertools auf den Reiter <code>Network</code> und dort in der Auswahlliste auf <code>Offline</code>. Selbst wenn Sie <code>Disable Cache</code> anklicken, werden Sie feststellen, dass sich das Spiel noch spielen lässt. Viel Spaß! ;-)</p>
-<h2 id="pwa-checklist">PWA Checklist<a class="headerlink" href="#pwa-checklist" title="Permanent link">&para;</a></h2>
-<p>Im Lighthouse-Plugin finden Sie auch einen Link zur <strong>PWA Checklist</strong>. Diese Checklist wird verwendet, um zu beurteilen, wie <em>progressive</em> eine Webanwendung ist. Eine gute Übersicht finden Sie auch <a href="https://web.dev/pwa-checklist/">hier</a>.</p>
-<div class="admonition success">
-<p class="admonition-title">Success</p>
-<p>Wir haben jetzt eine Idee davon, was <em>Progressive Web Apps</em> sind. Jetzt legen wir los und erstellen eigene PWAs!</p>
-</div>
+                <h1 id="push-notifications">Push Notifications<a class="headerlink" href="#push-notifications" title="Permanent link">&para;</a></h1>
+<p><em>Push Notifications</em> sind sinnvoll, um die Nutzerin einer App über Neuigkeiten zu informieren, sogar dann, wenn die Anwendung (und der Browser!) geschlossen ist (sind). Mit <em>Push Notifications</em> können Nutzerinnen wieder "zurück an die App geholt" werden, d.h. mithilfe von <em>Push Notifications</em> kann man dafür sorgen, dass Nutzerinnen die App wieder öffnen, um sich die Neuigkeiten genauer anzuschauen. Die Neuigkeiten können neue Tweets, E-Mails, Nachrichten, Anrufe usw. sein. </p>
+<p>Das Prinzip, das für die Push-Benachrichtungen umgesetzt wird, sieht auf den ersten Blick etwas kompliziert aus:</p>
+<p><img alt="push" src="../files/73_push.png" /></p>
+<p>Im Zentrum stehen zunächst die Webanwendung und der Service Worker. Die Webanwendung meldet sich bei den Push-Benachrichtigungen an und der Service Worker verwaltet diese. Jeder Browser hat eine eigenen "eingebauten" <em>Push Server</em>. Eine <em>Push-Anmeldung</em> (<em>Push Subscription</em>) erlaubt den Zugriff auf einen <em>Push-API-Endpunkt</em> auf den Push-Server. Die eigentliche <em>Push-Benachrichtigung</em> kommt jedoch vom eigenen Server. Er sendet die Push-Nachricht an den <em>In-Browser Push Server</em>, dieser löst damit ein <code>push</code>-Ereignis beim Service Worker aus und der Service Worker schickt die <em>Push-benachrichtigung</em> an die Webanwendung. </p>
+<p>Wir schauen uns alle diese Schritte im Detail an.</p>
                 
               
               
@@ -642,7 +489,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href=".." class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../backgroundsync/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -651,19 +498,19 @@
                 <span class="md-footer-nav__direction">
                   Zurück
                 </span>
-                Home
+                Hintergrundsynchronisation
               </div>
             </div>
           </a>
         
         
-          <a href="../grundgeruest/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../uebungen/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Weiter
                 </span>
-                Grundgerüst
+                Übungen
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

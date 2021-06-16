@@ -70,6 +70,7 @@ nav:
     - Frontend: frontend.md
     - IndexedDB: indexeddb.md
     - Hintergrundsynchronisation: backgroundsync.md
+    - Push Notifications: pushnotes.md
     - Übungen: uebungen.md
     - Werkzeuge: tools.md
     - Hilfen: hilfen.md

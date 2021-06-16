@@ -24,7 +24,7 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | 12. | 28.-02.07.2021 | Geolocation  | - | - | - |
 | 13. | 05.-09.07.2021 | automatisierte Service worker Verwaltung | - | - | - |
 | 14. | 12.-16.07.2021 | SPAs und PWAs mit Angular | - | - | - |
-|  |  |  |  | Abgabe 1.PZ 16.07.2021 | - |
+|  |  |  |  | Abgabe 1.PZ 21.07.2021 | - |
 |  |  |  |  | Abgabe 2.PZ 01.10.2021 | - |
 
 ### Organisatorisches 
@@ -108,3 +108,27 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 	- In der [Übung](./uebungen/#ubung-7-indexeddb) soll die Verwaltung der IndexedDB um eine weitere Funktion erweiteret werden. 
 	- Video zur Vorlesung am 09.06.2021
 		<iframe src="./files/08_indexeddb.mp4" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+
+
+### Semesteraufgabe
+
+Die als Semesteraufgabe zu entwickelnde Webanwendung sollte
+
+1. ein Frontend besitzen (muss nicht mit einem JavaScript-Framework erstellt werden),
+2. das Frontend sollte responsive sein,
+3. ein Backend (damit Daten auf dem Server verwaltet werden können), 
+4. eine Datenbank zur persistenten Speicherung von Daten (das kann auch SQLite oder ähnlich In-Apps-Datenbanken sein),
+5. installierbar sein,
+6. offline nutzbar sein,
+7. die IndexedDB verwenden,
+8. Hintergrundsynchronisation verwenden,
+9. die Gelocation API verwenden,
+10. die Kamera oder eine andere technische Schnittstelle (z.B. Sensoren, Mikrofon) verwenden.
+
+Sollten wir es noch schaffen, kommen auch Push-Nachrichten in Betracht. Von den Punkten 5.-10. sollten 4 implementiert sein. Die soll präsentiert werden und in einem kurzen Gespräch (15-20min) wird die Implementierung besprochen. 
+
+Diese Liste wird noch um Hinweise zur Bewertung angepasst. 
+
+---
+
