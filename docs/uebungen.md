@@ -612,3 +612,9 @@
 
 	**Tipps**: Mit der Methode [getAllKeys()](https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/getAllKeys) ermitteln Sie z.B. alle Schlüssel (`id`) der Datensätze und mit der Methode [get(key)](https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/get) erhalten Sie den zum Schlüssel zugehörigen Wert.
 
+
+##### keine weiteren Übungen
+
+Implementieren Sie lieber schon an der Semesteraufgabe. Die Übungszeit am Donnerstag um 12:15 Uhr bleibt aber bestehen. Dort können wir dann eventuell auftretende Probleme diskutieren.  
+
+1. Ich würde mit der Erstellung der Datenbank und des Backends beginnen. 

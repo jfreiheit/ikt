@@ -107,7 +107,18 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 	- Diese Woche machen wir uns mit der [IndexedDB](./indexeddb/#indexeddb) vertraut und speichern dynamische Daten (die `Posts`-Datensaätze) in die IndexedDB, um diese auszulesen, falls die Anwendung offline ist und somit das Backend nicht verfügbar.   
 	- In der [Übung](./uebungen/#ubung-7-indexeddb) soll die Verwaltung der IndexedDB um eine weitere Funktion erweiteret werden. 
 	- Video zur Vorlesung am 09.06.2021
-		<iframe src="./files/08_indexeddb.mp4" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=531c0ff5c9765951731a6e27fe41a11e&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no" aria-label="media embed code" style=""></iframe>
+
+
+
+##### Woche 9 (Hintergrundsynchronisation)
+
+??? question "Woche 9 - Hintergrundsynchronisation"
+
+	- Diese Woche machen wir uns mit der [Hintergrundsynchronisation](./backgroundsync/#hintergrundsynchronisation) vertraut. Diese verwenden wir, um Daten, die wir in der Webanwendung erstellt oder eingegeben haben, an das Backend zu senden. Die zu sendenden Daten werden zunächst in der IndexedDB gesichert und verbleiben dort so lange, bis die Übersendung an das Backend erfolgreich war.    
+	- Eine neue Übung gibt es nicht (mehr), sondern Sie können schonmal mit der Semesteraufgabe beginnen. 
+	- Video zur Vorlesung am 16.06.2021
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=aafa75ddca04b5a4e5fda406772777fe&width=720&height=389&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="389" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no" aria-label="media embed code" style=""></iframe>
 
 
 
