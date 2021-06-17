@@ -613,6 +613,183 @@
 	**Tipps**: Mit der Methode [getAllKeys()](https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/getAllKeys) ermitteln Sie z.B. alle Schlüssel (`id`) der Datensätze und mit der Methode [get(key)](https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/get) erhalten Sie den zum Schlüssel zugehörigen Wert.
 
 
+
+??? question "eine mögliche Lösung für Übung 7"
+
+	1. Die Idee ist, dass wir die Datensätze suchen, deren Titel das gesuchte Wort enthält und den `key` von diesen Datensätzen verwenden, um die `deleteOneData(store, id)` aufzurufen. In der `db.js` fügen wir also die neue Funktion `deleteByTitle(store, title)` hinzu, wobei `title` das Wort enthält, nachdem wir im `title` der Datensätze suchen:
+		```js linenums="1"
+		function deleteByTitle(st, title) {
+		    return db
+		        .then( dbPosts => {
+		            let tx = dbPosts.transaction(st, 'readonly');
+		            let store = tx.objectStore(st);
+		            let myIndex = store.index('id');
+		            myIndex.getAllKeys()
+		                .then( allKeys => {
+		                    for(let key of allKeys) {
+		                        myIndex.get(key)
+		                            .then( value => {
+		                                console.log('delete title', value.title);
+		                                if(value.title.includes(title)) {
+		                                    console.log('treffer ', value.title);
+		                                    console.log(' id ', value.id);
+		                                    console.log(' key', key);
+		                                    deleteOneData(st, key);
+		                                }
+		                            } )
+		                    }
+		                })
+		        })
+		}
+		```
+
+		- In Zeile `7` rufen wir die Funktion `getAllKeys()` auf. Diese Funktion gibt ein Promise zurück. In diesem Promise können wir nun durch dieses Array aller Schlüssel durchlaufen. 
+		- In Zeile `10` lassen wir uns den Wert für den jeweiligen Schlüssel zurückgeben (in einer Promise). In diesem Wert greifen wir auf die Eigenschaft `title` zu. 
+		- In Zeile `14` überprüfen wir, ob das übergebene Wort in dem Titel enthalten ist. Wenn ja, dann löschen wir diesen Datensatz mithilfe von `deleteOneData(st, key)`, wobei wir den `key` als die `id` übergeben, die diese Funktion erwartet. 
+
+	2. Ausprobieren könnte man die neue Funktion in dem Service Worker nach dem Schreiben aller Daten in die IndexedDB (ich schicke mal den kompletten Stand der `sw.js` mit, weil das in der Übung gewünscht wurde):
+		```js linenums="1" hl_lines="77"
+		importScripts('/src/js/idb.js');
+		importScripts('/src/js/db.js');
+
+		const VERSION = '10';
+		const CURRENT_STATIC_CACHE = 'static-v' + VERSION;
+		const CURRENT_DYNAMIC_CACHE = 'dynamic-v' + VERSION;
+		const STATIC_FILES = [
+		    '/',
+		    '/index.html',
+		    '/src/js/app.js',
+		    '/src/js/feed.js',
+		    '/src/js/material.min.js',
+		    '/src/js/idb.js',
+		    '/src/css/app.css',
+		    '/src/css/feed.css',
+		    '/src/images/htw.jpg',
+		    'https://fonts.googleapis.com/css?family=Roboto:400,700',
+		    'https://fonts.googleapis.com/icon?family=Material+Icons',
+		    'https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css'
+		];
+		self.addEventListener('install', event => {
+		    console.log('service worker --> installing ...', event);
+		    event.waitUntil(
+		        caches.open(CURRENT_STATIC_CACHE)
+		        .then(cache => {
+		            console.log('Service-Worker-Cache erzeugt und offen');
+		            cache.addAll(STATIC_FILES);
+		        })
+		    );
+		});
+
+		self.addEventListener('activate', event => {
+		    console.log('service worker --> activating ...', event);
+		    event.waitUntil(
+		        caches.keys()
+		        .then(keyList => {
+		            return Promise.all(keyList.map(key => {
+		                if (key !== CURRENT_STATIC_CACHE && key !== CURRENT_DYNAMIC_CACHE) {
+		                    console.log('service worker --> old cache removed :', key);
+		                    return caches.delete(key);
+		                }
+		            }))
+		        })
+		    );
+		    return self.clients.claim();
+		})
+
+		function isInArray(string, array) {
+		    for (let value of array) {
+		        if (value === string) {
+		            return true;
+		        }
+		    }
+		    return false;
+		}
+		self.addEventListener('fetch', event => {
+		    // check if request is made by chrome extensions or web page
+		    // if request is made for web page url must contains http.
+		    if (!(event.request.url.indexOf('http') === 0)) return; // skip the request. if request is not made with http protocol
+
+		    const url = 'http://localhost:3000/posts';
+		    if (event.request.url.indexOf(url) >= 0) {
+		        event.respondWith(
+		            fetch(event.request)
+		            .then(res => {
+		                const clonedResponse = res.clone();
+		                clearAllData('posts')
+		                    .then(() => {
+		                        return clonedResponse.json();
+		                    })
+		                    .then(data => {
+		                        for (let key in data) {
+		                            console.log('write data', data[key]);
+		                            writeData('posts', data[key]);
+		                            // if (data[key].id === 5) deleteOneData('posts', 5);
+		                        }
+		                        deleteByTitle('posts', 'post');
+		                    });
+		                return res;
+		            })
+		        )
+		    } else {
+		        event.respondWith(
+		            caches.match(event.request)
+		            .then(response => {
+		                if (response) {
+		                    return response;
+		                } else {
+		                    return fetch(event.request)
+		                        .then(res => { // nicht erneut response nehmen, haben wir schon
+		                            return caches.open(CURRENT_DYNAMIC_CACHE) // neuer, weiterer Cache namens dynamic
+		                                .then(cache => {
+		                                    cache.put(event.request.url, res.clone());
+		                                    return res;
+		                                })
+		                        });
+		                }
+		            })
+		        )
+		    }
+		})
+
+		self.addEventListener('sync', event => {
+		    console.log('service worker --> background syncing ...', event);
+		    if(event.tag === 'sync-new-post') {
+		        console.log('service worker --> syncing new posts ...');
+		        event.waitUntil(
+		            readAllData('sync-posts')
+		                .then( dataArray => {
+		                    for(let data of dataArray) {
+		                        console.log('data from IndexedDB', data);
+		                        fetch('http://localhost:3000/posts', {
+		                            method: 'POST',
+		                            headers: {
+		                                'Content-Type': 'application/json',
+		                                'Accept': 'application/json',
+		                            },
+		                            body: JSON.stringify({
+		                                id: null,
+		                                title: data.title,
+		                                location: data.location,
+		                                image: '',
+		                            })
+		                        })
+		                        .then( response => {
+		                            console.log('Data sent to backend ...', response);
+		                            if(response.ok) {
+		                                deleteOneData('sync-posts', data.id)
+		                            }
+		                        })
+		                        .catch( err => {
+		                            console.log('Error while sending data to backend ...', err);
+		                        })
+		                    }
+		                })
+		        );
+		    }
+		})
+		```
+
+
 ##### keine weiteren Übungen
 
 Implementieren Sie lieber schon an der Semesteraufgabe. Die Übungszeit am Donnerstag um 12:15 Uhr bleibt aber bestehen. Dort können wir dann eventuell auftretende Probleme diskutieren.  

@@ -379,9 +379,65 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Push Notifications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Push Notifications
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#anzeigen-von-benachrichtigungen" class="md-nav__link">
+    Anzeigen von Benachrichtigungen
+  </a>
+  
+    <nav class="md-nav" aria-label="Anzeigen von Benachrichtigungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benachrichtigungen-einschalten" class="md-nav__link">
+    Benachrichtigungen einschalten
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benachrichtigungen-anzeigen" class="md-nav__link">
+    Benachrichtigungen anzeigen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benachrichtigungen-im-service-worker-erstellen" class="md-nav__link">
+    Benachrichtigungen im Service Worker erstellen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -450,6 +506,48 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#anzeigen-von-benachrichtigungen" class="md-nav__link">
+    Anzeigen von Benachrichtigungen
+  </a>
+  
+    <nav class="md-nav" aria-label="Anzeigen von Benachrichtigungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benachrichtigungen-einschalten" class="md-nav__link">
+    Benachrichtigungen einschalten
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benachrichtigungen-anzeigen" class="md-nav__link">
+    Benachrichtigungen anzeigen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benachrichtigungen-im-service-worker-erstellen" class="md-nav__link">
+    Benachrichtigungen im Service Worker erstellen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -469,8 +567,239 @@
 <p><em>Push Notifications</em> sind sinnvoll, um die Nutzerin einer App über Neuigkeiten zu informieren, sogar dann, wenn die Anwendung (und der Browser!) geschlossen ist (sind). Mit <em>Push Notifications</em> können Nutzerinnen wieder "zurück an die App geholt" werden, d.h. mithilfe von <em>Push Notifications</em> kann man dafür sorgen, dass Nutzerinnen die App wieder öffnen, um sich die Neuigkeiten genauer anzuschauen. Die Neuigkeiten können neue Tweets, E-Mails, Nachrichten, Anrufe usw. sein. </p>
 <p>Das Prinzip, das für die Push-Benachrichtungen umgesetzt wird, sieht auf den ersten Blick etwas kompliziert aus:</p>
 <p><img alt="push" src="../files/73_push.png" /></p>
-<p>Im Zentrum stehen zunächst die Webanwendung und der Service Worker. Die Webanwendung meldet sich bei den Push-Benachrichtigungen an und der Service Worker verwaltet diese. Jeder Browser hat eine eigenen "eingebauten" <em>Push Server</em>. Eine <em>Push-Anmeldung</em> (<em>Push Subscription</em>) erlaubt den Zugriff auf einen <em>Push-API-Endpunkt</em> auf den Push-Server. Die eigentliche <em>Push-Benachrichtigung</em> kommt jedoch vom eigenen Server. Er sendet die Push-Nachricht an den <em>In-Browser Push Server</em>, dieser löst damit ein <code>push</code>-Ereignis beim Service Worker aus und der Service Worker schickt die <em>Push-benachrichtigung</em> an die Webanwendung. </p>
-<p>Wir schauen uns alle diese Schritte im Detail an.</p>
+<p>Im Zentrum stehen zunächst die Webanwendung und der Service Worker. Die Webanwendung meldet sich bei den Push-Benachrichtigungen an und der Service Worker verwaltet diese. Jeder Browser hat eine eigenen "eingebauten" <em>Push Server</em>. Eine <em>Push-Anmeldung</em> (<em>Push Subscription</em>) erlaubt den Zugriff auf einen <em>Push-API-Endpunkt</em> auf den Push-Server. Die eigentliche <em>Push-Benachrichtigung</em> kommt jedoch vom eigenen Server. Er sendet die Push-Nachricht an den <em>In-Browser Push Server</em>, dieser löst damit ein <code>push</code>-Ereignis beim Service Worker aus und der Service Worker schickt die <em>Push-Benachrichtigung</em> an die Webanwendung. </p>
+<p>Wir schauen uns alle diese Schritte im Detail an. Ausgangspunkt ist das <a href="../files/IKT-PWA-06.zip">Projekt in diesem Stand</a>.</p>
+<h2 id="anzeigen-von-benachrichtigungen">Anzeigen von Benachrichtigungen<a class="headerlink" href="#anzeigen-von-benachrichtigungen" title="Permanent link">&para;</a></h2>
+<p>Wir beginnen mit dem Anzeigen (der Darstellung) von Push-Benachrichtigungen in einer Webanwendung. Dieser Abschnitt hat <strong>noch nichts</strong> mit dem <code>push</code>-Ereignis zu tun! Wir benötigen zum Anzeigen nicht mal einen Service Worker. Es geht aber auch über den Service Worker - und das wird später auch bei der Verwendung der <em>Push-API</em> notwendig. Die hier verwendete <a href="https://developer.mozilla.org/en-US/docs/Web/API/notification">Notification-API</a> wird von fast allen Browsern unterstützt. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API">Hier</a> ist auch eine gute Übersicht darüber, wie diese <em>Notification-API</em> verwendet wird. </p>
+<h3 id="benachrichtigungen-einschalten">Benachrichtigungen einschalten<a class="headerlink" href="#benachrichtigungen-einschalten" title="Permanent link">&para;</a></h3>
+<p>Bevor wir das Anzeigen von <em>(Push-)Benachrichtigungen</em> betrachten, müssen wir diese zuerst erlauben. In unserer Anwendung gibt es dazu den Button <code>BENACHRICHTIGUNGEN EIN</code>. </p>
+<p><img alt="push" src="../files/74_push.png" /></p>
+<p>In der <code>index.html</code> ist dieser Button zwei Mal definiert, einmal für einen schmalen Viewport und einmal für einen breiten. Für beide Varianten sieht die Implementierung so aus: </p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;drawer-option&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;enable-notifications mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent&quot;</span><span class="p">&gt;</span>
+            Benachrichtigungen Ein
+        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Für einen schmalen Viewport ist der Button dann unter dem Hamburger Menü in der linken oberen Ecke erreichbar. Beiden Buttons ist die CSS-Klasse <code>enable-notifications</code> zugewiesen. Wir sorgen zuerst dafür, dass dieser Button nur angezeigt wird, wenn der Browser die <em>Notification-API</em> unterstützt. Wenn nicht, dann wäre der Button funktionslos und wir bräuchten ihn nicht. Wir schalten ihn deshalb in der <code>app.css</code> zunächst im Standartwert aus:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">/src/css/app.css</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">text-center</span> <span class="p">{</span>
+  <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">drawer-option</span> <span class="p">{</span>
+  <span class="k">padding</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="hll"><span class="p">.</span><span class="nc">enable-notifications</span> <span class="p">{</span>
+</span><span class="hll">  <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+</span><span class="hll"><span class="p">}</span>
+</span></code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>In der <code>app.js</code> prüfen wir, ob der Browser die <em>Notification-API</em> unterstützt und schalten für diesen Fall die Buttons wieder ein. </p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">/src/js/app.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll"><span class="kd">let</span> <span class="nx">enableNotificationsButtons</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;.enable-notifications&#39;</span><span class="p">);</span>
+</span>
+<span class="k">if</span> <span class="p">(</span><span class="s1">&#39;serviceWorker&#39;</span> <span class="k">in</span> <span class="nx">navigator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span>
+        <span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;/sw.js&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker registriert&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(</span>
+            <span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+        <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="hll"><span class="kd">function</span> <span class="nx">askForNotificationPermission</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="hll">    <span class="nx">Notification</span><span class="p">.</span><span class="nx">requestPermission</span><span class="p">(</span> <span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class="hll">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;User choice&#39;</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+</span><span class="hll">        <span class="k">if</span><span class="p">(</span><span class="nx">result</span> <span class="o">!==</span> <span class="s1">&#39;granted&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;No notification permission granted&#39;</span><span class="p">);</span>
+</span><span class="hll">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class="hll">            <span class="c1">// notifications granted</span>
+</span><span class="hll">        <span class="p">}</span>
+</span><span class="hll">    <span class="p">});</span>
+</span><span class="hll"><span class="p">}</span>
+</span>
+<span class="hll"><span class="k">if</span><span class="p">(</span><span class="s1">&#39;Notification&#39;</span> <span class="k">in</span> <span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">button</span> <span class="k">of</span> <span class="nx">enableNotificationsButtons</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">        <span class="nx">button</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;inline-block&#39;</span><span class="p">;</span>
+</span><span class="hll">        <span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">askForNotificationPermission</span><span class="p">);</span>
+</span><span class="hll">    <span class="p">}</span>
+</span><span class="hll"><span class="p">}</span>
+</span></code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<ul>
+<li>In Zeile <code>1</code> erstellen wir uns eine Variable <code>enableNotificationsButtons</code>, die auf ein Array aller Buttons mit der CSS-Klasse <code>enable-notifications</code> zeigt. </li>
+<li>In Zeile <code>25</code> prüfen wir nun, ob der Browser die <code>Notification</code>-API unterstützt. Wenn ja, dann schalten wir alle Buttons aus dem <code>enableNotificationsButtons</code>-Array wieder auf sichtbar (von <code>display: none</code> auf <code>display: inline-block</code>) und wir melden jeden dieser Buttons an die Ereignisbehandlung des <code>click</code>-Ereignisses an (Zeile <code>28</code>). </li>
+<li>Die Behandlung des <code>click</code>-Ereignisses erfolgt in der Methode <code>askForNotificationPermission()</code>, die in den Zeilen <code>14-23</code> definiert ist. Da diese Methode nur dann aufgerufen wird, wenn der Browser die <code>Notification</code>-API unterstützt, kann diese API darin verwendet werden. </li>
+<li>Mit der Funktion <a href="https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission">requestPermission()</a> wird die Nutzerin gefragt, ob sie Benachrichtigungen zulassen möchte. Diese Methode gibt ein Promise zurück, dessen <code>result</code> die Werte <code>granted</code>, <code>denied</code> oder <code>default</code> haben kann. Werden Benachrichtigungen nicht erlaubt (Zeile <code>17</code>), können wir nichts weiter tun. Die Nutzerin wird dann auch nicht erneut gefragt. Die Benachrichtigungen bleiben für die Webanwendung ausgeschaltet (Zeile <code>18</code>). </li>
+</ul>
+<p>Wenn wir die Anwendung nun ausführen (Reload nach <code>Application --&gt; Storage --&gt; Clear Storage</code> oder die Versionsnummern der Caches im Service Worker ändern), dann erhalten wir nach dem Klicken auf den <code>BENACHRICHTIGUNGEN EIN</code>-Button folgende Abfrage:</p>
+<p><img alt="push" src="../files/75_push.png" /></p>
+<p>Wenn wir auf <code>Zulassen</code> klicken, dann erscheint in der Konsole <code>User Chaice granted</code> (Zeile <code>16</code>). Beachten Sie, dass Sie nicht erneut gefragt werden, ob Benachrichtungen zugelassen werden sollen oder nicht. Erneutes Klicken auf den Button bewirkt (selbst nach einem Reload der Anwendung) keine erneute Abfrage. Deshalb wäre es eigentlich auch sinnvoll, den Button wieder zu verstecken, d.h. auf <code>display: none</code> zu setzen. </p>
+<h3 id="benachrichtigungen-anzeigen">Benachrichtigungen anzeigen<a class="headerlink" href="#benachrichtigungen-anzeigen" title="Permanent link">&para;</a></h3>
+<p>Jetzt erstellen wir unsere erste Benachrichtigung mithilfe der <code>Notification</code>-API. Die einfachtse Form der <code>Notification</code> wird durch die Verwendung des parametrisierten Konstruktors von <code>Notification</code> (<code>new Notification('Nachricht')</code>) erstellt. Wir fügen die <code>app.js</code> eine solche einfache Benachrichtigung für den Fall, dass Benachrichtigungen erlaubt werden, ein:</p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">/src/js/app.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">enableNotificationsButtons</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;.enable-notifications&#39;</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="s1">&#39;serviceWorker&#39;</span> <span class="k">in</span> <span class="nx">navigator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span>
+        <span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;/sw.js&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker registriert&#39;</span><span class="p">)</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(</span>
+            <span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+        <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="hll"><span class="kd">function</span> <span class="nx">displayConfirmNotification</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="hll">    <span class="k">new</span> <span class="nx">Notification</span><span class="p">(</span><span class="s1">&#39;Successfully subscribed!&#39;</span><span class="p">);</span>
+</span><span class="hll"><span class="p">}</span>
+</span>
+<span class="kd">function</span> <span class="nx">askForNotificationPermission</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Notification</span><span class="p">.</span><span class="nx">requestPermission</span><span class="p">(</span> <span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;User choice&#39;</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">result</span> <span class="o">!==</span> <span class="s1">&#39;granted&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;No notification permission granted&#39;</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="hll">            <span class="nx">displayConfirmNotification</span><span class="p">();</span>
+</span>        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="s1">&#39;Notification&#39;</span> <span class="k">in</span> <span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">button</span> <span class="k">of</span> <span class="nx">enableNotificationsButtons</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">button</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;inline-block&#39;</span><span class="p">;</span>
+        <span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">askForNotificationPermission</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Wenn wir die Anwendung nun erneut ausführen und auf den Button klicken, dann werden wir zwar nicht erneut gefragt, ob wir Benachrichtigungen zulassen oder blockieren wollen, aber da wir Benachrichtungen bereits zugelassen haben, erscheint nun die folgende Benachrichtigung:</p>
+<p><img alt="push" src="../files/76_push.png" /></p>
+<p>Der einfache Aufruf des <code>Notification</code>-Konstruktors mit einer einfachen Nachricht (Zeile <code>15</code>) erzeugt auch die einfachste Form der Benachrichtigung. Dem Konstruktor lassen sich aber als zweiten Parameter noch JavaScript-Objekt für <code>options</code> übergeben. Darin kann ein weiterer Text (<code>body</code>) definiert werden und z.B. auch ein eigenes <code>icon</code>. Wir betrachten das später noch etwas genauer, erstmal nur eine weitere Nachricht: </p>
+<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">/src/js/app.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">displayConfirmNotification</span><span class="p">()</span> <span class="p">{</span>
+<span class="hll">    <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">body</span><span class="o">:</span> <span class="s1">&#39;You successfully subscribed to our Notification service!&#39;</span><span class="p">};</span>
+</span><span class="hll">    <span class="k">new</span> <span class="nx">Notification</span><span class="p">(</span><span class="s1">&#39;Successfully subscribed!&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</span><span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>ergibt dann die Benachrichtigung:</p>
+<p><img alt="push" src="../files/77_push.png" /></p>
+<h3 id="benachrichtigungen-im-service-worker-erstellen">Benachrichtigungen im Service Worker erstellen<a class="headerlink" href="#benachrichtigungen-im-service-worker-erstellen" title="Permanent link">&para;</a></h3>
+<p>Im jetzigen Stand werden die Benachrichtungen aus der Webanwendung heraus erstellt. Das ist auch völlig ok. Die <code>Notification</code>-API lässt sich sowohl in der Webanwendung verwenden, als auch im Service Worker. Da später aber die <em>Push-Benachrichtigungen</em> vom Service Worker verwaltet werden, wechseln wir jetzt auch für die einfachen Benachrichtigungen zum Service Worker, d.h. wir lassen die Benachrichtigungen nun nicht mehr durch die Webanwendung erstellen, sondern durch den Service Worker. Dazu passen wir unsere <code>app.js</code> wie folgt an:</p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">/src/js/app.js</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">displayConfirmNotification</span><span class="p">()</span> <span class="p">{</span>
+<span class="hll">    <span class="k">if</span><span class="p">(</span><span class="s1">&#39;serviceWorker&#39;</span> <span class="k">in</span> <span class="nx">navigator</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="hll">        <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">body</span><span class="o">:</span> <span class="s1">&#39;You successfully subscribed to our Notification service!&#39;</span><span class="p">};</span>
+</span>
+        <span class="nx">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span><span class="p">.</span><span class="nx">ready</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">sw</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="nx">sw</span><span class="p">.</span><span class="nx">showNotification</span><span class="p">(</span><span class="s1">&#39;Successfully subscribed (from SW)!&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+            <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Der Service Worker besitzt eine eigene Funktion <code>showNotification()</code>, die intern ein <code>Notification</code>-Objekt erzeugt und der die gleiche Parameterliste übergeben werden kann, wie dem <code>Notification</code>-Konstruktor. </p>
                 
               
               

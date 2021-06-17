@@ -1505,6 +1505,346 @@ Package                      Version
 </ol>
 <p><strong>Tipps</strong>: Mit der Methode <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/getAllKeys">getAllKeys()</a> ermitteln Sie z.B. alle Schlüssel (<code>id</code>) der Datensätze und mit der Methode <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/get">get(key)</a> erhalten Sie den zum Schlüssel zugehörigen Wert.</p>
 </details>
+<details class="question"><summary>eine mögliche Lösung für Übung 7</summary><ol>
+<li>
+<p>Die Idee ist, dass wir die Datensätze suchen, deren Titel das gesuchte Wort enthält und den <code>key</code> von diesen Datensätzen verwenden, um die <code>deleteOneData(store, id)</code> aufzurufen. In der <code>db.js</code> fügen wir also die neue Funktion <code>deleteByTitle(store, title)</code> hinzu, wobei <code>title</code> das Wort enthält, nachdem wir im <code>title</code> der Datensätze suchen:
+    <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">deleteByTitle</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="nx">title</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">db</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dbPosts</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">tx</span> <span class="o">=</span> <span class="nx">dbPosts</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="s1">&#39;readonly&#39;</span><span class="p">);</span>
+            <span class="kd">let</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">objectStore</span><span class="p">(</span><span class="nx">st</span><span class="p">);</span>
+            <span class="kd">let</span> <span class="nx">myIndex</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">index</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+            <span class="nx">myIndex</span><span class="p">.</span><span class="nx">getAllKeys</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">allKeys</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">of</span> <span class="nx">allKeys</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">myIndex</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+                            <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">value</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;delete title&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
+                                <span class="k">if</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">title</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">title</span><span class="p">))</span> <span class="p">{</span>
+                                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;treffer &#39;</span><span class="p">,</span> <span class="nx">value</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
+                                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39; id &#39;</span><span class="p">,</span> <span class="nx">value</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+                                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39; key&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+                                    <span class="nx">deleteOneData</span><span class="p">(</span><span class="nx">st</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+                                <span class="p">}</span>
+                            <span class="p">}</span> <span class="p">)</span>
+                    <span class="p">}</span>
+                <span class="p">})</span>
+        <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table></p>
+<ul>
+<li>In Zeile <code>7</code> rufen wir die Funktion <code>getAllKeys()</code> auf. Diese Funktion gibt ein Promise zurück. In diesem Promise können wir nun durch dieses Array aller Schlüssel durchlaufen. <ul>
+<li>In Zeile <code>10</code> lassen wir uns den Wert für den jeweiligen Schlüssel zurückgeben (in einer Promise). In diesem Wert greifen wir auf die Eigenschaft <code>title</code> zu. </li>
+<li>In Zeile <code>14</code> überprüfen wir, ob das übergebene Wort in dem Titel enthalten ist. Wenn ja, dann löschen wir diesen Datensatz mithilfe von <code>deleteOneData(st, key)</code>, wobei wir den <code>key</code> als die <code>id</code> übergeben, die diese Funktion erwartet. </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Ausprobieren könnte man die neue Funktion in dem Service Worker nach dem Schreiben aller Daten in die IndexedDB (ich schicke mal den kompletten Stand der <code>sw.js</code> mit, weil das in der Übung gewünscht wurde):
+    <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">importScripts</span><span class="p">(</span><span class="s1">&#39;/src/js/idb.js&#39;</span><span class="p">);</span>
+<span class="nx">importScripts</span><span class="p">(</span><span class="s1">&#39;/src/js/db.js&#39;</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">VERSION</span> <span class="o">=</span> <span class="s1">&#39;10&#39;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">CURRENT_STATIC_CACHE</span> <span class="o">=</span> <span class="s1">&#39;static-v&#39;</span> <span class="o">+</span> <span class="nx">VERSION</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">CURRENT_DYNAMIC_CACHE</span> <span class="o">=</span> <span class="s1">&#39;dynamic-v&#39;</span> <span class="o">+</span> <span class="nx">VERSION</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">STATIC_FILES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/src/js/app.js&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/src/js/feed.js&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/src/js/material.min.js&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/src/js/idb.js&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/src/css/app.css&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/src/css/feed.css&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/src/images/htw.jpg&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https://fonts.googleapis.com/css?family=Roboto:400,700&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https://fonts.googleapis.com/icon?family=Material+Icons&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css&#39;</span>
+<span class="p">];</span>
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; installing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CURRENT_STATIC_CACHE</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Service-Worker-Cache erzeugt und offen&#39;</span><span class="p">);</span>
+            <span class="nx">cache</span><span class="p">.</span><span class="nx">addAll</span><span class="p">(</span><span class="nx">STATIC_FILES</span><span class="p">);</span>
+        <span class="p">})</span>
+    <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;activate&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; activating ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+        <span class="nx">caches</span><span class="p">.</span><span class="nx">keys</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">keyList</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">keyList</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">key</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">!==</span> <span class="nx">CURRENT_STATIC_CACHE</span> <span class="o">&amp;&amp;</span> <span class="nx">key</span> <span class="o">!==</span> <span class="nx">CURRENT_DYNAMIC_CACHE</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; old cache removed :&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+                    <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}))</span>
+        <span class="p">})</span>
+    <span class="p">);</span>
+    <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">clients</span><span class="p">.</span><span class="nx">claim</span><span class="p">();</span>
+<span class="p">})</span>
+
+<span class="kd">function</span> <span class="nx">isInArray</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">value</span> <span class="k">of</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">===</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// check if request is made by chrome extensions or web page</span>
+    <span class="c1">// if request is made for web page url must contains http.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="mf">0</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// skip the request. if request is not made with http protocol</span>
+
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="kd">const</span> <span class="nx">clonedResponse</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+                <span class="nx">clearAllData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                        <span class="k">return</span> <span class="nx">clonedResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+                    <span class="p">})</span>
+                    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;write data&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+                            <span class="nx">writeData</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+                            <span class="c1">// if (data[key].id === 5) deleteOneData(&#39;posts&#39;, 5);</span>
+                        <span class="p">}</span>
+<span class="hll">                        <span class="nx">deleteByTitle</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;post&#39;</span><span class="p">);</span>
+</span>                    <span class="p">});</span>
+                <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+            <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+            <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="c1">// nicht erneut response nehmen, haben wir schon</span>
+                            <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CURRENT_DYNAMIC_CACHE</span><span class="p">)</span> <span class="c1">// neuer, weiterer Cache namens dynamic</span>
+                                <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">cache</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                                    <span class="nx">cache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">clone</span><span class="p">());</span>
+                                    <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+                                <span class="p">})</span>
+                        <span class="p">});</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;sync&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; background syncing ...&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">tag</span> <span class="o">===</span> <span class="s1">&#39;sync-new-post&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;service worker --&gt; syncing new posts ...&#39;</span><span class="p">);</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">waitUntil</span><span class="p">(</span>
+            <span class="nx">readAllData</span><span class="p">(</span><span class="s1">&#39;sync-posts&#39;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">dataArray</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">data</span> <span class="k">of</span> <span class="nx">dataArray</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;data from IndexedDB&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+                        <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/posts&#39;</span><span class="p">,</span> <span class="p">{</span>
+                            <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+                            <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+                                <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;Accept&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+                            <span class="p">},</span>
+                            <span class="nx">body</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+                                <span class="nx">id</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+                                <span class="nx">title</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+                                <span class="nx">location</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">location</span><span class="p">,</span>
+                                <span class="nx">image</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                            <span class="p">})</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data sent to backend ...&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+                            <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">deleteOneData</span><span class="p">(</span><span class="s1">&#39;sync-posts&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+                            <span class="p">}</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="k">catch</span><span class="p">(</span> <span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Error while sending data to backend ...&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+                        <span class="p">})</span>
+                    <span class="p">}</span>
+                <span class="p">})</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+</td></tr></table></p>
+</li>
+</ol>
+</details>
 <h5 id="keine-weiteren-ubungen">keine weiteren Übungen<a class="headerlink" href="#keine-weiteren-ubungen" title="Permanent link">&para;</a></h5>
 <p>Implementieren Sie lieber schon an der Semesteraufgabe. Die Übungszeit am Donnerstag um 12:15 Uhr bleibt aber bestehen. Dort können wir dann eventuell auftretende Probleme diskutieren.  </p>
 <ol>
