@@ -95,6 +95,11 @@ Wenn wir die Anwendung nun ausführen (Reload nach `Application --> Storage --> 
 
 Wenn wir auf `Zulassen` klicken, dann erscheint in der Konsole `User Chaice granted` (Zeile `16`). Beachten Sie, dass Sie nicht erneut gefragt werden, ob Benachrichtungen zugelassen werden sollen oder nicht. Erneutes Klicken auf den Button bewirkt (selbst nach einem Reload der Anwendung) keine erneute Abfrage. Deshalb wäre es eigentlich auch sinnvoll, den Button wieder zu verstecken, d.h. auf `display: none` zu setzen. 
 
+Um die benachrichtigungen zu verwalten, können Sie in Chrome `chrome://settings/content/notifications` eingeben. Dort sehen Sie eine Auflistung aller Webanwendungen, die Sie besucht haben und die von Ihnen eine Erlaubnis zur Benachrichtung gewollt haben. Sie können dort die jeweiligen Einstellungen wieder änder, z.B. auch für die hier entwickelte Anwendung.
+
+
+![push](./files/79_push.png)
+
 
 ### Benachrichtigungen anzeigen
 
@@ -182,7 +187,837 @@ Im jetzigen Stand werden die Benachrichtungen aus der Webanwendung heraus erstel
 	}
 	```
 
-Der Service Worker besitzt eine eigene Funktion `showNotification()`, die intern ein `Notification`-Objekt erzeugt und der die gleiche Parameterliste übergeben werden kann, wie dem `Notification`-Konstruktor. 
+Der Service Worker besitzt eine eigene Funktion `showNotification()`, die intern ein `Notification`-Objekt erzeugt und der die gleiche Parameterliste übergeben werden kann, wie dem `Notification`-Konstruktor. Nach Reload und Klicken des Buttons sehen wir nun folgende Benachrichtigung:
+
+
+![push](./files/78_push.png)
+
+
+Die Nachricht wurde extra um `(from SW)` ergänzt, um kenntlich zu machen, dass die Benachrichtigung nun vom Service Worker angestoßen wird. 
+
+
+### Weitere Optionen für die Benachrichtigungen
+
+Benachrichtigungen sind ein *System-Feature*, d.h. ihre Gestaltung hat etwas mit dem Gerät zu tun, in dem diese Benachrichtigungen erscheinen. Es ist kein *Browser-Feature*. Benachrichtigungen sehen auf dem Mac anders aus, als unter Windows oder unter Linux und auf dem iPhone anders, als auf einem Android-Gerät. Es gibt ziemlich viele mögliche Optionen für eine solche Benachrichtigung, aber die unterschiedlichen Systeme beachten diese Optionen mal mehr und mal weniger. 
+
+Wir werden hier der Vollständigkeit halber einige Optionen benennen, aber am meisten sieht man von diesen Optionen auf einem Android-Gerät. 
+
+
+=== "/src/js/app.js"
+	```js linenums="14" hl_lines="5-15"
+	function displayConfirmNotification() {
+	    if('serviceWorker' in navigator) {
+	        let options = {
+	            body: 'You successfully subscribed to our Notification service!',
+	            icon: '/src/images/icons/fiw96x96.png',
+	            image: '/src/images/htw-sm.jpg',
+	            lang: 'de-DE',
+	            vibrate: [100, 50, 200],
+	            badge: '/src/images/icons/fiw96x96.png',
+	            tag: 'confirm-notification',
+	            renotify: true,
+	            actions: [
+	                { action: 'confirm', title: 'Ok', icon: '/src/images/icons/fiw96x96.png' },
+	                { action: 'cancel', title: 'Cancel', icon: '/src/images/icons/fiw96x96.png' },
+	            ]
+	        };
+
+	        navigator.serviceWorker.ready
+	            .then( sw => {
+	                sw.showNotification('Successfully subscribed (from SW)!', options);
+	            });
+	    }
+	}
+	```
+
+Auf dem Mac hat neben der `icon`-Option nur noch die `actions`-Option eine Auswirkung. Die Benachrichtigung sieht nun so aus (auf dem Mac):
+
+
+![push](./files/80_push.png)
+
+
+Man sieht das icon und unter dem Icon wird durch das Hovern mit der Maus ein Menü sichtbar, das die definierten `actions` enthält. 
+
+- mit `image` kann die gesamte Benachrichtigung mit einem Bild unterlegt werden (sieht man bei Android),
+- mit `vibrate` kann die Benachrichtigung durch das Vibrieren des Gerätes signalisiert werden. In unserem Beispiel vibriert das Gerät 100 Millisekunden, dann ist 50 Millisekunden Pause und dann vibriert es nochmal für 200 Millisekunden. 
+- mit `tag` können Benachrichtigungen mit einer Art `id` versehen werden. Wenn meherere Benachrichtigungen mit demselben `tag` vorliegen, dann wird nur die zuletzt eingegangene Benachrichtigung angezeigt. Ansonsten erscheinen alle Benachrichtigungen untereinander. 
+- `renotify` gehört zu `tag`. Wenn der Wert true ist, dann wird die Nutzerin auch dann informiert, wenn eine neue Nachricht zum selben `tag` angekommen ist. Sonst nicht.
+
+Eine Übersicht über alle Optionen findet sich [hier](https://developer.mozilla.org/en-US/docs/Web/API/Notification/Notification).
+
+Wenn Sie ein Android-Gerät besitzen, dann können Sie es an den Rechner andocken (USB-Anschluss - dazu müssen Sie den USB-Zugriff erlauben) und in den Devloper Tools rechts oben unter den drei senkrechten Punkten den Menüpunkt `More tools` und dort `Remote devices` auswählen und können dann ausprobieren, wie die Benachrichtigungen unter einem Android-Gerät aussehen. [Anleitung für Edge](https://docs.microsoft.com/de-de/microsoft-edge/devtools-guide-chromium/remote-debugging/), [Anleitung für Chrome](https://raygun.com/blog/debug-android-chrome/), [Anleitung für Firefox](https://developer.mozilla.org/de/docs/Tools/Remote_Debugging/Firefox_for_Android).
+
+
+Auf die unter `actions` definierten Aktionen kann innerhalb des Service Workers sogar reagiert werden:
+
+
+=== "/sw.js"
+	```js linenums="140"
+	self.addEventListener('notificationclick', event => {
+	    let notification = event.notification;
+	    let action = event.action;
+
+	    console.log(notification);
+
+	    if(action === 'confirm') {
+	        console.log('confirm was chosen');
+	        notification.close();
+	    } else {
+	        console.log(action);
+	    }
+	});
+	```
+
+Der Service Worker kann das `notificationclick`-Ereignis behandeln. Ebenso kann der Service Worker das Ereignis behandeln, das ausgelöst wird, wenn eine Benachrichtigung geschlossen wird: 
+
+
+=== "/sw.js"
+	```js linenums="155"
+	self.addEventListener('notificationclose', event => {
+	    console.log('notification was closed', event);
+	});
+	```
+
+Wir wollen uns aber mit den Benachrichtigungen gar nicht weiter im Detail beschäftigen, sondern lieber mit Push-Notationen. Kenntnisse über Benachrichtigungen sind aber eine gute Voraussetzung, um zu den Push-Notifikationen überzugehen. 
+
+## Push-Benachrichtigungen 
+
+Das Konzept der Benachrichtigung wird auch bei den Push-Nachrichten verwendet. Um Push-Nachrichten zu emmpfangen, muss man sich jedoch zunächst für den Empfang registrieren (siehe in der Abbildung oben *neue Push Subscription erstellen*).  
+
+### Anmelden an Push-Nachrichten (Subscription)
+
+Die Anmeldung an die Push-Nachrichten geschieht in der Webanwendung. Wir passen dazu unsere `app.js` an und fügen eine Funktion `configurePushSubscription()` ein. 
+
+
+
+=== "/src/js/app.js"
+	```js linenums="1" hl_lines="38-54 62-63 68"
+	let enableNotificationsButtons = document.querySelectorAll('.enable-notifications');
+
+	if ('serviceWorker' in navigator) {
+	    navigator.serviceWorker
+	        .register('/sw.js')
+	        .then(() => {
+	            console.log('service worker registriert')
+	        })
+	        .catch(
+	            err => { console.log(err); }
+	        );
+	}
+
+	function displayConfirmNotification() {
+	    if('serviceWorker' in navigator) {
+	        let options = {
+	            body: 'You successfully subscribed to our Notification service!',
+	            icon: '/src/images/icons/fiw96x96.png',
+	            image: '/src/images/htw-sm.jpg',
+	            lang: 'de-DE',
+	            vibrate: [100, 50, 200],
+	            badge: '/src/images/icons/fiw96x96.png',
+	            tag: 'confirm-notification',
+	            renotify: true,
+	            actions: [
+	                { action: 'confirm', title: 'Ok', icon: '/src/images/icons/fiw96x96.png' },
+	                { action: 'cancel', title: 'Cancel', icon: '/src/images/icons/fiw96x96.png' },
+	            ]
+	        };
+
+	        navigator.serviceWorker.ready
+	            .then( sw => {
+	                sw.showNotification('Successfully subscribed (from SW)!', options);
+	            });
+	    }
+	}
+
+	function configurePushSubscription() {
+	    if(!('serviceWorker' in navigator)) {
+	        return
+	    }
+
+	    navigator.serviceWorker.ready
+	        .then( sw => {
+	            return sw.pushManager.getSubscription();
+	        })
+	        .then( sub => {
+	            if(sub === null) {
+	                // create a new subscription
+	            } else {
+	                // already subscribed
+	            }
+	        });
+	}
+
+	function askForNotificationPermission() {
+	    Notification.requestPermission( result => {
+	        console.log('User choice', result);
+	        if(result !== 'granted') {
+	            console.log('No notification permission granted');
+	        } else {
+	            // displayConfirmNotification();
+	            configurePushSubscription();
+	        }
+	    });
+	}
+
+	if('Notification' in window && 'serviceWorker' in navigator) {
+	    for(let button of enableNotificationsButtons) {
+	        button.style.display = 'inline-block';
+	        button.addEventListener('click', askForNotificationPermission);
+	    }
+	}
+	```
+
+Die Methode `configurePushSubscription()` wird nun anstelle von `displayConfirmNotifivcation()` in der `askForNotificationPermission()` aufgerufen (Zeilen `62-63`). Das liegt daran, dass die `Notification.requestPermission()`-Funktion auch für die Erlaubnis von *Push-Nachrichten* verwendet wird. Mit der Erlaubnis von *Benachrichtigungen*. wird also auch gleichzeitig die Erlaubnis von *Push-Nachrichten* erteilt. 
+
+Da die *Push-Benachrichtigungen* über den Service Worker verwaltet werden, wird in `configurePushSubscription()` zunächst geprüft, ob der Browser überhaupt Service Worker unterstützt (Zeile `39`). Wenn nicht, wird die Methode sofort verlassen (Zeile `40`). Da wir aber auch in die Abfrage nach der `Notification-API` (Zeile `68`) noch die Abfrage nach dem `serviceWorker` hinzugefügt haben, wäre der Button `BENACHRICHTUNGEN EIN` gar nicht sichtbar, wenn der Service Worker nicht im Browser unterstützt würde. Dann würde auch nie die Funktion `configurePushSubscription()` aufgerufen. Wir lassen Zeilen `39-41` trotzdem sicherheitshalber drin.
+
+In Zeile `45` verwendet der Service Worker die [PushManager-API](https://developer.mozilla.org/en-US/docs/Web/API/PushManager). Eine der drei Methoden, die diese API zur Verfügung stellt, ist die `getSubscription()`-Methode. Diese Methode gibt eine Promise mit einer existierenden Subscription zurück. Wenn keine Subscription existiert, ist der Rückgabewert `null`. Ist der Rückgabewert `null`, dann erzeugen wir eine neue Subscription (Zeile `49`). 
+
+### Erzeugen einer neuen Subscription
+
+Das Erezugen einer Subscription ist zunächst einfach. Dafür gibt es in der *PushManager-API* die Methode `subscribe()`. 
+
+
+=== "/src/js/app.js"
+	```js linenums="38" hl_lines="6 9 15"
+	function configurePushSubscription() {
+	    if(!('serviceWorker' in navigator)) {
+	        return
+	    }
+
+	    let swReg;
+	    navigator.serviceWorker.ready
+	        .then( sw => {
+	            swReg = sw;
+	            return sw.pushManager.getSubscription();
+	        })
+	        .then( sub => {
+	            if(sub === null) {
+	                // create a new subscription
+	                swReg.pushManager.subscribe();
+	            } else {
+	                // already subscribed
+	            }
+	        });
+	}
+	```
+
+Da wir in dem zweiten `then()`-Block keinen Zugriff mehr auf die Variable `sw` haben (wir geben die Promise von `getSubscription()` zurück, nicht aber `sw`), benötigen wir eine Variable, in der wir die Referenz auf den Service Worker speichern udn auf die wir in der gesamten Funktion Zugriff haben. Die Promise `navigatir.serWorker.ready` gibt etwas mehr als den Service Worker zurück, eine sogenannte +Service Worker Registration* (siehe [ready](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/ready) und [Srvice Worker Registration](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration)). Wir nennen unsere Variable deshalb `swReg` (Zeile `43`). Die `subscribe()`-Funktion wird in Zeile `52` aufgerufen. 
+
+Wir haben nun eine neue Subscription erstellt. Eine solche Subscription enthält den Endpunkt (*Push-API Endpunkt* in der Abbildung ganz oben) des *In-Browser Push Servers*, an den die Push-Nachrichten gesendet werden und der für eine neue Push-Nachricht das `push`-Ereignis beim Service Worker auslöst. Mit der Kenntnis des Endpunktes kann nun aber jede beliebige Anwendung eine Push-Nachricht an den *In-Browser Push Server* senden. Damit kann es passieren, dass Push-Nachrichten erstellt werden, die gar nicht von dem eigenen Backend kommen. Deshalb müssen wir diese Informationen über den Endpunkt **schützen**. 
+
+
+### Schutz der Subscription
+
+Der `subscribe()`-Methode können Optionen (als JavaScript-Objekt) übergeben werden, welche zwei Eigenschaften enthalten können:
+
+- `userVisibleOnly`; kann `true` oder `false` sein. Wenn `true`, dann können nur Nachrichten gesendet werden, die "sichtbar" für den User sind, d.h. es können keine Aktionen (Java-Skripte o.ä.) als Nachrichten gesendet werden und
+- `applicationServerKey`: das ist ein Base64-ArrayBuffer, der einen Schlüssel enthält. Das Vorgehen dafür ist z.B. [hier](https://developers.google.com/web/fundamentals/push-notifications/web-push-protocol), aber auch [hier](https://blog.mozilla.org/services/2016/04/04/using-vapid-with-webpush/) gut beschrieben.  
+
+
+Die Grundidee dabei ist, dass wir sicherstellen wollen, dass nur Nachrichten, die von **unserem** Backend kommen, von dem *In-Browser Push Server* an unsere Webanwendung weitergeleitet werden. Dazu müssen wir unser Backend erweitern.
+
+
+#### Backend erweitern
+
+Um unser Backend für das Senden von *Push-Nachrichten* einzurichten, benötigen wir das Modul [web-push](https://www.npmjs.com/package/web-push). Wir wechesln im Terminal in unseren Backend-Ordner und führen dort
+
+```bash
+npm install --save web-push
+```
+
+aus. Die `--save`-Option wird seit `npm 5.0.0` nicht mehr benötigt. Die Abhängigkeiten werden auch so in der `package.json` gespeichert. In diese `package.json` des Backends fügen wir ein weiteres `script` hinzu: 
+
+=== "package.json"
+	```json linenums="1" hl_lines="10"
+	{
+	    "name": "backend",
+	    "version": "1.0.0",
+	    "description": "REST-Server für posts-Datenbank",
+	    "main": "server.js",
+	    "type": "module",
+	    "scripts": {
+	        "watch": "nodemon ./server.js",
+	        "test": "echo \"Error: no test specified\" && exit 1",
+	        "web-push": "web-push"
+	    },
+	    "keywords": [
+	        "IKT",
+	        "PWA",
+	        "REST-API",
+	        "Backendend",
+	        "posts"
+	    ],
+	    "author": "J. Freiheit",
+	    "license": "ISC",
+	    "dependencies": {
+	        "cors": "^2.8.5",
+	        "express": "^4.17.1",
+	        "mysql": "^2.18.1",
+	        "web-push": "^3.4.4"
+	    },
+	    "devDependencies": {
+	        "nodemon": "^2.0.7"
+	    }
+	}	
+	```
+
+Das ermöglicht uns, 
+
+```bash
+npm run web-push
+```
+
+auszuführen. Das führt allerdings zu einem Fehler, zeigt uns aber an, welche Optionen wir nutzen könnten: 
+
+```bash
+Usage: 
+
+  web-push send-notification --endpoint=<url> [--key=<browser key>] [--auth=<auth secret>] [--payload=<message>] [--ttl=<seconds>] [--encoding=<encoding type>] [--vapid-subject=<vapid subject>] [--vapid-pubkey=<public key url base64>] [--vapid-pvtkey=<private key url base64>] [--gcm-api-key=<api key>]
+
+  web-push generate-vapid-keys [--json]
+
+```
+
+Die `send-notification`-Option in Verbindung mit dem `endpoint` werden wir später verwenden, um *Push-Nachrichten* zu senden. Zunächst benötigen wir den öffentlichen und den privaten Schlüssel zur Verschlüsselung der Kommunikation mit dem *In-Browser Push Server*. Dazu verwenden wir die Option `generate-vapid-keys` und geben in das Terminal 
+
+
+```bash
+npm run web-push generate-vapid-keys
+```
+
+ein. Wir erhalten eine Ausgabe in der Form
+
+```bash
+=======================================
+
+Public Key:
+BCGnTHY7-DB07ySIj5hAYQBd5J3lXskcLMuAkqTTkneKB21tXyUP7uCaWJUjIPRpfecn73lMHpwANFw-0LsXEtY
+
+Private Key:
+TNVDKlHHGBZ66aKyCTxru630t6RL_xictOKA3n0lgM4
+
+=======================================
+```
+
+
+#### Public Key in der app.js
+
+Wir kopieren zunächst den öffentlichen (`public`) Schlüssel und speichern in in unsere `app.js` der Webanwendung:
+
+
+=== "/src/js/app.js"
+	```js linenums="38" hl_lines="15-18"
+	function configurePushSubscription() {
+	    if(!('serviceWorker' in navigator)) {
+	        return
+	    }
+
+	    let swReg;
+	    navigator.serviceWorker.ready
+	        .then( sw => {
+	            swReg = sw;
+	            return sw.pushManager.getSubscription();
+	        })
+	        .then( sub => {
+	            if(sub === null) {
+	                // create a new subscription
+	                let vapidPublicKey = 'BCGnTHY7-DB07ySIj5hAYQBd5J3lXskcLMuAkqTTkneKB21tXyUP7uCaWJUjIPRpfecn73lMHpwANFw-0LsXEtY';
+	                swReg.pushManager.subscribe({
+	                    userVisibleOnly: true,
+	                });
+	            } else {
+	                // already subscribed
+	            }
+	        });
+	}
+	```
+
+Hier können wir auch schonmal die Option `userVisibleOnly: true` definieren (Zeile `54` - geschweifte Klammern nicht vergessen). Wie oben bereits erwähnt, stellen wir den öffentlichen Schlüssel als ein Base64- ArrayBuffer zur Verfügung. Dazu benötigen wir eine Funktion `urlBase64ToUint8Array(base64String)`, die wir z.B. [hier](https://www.npmjs.com/package/web-push) oder auch [hier](https://gist.github.com/Klerith/80abd742d726dd587f4bd5d6a0ab26b6) finden und die wir z.B. ebenfalls in die `app.js` einfügen können (wenn Ihnen die `app.js`zu voll wird, können Sie sie auch in die `db.js` einfügen): 
+
+
+=== "/src/js/app.js"
+	```js linenums="38" hl_lines="31 34"
+	function urlBase64ToUint8Array(base64String) {
+	    var padding = '='.repeat((4 - base64String.length % 4) % 4);
+	    var base64 = (base64String + padding)
+	        .replace(/\-/g, '+')
+	        .replace(/_/g, '/');
+
+	    var rawData = window.atob(base64);
+	    var outputArray = new Uint8Array(rawData.length);
+
+	    for (var i = 0; i < rawData.length; ++i) {
+	        outputArray[i] = rawData.charCodeAt(i);
+	    }
+	    return outputArray;
+	}
+
+	function configurePushSubscription() {
+	    if(!('serviceWorker' in navigator)) {
+	        return
+	    }
+
+	    let swReg;
+	    navigator.serviceWorker.ready
+	        .then( sw => {
+	            swReg = sw;
+	            return sw.pushManager.getSubscription();
+	        })
+	        .then( sub => {
+	            if(sub === null) {
+	                // create a new subscription
+	                let vapidPublicKey = 'BCGnTHY7-DB07ySIj5hAYQBd5J3lXskcLMuAkqTTkneKB21tXyUP7uCaWJUjIPRpfecn73lMHpwANFw-0LsXEtY';
+	                let convertedVapidPublicKey = urlBase64ToUint8Array(vapidPublicKey);
+	                swReg.pushManager.subscribe({
+	                    userVisibleOnly: true,
+	                    applicationServerKey: convertedVapidPublicKey,
+	                });
+	            } else {
+	                // already subscribed
+	            }
+	        });
+	}
+	```
+
+In Zeile `68` verwenden die neue Funktion, um den öffentlichen Schlüssel in ein Base64-ArrayBuffer zu konvertieren und weisen diesen `convertedVapidPublicKey` der Eigenschaft `applicationServerKey` in den Optionen der `subscribe()`-methode zu (Zeile `71`). 
+
+Damit ist die Konfiguration der Subscription im Prinzip abgeschlossen. Allerdings müssen wir diese Subscription nun auch noch unserem Backend mitteilen. Dazu sorgen wir zunächst dafür, dass die Subscription an den nächsten `then()`-Block weitergegeben wird (`return swReg`) und senden diese im `then()`-Block an das Backend:
+
+
+=== "/src/js/app.js"
+	```js linenums="53" hl_lines="17 25-39"
+	function configurePushSubscription() {
+	    if(!('serviceWorker' in navigator)) {
+	        return
+	    }
+
+	    let swReg;
+	    navigator.serviceWorker.ready
+	        .then( sw => {
+	            swReg = sw;
+	            return sw.pushManager.getSubscription();
+	        })
+	        .then( sub => {
+	            if (sub === null) {
+	                // create a new subscription
+	                let vapidPublicKey = 'BCGnTHY7-DB07ySIj5hAYQBd5J3lXskcLMuAkqTTkneKB21tXyUP7uCaWJUjIPRpfecn73lMHpwANFw-0LsXEtY';
+	                let convertedVapidPublicKey = urlBase64ToUint8Array(vapidPublicKey);
+	                return swReg.pushManager.subscribe({
+	                    userVisibleOnly: true,
+	                    applicationServerKey: convertedVapidPublicKey,
+	                })
+	            } else {
+	                // already subscribed
+	            }
+	        })
+	        .then( newSub => {
+	            return fetch('http://localhost:3000/subscription', {
+	                method: 'POST',
+	                headers: {
+	                    'Content-Type': 'application/json',
+	                    'Accept': 'application/json'
+	                },
+	                body: JSON.stringify(newSub)
+	            })
+	            .then( response => {
+	                if(response.ok) {
+	                    displayConfirmNotification();
+	                }
+	            })
+	        });
+	}
+	```
+
+
+Den Aufbau einer solchen `POST-fetch()`-Anfrage kennen wir schon. Wenn das Backend ein `ok` zurücksendet, dann rufen wir die `displayConfirmNotatification()` auf, die wir für Benachrichtigungen erstellt hatten. 
+
+Aber diesen Endpunkt, den wir beim Backend verwenden, nämlich `POST http://localhost:3000/subscription`, den müssen wir erst noch im Backend einrichten. 
+
+#### Neuer Endpunkt im Backend
+
+Wir wechseln wieder zu unserem Backend und öffnen dort die `server.js`, um einen neuen Endpunkt zu definieren:
+
+
+=== "server.js"
+	```js linenums="1" hl_lines="4 26"
+	import express from 'express';
+	import cors from 'cors';
+	import { PostController } from './posts.controller.js';
+	import { SubscriptionController } from "./sub.controller.js";
+
+	const app = express();
+	const PORT = 3000;
+
+	app.use(cors());
+	app.use(express.urlencoded({ limit: '20mb', extended: true }));
+	app.use(express.json({ limit: '20mb' }));
+
+	app.get('/', (request, response) => {
+	    response.send('HELLO FIW!');
+	});
+
+	// Endpunkte definieren
+	app.post("/posts", PostController.create); // C
+	app.get("/posts/title", PostController.readOneByTitle); // R (one)
+	app.get("/posts", PostController.readAll); // R (all)
+	app.get("/posts/:postId", PostController.readOne); // R (one)
+
+	app.put("/posts/:postId", PostController.update); // U
+	app.delete("/posts/:postId", PostController.delete); // D
+
+	app.post("/subscription", SubscriptionController.subscribe);
+
+	app.listen(PORT, (error) => {
+	    if (error) {
+	        console.log(error);
+	    } else {
+	        console.log(`Server started and listening on port ${PORT} ...`);
+	    }
+	});
+	```
+
+Die Subscriptions wollen wir nicht durch den `PostController` verwalten lassen, sondern wir erstellen uns eine neue Datei `sub.controller.js` mit zunächst nur
+
+
+=== "sub.controller.js"
+	```js linenums="1"
+	export const SubscriptionController = {
+
+	    subscribe: (req, res) => {
+
+	    }
+	}
+	```
+
+Dieser `SubscriptionController` ist auch bereits in der `server.js` importiert worden (siehe dort Zeile `4`). Nun richten wir die Verwaltung der Subscription im Backend ein. Dabei gehen wir vor, wie z.B. [hier](https://www.npmjs.com/package/web-push) oder [hier](https://www.section.io/engineering-education/push-notification-in-nodejs-using-service-worker/) beschrieben:
+
+
+=== "sub.controller.js"
+	```js linenums="1"
+	import webpush from 'web-push';
+
+	const publicVapidKey = 'BCGnTHY7-DB07ySIj5hAYQBd5J3lXskcLMuAkqTTkneKB21tXyUP7uCaWJUjIPRpfecn73lMHpwANFw-0LsXEtY';
+	const privateVapidKey = 'TNVDKlHHGBZ66aKyCTxru630t6RL_xictOKA3n0lgM4';
+
+	export const SubscriptionController = {
+
+	    subscribe: (req, res) => {
+	        const subscription = req.body;
+	        console.log('subscription', subscription);
+	        res.status(201).json({ message: 'subscription received'});
+
+	        webpush.setVapidDetails('mailto:freiheit@htw-berlin.de', publicVapidKey, privateVapidKey);
+	    }
+	}
+	```
+
+Bei den Schlüsseln müssen Sie natürlich Ihre einsetzen (die mit `web-push generate-vapid-keys` erzeugten).
+
+Wenn wir nun das Backend ausführen und auch die Webanwendung und auf den Button `BENACHRICHTIGEN EIN` klicken, dann erhalten wir eine Nachricht, die durch die `displayConfirmNotification()`-Methode ausgelöst wurde. Wir haben uns erfolgreich an die *Push-Benachrichtigung* angemeldet. 
+
+Bitte beachten Sie die Ausgabe auf die Konsole im Backend, die wir durch die Zeile `10` `console.log('subscription', subscription);` erzeugt haben. Sie zeigt etwas in der Art: 
+
+```bash
+subscription {
+  endpoint: 'https://fcm.googleapis.com/fcm/send/cMdUtRW4H9o:APA91bG8p3o-Ta31e1yMrqdvonJCyf3xbPfIFtpS2UbX9PcJwkeNKoQjZhEAWo5nad7eR3NgRQR8__3wk591j7DKWJLGzwWgJYm_GgipU0gTvMRpWA6TpmCtrD9OCo1mB0jZQrTj5a_5',
+  expirationTime: null,
+  keys: {
+    p256dh: 'BDhH_TBG4l-PU3wJnT6wHqsPeYusbPqOiw7VvJvupXDC3JZOIIOiz2Ml8ZaZD9wJuGnXs9BFqINEzrFStsjkk6c',
+    auth: 'fJRvyO_fnPXsYeDkMy_jAA'
+  }
+}
+```
+
+Das Wort `subscription` haben wir davor gesetzt, aber das `subscription`-Objekt besitzt drei Eigenschaften:
+
+- `endpoint`: das ist genau der Endpunkt des In-Browser Push Servers (hier wegen Chrome natürlich irgendetwas bei Google). An diesen Endpunkt werden die *Push-Notifikationen* gesendet. 
+- `expirationTime`: spielt hier keine Rolle, ist ja auch `null`. Kann man nutzen, wenn man JSON Web Tokens verwendet und diesen eine Haltbarkeitsdauer zuweist. 
+- `keys`: das sind unsere Authentifikationsdaten beim *In-Browser Push Server*. Diese Daten zusammen mit dem privaten Schlüssel werden benötigt, um sich an dem Endpunkt zu authentifizieren.  
+
+
+**Achtung!** Sie müssen ab jetzt vermeiden, Ihren Service Worker auf `unregister` zu setzen. Eine Subscription existiert für einen Browser und auch für einen Service Worker! Update von Service Worker ist kein Problem, aber `unregister` führt zu Problemen - also lieber jetzt erstmal nicht mehr!
+
+
+#### Push-Nachrichten senden
+
+
+Wir haben uns nun erfolgreich für den Empfang von Push-Nachrichten "registriert". Wir haben in `app.js` allerdings noch nicht implementiert, was passieren soll, wenn wir bereits registriert sind (sihe oben Listing von `app.js` Zeile `74`). Wir wollen aber trotzdem schonmal Push-Nachrichten senden. Dazu passen wir Backend die `sub.controller.js` wie folgt an:
+
+
+
+=== "sub.controller.js"
+	```js linenums="1"
+	import webpush from 'web-push';
+
+	const publicVapidKey = 'BCGnTHY7-DB07ySIj5hAYQBd5J3lXskcLMuAkqTTkneKB21tXyUP7uCaWJUjIPRpfecn73lMHpwANFw-0LsXEtY';
+	const privateVapidKey = 'TNVDKlHHGBZ66aKyCTxru630t6RL_xictOKA3n0lgM4';
+	const pushSubscription = {
+	    endpoint: 'https://fcm.googleapis.com/fcm/send/cMdUtRW4H9o:APA91bG8p3o-Ta31e1yMrqdvonJCyf3xbPfIFtpS2UbX9PcJwkeNKoQjZhEAWo5nad7eR3NgRQR8__3wk591j7DKWJLGzwWgJYm_GgipU0gTvMRpWA6TpmCtrD9OCo1mB0jZQrTj5a_5',
+	    keys: {
+	        auth: 'fJRvyO_fnPXsYeDkMy_jAA',
+	        p256dh: 'BDhH_TBG4l-PU3wJnT6wHqsPeYusbPqOiw7VvJvupXDC3JZOIIOiz2Ml8ZaZD9wJuGnXs9BFqINEzrFStsjkk6c',
+	    }
+	};
+	export const SubscriptionController = {
+
+	    subscribe: (req, res) => {
+	        const subscription = req.body;
+	        console.log('subscription', subscription);
+	        res.status(201).json({ message: 'subscription received'});
+	    },
+
+	    sendNotification: () => {
+	        webpush.setVapidDetails('mailto:freiheit@htw-berlin.de', publicVapidKey, privateVapidKey);
+	        const payload = JSON.stringify({
+	            title: 'New Push Notification',
+	            content: 'New data in database!'
+	        });
+	        webpush.sendNotification(pushSubscription,payload)
+	            .catch(err => console.error(err));
+	        console.log('push notification sent');
+	        // res.status(201).json({ message: 'push notification sent'});
+	    }
+	}
+	```
+
+Wir definieren eine Variable `pushSubscription`, die genau alle Werte der Subscription oben enthält (`expirationTime` lassen wir weg). Diese Informationen holen wir uns später noch automatisch. Außerdem definieren wir eine neue Funktion `sendNotification()`. Darin verwenden wir aus dem [web-push](https://www.npmjs.com/package/web-push)-Package die Funktion `setVapidDetail()`. Diese Funktion bekommt als ersten Parameter eine `id` übergeben, typischerweise (so wie [hier](https://www.npmjs.com/package/web-push) beschrieben) einen String beginnend mit `mailto:` und der E-Mail-Adresse. Als zweiten Parameter wird der öffentliche Vapid-Schlüssel als einfacher String übergeben und als dritter Parameter der private Vapid-Schlüssel als einfacher String. 
+
+Dann kann man für die Nachricht einen sogenannten `payload` festlegen, der ein beliebiges JSON ist (kann auch ein einfacher String sein). Dieser `payload` ist der Inhalt der Push-Nachricht. Wir haben in diesem Fall einen `title` und einen `content` festgelegt. 
+
+Das Senden der eigentlichen Nachricht an den *In-Browser Push Server* erfolgt mithilfe der Funktion `sendNotification()` aus dem *web-push*-Package. Dieser wird das gesamte JavaScript-Objekt `pushSubscription` sowie der `payload` übergeben. 
+
+Die Funktion `sendNotification()` des `SubscriptionControllers` sollte am besten immer dann aufgerufen werden, wenn sich in der Datenbank etwas geändert hat. Am besten, wenn ein neuer Datensatz hinzugekommen ist. Also rufen wir diese Funktion in dem `PostController` in der `create()`-Funktion auf:
+
+
+
+=== "post.controller.js"
+	```js linenums="1" hl_lines="2 18 20-23"
+	import { PostService } from './db.sqlqueries.js';
+	import { SubscriptionController } from "./sub.controller.js";
+
+	export const PostController = {
+
+	    create: (req, res) => {
+	        if (!req.body) {
+	            res.status(400).send({
+	                message: "Content can not be empty!",
+	            });
+	        }
+	        const post = {...req.body };
+	        PostService.create(post, (err, result) => {
+	            if (err)
+	                res.status(500).send({
+	                    message: err.message || "Some error occurred while creating the post.",
+	                });
+	            else return res.json(result);
+	        })
+	        .then( data => {
+	            SubscriptionController.sendNotification();
+	            return data;
+	        });
+	    },
+
+	    // hier noch die anderen Funktionen R U D
+	};
+	```
+
+Wir können die Funktion insofern testen, als dass wir neue Daten eingeben, entweder über Postman oder über unsere Webanwendung über das Formular (diese daten landen ja auch beim Backend). Allerdings können wir uns dabei nur von der fehlerfreiheit der Ausführungen überzeugen (und im Backend erscheint im Terminal `push notification sent`). Die Push-Nachricht ist nun beim *In-Browser Push Server*. Wir müssen jetzt aber im Service Worker zunächst das `push`-Event behandeln, um die Benachrichtigung tatsächlich im Gerät zu erhalten. 
+
+
+#### Das `push`-Ereignis behandeln
+
+
+Das `push`-Ereignis wird vom *In-Browser Push Server* ausgelöst, wann immer eine neue Push-Benachrichtigung dort eintrifft. Das kann antürlich auch dann passieren, wenn die Webanwendung geschlossen ist. Das Behandeln des `push`-Ereignisses ist deshalb Aufgabe des Service Workers. Wir erweitern also die `sw.js` um die Behandlung des `push`-Events:
+
+
+
+=== "sw.js"
+	```js linenums="158"
+	self.addEventListener('push', event => {
+	    console.log('push notification received', event);
+	    let data = { title: 'Test', content: 'Fallback message'};
+	    if(event.data) {
+	        data = JSON.parse(event.data.text());
+	    }
+
+	    let options = {
+	        body: data.content,
+	        icon: '/src/images/icons/fiw96x96.png',
+	    };
+
+	    event.waitUntil(
+	        self.registration.showNotification(data.title, options)
+	    );
+	});
+	```
+
+Die Ereignisbehandlung im Service Worker haben wir nun schon ein paar Mal gemacht. Wir geben zuerst das `event` selbst einmal auf der Konsole aus. Es handelt sich um ein [PushEvent](https://developer.mozilla.org/en-US/docs/Web/API/PushEvent). Dann erstellen wir uns Dummy-`data`, falls der Empfang der *Push-Nachricht* vom Server nicht klappen sollte. Wenn aber doch, dann schreiben wir die Variable `data` mit den Daten aus dem `PushEvent` (siehe oben im Backend `payload` - die Daten sollten also `title` und `content` enthalten). Wir lesen die `data` aus dem `event`-Objekt aus und wandeln diese mithilfe von `JSON.parse()` in ein JSON um. Dann erzeugen wir, so wie in Abschnitt [Weitere Optionen für die Benachrichtigungen](./#weitere-optionen-fur-die-benachrichtigungen) beschrieben, die Benachrichtigung. 
+
+Beachten Sie noch, dass `self` auf den Service Worker zeigt und `self.registration` verwendet wird, um auf das [ServiceWorkerRegistration](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration) zuzugreifen, welches über die Methode `showNotification()` verfügt. 
+
+Wenn wir nun neue Daten über das Formular eingeben, erscheint
+
+![push](./files/81_push.png)
+
+
+#### Eine Webseite öffnen
+
+
+Jetzt fehlt eigentlich nur noch, dass wir in der Push-benachrichtung eine Aktion vorsehen, die das Öffnen unserer Webanwendung ermöglicht. Das typische Szenario ist ja, dass die Webanwendung geschlossen ist und dass im Backend eine Datenänderung stattfindet und wir daraufhin eine Push-Nachricht erhalten. Nun wollen wir gerne auf diese Push-Nachricht klicken und damit soll die Anwendung geöffnet werden, die uns das neue Datum anzeigt. Dafür haben wir auch schon alles vorbereitet - Service Worker reagieren wir bereits auf das Ereignis, dass auf die Benachrichtigung geklickt wird:
+
+=== "sw.js"
+	```js linenums="140"
+	self.addEventListener('notificationclick', event => {
+	    let notification = event.notification;
+	    let action = event.action;
+
+	    console.log(notification);
+
+	    if(action === 'confirm') {
+	        console.log('confirm was chosen');
+	        notification.close();
+	    } else {
+	        console.log(action);
+	    }
+	});
+	```
+
+Die `confirm`-Antwort erfolgt nur, wenn nach der Zulassung der Berechtigung gefragt wird. Wir behandeln die anderen Fälle. 
+
+
+=== "sw.js"
+	```js linenums="140"
+	self.addEventListener('notificationclick', event => {
+	    let notification = event.notification;
+	    let action = event.action;
+
+	    console.log(notification);
+
+	    if(action === 'confirm') {
+	        console.log('confirm was chosen');
+	        notification.close();
+	    } else {
+	        console.log(action);
+	        event.waitUntil(
+	            clients.matchAll()      // clients sind alle Windows (Browser), fuer die der Service Worker verantwortlich ist
+	                .then( clientsArray => {
+	                    let client = clientsArray.find( c => {
+	                        return c.visibilityState === 'visible';
+	                    });
+
+	                    if(client !== undefined) {
+	                        client.navigate('http://localhost:8080');
+	                        client.focus();
+	                    } else {
+	                        clients.openWindow('http://localhost:8080');
+	                    }
+	                    notification.close();
+	                })
+	        );
+	    }
+	});
+	```
+
+Mit `clients` greift der Service Worker auf alle Fenster (Anwendungen, Browser) zu, über die er Kontrolle hat (siehe [Clients](https://developer.mozilla.org/en-US/docs/Web/API/Clients)). Die Funktion `matcAll()` gibt ihm alle diese Clients als ein Array zurück. Mit der JavaScript-Funktion `find()` laufen wir durch das Array und geben alle die Clients (genauer vom Typ [WindowClient](https://developer.mozilla.org/en-US/docs/Web/API/WindowClient) zurück, für die gilt, dass sie sichtbar - im Sinne von *erreichbar* - sind. Diejenigen Clients, die nicht erreichbar sind, werden gar nicht erst zurückgegeben. Für alle anderen gilt, dass sie entweder bereits geöffnet sind oder nicht. Diejenigen (Browser), die bereits geöffnet sind, navigieren zur URL `http://localhost:8080` und die anderen werden mit dieser URL geöffnet. 
+
+Wenn nun neue Daten eingegeben werden, dann erscheint eine Push-Notifikation und wenn wir darauf klicken, dann öffnet sich unsere Anwendung. Eine gute Möglichkeit, das zu Testen, besteht in der Verwendung unseres Frontends, das wir für die Eingabe der Daten erstellt haben. Schließen Sie die `HTW-Insta`-Anwendung, öffnen Sie das andere Frontend, geben Sie Daten ein und speichern diese. Es erscheint eine Push-Notifikation, auf die Sie klicken können und die `HTW-Insta`-Anwendung wird im browser mit den neuen Daten geöffnet. Diejenigen, die ihr Android-Gerät anschließenm können, sollten es auch unbedingt darüber probieren. 
+
+Hier noch eine kleine Verbesserung davon, weil wir ja die URL hart in den Code geschrieben haben. Wir können im Backend beim Senden der Notification eine weitere Eigenschaft hinzufügen:
+
+=== "sub.controller.js"
+	```js linenums="20" hl_lines="6"
+    sendNotification: () => {
+        webpush.setVapidDetails('mailto:freiheit@htw-berlin.de', publicVapidKey, privateVapidKey);
+        const payload = JSON.stringify({
+            title: 'New Push Notification',
+            content: 'New data in database!',
+            openUrl: '/help'
+        });
+        webpush.sendNotification(pushSubscription,payload)
+            .catch(err => console.error(err));
+        console.log('push notification sent');
+    }
+	```
+
+und diese der Benachrichtigung mitgeben:
+
+
+=== "sw.js"
+	```js linenums="174" hl_lines="3 11-13"
+	self.addEventListener('push', event => {
+	    console.log('push notification received', event);
+	    let data = { title: 'Test', content: 'Fallback message', openUrl: '/'};
+	    if(event.data) {
+	        data = JSON.parse(event.data.text());
+	    }
+
+	    let options = {
+	        body: data.content,
+	        icon: '/src/images/icons/fiw96x96.png',
+	        data: {
+	            url: data.openUrl
+	        }
+	    };
+
+	    event.waitUntil(
+	        self.registration.showNotification(data.title, options)
+	    );
+	});
+	```
+
+und diese Informationen dann statt der festen URL verwenden:
+
+
+=== "sw.js"
+	```js linenums="140" hl_lines="20 23"
+	self.addEventListener('notificationclick', event => {
+	    let notification = event.notification;
+	    let action = event.action;
+
+	    console.log(notification);
+
+	    if(action === 'confirm') {
+	        console.log('confirm was chosen');
+	        notification.close();
+	    } else {
+	        console.log(action);
+	        event.waitUntil(
+	            clients.matchAll()      // clients sind alle Windows (Browser), fuer die der Service Worker verantwortlich ist
+	                .then( clientsArray => {
+	                    let client = clientsArray.find( c => {
+	                        return c.visibilityState === 'visible';
+	                    });
+
+	                    if(client !== undefined) {
+	                        client.navigate(notification.data.url);
+	                        client.focus();
+	                    } else {
+	                        clients.openWindow(notification.data.url);
+	                    }
+	                    notification.close();
+	                })
+	        );
+	    }
+	});
+	```
+
+Wenn Sie jetzt auf die Push-nachricht klicken, sollte sich die `help`-Seite der Anwendung öffnen. 
+
+!!! success
+	Wir haben zunächst gelernt, dass Benachrichtigungen und Push-benachrichtigungen zwei grundsätzlich verschiedene Dinge sind. Benachrichtigungen ist das, was man als Nachricht "sieht". Push-Notifikationen werden an den *In-Browser Push Server* vom Backend gesendet. Dieser Server löst daraufhin ein `push`-Ereignis beim Service Worker aus, wenn die Webanwendung sich für den Empfang von *Push-Nachrichten*. registriert hat. Die Registrierung ist etwas aufwendig, muss aber nur einmal erledigt werden. Mit den Push-Nachrichten kennen wir nun eine weitere *progressive* Funktionalität. Bis dahin waren Push-Nachrichten nur nativen Apps vorbehalten. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

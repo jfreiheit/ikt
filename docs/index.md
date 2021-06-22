@@ -15,15 +15,13 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | 3. | 26.-30.04.2021 | Service workers | Übung 2 | - | 07.05.2021 | 
 | 4. | 03.-07.05.2021 | Promises und Fetch API | Übung 3 | - | 14.05.2021 | 
 | 5. | 10.-14.05.2021 | Service workers und Caching | - | - | 21.05.2021 | 
-| 6. | 17.-21.05.2021 | Datenbank und Backend | Übung 4 | - | 28.05.2021 | 
-| 7. | 24.-28.05.2021 | Frontend mit Backend-Anbindung | Übung 5 | - | 04.06.2021 | 
-| 8. | 31.-04.06.2021 | Caching dynamische Daten mit IndexDB | Übung 6 | - | 11.06.2021 | 
-| 9. | 07.-11.06.2021 | Hintergrundsynchronisation  | Übung 7 | - | 18.06.2021 | 
-| 10. | 14.-18.06.2021 | Push-Notifikationen | Übung 8 | - | 25.06.2021 | 
-| 11. | 21.-25.06.2021 | Media API (Kamera) | Übung 9 | - | 02.07.2021 | 
-| 12. | 28.-02.07.2021 | Geolocation  | - | - | - |
-| 13. | 05.-09.07.2021 | automatisierte Service worker Verwaltung | - | - | - |
-| 14. | 12.-16.07.2021 | SPAs und PWAs mit Angular | - | - | - |
+| 6. | 17.-21.05.2021 | Entwicklungsinfrastruktur | Übung 4 | - | 28.05.2021 | 
+| 7. | 24.-28.05.2021 | Datenbank und Backend | Übung 5 | - | 04.06.2021 | 
+| 8. | 31.-04.06.2021 | Frontend mit Backend-Anbindung | Übung 6 | - | 11.06.2021 | 
+| 9. | 07.-11.06.2021 | Caching dynamische Daten mit IndexDB | Übung 7 | - | 18.06.2021 | 
+| 10. | 14.-18.06.2021 | Hintergrundsynchronisation | - | Datenbank | - | 
+| 11. | 21.-25.06.2021 | Push-Notifikationen | - | Backend | - | 
+| 12. | 28.-02.07.2021 | Kamera und Geolocation | - | Frontend | - |
 |  |  |  |  | Abgabe 1.PZ 21.07.2021 | - |
 |  |  |  |  | Abgabe 2.PZ 01.10.2021 | - |
 
@@ -119,6 +117,27 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 	- Eine neue Übung gibt es nicht (mehr), sondern Sie können schonmal mit der Semesteraufgabe beginnen. 
 	- Video zur Vorlesung am 16.06.2021
 		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=aafa75ddca04b5a4e5fda406772777fe&width=720&height=389&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="389" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no" aria-label="media embed code" style=""></iframe>
+
+
+
+##### Woche 10 (Push-Benachrichtigungen)
+
+??? question "Woche 10 - Push-Benachrichtigungen"
+
+	- Diese Woche machen wir uns mit der [Push-benachrichtigung](./pushnotes/#push-notifications) vertraut. Diese verwenden wir, um die Nutzerinnen zu informieren, dass es Änderungen (Updates/Aktuelles) in der Webanwendung gibt. Die Nutzerinnen werden so an die Anwendung gebunden, denn Push-Notifications erhöhen das Interesse daran, die Anwendung erneut zu öffnen.     
+	- Eine neue Übung gibt es nicht (mehr), sondern Sie können (schonmal) mit der Semesteraufgabe beginnen/weitermachen. 
+	- Video zur Vorlesung am 23.06.2021 - kommt noch
+		
+
+
+##### Woche 11 (Kamera und Geolocation)
+
+??? question "Woche 11 - Kamera und Geolocation"
+
+	- Diese Woche machen wir uns mit der Anwendung der [Kamera und der Geolocation-API](./devices/#geratezugriffe) vertraut. Wir streamen Videos und nehmen Fotos auf. Diese speichern wir im Backend. Wir haben dadurch nun auch aus der *HTW-Insta*-App die Möglichkeit, *Posts* zu speichern. Außerdem ermitteln wir mithilfe der Geolocation-API unseren aktuellen Standort. Diese Art der Gerätezugriffe war lange aus Webanwendungen nicht möglich, ist nun aber mit zunehmend mehr APIs und Browserunterstützung auch für (progressive) Webanwendungen verfügbar.     
+	- Es gibt auch noch einen kurzen Abschnitt [Zusammenfassung](./zusammenfassung/#zusammenfassung), der ein kurzes Tutorial enthält, wie eine Angular-Anwendung *progressive* gestaltet werden kann und auch einen kurzen Ausblick.  
+	- Video zur Vorlesung am 30.06.2021 - kommt noch
+		
 
 
 

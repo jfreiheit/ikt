@@ -71,6 +71,8 @@ nav:
     - IndexedDB: indexeddb.md
     - Hintergrundsynchronisation: backgroundsync.md
     - Push Notifications: pushnotes.md
+    - Gerätezugriffe: devices.md
+    - Zusammenfassung: zusammenfassung.md
     - Übungen: uebungen.md
     - Werkzeuge: tools.md
     - Hilfen: hilfen.md

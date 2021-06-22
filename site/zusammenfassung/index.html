@@ -1,0 +1,925 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Lehrmaterial, Übungen, Aufgaben und Hilfen für Aktuelle Trends der IKT">
+      
+      
+      
+        <meta name="author" content="Jörn Freiheit">
+      
+      
+        <link rel="canonical" href="http://freiheit.f4.htw-berlin.de/ikt/zusammenfassung/">
+      
+      <link rel="shortcut icon" href="../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>Zusammenfassung - Progressive Web Apps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#757575">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="grey" data-md-color-accent="indigo">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#zusammenfassung" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-header-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Progressive Web Apps
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Zusammenfassung
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="http://freiheit.f4.htw-berlin.de/ikt" title="Progressive Web Apps" class="md-nav__button md-logo" aria-label="Progressive Web Apps">
+      
+  <img src="../img/fiw.jpg" alt="logo">
+
+    </a>
+    Progressive Web Apps
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/jfreiheit/ikt/" title="Quellcode" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    webtech
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../einfuehrung/" class="md-nav__link">
+        Einführung
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grundgeruest/" class="md-nav__link">
+        Grundgerüst
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manifest/" class="md-nav__link">
+        Manifest
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serviceworker/" class="md-nav__link">
+        Service Worker
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../promises/" class="md-nav__link">
+        Promises & fetch
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../caching/" class="md-nav__link">
+        Caching
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend/" class="md-nav__link">
+        Backend
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend/" class="md-nav__link">
+        Frontend
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../indexeddb/" class="md-nav__link">
+        IndexedDB
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backgroundsync/" class="md-nav__link">
+        Hintergrundsynchronisation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pushnotes/" class="md-nav__link">
+        Push Notifications
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devices/" class="md-nav__link">
+        Gerätezugriffe
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Zusammenfassung
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Zusammenfassung
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kurzes-start-tutorial-fur-angular" class="md-nav__link">
+    Kurzes Start-Tutorial für Angular
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ausblick" class="md-nav__link">
+    Ausblick
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uebungen/" class="md-nav__link">
+        Übungen
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        Werkzeuge
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hilfen/" class="md-nav__link">
+        Hilfen
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kurzes-start-tutorial-fur-angular" class="md-nav__link">
+    Kurzes Start-Tutorial für Angular
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ausblick" class="md-nav__link">
+    Ausblick
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/jfreiheit/ikt/edit/master/docs/zusammenfassung.md" title="Seite editieren" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="zusammenfassung">Zusammenfassung<a class="headerlink" href="#zusammenfassung" title="Permanent link">&para;</a></h1>
+<p>Wir haben im Laufe des Semesters eine Webanwendung in eine <em>progressive</em> Webanwendung umgestaltet. Wir haben verschiedene <em>progressive</em> Funktionalitäten ausprobiert und implementiert. Das Konzept einer <em>progressive Web App</em> wird zunehmend unterstützt, sowohl von den Browser-Herstellern, als auch von den Entwicklern von JavaScript-Frameworks, wie z.B. Angular. </p>
+<p>Hier nochmal zusammengefasst die Funktionalitäten, die das <em>progressive</em>  ausmachen und die wir implementiert haben:</p>
+<ul>
+<li><strong>auffindbar</strong>; die Webanwendungen können einfach über Suchmaschinen gefunden werden, denn es sind ja <em>Web</em>-Anwendungen, der gleiche Grund gilt auch für <strong>verlinkbar</strong>,</li>
+<li><strong>installierbarr</strong>; mithilfe des WebApp-Manifestes werden Anwendungen installierbar und lassen sich durch Klick auf ein Icon im Browser starten - man sieht aber gar nicht, dass es sich um eine Browser handelt,</li>
+<li><strong>offline ausführbar</strong>; die Webanwendung ist durch die Verwendung von Cache, IndexedDB und Hintergrundsynchronisation auch ohne Netzwerkverbindung ausführbar,</li>
+<li><strong>plattformunabhängig</strong>; die Webanwendung läuft in jedem Browser und ist somit unabhängig vom Betriebssystem,</li>
+<li><strong>nutzerbindend</strong>; durch die Verwendung von (Push-)Nachrichten kann die Nutzerin stets über Aktuelels informiert werden und wird somit dafür interessiert, die Anwendung erneut zu starten,</li>
+<li><strong>responsive</strong>; PWAs sind hauptsächlich für die Anwendung auf mobilen Geräten konzipiert, können aber genau so sinnvoll auf Desktop-PCs sein und sind deshalb typischerweise responsive gestaltet, </li>
+<li><strong>Zugriff auf Geräte</strong>; mit progressiven Webanwendungen kann genau wie mit nativen Anwendungen auf Kamera, Mikrofon, Standard und weitere Sensoren zugegriffen werden. Dafür gibt es mittlerweile viele APIs, die zunehmend mehr von Browsern unterstützt werden.</li>
+</ul>
+<p>Für den Fall, dass Sie für Ihre Semesteraufgabe planen, das Frontend mithilfe von Angular zu erstellen, hier noch ein kurzes <em>Start-Tutorial</em>. Für Angular lässt sich aus einer existierenden Anwendung (mit dem Namen <code>*project-name*</code>) eine <em>PWA</em> mithilfe von </p>
+<div class="highlight"><pre><span></span><code>ng add @angular/pwa --project *project-name*
+</code></pre></div>
+<p>machen. Beachten Sie für Angular, dass <code>ng serve</code> nicht für Service Worker funktioniert, sondern Sie, wie in unserer <code>HTW-Insta</code>-Anwendung mit dem <code>http-server</code> arbeiten müssen. Beispiel:</p>
+<h2 id="kurzes-start-tutorial-fur-angular">Kurzes Start-Tutorial für Angular<a class="headerlink" href="#kurzes-start-tutorial-fur-angular" title="Permanent link">&para;</a></h2>
+<p>Eingabe: </p>
+<div class="highlight"><pre><span></span><code>ng new AngularPWA
+</code></pre></div>
+<p>Ausgabe:</p>
+<div class="highlight"><pre><span></span><code>? Would you like to add Angular routing? Yes
+? Which stylesheet format would you like to use? CSS
+CREATE AngularPWA/README.md <span class="o">(</span><span class="m">1056</span> bytes<span class="o">)</span>
+CREATE AngularPWA/.editorconfig <span class="o">(</span><span class="m">274</span> bytes<span class="o">)</span>
+CREATE AngularPWA/.gitignore <span class="o">(</span><span class="m">604</span> bytes<span class="o">)</span>
+CREATE AngularPWA/angular.json <span class="o">(</span><span class="m">3063</span> bytes<span class="o">)</span>
+CREATE AngularPWA/package.json <span class="o">(</span><span class="m">1073</span> bytes<span class="o">)</span>
+CREATE AngularPWA/tsconfig.json <span class="o">(</span><span class="m">783</span> bytes<span class="o">)</span>
+CREATE AngularPWA/.browserslistrc <span class="o">(</span><span class="m">703</span> bytes<span class="o">)</span>
+CREATE AngularPWA/karma.conf.js <span class="o">(</span><span class="m">1427</span> bytes<span class="o">)</span>
+CREATE AngularPWA/tsconfig.app.json <span class="o">(</span><span class="m">287</span> bytes<span class="o">)</span>
+CREATE AngularPWA/tsconfig.spec.json <span class="o">(</span><span class="m">333</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/favicon.ico <span class="o">(</span><span class="m">948</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/index.html <span class="o">(</span><span class="m">296</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/main.ts <span class="o">(</span><span class="m">372</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/polyfills.ts <span class="o">(</span><span class="m">2820</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/styles.css <span class="o">(</span><span class="m">80</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/test.ts <span class="o">(</span><span class="m">743</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/assets/.gitkeep <span class="o">(</span><span class="m">0</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/environments/environment.prod.ts <span class="o">(</span><span class="m">51</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/environments/environment.ts <span class="o">(</span><span class="m">658</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/app/app-routing.module.ts <span class="o">(</span><span class="m">245</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/app/app.module.ts <span class="o">(</span><span class="m">393</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/app/app.component.css <span class="o">(</span><span class="m">0</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/app/app.component.html <span class="o">(</span><span class="m">23809</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/app/app.component.spec.ts <span class="o">(</span><span class="m">1069</span> bytes<span class="o">)</span>
+CREATE AngularPWA/src/app/app.component.ts <span class="o">(</span><span class="m">214</span> bytes<span class="o">)</span>
+✔ Packages installed successfully.
+    Successfully initialized git.
+</code></pre></div>
+<p>Eingabe: </p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> AngularPWA 
+ng add @angular/pwa --project AngularPWA
+</code></pre></div>
+<p>Ausgabe:</p>
+<div class="highlight"><pre><span></span><code>ℹ Using package manager: npm
+✔ Found compatible package version: @angular/pwa@latest.
+✔ Package information loaded.
+
+The package @angular/pwa will be installed and executed.
+Would you like to proceed? Yes
+✔ Package successfully installed.
+Option <span class="s2">&quot;configuration&quot;</span> is deprecated: No longer has an effect.
+CREATE ngsw-config.json <span class="o">(</span><span class="m">624</span> bytes<span class="o">)</span>
+CREATE src/manifest.webmanifest <span class="o">(</span><span class="m">1344</span> bytes<span class="o">)</span>
+CREATE src/assets/icons/icon-128x128.png <span class="o">(</span><span class="m">1253</span> bytes<span class="o">)</span>
+CREATE src/assets/icons/icon-144x144.png <span class="o">(</span><span class="m">1394</span> bytes<span class="o">)</span>
+CREATE src/assets/icons/icon-152x152.png <span class="o">(</span><span class="m">1427</span> bytes<span class="o">)</span>
+CREATE src/assets/icons/icon-192x192.png <span class="o">(</span><span class="m">1790</span> bytes<span class="o">)</span>
+CREATE src/assets/icons/icon-384x384.png <span class="o">(</span><span class="m">3557</span> bytes<span class="o">)</span>
+CREATE src/assets/icons/icon-512x512.png <span class="o">(</span><span class="m">5008</span> bytes<span class="o">)</span>
+CREATE src/assets/icons/icon-72x72.png <span class="o">(</span><span class="m">792</span> bytes<span class="o">)</span>
+CREATE src/assets/icons/icon-96x96.png <span class="o">(</span><span class="m">958</span> bytes<span class="o">)</span>
+UPDATE angular.json <span class="o">(</span><span class="m">3232</span> bytes<span class="o">)</span>
+UPDATE package.json <span class="o">(</span><span class="m">1115</span> bytes<span class="o">)</span>
+UPDATE src/app/app.module.ts <span class="o">(</span><span class="m">789</span> bytes<span class="o">)</span>
+UPDATE src/index.html <span class="o">(</span><span class="m">478</span> bytes<span class="o">)</span>
+✔ Packages installed successfully.
+</code></pre></div>
+<p>Eingabe: </p>
+<div class="highlight"><pre><span></span><code>ng build
+</code></pre></div>
+<p>Ausgabe:</p>
+<div class="highlight"><pre><span></span><code>⠋ Generating browser application bundles <span class="o">(</span>phase: setup<span class="o">)</span>...Compiling @angular/core : es2015 as esm2015
+Compiling @angular/common : es2015 as esm2015
+Compiling @angular/platform-browser : es2015 as esm2015
+Compiling @angular/router : es2015 as esm2015
+Compiling @angular/platform-browser-dynamic : es2015 as esm2015
+Compiling @angular/service-worker : es2015 as esm2015
+✔ Browser application bundle generation complete.
+✔ Copying assets complete.
+✔ Index html generation complete.
+✔ Service worker generation complete.
+
+Initial Chunk Files               <span class="p">|</span> Names         <span class="p">|</span>      Size
+main.91513f6b1472da6ef484.js      <span class="p">|</span> main          <span class="p">|</span> <span class="m">222</span>.83 kB
+polyfills.7483c3136b6130f43c00.js <span class="p">|</span> polyfills     <span class="p">|</span>  <span class="m">35</span>.95 kB
+runtime.edf4ff6924b895aead86.js   <span class="p">|</span> runtime       <span class="p">|</span>   <span class="m">1</span>.00 kB
+styles.31d6cfe0d16ae931b73c.css   <span class="p">|</span> styles        <span class="p">|</span>   <span class="m">0</span> bytes
+
+                                  <span class="p">|</span> Initial Total <span class="p">|</span> <span class="m">259</span>.79 kB
+
+Build at: <span class="m">2021</span>-06-22T09:36:03.581Z - Hash: 01998ed491556b85bad3 - Time: 28665ms
+</code></pre></div>
+<p>Eingabe: </p>
+<div class="highlight"><pre><span></span><code>http-server -p <span class="m">8080</span> -c-1 dist/AngularPWA
+</code></pre></div>
+<p>Ausgabe:</p>
+<div class="highlight"><pre><span></span><code>Starting up http-server, serving dist/AngularPWA
+Available on:
+  http://127.0.0.1:8080
+  http://192.168.1.2:8080
+Hit CTRL-C to stop the server
+</code></pre></div>
+<p>Angular empfiehlt auch noch die Verwendung des <a href="https://developers.google.com/web/fundamentals/architecture/app-shell">App Shell Models</a>. Dies kann erfolgen durch </p>
+<p>Eingabe: </p>
+<div class="highlight"><pre><span></span><code>ng generate app-shell
+</code></pre></div>
+<p>Ausgabe:</p>
+<div class="highlight"><pre><span></span><code>CREATE src/main.server.ts <span class="o">(</span><span class="m">698</span> bytes<span class="o">)</span>
+CREATE src/app/app.server.module.ts <span class="o">(</span><span class="m">598</span> bytes<span class="o">)</span>
+CREATE tsconfig.server.json <span class="o">(</span><span class="m">379</span> bytes<span class="o">)</span>
+CREATE src/app/app-shell/app-shell.component.css <span class="o">(</span><span class="m">0</span> bytes<span class="o">)</span>
+CREATE src/app/app-shell/app-shell.component.html <span class="o">(</span><span class="m">24</span> bytes<span class="o">)</span>
+CREATE src/app/app-shell/app-shell.component.spec.ts <span class="o">(</span><span class="m">641</span> bytes<span class="o">)</span>
+CREATE src/app/app-shell/app-shell.component.ts <span class="o">(</span><span class="m">286</span> bytes<span class="o">)</span>
+UPDATE package.json <span class="o">(</span><span class="m">1158</span> bytes<span class="o">)</span>
+UPDATE angular.json <span class="o">(</span><span class="m">4638</span> bytes<span class="o">)</span>
+UPDATE src/main.ts <span class="o">(</span><span class="m">432</span> bytes<span class="o">)</span>
+UPDATE src/app/app.module.ts <span class="o">(</span><span class="m">900</span> bytes<span class="o">)</span>
+✔ Packages installed successfully.
+</code></pre></div>
+<p>Die Anwendung kann nun entweder im Development- (<code>ng run my-app:app-shell:development</code>) oder im Production-Modus (<code>ng run my-app:app-shell:production</code>) gestartet werden:</p>
+<p>Eingabe: </p>
+<div class="highlight"><pre><span></span><code>ng run AngularPWA:app-shell:development
+</code></pre></div>
+<p>Ausgabe:</p>
+<div class="highlight"><pre><span></span><code>⠋ Generating server application bundles <span class="o">(</span>phase: setup<span class="o">)</span>...⠋ Generating browser application bundles <span class="o">(</span>phase: setup<span class="o">)</span>...Compiling @angular/animations : es2015 as esm2015
+Compiling @angular/common/http : es2015 as esm2015
+Compiling @angular/platform-server/init : es2015 as esm2015
+Compiling @angular/animations/browser : es2015 as esm2015
+Compiling @angular/platform-browser/animations : es2015 as esm2015
+Compiling @angular/platform-server : es2015 as esm2015
+✔ Browser application bundle generation complete.
+✔ Copying assets complete.
+✔ Index html generation complete.
+
+Initial Chunk Files <span class="p">|</span> Names         <span class="p">|</span>      Size
+vendor.js           <span class="p">|</span> vendor        <span class="p">|</span>   <span class="m">2</span>.05 MB
+polyfills.js        <span class="p">|</span> polyfills     <span class="p">|</span> <span class="m">128</span>.55 kB
+main.js             <span class="p">|</span> main          <span class="p">|</span>  <span class="m">54</span>.76 kB
+runtime.js          <span class="p">|</span> runtime       <span class="p">|</span>   <span class="m">6</span>.22 kB
+styles.css          <span class="p">|</span> styles        <span class="p">|</span> <span class="m">119</span> bytes
+
+                    <span class="p">|</span> Initial Total <span class="p">|</span>   <span class="m">2</span>.24 MB
+
+Build at: <span class="m">2021</span>-06-22T09:46:11.341Z - Hash: a1c812f62e199879cc3c - Time: 9895ms
+✔ Server application bundle generation complete.
+
+Initial Chunk Files <span class="p">|</span> Names         <span class="p">|</span>    Size
+main.js             <span class="p">|</span> main          <span class="p">|</span> <span class="m">4</span>.61 MB
+
+                    <span class="p">|</span> Initial Total <span class="p">|</span> <span class="m">4</span>.61 MB
+
+Build at: <span class="m">2021</span>-06-22T09:46:11.391Z - Hash: 0fbcd120e039051af1c2 - Time: 19807ms
+⠋ Generating application shell...Angular is running <span class="k">in</span> development mode. Call enableProdMode<span class="o">()</span> to <span class="nb">enable</span> production mode.
+✔ Application shell generation complete.
+</code></pre></div>
+<p>Um nicht immer die Cache-Versionen händisch ändern zu müssen - so, wie wir das für die <code>HTW-Insta</code>-Anwendung gemacht haben - kann ein Service eingerichtet werden, der die Updates in der Webanwendung erkennt und automatisch die Versionen verwaltet. </p>
+<p>Eingabe: </p>
+<div class="highlight"><pre><span></span><code>ng generate service log-update
+</code></pre></div>
+<p>Ausgabe:</p>
+<div class="highlight"><pre><span></span><code>CREATE src/app/log-update.service.spec.ts <span class="o">(</span><span class="m">373</span> bytes<span class="o">)</span>
+CREATE src/app/log-update.service.ts <span class="o">(</span><span class="m">138</span> bytes<span class="o">)</span>
+</code></pre></div>
+<p>Dazu wird das <a href="https://angular.io/api/service-worker/SwUpdate">SwUpdate</a>-Packet aus dem <code>@angular/service-worker</code>-Modul verwendet. Die <code>log-update.service.ts</code> sieht dann so aus:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">src/app/log-update.service.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SwUpdate</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@angular/service-worker&quot;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">LogUpdateService</span> <span class="p">{</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">updates</span><span class="o">:</span> <span class="nx">SwUpdate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">updates</span><span class="p">.</span><span class="nx">available</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;current version is&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">current</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;available version is&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">available</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="nx">updates</span><span class="p">.</span><span class="nx">activated</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;old version was&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">previous</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;new version is&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">current</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Dieser <em>Service</em> <strong>erkennt</strong> also neue Updates. Der eigentliche <em>Reload</em> der Anwendung bei neuen Updates kann mit dem folgenden Service durchgeführt werden: </p>
+<p>Eingabe: </p>
+<div class="highlight"><pre><span></span><code>ng generate service prompt-update
+</code></pre></div>
+<p>Ausgabe:</p>
+<div class="highlight"><pre><span></span><code>CREATE src/app/prompt-update.service.spec.ts <span class="o">(</span><span class="m">388</span> bytes<span class="o">)</span>
+CREATE src/app/prompt-update.service.ts <span class="o">(</span><span class="m">141</span> bytes<span class="o">)</span>
+</code></pre></div>
+<p>Dazu wird das <a href="https://angular.io/api/service-worker/SwUpdate">SwUpdate</a>-Packet aus dem <code>@angular/service-worker</code>-Modul verwendet. Die <code>log-update.service.ts</code> sieht dann so aus:</p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">src/app/prompt-update.service.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SwUpdate</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@angular/service-worker&quot;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">LogUpdateService</span> <span class="p">{</span>
+
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">updates</span><span class="o">:</span> <span class="nx">SwUpdate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">updates</span><span class="p">.</span><span class="nx">available</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;current version is&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">current</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;available version is&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">available</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="nx">updates</span><span class="p">.</span><span class="nx">activated</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;old version was&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">previous</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;new version is&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">current</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Wenn Sie eine solch konfigurierte Angular-Anwendung starten, dann ist <code>Lighthouse</code> schonmal recht zufrieden:</p>
+<p><img alt="angularPWA" src="../files/85_angularpwa.png" /></p>
+<p>Weitere Information zu Angular + PWA finden Sie z.B. <a href="https://angular.io/guide/service-worker-intro">hier</a> oder <a href="https://web.dev/creating-pwa-with-angular-cli/">hier</a> oder <a href="https://github.com/angular/angular/tree/master/aio/content/examples/service-worker-getting-started">hier</a> oder <a href="https://medium.com/ngconf/angular-pwa-install-and-configure-858dd8e9fb07">hier</a> oder <a href="https://angular-buch.com/blog/2019-07-progressive-web-app">hier</a>.</p>
+<h2 id="ausblick">Ausblick<a class="headerlink" href="#ausblick" title="Permanent link">&para;</a></h2>
+<p>Zunächst herzlichen Glückwunsch - Sie haben es geschafft! Ich hoffe, Sie haben eine Menge gelernt. Ich denke, dass uns das Thema <em>Progressive Web Apps</em> noch eine Weile beschäftigen wird, denn die grundsätzliche Idee dieses Konzeptes ist gut. Wenn die nativen Apps durch progressive Web Apps ersetzt werden würden, dann wären wir nicht nur komplett plattformunabhängig bei der Verwendung von Apps, es wäre nicht mehr notwendig, unterschiedliche Implementierungen für unterschiedliche Plattformen zu erstellen, sondern wir wären insbesondere komplett unabhängig von irgendwelchen App- oder Play-Stores!</p>
+<p>Sie können nun mehrere Sachen tun, wenn Sie möchten:</p>
+<ul>
+<li>erstellen Sie Ihr nächstes Projekt gleich als eine PWA oder</li>
+<li>fügen Sie für ein existierendes Projekt PWA-Funktionalität hinzu oder</li>
+<li>tauchen Sie tiefer ein in die APIs, die wir betrachtet haben oder </li>
+<li>verfolgen Sie die Entwicklung neuer APIs, z.B. <code>Payments-API</code> (<a href="https://developers.google.com/pay/api">Google Pay API</a>, <a href="https://developer.paypal.com/docs/api/payments/v1/">PayPal Payments API</a>) oder <a href="https://rapidapi.com/blog/top-payment-apis-manage-your-payments/">Übersicht</a></li>
+</ul>
+<p>oder Sie ruhen sich erstmal aus. Einen schönen Sommer!</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../devices/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Zurück
+                </span>
+                Gerätezugriffe
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../uebungen/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Weiter
+                </span>
+                Übungen
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 Jörn Freiheit
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: ['instant', 'tabs'],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

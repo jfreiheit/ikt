@@ -795,3 +795,4 @@
 Implementieren Sie lieber schon an der Semesteraufgabe. Die Übungszeit am Donnerstag um 12:15 Uhr bleibt aber bestehen. Dort können wir dann eventuell auftretende Probleme diskutieren.  
 
 1. Ich würde mit der Erstellung der Datenbank und des Backends beginnen. 
+2. Meine Empfehlung ist, mit der Entwicklung des Frontends erst dann zu beginnen, wenn das Backend (und somit auch die Datenbank) steht. Sollten Sie für das Frontend Angular verwenden wollen, gibt es noch ein kleines [Starter-Tutorial hier](../zusammenfassung/#kurzes-start-tutorial-fur-angular). 
