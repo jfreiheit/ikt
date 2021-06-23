@@ -126,7 +126,8 @@ Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com
 
 	- Diese Woche machen wir uns mit der [Push-benachrichtigung](./pushnotes/#push-notifications) vertraut. Diese verwenden wir, um die Nutzerinnen zu informieren, dass es Änderungen (Updates/Aktuelles) in der Webanwendung gibt. Die Nutzerinnen werden so an die Anwendung gebunden, denn Push-Notifications erhöhen das Interesse daran, die Anwendung erneut zu öffnen.     
 	- Eine neue Übung gibt es nicht (mehr), sondern Sie können (schonmal) mit der Semesteraufgabe beginnen/weitermachen. 
-	- Video zur Vorlesung am 23.06.2021 - kommt noch
+	- Video zur Vorlesung am 23.06.2021
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=bd60899d214c44a0a15987921ddcf908&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no" aria-label="media embed code" style=""></iframe>
 		
 
 
@@ -153,10 +154,11 @@ Die als Semesteraufgabe zu entwickelnde Webanwendung sollte
 6. offline nutzbar sein,
 7. die IndexedDB verwenden,
 8. Hintergrundsynchronisation verwenden,
-9. die Gelocation API verwenden,
-10. die Kamera oder eine andere technische Schnittstelle (z.B. Sensoren, Mikrofon) verwenden.
+9. Push-Nachrichten verwenden,
+10. die Gelocation API verwenden,
+11. die Kamera oder eine andere technische Schnittstelle (z.B. Sensoren, Mikrofon) verwenden.
 
-Sollten wir es noch schaffen, kommen auch Push-Nachrichten in Betracht. Von den Punkten 5.-10. sollten 4 implementiert sein. Die soll präsentiert werden und in einem kurzen Gespräch (15-20min) wird die Implementierung besprochen. 
+Von den Punkten 5.-11. sollten 5 implementiert sein. Bitte erstellen Sie eine aussagekräftige README-Datei. Die erstellte Anwendung soll präsentiert werden und in einem kurzen Gespräch (15-20min) wird die Implementierung besprochen. 
 
 Diese Liste wird noch um Hinweise zur Bewertung angepasst. 
 
